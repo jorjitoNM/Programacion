@@ -25,6 +25,7 @@ public class Ejercicio1SinLimites {
                     do {
                         System.out.println("Introduzca la planta a la que quiere subir");
                         plantaanterior = planta;
+                        exitA=false;
                         aux = teclado.nextInt();
                         if (aux>plantaanterior) {
                             for (; planta <= aux ;planta++) {
@@ -47,6 +48,7 @@ public class Ejercicio1SinLimites {
                     do {
                         System.out.println("Introduzca la planta a la que quiere bajar (el ascensor tiene de la -10 a la 25)");
                         plantaanterior = planta;
+                        exitA=false;
                         aux = teclado.nextInt();
                         if (aux<plantaanterior) {
                             for (; planta >= aux; planta--) {
@@ -76,7 +78,7 @@ public class Ejercicio1SinLimites {
                 case 'e':
                     planta = 0;
                     contador = 0;
-                    ruta = ruta.delete();
+                    ruta = ruta.delete(0,ruta.length()-1);
                     break;
                 case 'F':
                 case 'f':

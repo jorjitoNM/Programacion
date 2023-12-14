@@ -6,7 +6,7 @@ public class OperacionesVarias {
                 primo = false;
             }
             else {
-                for (int i = 3; i < x; i++) {
+                for (int i = 3; i < x/2; i++) {
                     if (x%i==0) {
                         primo = false;
                     }

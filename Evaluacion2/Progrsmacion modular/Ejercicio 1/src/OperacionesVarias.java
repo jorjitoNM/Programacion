@@ -16,11 +16,12 @@ public class OperacionesVarias {
         return primo;
     }
     public static String piramide (int x) {
-         StringBuilder forma = new StringBuilder();
+        StringBuilder forma = new StringBuilder();
         int y = x;
         for (int i = x; i < 3*x/2; i+=2,y++) {
             for (int k = 0; k < (3*x/2-(y)); k++) {
                 System.out.print(" ");
+                forma.append(" ");
             }
             for (int j = 0; j <= i; j++) {
                 System.out.print("@");

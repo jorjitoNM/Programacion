@@ -1,11 +1,27 @@
 import java.util.Arrays;
 
 public class OperacionesArray {
-    public static Arrays array (char[]) {
-        Arrays resultado;
+    public static Arrays array () {
+        resultado[10];
         for (int i = 0; i < resultado.length; i++) {
-            resultado = (char)(Math.random()*11-5);
+            resultado[i] = (int)(Math.random()*11-5);
         }
         return resultado;
+    }
+    public static Arrays ordenado (Arrays x) {
+        boolean exit = false;
+        int aux;
+        for (int i = 0; !exit ; i++) {
+            exit = true;
+            for (int j = 0; j < x.length; j++) {
+                if (x[j]>x[j+1]) {
+                    aux = x[j];
+                    x[j] = x[j+1];
+                    x[j+1] = aux;
+                    exit = false;
+                }
+            }
+        }
+        return x;
     }
 }

@@ -16,7 +16,7 @@ public class Tester {
         }
         System.out.println("Introduzca donde quieres que empieze la pirámide");
         numero = teclado.nextInt();
-
+        System.out.println(OperacionesVarias.piramide(numero));
         int x = 12;
         int z = x;
         for (int i = x; i < 3*x/2; i+=2,z++) {

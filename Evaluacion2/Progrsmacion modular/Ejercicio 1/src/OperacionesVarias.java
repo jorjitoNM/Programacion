@@ -24,9 +24,10 @@ public class OperacionesVarias {
             }
             for (int j = 0; j <= i; j++) {
                 System.out.print("@");
+                forma.append("@");
             }
             System.out.println();
-            forma =
+            forma.append("\n");
         }
         String resultado = forma.toString();
         return resultado;

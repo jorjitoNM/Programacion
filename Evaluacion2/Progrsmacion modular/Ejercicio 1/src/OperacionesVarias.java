@@ -33,8 +33,4 @@ public class OperacionesVarias {
         String resultado = forma.toString();
         return resultado;
     }
-    public static void cambio {
-
-    }
-
 }

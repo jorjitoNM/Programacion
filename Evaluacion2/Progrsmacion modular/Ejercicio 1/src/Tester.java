@@ -29,7 +29,4 @@ public class Tester {
             System.out.println();
         }
     }
-    public static void cambio {
-
-    }
 }

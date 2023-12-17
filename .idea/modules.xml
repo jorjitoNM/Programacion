@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Evaluacion2/Progrsmacion modular/BusquedaBinaria/BusquedaBinaria.iml" filepath="$PROJECT_DIR$/Evaluacion2/Progrsmacion modular/BusquedaBinaria/BusquedaBinaria.iml" />
       <module fileurl="file://$PROJECT_DIR$/Ejercicios/CorreoELectronico/CorreoELectronico.iml" filepath="$PROJECT_DIR$/Ejercicios/CorreoELectronico/CorreoELectronico.iml" />
       <module fileurl="file://$PROJECT_DIR$/Evaluacion2/Progrsmacion modular/Ejercicio 1/Ejercicio 1.iml" filepath="$PROJECT_DIR$/Evaluacion2/Progrsmacion modular/Ejercicio 1/Ejercicio 1.iml" />
       <module fileurl="file://$PROJECT_DIR$/Evaluacion2/Progrsmacion modular/Ejercicio 2/Ejercicio 2.iml" filepath="$PROJECT_DIR$/Evaluacion2/Progrsmacion modular/Ejercicio 2/Ejercicio 2.iml" />

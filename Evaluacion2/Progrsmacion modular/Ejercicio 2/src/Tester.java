@@ -16,5 +16,6 @@ public class Tester {
         System.out.println("Introduzca otra oracion o palabra");
         apellido = teclado.nextLine();
         System.out.println(OperacionesString.concatenacion(nombre,apellido));
+        System.out.println("");
     }
 }

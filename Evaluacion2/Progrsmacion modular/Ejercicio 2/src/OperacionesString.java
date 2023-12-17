@@ -14,4 +14,7 @@ public class OperacionesString {
         String [] trozos = x.split(" ");
         return trozos.length;
     }
+    public static void cambio {
+
+    }
 }

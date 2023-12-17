@@ -24,4 +24,8 @@ public class OperacionesArray {
         }
         return x;
     }
+
+    public static void cambio {
+
+    }
 }

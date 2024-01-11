@@ -5,7 +5,6 @@ public class Gallina {
     private int edad;
     private float peso;
     private int [] huevosSemana;
-
     private static final String [] nombres ={"Paco","Maksim", "Quien", "Goku", "MartiMcFly"};
 
     public static String getNombreAleatorio(){

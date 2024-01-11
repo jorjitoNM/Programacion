@@ -24,7 +24,7 @@ public class Circulo {
         return radio;
     }
     public double calcularDistancia (Punto punto) {
-        return (Punto.calcularDistancia(punto,centro))-radio;
+        return (punto.calcularDistancia(punto,centro))-radio;
     }
     public double calcularArea () {
         return Math.PI*Math.pow(radio,2);

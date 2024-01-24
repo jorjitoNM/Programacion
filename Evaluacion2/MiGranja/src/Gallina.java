@@ -1,59 +1,50 @@
 import java.util.Arrays;
 
-public class Gallina {
-    private String nombre;
-    private int edad;
-    private float peso;
+public class Gallina extends Animal {
     private int [] huevosSemana;
-    private static final String [] nombres ={"Paco","Maksim", "Quien", "Goku", "MartiMcFly"};
-
-    public static String getNombreAleatorio(){
-    return nombres[(int)(Math.random()*nombres.length)];
-    }
+    private static final double pesoMinimo = 3;
+    private static final double pesoMaximo = 7;
 
     public Gallina(){
-        nombre = nombres[(int)(Math.random()*nombres.length)];
-        edad= (int)(Math.random()*9);
-        peso= (float)(Math.random()*3+1);
+        super();
         huevosSemana = new int[7];
         for (int i = 0; i < huevosSemana.length; i++) {
             huevosSemana[i]= (int) (Math.random()*3);
         }
+        peso = Math.random()*(pesoMaximo-pesoMinimo)+pesoMinimo;
     }
-    public Gallina(String nombre, int edad, float peso){
-        this.nombre = nombre;
-        this.edad = edad;
-        this.peso = peso;
-        huevosSemana = new int[7];
+
+    public Gallina (String nombre, int edad, double peso) {
+        super (nombre,edad,peso);
     }
+
 
     public void huevosDia(int dia, int huevos){
         huevosSemana[dia-1] = huevos;
-
     }
-
+    public int sumaHuevos () {
+        int suma = 0;
+        for (int i = 0; i < huevosSemana.length; i++) {
+            suma+= huevosSemana[i];
+        }
+        return suma;
+    }
 
     public String toString(){
-        return String.format("Me llamo %s, este es mi peso %.2f, tengo %d años y pongo a la semana \n %s", nombre,peso,edad, Arrays.toString(huevosSemana));
+        return  super.toString()+String.format(" y pongo a la semana \n %s",sumaHuevos());
     }
 
-    public void setEdad(int edad) {
-        this.edad= edad;
+    public static boolean controlPeso(double peso) {
+        return (peso >= pesoMaximo);
     }
-    public int getEdad() {
-        return edad;
+    public static boolean controlEdad (int edad) {
+        return (edad >= 10);
     }
-    public void setPeso(float peso) {
-        this.peso= peso;
-    }
-    public float getPeso() {
-        return peso;
-    }
-    public String getNombre(){
-        return nombre;
-    }
-
-    public void setNombre(String nombre){
-        this.nombre = nombre;
+    public String calcularProduccion () {
+        double media = 0;
+        for (int i = 0; i < huevosSemana.length; i++) {
+            media+=huevosSemana[i];
+        }
+        return String.format("Esta gallina ha producido %.2f huevos",media/ huevosSemana.length);
     }
 }

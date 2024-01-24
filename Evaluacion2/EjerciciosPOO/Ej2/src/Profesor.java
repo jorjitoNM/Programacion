@@ -7,6 +7,4 @@ public class Profesor {
     public static double calcularMedia (Alumno alumno) {
         return (alumno.getAsignatura1().getNota()+alumno.getAsignatura2().getNota()+alumno.getAsignatura3().getNota())/3;
     }
-
-
 }

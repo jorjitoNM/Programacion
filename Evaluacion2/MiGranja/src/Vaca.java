@@ -1,83 +1,66 @@
-public class Vaca {
-    public Vaca() {
-        nombre = nombres[(int)(Math.random()*10)];
-        raza = razas[(int)(Math.random()*5)];
-        peso = Math.random()*201+600;
-        color = colores[(int)(Math.random()*3)];
-        lLeche = (int)(Math.random()*31+20);
-    }
-    public Vaca(String nombre) {
-    }
-    public Vaca(String nombre,String raza, double peso, String color, int lLeche ) {
-    }
+public class Vaca extends Animal{
 
-    private String nombre;
     private String raza;
-    private double peso;
     private String color;
-    private int lLeche;
+    private int[] lLeche = new int[7];
+    private static final double pesoMinimo = 100;
+    private static final double pesoMaximo = 600;
 
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+
+    public Vaca() {
+        super();
+        peso = peso = Math.random()*(pesoMaximo-pesoMinimo)+pesoMinimo;
+        raza = Utilidades.razas[(int)(Math.random()* Utilidades.razas.length)];
+        color = Utilidades.colores[(int)(Math.random()* Utilidades.colores.length)];
+        for (int i = 0; i < lLeche.length; i++) {
+            lLeche[i] = (int)(Math.random()*20+10);
+        }
     }
+    public Vaca(String nombre, int edad, double peso, String raza,String color, int[] lLeche) {
+        super(nombre,edad,peso);
+        this.raza = raza;
+        this.color = color;
+        this.lLeche = lLeche;
+    }
+
     public void setRaza(String raza) {
         this.raza = raza;
-    }
-    public void setPeso(double peso) {
-        this.peso = peso;
     }
     public void setColor(String color) {
         this.color = color;
     }
-    public void setLleche(int lLeche) {
+    public void setLleche(int[] lLeche) {
         this.lLeche = lLeche;
     }
 
-
-
-    public String getNombre() {
-        return nombre;
-    }
     public String getRaza() {
         return raza;
-    }
-    public double getPeso() {
-        return peso;
     }
     public String getColor() {
         return color;
     }
-    public int getLleche() {
+    public int[] getLleche() {
         return lLeche;
     }
 
 
-    private static String [] nombres = {"Clara","Tania","Candela","Olivia","Mar","Florentina","Antonia","Maria","Anais","Cayetana"};
-    private static String [] razas = {"Lidia","Rubia gallega","Cachena","Avileña","Asturiana de los valles"};
-    private static String [] colores = {"Marron","Negra","Blanca"};
-    /*private static String combinacionColores() {
-        int numero = (int)(Math.random()*3);
-        StringBuilder resultado = new StringBuilder();
-        if (numero==0) {
-            resultado.append(colores[(int)(Math.random()*3)]);
-        }
-        else {
-            if (numero==1) {
-                resultado.append(colores[(int)(Math.random()*3)]).append(colores[(int)(Math.random()*3)]);
-            }
-            else {
-                resultado.append(colores[(int)(Math.random()*3)]).append(colores[(int)(Math.random()*3)]);
-            }
-    }
-    }
-    */
-
-
-
-
     public String toString() {
-        return String.format("Nombre: %s\nRaza: %s\nPeso: %.2f\nColor: %s\nLeche producida: %d",nombre,raza,peso,color,lLeche);
+        return String.format("Soy %s, una vaca de raza %s de %s, peso %skg y tengo %s primaveras",nombre,raza,peso,edad);
+    }
+
+    public static boolean controlPeso(double peso) {
+        return (peso >= pesoMaximo);
+    }
+    public static boolean controlEdad (int edad) {
+        return (edad >= 20);
+    }
+    public String calcularProduccion () {
+        double media = 0;
+        for (int i = 0; i < lLeche.length; i++) {
+            media+=lLeche[i];
+        }
+        return String.format("Esta vaca ha producido %.2fl de leche",media/ lLeche.length);
     }
 
 }

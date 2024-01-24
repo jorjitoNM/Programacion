@@ -1,62 +1,74 @@
+import java.io.IOException;
 import java.util.Scanner;
 /*
 1. Implementar otra clase de un animal. Ejemplo: Cerdo, Oveja, Vaca, Caballo, etc..
 2. Array de Gallinas
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Scanner teclado = new Scanner(System.in);
-        /*
-        Gallina random = new Gallina();
-        System.out.println("Introduce nombre, edad y peso");
-        String nombre = lector.nextLine();
-        int edad = lector.nextInt();
-        float peso = lector.nextFloat();
-        Gallina especial= new Gallina(nombre, edad, peso);
-        System.out.println(random.toString());
-        System.out.println(especial.toString());
-        System.out.println("Después de un año....");
-        random.setEdad(random.getEdad()+1);
-        random.setPeso(random.getPeso()+0.5f);
-        especial.setEdad(especial.getEdad()+1);
-        especial.setPeso(especial.getPeso()+0.75f);
-        System.out.println(random.getPeso());
-        System.out.println(especial.getPeso());
-        especial.huevosDia(2,3);
-        System.out.println(especial);
-        */
-
+        double peso = 0;
+        String respuesta;
         String nombre;
+        int edad = 0;
         String raza;
         String color;
-        int lLeche;
-        double peso;
-
-        Vaca vacarandom = new Vaca();
-
-        System.out.println("Introduce el nombre de tu vaca");
-        nombre = teclado.nextLine();
-        Vaca vacaname = new Vaca(nombre);
-
-        System.out.println("Introduce el nombre de tu vaca");
-        nombre = teclado.nextLine();
-        System.out.println("Introduce su raza");
-        raza = teclado.nextLine();
-        System.out.println("Introduce su peso (Kg)");
-        peso = teclado.nextDouble();
-        teclado.nextLine();
-        System.out.println("Introduce el color de la vaca");
-        color = teclado.nextLine();
-        System.out.println("Introduce los litros de leche que produce (L/día)");
-        lLeche = teclado.nextInt();
-        Vaca vacapersonalizada = new Vaca(nombre,raza,peso,color,lLeche);
-        System.out.println(vacapersonalizada.toString());
-
-        Establo vacas = new Establo();
-        System.out.println("Vamos a ver que vacas tenemos en el establo:");
-        System.out.println(vacas.toString());
+        int[] lLeche = new int[7];
 
 
+            System.out.println("Qué animal quieres crear?");
+            respuesta = teclado.nextLine();
+            if (respuesta.equals("Gallina") || respuesta.equals("gallina")) {
+                System.out.println("Como quieres que se llame la gallina?");
+                nombre = teclado.nextLine();
+                do {
+                    System.out.println("Introduzca el peso de su gallina");
+                    peso = teclado.nextDouble();
+                }while(Gallina.controlPeso(peso));
+                do {
+                    System.out.println("Introduzca la edad de su gallina");
+                    edad = teclado.nextInt();
+                }while(Gallina.controlEdad(edad));
+                Gallina animal = new Gallina(nombre,edad,peso);
+            } else if (respuesta.equals("Vaca") || respuesta.equals("vaca")) {
+                System.out.println("Como quieres que se llame la gallina?");
+                nombre = teclado.nextLine();
+                do {
+                    System.out.println("Introduzca el peso de su vaca");
+                    peso = teclado.nextDouble();
+                }while(Vaca.controlPeso(peso));
+                do {
+                    System.out.println("Introduzca la edad de su vaca");
+                    edad = teclado.nextInt();
+                }while(Vaca.controlEdad(edad));
+                System.in.read();
+                System.out.println("Introduzca la raza de la vaca");
+                raza = teclado.nextLine();
+                System.in.read();
+                System.out.println("Introduzca el color de la vaca");
+                color = teclado.nextLine();
+                System.out.println("Introduzca los litros de leche que ha producido la vaca durante la semana");
+                for (int i = 0; i < 8; i++) {
+                    lLeche[i] = teclado.nextInt();
+                    System.in.read();
+                }
+                Vaca animal = new Vaca(nombre,edad,peso,raza,color,lLeche);
+            } else if (respuesta.equals("Cerdo")||respuesta.equals("cerdo")) {
+                System.out.println("Como quieres que se llame el cerdo");
+                nombre = teclado.nextLine();
+                do {
+                    System.out.println("Introduzca el peso de su cerdo");
+                    peso = teclado.nextDouble();
+                }while(Cerdo.controlPeso(peso));
+                do {
+                    System.out.println("Introduzca la edad de su cerdo");
+                    edad = teclado.nextInt();
+                }while(Cerdo.controlEdad(edad));
+
+            }
+            System.out.println("Vamos a crear una granja con animales");
+            Establo granja = new Establo();
+            System.out.println(granja.mediaProduccion());
     }
 }

@@ -11,10 +11,23 @@ public class Banco {
         cuentasA = new CuentaAhorro[10];
     }
     public void crearCuentaC (Titular titular) {
-        cuentasC[contadorC] = new CuentaCorriente(titular);
+        cuentasC[calcularPosicion()] = new CuentaCorriente(titular);
     }
     public void crearCuentaA (Titular titular,double saldo) {
-        cuentasA[contadorA] = new CuentaAhorro(titular,saldo);
+        cuentasA[calcularPosicion()] = new CuentaAhorro(titular,saldo);
+    }
+    public void crearCuentaA (Titular titular,String nCuenta,double saldo) {
+        cuentasA[calcularPosicion()] = new CuentaAhorro(titular,nCuenta,saldo);
+    }
+    private int calcularPosicion () {
+        int i = 0;
+        boolean exit = false;
+        for (; i < cuentasC.length && !exit; i++) {
+            if (cuentasC[i]!=null) {
+                exit = true;
+            }
+        }
+        return i-1;
     }
     public int buscarCuentaC (String nCuenta) {
         boolean exit = false;
@@ -26,14 +39,27 @@ public class Banco {
         }
         return (i-1);
     }
-    public boolean buscarCuentaA (String nCuenta) {
+    public int buscarCuentaA (String nCuenta) {
         boolean exit = false;
-        for (int i = 0; i < cuentasA.length && !exit; i++) {
+        int i = 0;
+        for (; i < cuentasA.length && !exit; i++) {
             if (nCuenta.equals(cuentasA[i].getnCuenta())) {
                 exit = true;
             }
         }
-        return exit;
+        return (i-1);
+    }
+    public double getSaldo (int posicion) {
+        return cuentasC[posicion].getSaldo();
+    }
+    public void ingreso (double cantidad, int posicion) {
+        cuentasC[posicion].ingreso(cantidad);
+    }
+    public void retirada (double cantidad, int posicion) {
+        cuentasC[posicion].retirada(cantidad);
+    }
+    public String toString (int posicion) {
+        return String.format(cuentasC[posicion].toString());
     }
 
 }

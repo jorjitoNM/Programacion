@@ -16,6 +16,9 @@ public class Gallina extends Animal {
 
     public Gallina (String nombre, int edad, double peso) {
         super (nombre,edad,peso);
+        for (int i = 0; i < huevosSemana.length; i++) {
+            huevosSemana[i] = (int)(Math.random()*2+1);
+        }
     }
 
 

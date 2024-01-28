@@ -1,6 +1,5 @@
 public class Utilidades {
     public static final String[] nombres = {"Paco","Maksim","Quien","Goku","MartiMcFly","Clara","Tania","Candela","Olivia","Mar","Florentina","Antonia","Maria","Anais","Cayetana","Marc","Maria","Angel","Jimena","Herminio","Liliana"};
-
     public String[] getNombres() {
         return nombres;
     }

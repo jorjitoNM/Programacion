@@ -1,7 +1,11 @@
 public class Establo {
     private Animal [] misanimales;
 
-    public Establo() {
+
+    public Establo () {
+        misanimales = new Animal[10];
+    }
+    /*public Establo() {
         this.misanimales = new Animal[10];
         int opcion;
         for (int i = 0; i < misanimales.length; i++) {
@@ -15,7 +19,7 @@ public class Establo {
                 misanimales[i] = new Cerdo();
             }
         }
-    }
+    }*/
     public Establo (Vaca vaca1,Cerdo cerdo1,Gallina gallina1,Vaca vaca2,Cerdo cerdo2,Gallina gallina2) {
         this.misanimales = new Animal[6];
         misanimales[0] = vaca1;
@@ -24,6 +28,18 @@ public class Establo {
         misanimales[3] = vaca2;
         misanimales[4] = cerdo2;
         misanimales[5] = gallina2;
+    }
+
+
+    public boolean nuevoAnimal (Animal animal) {
+        boolean exit = false;
+        for (int i = 0; i < misanimales.length && !exit; i++) {
+            if (misanimales[i]== null) {
+                misanimales[i] = animal;
+                exit = true;
+            }
+        }
+        return exit;
     }
     public String toString() {
         StringBuilder builder = new StringBuilder();

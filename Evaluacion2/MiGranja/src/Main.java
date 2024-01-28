@@ -1,9 +1,5 @@
 import java.io.IOException;
 import java.util.Scanner;
-/*
-1. Implementar otra clase de un animal. Ejemplo: Cerdo, Oveja, Vaca, Caballo, etc..
-2. Array de Gallinas
- */
 public class Main {
     public static void main(String[] args) throws IOException {
 
@@ -42,10 +38,8 @@ public class Main {
                     System.out.println("Introduzca la edad de su vaca");
                     edad = teclado.nextInt();
                 }while(Vaca.controlEdad(edad));
-                System.in.read();
                 System.out.println("Introduzca la raza de la vaca");
                 raza = teclado.nextLine();
-                System.in.read();
                 System.out.println("Introduzca el color de la vaca");
                 color = teclado.nextLine();
                 System.out.println("Introduzca los litros de leche que ha producido la vaca durante la semana");
@@ -67,7 +61,6 @@ public class Main {
                 }while(Cerdo.controlEdad(edad));
 
             }
-            System.out.println("Vamos a crear una granja con animales");
             Establo granja = new Establo();
             System.out.println(granja.mediaProduccion());
     }

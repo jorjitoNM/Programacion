@@ -20,6 +20,24 @@ public class Television extends Articulo {
         this.vAndroid = vAndroid;
     }
 
+
+    public String marcaArticulo (){
+        return Utilidades.marcasT[(int)(Math.random()*Utilidades.marcasT.length)];
+    }
+    public double calcularPrecio () {
+        double precio = 0;
+        if (isOLED) {
+            precio += 600;
+        }
+        else {
+            precio += 80*pulgadas/10;
+            precio += 15*sRGB/10;
+        }
+        return precio;
+    }
+
+
+
     public double getPulgadas() {
         return pulgadas;
     }

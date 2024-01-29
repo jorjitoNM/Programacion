@@ -1,10 +1,10 @@
-public class Articulo {
+public abstract class Articulo {
 
-    //nuevo producto seria polimorfismo ?? (seria un metodo que es obligatorio tener en los hijos
     protected int id;
     private int pasillo;
     protected double precio;
     protected String categoria;
+    protected String marca;
     private static final String[] categorias = {"Smartphones,Ordenadores,Televisiones,Accesorios"};
 
     public Articulo (Tienda tienda) {
@@ -18,12 +18,13 @@ public class Articulo {
         precio = Math.random()*1000+100;
         categoria = categorias[(int)(Math.random()* categorias.length)];
         pasillo = calcularPasillo(categoria);
+        marca = marcaArticulo();
     }
     public Articulo (Tienda tienda,double precio) {
         this.precio = precio;
         //quiero que este contructor llame al que solo recibe tienda
     }
-    public  Articulo (Tienda tienda, double precio, String categoria) {
+    public  Articulo (Tienda tienda, double precio, String categoria,String marca) {
         boolean exit = false;
         do {
             id = (int)(Math.random()*100);
@@ -33,6 +34,7 @@ public class Articulo {
         }while(!exit);
         this.precio = precio;
         this.categoria = categoria;
+        this.marca = marca;
     }
 
     private int calcularPasillo (String categoria) {
@@ -48,6 +50,10 @@ public class Articulo {
         }
         return nPasillo;
     }
+    public abstract String marcaArticulo ();
+    public abstract double calcularPrecio ();
+
+
 
     public int getId() {
         return id;
@@ -71,5 +77,21 @@ public class Articulo {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public int getPasillo() {
+        return pasillo;
+    }
+
+    public void setPasillo(int pasillo) {
+        this.pasillo = pasillo;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 }

@@ -9,7 +9,7 @@ public class Smartphone extends Articulo {
         gbRAM = (int) (Math.random()*4+4);
         gbAlmacenamiento = (int) (Math.random()*192+64);
     }
-    public Smartphone (Tienda tienda,int gbRAM,String marca,int gbAlmacenamiento,double precio, String categoria) {
+    public Smartphone (Tienda tienda,String marca,int gbRAM,int gbAlmacenamiento,double precio,String categoria) {
         super(tienda,precio,categoria,marca);
         this.gbRAM = gbRAM;
         this.gbAlmacenamiento = gbAlmacenamiento;

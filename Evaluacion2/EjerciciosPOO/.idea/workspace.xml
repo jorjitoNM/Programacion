@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b1da806f-2870-49c7-aff1-eeb9e32c4ddf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Ajedrez/Ajedrez.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ajedrez/src/Alfil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ajedrez/src/Caballo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ajedrez/src/Movimiento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ajedrez/src/Peon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ajedrez/src/Pieza.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ajedrez/src/Posicion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ajedrez/src/Torre.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ej4-Medicos/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ej4-Medicos/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ej4-Medicos/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ej4-Medicos/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ej1-Puntos/Ej1-Puntos.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ej2-Asignaturas/Ej2-Asignaturas.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ej3-Cuentas/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Ej3-Cuentas/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ej3-Cuentas/Ej3-Cuentas.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ej4-Medicos/Ej4-Medicos.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EjerciciosPOO.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tienda/src/Smartphone.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tienda/src/Smartphone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tienda/src/Tienda.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tienda/src/Tienda.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2bjMbEdu0yTPv0AVsfsOq3PTTDe" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Usuario/Desktop/Jorge/Programacion/GitIntelliJ/Evaluacion2/EjerciciosPOO",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b1da806f-2870-49c7-aff1-eeb9e32c4ddf" name="Changes" comment="" />
+      <created>1706724103848</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1706724103848</updated>
+      <workItem from="1706724104945" duration="111000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

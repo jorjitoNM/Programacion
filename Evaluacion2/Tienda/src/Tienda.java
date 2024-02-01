@@ -3,7 +3,7 @@ public class Tienda {
 
     private Articulo[] articulos = new Articulo[50];
 
-
+    //implementar el plan renove de samsung
     public String buscarPasillo (int id) {
         int hueco =buscarArticulo(id);
         return (hueco!=-1)?String.format("Su producto se encuentra en el pasillo %d",articulos[hueco].getPasillo()):String.format("Su producto no se encuentra disponible o ha introducido mal el id");

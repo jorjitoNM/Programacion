@@ -3,10 +3,10 @@ public class Alfil extends Pieza {
     public Alfil (boolean color) {
         super(color);
         if (!color) {
-            nombre = "\\u2657";
+            nombre = "\u2657";
         }
         else {
-            nombre = "\\u265D";
+            nombre = "\u265D";
         }
     }
     @Override

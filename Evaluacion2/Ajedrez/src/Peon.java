@@ -2,10 +2,10 @@ public class Peon extends Pieza {
     public Peon(boolean color) {
         super(color);
         if (!color) {
-            nombre = "\\u2659";
+            nombre = "\u2659";
         }
         else {
-            nombre = "\\u265F";
+            nombre = "\u265F";
         }
     }
     @Override

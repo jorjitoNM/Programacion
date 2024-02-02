@@ -6,10 +6,10 @@ public class Dama extends Pieza {
     public Dama (boolean color) {
         super(color);
         if (!color) {
-            nombre = "\\u2655";
+            nombre = "\u2655";
         }
         else {
-            nombre = "\\u265B";
+            nombre = "\u265B";
         }
     }
 }

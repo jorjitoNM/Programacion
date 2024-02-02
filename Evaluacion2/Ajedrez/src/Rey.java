@@ -5,5 +5,11 @@ public class Rey extends Pieza {
     }
     public Rey (boolean color) {
         super(color);
+        if (!color) {
+            nombre = "\u2654";
+        }
+        else {
+            nombre = "\u265A";
+        }
     }
 }

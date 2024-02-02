@@ -18,13 +18,6 @@ public abstract class Pieza {
 
     @Override
     public String toString() {
-        String color;
-        if (this.color) {
-            color = "N";
-        }
-        else {
-            color = "B";
-        }
         return String.format("%s",nombre);
     }
 }

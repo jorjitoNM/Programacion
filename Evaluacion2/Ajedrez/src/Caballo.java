@@ -6,5 +6,11 @@ public class Caballo extends Pieza {
     }
     public Caballo (boolean color) {
         super(color);
+        if (!color) {
+            nombre = "\u2658";
+        }
+        else {
+            nombre = "\u265E";
+        }
     }
 }

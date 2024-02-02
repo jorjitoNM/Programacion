@@ -24,8 +24,8 @@ public class Tablero {
         tablero[7][0] = new Torre(false);
         tablero[7][1] = new Caballo(false);
         tablero[7][2] = new Alfil(false);
-        tablero[7][3] = new Rey(false);
-        tablero[7][4] = new Dama(false);
+        tablero[7][3] = new Dama(false);
+        tablero[7][4] = new Rey(false);
         tablero[7][5] = new Alfil(false);
         tablero[7][6] = new Caballo(false);
         tablero[7][7] = new Torre(false);
@@ -45,7 +45,7 @@ public class Tablero {
             System.out.print(contador +" ");
             for (int j = 0; j < tablero[i].length; j++) {
                 if (tablero[i][j]!=null) {
-                    System.out.print(tablero[i][j].toString() + " ");
+                    System.out.printf(tablero[i][j].toString() + " "); //podria hacerse con un printf para que ocupe 2 huecos??
                 }
             }
             contador--;
@@ -62,7 +62,7 @@ public class Tablero {
         boolean exit = false;
         if (movimiento.isHorizontal()) {
             for (int i = movimiento.getPosInicial().getColumna(); i < movimiento.getPosFinal().getColumna()&&!exit; i++) {
-                if (tablero[movimiento.getPosInicial().getFila()][movimiento.getPosInicial().getColumna()+i]==null) {
+                if (tablero[movimiento.getPosInicial().getFila()][i]==null) {
                     exit = true;
                 }
             }

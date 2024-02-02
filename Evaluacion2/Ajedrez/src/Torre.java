@@ -7,10 +7,10 @@ public class Torre extends Pieza {
     public Torre (boolean color) {
         super(color);
         if (!color) {
-            nombre = "\\u2656";
+            nombre = "\u2656";
         }
         else {
-            nombre = "\\u265C";
+            nombre = "\u265C";
         }
     }
 }

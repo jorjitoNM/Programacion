@@ -1,4 +1,9 @@
 public class Dama extends Pieza {
+
+    /**
+     * metodo que crea una Dama con el color adecuado
+     * @param color
+     */
     public Dama (boolean color) {
         super(color);
         if (!color) {

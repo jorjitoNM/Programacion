@@ -1,4 +1,9 @@
 public class Rey extends Pieza {
+
+    /**
+     * Metodo que crea un Rey con el color adecuado
+     * @param color
+     */
     public Rey (boolean color) {
         super(color);
         if (!color) {

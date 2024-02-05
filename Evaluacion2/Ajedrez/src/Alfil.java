@@ -1,5 +1,9 @@
 public class Alfil extends Pieza {
 
+    /**
+     * Metodo que crea un Alfil con el color indicado
+     * @param color
+     */
     public Alfil (boolean color) {
         super(color);
         if (!color) {

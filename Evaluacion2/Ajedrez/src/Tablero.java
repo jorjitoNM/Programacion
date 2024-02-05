@@ -2,6 +2,9 @@ public class Tablero {
     private Pieza[][] tablero;
 
 
+    /**
+     * Metodo que incializa el tablero con todas las piezas en sus posiciones adequadas
+     */
     public Tablero () {
         tablero = new Pieza[8][8];
         tablero[0][0] = new Torre(true);
@@ -38,6 +41,10 @@ public class Tablero {
         tablero[6][6] = new Peon(false);
         tablero[6][7] = new Peon(false);
     }
+
+    /**
+     * Metodo que imprime el tablero con todas las fichas que en el se hayan
+     */
     public void pintarTablero () {
         int contador = 8;
         System.out.println("  A  B  C  D  E  F  G  H");
@@ -52,12 +59,31 @@ public class Tablero {
             System.out.println();
         }
     }
+
+    /**
+     * Metodo que comprueba si hay una pieza en la posicion indicada por fila y columna
+     * @param fila
+     * @param columna
+     * @return Devuelve true cuando hay una pieza
+     */
     public boolean hayPieza (int fila, int columna) {
         return tablero[fila][columna]!=null;
     }
+
+    /**
+     * Metodo que comprueba si hay una pieza en la posicion indicada obtenida por una posicion
+     * @param posicion
+     * @return Devuelve true cuando hay una pieza
+     */
     public boolean hayPieza (Posicion posicion) {
         return tablero[posicion.getFila()][posicion.getColumna()]!=null;
     }
+
+    /**
+     * Metodo que busca si hay piezas dentro del rango del movimiento proporcionado
+     * @param movimiento
+     * @return Devuelve true cuando encuantra una pieza en el recorrido
+     */
     public boolean hayPiezasEntre (Movimiento movimiento) {
         boolean exit = false;
         if (movimiento.isHorizontal()) {
@@ -107,9 +133,16 @@ public class Tablero {
     public void quitaPieza(int fila,int columna) {
 
     }
-    public void QuitaPieza(Posicion pos) {
+    public void quitaPieza(Posicion pos) {
 
     }
+
+    /**
+     *
+     * @param fila
+     * @param columna
+     * @return Devuelve una pieza segun los parametros de posicion en el array dados
+     */
     public Pieza devuelvePieza(int fila,int columna){
         return tablero[fila][columna];
     }

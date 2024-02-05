@@ -1,5 +1,9 @@
 public class Caballo extends Pieza {
 
+    /**
+     * Metodo que crea un Caballo con el color adecuado
+     * @param color
+     */
     public Caballo (boolean color) {
         super(color);
         if (!color) {

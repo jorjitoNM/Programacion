@@ -61,13 +61,42 @@ public class Tablero {
     public boolean hayPiezasEntre (Movimiento movimiento) {
         boolean exit = false;
         if (movimiento.isHorizontal()) {
-            for (int i = movimiento.getPosInicial().getColumna(); i < movimiento.getPosFinal().getColumna()&&!exit; i++) {
-                if (tablero[movimiento.getPosInicial().getFila()][i]==null) {
-                    exit = true;
+            //preguntar para saber si es para arriba o para abajo
+            if (movimiento.getPosInicial().getColumna()>movimiento.getPosFinal().getColumna()) {
+                for (int i = movimiento.getPosInicial().getColumna()+1; i < movimiento.getPosFinal().getColumna()&&!exit; i++) {
+                    if (tablero[movimiento.getPosInicial().getFila()][i]!=null) {
+                        exit = true;
+                    }
+                }
+            } else {
+                for (int i = movimiento.getPosInicial().getColumna()+1; i < movimiento.getPosFinal().getColumna()&&!exit; i--) {
+                    if (tablero[movimiento.getPosInicial().getFila()][i]!=null) {
+                        exit = true;
+                    }
                 }
             }
         }
-        return false;
+        /*else if (movimiento.isDiagonal()) {
+            if ()
+
+        }*/ else if (movimiento.isVertical()) {
+            if (movimiento.getPosInicial().getFila()>movimiento.getPosFinal().getFila()) {
+                for (int i = movimiento.getPosInicial().getFila()+1; i < movimiento.getPosFinal().getColumna()&&!exit; i++) {
+                    if (tablero[i][movimiento.getPosInicial().getColumna()]!=null) {
+                        exit = true;
+                    }
+                }
+            }
+            else {
+                for (int i = movimiento.getPosInicial().getFila()+1; i < movimiento.getPosFinal().getColumna()&&!exit; i--) {
+                    if (tablero[i][movimiento.getPosInicial().getColumna()]!=null) {
+                        exit = true;
+                    }
+                }
+            }
+
+        }
+        return exit;
     }
     public void ponPieza(Pieza figura, int fila, int columna) {
 
@@ -81,7 +110,7 @@ public class Tablero {
     public void QuitaPieza(Posicion pos) {
 
     }
-    public Pieza DevuelvePieza(int fila,int columna){
+    public Pieza devuelvePieza(int fila,int columna){
         return tablero[fila][columna];
     }
     /*public Pieza DevuelvePieza(Posicion pos) {

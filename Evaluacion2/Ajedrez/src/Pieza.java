@@ -11,8 +11,8 @@ public abstract class Pieza {
     }
 
 
-    public abstract boolean validoMovimiento (Movimiento movimiento);
-    public boolean isColor() {
+    public abstract boolean validoMovimiento (Movimiento movimiento, Tablero tablero);
+    public boolean getColor() {
         return color;
     }
 

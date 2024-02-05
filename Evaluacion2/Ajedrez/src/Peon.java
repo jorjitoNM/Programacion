@@ -9,11 +9,10 @@ public class Peon extends Pieza {
         }
     }
     @Override
-
-    public boolean validoMovimiento(Movimiento movimiento) {
+    public boolean validoMovimiento(Movimiento movimiento,Tablero tablero) {
         return Math.abs(movimiento.saltoVertical())==1;
     }
-    public boolean validoComer (Movimiento movimiento) {
+    public boolean validoComer (Movimiento movimiento,Tablero tablero) {
         return Math.abs(movimiento.saltoDiagonal())==1;
     }
 

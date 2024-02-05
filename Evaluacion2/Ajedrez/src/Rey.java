@@ -1,8 +1,4 @@
 public class Rey extends Pieza {
-    @Override
-    public boolean validoMovimiento(Movimiento movimiento) {
-        return movimiento.isVertical()||movimiento.isDiagonal()||movimiento.isHorizontal();
-    }
     public Rey (boolean color) {
         super(color);
         if (!color) {
@@ -11,5 +7,9 @@ public class Rey extends Pieza {
         else {
             nombre = "\u265A";
         }
+    }
+    @Override
+    public boolean validoMovimiento(Movimiento movimiento,Tablero tablero) {
+        return movimiento.isVertical()||movimiento.isDiagonal()||movimiento.isHorizontal();
     }
 }

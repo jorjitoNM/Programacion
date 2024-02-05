@@ -1,8 +1,4 @@
 public class Dama extends Pieza {
-    @Override
-    public boolean validoMovimiento(Movimiento movimiento) {
-        return movimiento.isHorizontal()||movimiento.isDiagonal()||movimiento.isVertical();
-    }
     public Dama (boolean color) {
         super(color);
         if (!color) {
@@ -11,5 +7,9 @@ public class Dama extends Pieza {
         else {
             nombre = "\u265B";
         }
+    }
+    @Override
+    public boolean validoMovimiento(Movimiento movimiento,Tablero tablero) {
+        return (!tablero.hayPiezasEntre(movimiento))&&(movimiento.isHorizontal()||movimiento.isDiagonal()||movimiento.isVertical());
     }
 }

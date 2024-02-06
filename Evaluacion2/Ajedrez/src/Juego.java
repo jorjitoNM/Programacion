@@ -75,7 +75,7 @@ public class Juego {
             System.out.println("Error. No hay pieza en esta casilla");
         else if (tablero.devuelvePieza(filaInicial,columnaInicial).getColor()!=darTurno())
             System.out.println("Error. Esa pieza no es tuya");
-        else if (!((tablero.hayPieza(filaFinal,columnaFinal)&&(tablero.devuelvePieza(filaInicial,columnaInicial).getColor()!=darTurno()))))
+        else if (!((tablero.hayPieza(filaFinal,columnaFinal)&&(tablero.devuelvePieza(filaInicial,columnaInicial).getColor()==darTurno()))))
             System.out.println("Error. No puedes comerte una pieza tuya");
         else if (!tablero.devuelvePieza(filaInicial,columnaInicial).validoMovimiento(movimiento,tablero)) {
             System.out.println("Error. Movimiento no válido");

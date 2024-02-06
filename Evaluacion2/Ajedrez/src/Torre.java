@@ -6,8 +6,8 @@ public class Torre extends Pieza {
     }
 
     /**
-     * Metodo que crea una Torre del color adecuado
-     * @param color
+     * Metodo que crea una Torre inicializando su nombre a su caracter Unicode del color adecuado
+     * @param color El color sirve para distinguir entre las piezas negras y blancas
      */
     public Torre (boolean color) {
         super(color);

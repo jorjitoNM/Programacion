@@ -1,17 +1,20 @@
 public class Tablero {
+    /**
+     * Es un array que representa un tablero de ajdrez donde se van a mover las piezas
+     */
     private Pieza[][] tablero;
 
 
     /**
-     * Metodo que incializa el tablero con todas las piezas en sus posiciones adequadas
+     * Metodo que incializa el tablero con todas las piezas en sus posiciones adecuadas
      */
     public Tablero () {
         tablero = new Pieza[8][8];
         tablero[0][0] = new Torre(true);
         tablero[0][1] = new Caballo(true);
         tablero[0][2] = new Alfil(true);
-        tablero[0][3] = new Rey(true);
-        tablero[0][4] = new Dama(true);
+        tablero[0][3] = new Dama(true);
+        tablero[0][4] = new Rey(true);
         tablero[0][5] = new Alfil(true);
         tablero[0][6] = new Caballo(true);
         tablero[0][7] = new Torre(true);
@@ -48,7 +51,7 @@ public class Tablero {
     public void pintarTablero () {
         int contador = 8;
         System.out.println("  A  B  C  D  E  F  G  H");
-        for (int i = 0; i < tablero.length; i++) {
+        for (int i = 7; i >= 0; i--) {
             System.out.print(contador +" ");
             for (int j = 0; j < tablero[i].length; j++) {
                 if (tablero[i][j]!=null) {
@@ -62,9 +65,9 @@ public class Tablero {
 
     /**
      * Metodo que comprueba si hay una pieza en la posicion indicada por fila y columna
-     * @param fila
-     * @param columna
-     * @return Devuelve true cuando hay una pieza
+     * @param fila Primer valor de la coordenada donde se busca
+     * @param columna Segundo valor de la coordenada donde se busca
+     * @return Devuelve true cuando hay una pieza en la coordenada
      */
     public boolean hayPieza (int fila, int columna) {
         return tablero[fila][columna]!=null;
@@ -72,7 +75,7 @@ public class Tablero {
 
     /**
      * Metodo que comprueba si hay una pieza en la posicion indicada obtenida por una posicion
-     * @param posicion
+     * @param posicion Coordenada donde se busca
      * @return Devuelve true cuando hay una pieza
      */
     public boolean hayPieza (Posicion posicion) {
@@ -81,46 +84,69 @@ public class Tablero {
 
     /**
      * Metodo que busca si hay piezas dentro del rango del movimiento proporcionado
-     * @param movimiento
+     * @param movimiento Desplazamiento que va a realizar la pieza
      * @return Devuelve true cuando encuantra una pieza en el recorrido
      */
     public boolean hayPiezasEntre (Movimiento movimiento) {
         boolean exit = false;
         if (movimiento.isHorizontal()) {
-            //preguntar para saber si es para arriba o para abajo
             if (movimiento.getPosInicial().getColumna()>movimiento.getPosFinal().getColumna()) {
-                for (int i = movimiento.getPosInicial().getColumna()+1; i < movimiento.getPosFinal().getColumna()&&!exit; i++) {
+                for (int i = movimiento.getPosInicial().getColumna()-1; i > movimiento.getPosFinal().getColumna()&&!exit; i--) {
                     if (tablero[movimiento.getPosInicial().getFila()][i]!=null) {
                         exit = true;
                     }
                 }
             } else {
-                for (int i = movimiento.getPosInicial().getColumna()+1; i < movimiento.getPosFinal().getColumna()&&!exit; i--) {
+                for (int i = movimiento.getPosInicial().getColumna()+1; i < movimiento.getPosFinal().getColumna()&&!exit; i++) {
                     if (tablero[movimiento.getPosInicial().getFila()][i]!=null) {
                         exit = true;
                     }
                 }
             }
         }
-        /*else if (movimiento.isDiagonal()) {
-            if ()
+        else if (movimiento.isDiagonal()) {
+            if ((movimiento.getPosInicial().getFila()>movimiento.getPosFinal().getColumna())==(movimiento.getPosInicial().getColumna()>movimiento.getPosFinal().getColumna())) {
+                for (int i = movimiento.getPosInicial().getFila()-1; i > movimiento.getPosFinal().getFila() && !exit; i--) {
+                    if (tablero[i][i]!=null) {
+                        exit = true;
+                    }
+                }
+            } else if ((movimiento.getPosInicial().getFila()<movimiento.getPosFinal().getFila())==(movimiento.getPosInicial().getColumna()<movimiento.getPosFinal().getColumna())) {
+                for (int i = movimiento.getPosFinal().getFila()+1; i < movimiento.getPosFinal().getFila() && !exit; i++) {
+                    if (tablero[i][i]!=null) {
+                        exit = true;
+                    }
+                }
+            } else if ((movimiento.getPosInicial().getFila()>movimiento.getPosFinal().getFila())&&(movimiento.getPosInicial().getColumna()<movimiento.getPosFinal().getColumna())) {
+                for (int i = movimiento.getPosInicial().getFila()-1,j = movimiento.getPosInicial().getColumna()+1; i < movimiento.getPosFinal().getFila(); i--,j++) {
+                    if (tablero[i][j]!=null) {
+                        exit = true;
+                    }
+                }
+            }
+            else {
+                for (int i = movimiento.getPosInicial().getFila()+1,j = movimiento.getPosInicial().getColumna()-1; i < movimiento.getPosFinal().getFila(); i++,j--) {
+                    if (tablero[i][j]!=null) {
+                        exit = true;
+                    }
+                }
+            }
 
-        }*/ else if (movimiento.isVertical()) {
+        } else if (movimiento.isVertical()) {
             if (movimiento.getPosInicial().getFila()>movimiento.getPosFinal().getFila()) {
-                for (int i = movimiento.getPosInicial().getFila()+1; i < movimiento.getPosFinal().getColumna()&&!exit; i++) {
+                for (int i = movimiento.getPosInicial().getFila()-1; i > movimiento.getPosFinal().getColumna()&&!exit; i--) {
                     if (tablero[i][movimiento.getPosInicial().getColumna()]!=null) {
                         exit = true;
                     }
                 }
             }
             else {
-                for (int i = movimiento.getPosInicial().getFila()+1; i < movimiento.getPosFinal().getColumna()&&!exit; i--) {
+                for (int i = movimiento.getPosInicial().getFila()+1; i < movimiento.getPosFinal().getColumna()&&!exit; i++) {
                     if (tablero[i][movimiento.getPosInicial().getColumna()]!=null) {
                         exit = true;
                     }
                 }
             }
-
         }
         return exit;
     }
@@ -139,15 +165,20 @@ public class Tablero {
 
     /**
      *
-     * @param fila
-     * @param columna
+     * @param fila Primer valor de la coordenada de busqueda
+     * @param columna Segundo valor de la coordenada de busqueda
      * @return Devuelve una pieza segun los parametros de posicion en el array dados
      */
     public Pieza devuelvePieza(int fila,int columna){
         return tablero[fila][columna];
     }
-    /*public Pieza DevuelvePieza(Posicion pos) {
 
-    }
+    /**
+     *
+     * @param posicion Coordenada de busqueda
+     * @return Devuelve la pieza que se encuentre en esa posicion (o null si no hay pieza)
      */
+    public Pieza devuelvePieza(Posicion posicion) {
+        return tablero[posicion.getFila()][posicion.getColumna()];
+    }
 }

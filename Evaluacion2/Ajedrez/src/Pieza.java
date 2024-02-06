@@ -1,5 +1,11 @@
 public abstract class Pieza {
+    /**
+     * Es el color de la pieza, true si es blanca, false si es negra
+     */
     private boolean color;
+    /**
+     * Es el caracter Unicode de la pieza (su dibujo)
+     */
     protected String nombre;
 
     /**
@@ -11,7 +17,7 @@ public abstract class Pieza {
 
     /**
      * Constructor que crea una pieza del color indicado, utilizando como nombre la primera letra del nombre de la clase
-     * @param color
+     * @param color Es el color de la pieza que se va a crear (true si es blanca, false si es negra)
      */
     public Pieza(boolean color) {
         nombre = String.valueOf(this.getClass().getSimpleName().charAt(0));
@@ -19,8 +25,8 @@ public abstract class Pieza {
 
     /**
      * Metodo que pregunta si un movimiento es valido de realizar
-     * @param movimiento
-     * @return Devuelve true si el movimiento es correcto
+     * @param movimiento Es el recorrido que va a realizar la pieza
+     * @return Devuelve true si el movimiento es correcto (no incumple ninguna regla)
      */
     public abstract boolean validoMovimiento (Movimiento movimiento,Tablero tablero);
 
@@ -34,7 +40,7 @@ public abstract class Pieza {
 
     /**
      * Metodo que imprime el nombre de la pieza (este ya incluye su color por el simbolo que aparece)
-     * @return
+     * @return Devuelve un String con el Unicode de la pieza
      */
     @Override
     public String toString() {

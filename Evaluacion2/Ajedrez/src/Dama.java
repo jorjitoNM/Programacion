@@ -1,8 +1,8 @@
 public class Dama extends Pieza {
 
     /**
-     * metodo que crea una Dama con el color adecuado
-     * @param color
+     * metodo que crea una Dama inicializando su nombre a su caracter Unicode del color adecuado
+     * @param color El color sirve para distinguir entre las piezas negras y blancas
      */
     public Dama (boolean color) {
         super(color);

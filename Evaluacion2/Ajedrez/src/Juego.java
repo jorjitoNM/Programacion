@@ -1,10 +1,16 @@
 public class Juego {
 
+    /**
+     * Representa que jugador debe jugar (blancas si es par, negras si es impar)
+     */
     private int turno;
+    /**
+     * Representa el crecimiento del valor de turno
+     */
     private int contador = 0;
 
     /**
-     * Metodo que calcula el turno.
+     * Metodo que calcula el turno (par si juegan blancas e impar si juegan negras).
      * @return Devuelve true cuando el turno no es par (el color true son las negras)
      */
     public boolean darTurno () {
@@ -51,9 +57,9 @@ public class Juego {
 
     /**
      * Metodo que recibe una jugada en forma de coordenadas y comprueba si es válida
-     * @param jugada
-     * @param tablero
-     * @return Devuelve la jugada
+     * @param jugada Es un string que indica una coordenada en sus dos primeros caracteres, la pieza a mover, y una segunda coordenada en sus dos ultimos caracteres, la casilla de destino de la pieza
+     * @param tablero Es el tablero de juego concreto
+     * @return Devuelve una jugada que sera el movimiento que va a realizar la pieza indicada
      */
     public Movimiento jugada (String jugada, Tablero tablero) {
         Movimiento movimiento = null;
@@ -90,9 +96,17 @@ public class Juego {
 
     /**
      * Metodo que actualiza el valor de turno
-     * @param turno
+     * @param turno Es el turno es un contador que representa si es el turno de las blancas (contador en par) o las negras (contador impar)
      */
     public void setTurno(int turno) {
         this.turno = turno;
+    }
+
+    public int getContador() {
+        return contador;
+    }
+
+    public void setContador(int contador) {
+        this.contador = contador;
     }
 }

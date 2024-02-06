@@ -1,8 +1,8 @@
 public class Caballo extends Pieza {
 
     /**
-     * Metodo que crea un Caballo con el color adecuado
-     * @param color
+     * Metodo que crea un Caballo inicializando su nombre a su caracter Unicode del color adecuado
+     * @param color El color sirve para distinguir entre las piezas negras y blancas
      */
     public Caballo (boolean color) {
         super(color);

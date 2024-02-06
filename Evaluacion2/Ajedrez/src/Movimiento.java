@@ -1,15 +1,22 @@
 public class Movimiento {
+    /**
+     * Es la coordenada Inicial del movimiento (fila,columna)
+     */
     private Posicion posInicial;
+    /**
+     * Es la coordenada final del movimiento (fila,columna)
+     */
     private Posicion posFinal;
 
+    /**
+     * Metodo que no hace nada
+     */
     public Movimiento () {
-        //para pasasr de movimiento????
     }
-
     /**
      * Constructor que actualiza la posicion incial y la final a las indicadas
-     * @param posInicial
-     * @param posFinal
+     * @param posInicial Es la coordenada inicial del movimiento (fila,columna)
+     * @param posFinal Es la coordenada final del movimiento (fila,columna)
      */
     public Movimiento (Posicion posInicial,Posicion posFinal) {
         this.posFinal = posFinal;
@@ -18,7 +25,7 @@ public class Movimiento {
 
     /**
      *
-     * @return Devuelve la posicion inicial
+     * @return Devuelve la posicion inicial del movimiento
      */
     public Posicion getPosInicial() {
         return posInicial;
@@ -26,7 +33,7 @@ public class Movimiento {
 
     /**
      * Metodo que actualiza el valor de posicionInicial
-     * @param posInicial
+     * @param posInicial Es la coordenada inicial del movimiento (fila,columna)
      */
     public void setPosInicial(Posicion posInicial) {
         this.posInicial = posInicial;
@@ -40,14 +47,14 @@ public class Movimiento {
     }
     /**
      * Metodo que actualiza el valor de posicioFinal
-     * @param posFinal
+     * @param posFinal Es la coordenada final del movimiento (fila,columna)
      */
     public void setPosFinal(Posicion posFinal) {
         this.posFinal = posFinal;
     }
 
     /**
-     * Metodo que pregunta si un movimiento es vertical
+     * Metodo que pregunta si un movimiento es vertical (la fila cambia y la columna se mantiene)
      * @return Devuelve true cuando es vertical
      */
     public boolean isVertical () {
@@ -55,7 +62,7 @@ public class Movimiento {
     }
 
     /**
-     * Metodo que pregunta si un movimiento es horizontal
+     * Metodo que pregunta si un movimiento es horizontal (la columna cambia y la fila se mantiene)
      * @return Devuelve true cuando es horizontal
      */
     public boolean isHorizontal () {

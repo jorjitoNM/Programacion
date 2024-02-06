@@ -1,8 +1,8 @@
 public class Alfil extends Pieza {
 
     /**
-     * Metodo que crea un Alfil con el color indicado
-     * @param color
+     * Metodo que crea un Alfil inicializando su nombre a su caracter Unicode del color adecuado
+     * @param color El color sirve para distinguir entre las piezas negras y blancas
      */
     public Alfil (boolean color) {
         super(color);

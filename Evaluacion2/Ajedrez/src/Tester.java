@@ -4,7 +4,7 @@ public class Tester {
     public static void main(String[] args) {
        Tablero tablero = new Tablero();
        tablero.pintarTablero();
-        Scanner teclado = new Scanner(System.in);
+       Scanner teclado = new Scanner(System.in);
        String respuesta;
        Juego juego = new Juego();
        do {
@@ -16,6 +16,9 @@ public class Tester {
                if ((movimiento!=null)&&(pieza.validoMovimiento(movimiento,tablero))) {
                    tablero.ponPieza(pieza,destino);
                    tablero.pintarTablero();
+               }
+               else {
+                   System.out.println(juego.jugada(respuesta,tablero));
                }
        }while (juego.getContador()<50);
     }

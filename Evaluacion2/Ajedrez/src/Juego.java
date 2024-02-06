@@ -64,9 +64,9 @@ public class Juego {
     public Movimiento jugada (String jugada, Tablero tablero) {
         Movimiento movimiento = null;
         int filaInicial = jugada.charAt(1)-49;
-        int columnaInicial = jugada.charAt(0)-65;
+        int columnaInicial = (jugada.charAt(0)>90)?jugada.charAt(0)-97:jugada.charAt(0)-65;
         int filaFinal = jugada.charAt(3)-49;
-        int columnaFinal = jugada.charAt(2)-65;
+        int columnaFinal = (jugada.charAt(2)>90)?jugada.charAt(2)-97:jugada.charAt(2)-65;
         if (jugada.length()!=4)
             System.out.println("Error. La jugada tiene que ser del tipo A2A3 (pieza origen/casilla destino)");
         else if (!((filaInicial<=7&&filaInicial>=0)&&(columnaInicial<=7&&columnaInicial>=0)&&(filaFinal<=7&&filaFinal>=0)&&(columnaFinal<=7&&columnaFinal>=0)))

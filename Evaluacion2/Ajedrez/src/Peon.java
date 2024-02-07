@@ -21,7 +21,7 @@ public class Peon extends Pieza {
      */
     @Override
     public boolean validoMovimiento(Movimiento movimiento,Tablero tablero) {
-        if (getColor()) { //es blanco
+        if (!getColor()) { //es blanco
             if (tablero.hayPieza(movimiento.getPosFinal())) {
                 return movimiento.saltoDiagonal()==1;
             }

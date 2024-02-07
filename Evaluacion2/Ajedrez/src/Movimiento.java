@@ -66,7 +66,7 @@ public class Movimiento {
      * @return Devuelve true cuando es horizontal
      */
     public boolean isHorizontal () {
-        return (posInicial.getFila()!=posFinal.getFila());
+        return (posInicial.getFila()==posFinal.getFila());
     }
 
     /**
@@ -75,7 +75,7 @@ public class Movimiento {
      */
     public boolean isDiagonal () {
         //(Math.pow(Math.abs(posFinal.getFila()-posInicial.getFila()),2)+Math.pow(Math.abs(posFinal.getColumna()-posInicial.getColumna()),2))==Math.pow(,2)
-        return (Math.abs(saltoHorizontal())==Math.abs(saltoVertical()))?false:true;
+        return (Math.abs(saltoHorizontal())==Math.abs(saltoVertical()))?true:false;
     }
 
     /**
@@ -88,34 +88,33 @@ public class Movimiento {
 
     /**
      * Metodo que pregunta si el movimiento es un salto horizontal
-     * @return Devuelve el numero de casillas saltadas o -1 si no es un salto
+     * @return Devuelve el numero de casillas saltadas o -3 si no es un salto
      */
     public int saltoHorizontal () {
-        if (posInicial.getFila()!=posFinal.getFila()) {
+        //if (isHorizontal()) {
             return posFinal.getFila()- posInicial.getFila();
-        }
-        return -1;
+        //}
+        //return -3;
     }
 
     /**
      * Metodo que pregunta si el movimiento es un salto vertical
-     * @return Devuelve el numero de casillas saltadas o -1 si no es un salto
+     * @return Devuelve el numero de casillas saltadas o -3 si no es un salto
      */
     public int saltoVertical () {
-        if (posInicial.getColumna()==posFinal.getColumna()) {
+        //if (isVertical()) {
             return posFinal.getColumna()-posInicial.getColumna();
-        }
-        return -1;
+        //}
+        //return -3;
     }
 
     /**
      * Metodo que pregunta si el movimiento es un salto diagonal
-     * @return Devuelve el numero de casillas saltadas o -1 si no es un salto
+     * @return Devuelve el numero de casillas saltadas o -3 si no es un salto
      */
     public int saltoDiagonal () {
-        if ((posInicial.getFila()!=posFinal.getFila()&&posInicial.getColumna()!= posFinal.getColumna())&&(Math.abs(saltoVertical())==Math.abs(saltoHorizontal()))) {
-            return (int)(Math.sqrt((posInicial.getFila()-posFinal.getFila())-(posInicial.getColumna()-posFinal.getColumna())));
-        }
-        return -1;
+        if (isDiagonal())
+            return (int)(Math.sqrt(Math.pow(Math.abs(posInicial.getFila()-posFinal.getFila()),2)+Math.pow(Math.abs(posInicial.getColumna()-posFinal.getColumna()),2)));
+        return -3;
     }
 }

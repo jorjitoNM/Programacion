@@ -111,7 +111,7 @@ public class Tablero {
             }
         }
         else if (movimiento.isDiagonal()) {
-            if ((movimiento.getPosInicial().getFila()>movimiento.getPosFinal().getColumna())==(movimiento.getPosInicial().getColumna()>movimiento.getPosFinal().getColumna())) {
+            if ((movimiento.getPosInicial().getFila()>movimiento.getPosFinal().getFila())==(movimiento.getPosInicial().getColumna()>movimiento.getPosFinal().getColumna())) {
                 for (int i = movimiento.getPosInicial().getFila()-1; i > movimiento.getPosFinal().getFila() && !exit; i--) {
                     if (tablero[i][i]!=null) {
                         exit = true;

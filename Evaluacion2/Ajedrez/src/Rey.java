@@ -2,7 +2,7 @@ public class Rey extends Pieza {
 
     /**
      * Metodo que crea un Rey con el color adecuado
-     * @param color
+     * @param color El color sirve para distinguir entre las piezas negras y blancas
      */
     public Rey (boolean color) {
         super(color);
@@ -15,6 +15,6 @@ public class Rey extends Pieza {
     }
     @Override
     public boolean validoMovimiento(Movimiento movimiento,Tablero tablero) {
-        return movimiento.isVertical()||movimiento.isDiagonal()||movimiento.isHorizontal();
+        return movimiento.saltoVertical()==1||movimiento.saltoHorizontal()==1||movimiento.saltoDiagonal()==1;
     }
 }

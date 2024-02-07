@@ -13,19 +13,30 @@ public class Peon extends Pieza {
             nombre = "\u265F";
         }
     }
-    @Override
-    public boolean validoMovimiento(Movimiento movimiento,Tablero tablero) {
-        return Math.abs(movimiento.saltoVertical())==1;
-    }
-
     /**
-     * Metodo que comprueba si el movimiento es valido teniendo en cuenta que va a comer
+     * Metodo que comprueba si el movimiento es valido teniendo en cuenta si va a comer o a avanzar
      * @param movimiento Es el recorrido que va a realizar el peon
      * @param tablero Es el tablero de juego que se esta usando
-     * @return devuelve true cuando el movimiento para comer es valido
+     * @return Devuelve true cuando el movimiento es valido
      */
-    public boolean validoComer (Movimiento movimiento,Tablero tablero) {
-        return Math.abs(movimiento.saltoDiagonal())==1;
+    @Override
+    public boolean validoMovimiento(Movimiento movimiento,Tablero tablero) {
+        if (getColor()) { //es blanco
+            if (tablero.hayPieza(movimiento.getPosFinal())) {
+                return movimiento.saltoDiagonal()==1;
+            }
+            else  if (movimiento.getPosInicial().getFila()==6)
+                return movimiento.saltoVertical()==1||movimiento.saltoVertical()==2;
+            else
+                return movimiento.saltoVertical()==1;
+        }
+        else { //es negro
+            if (tablero.hayPieza(movimiento.getPosFinal()))
+                return movimiento.saltoDiagonal()==-1;
+            else if (movimiento.getPosInicial().getFila()==1)
+                return movimiento.saltoVertical()==-1||movimiento.saltoVertical()==-2;
+            else
+                return movimiento.saltoVertical()==-1;
+        }
     }
-
 }

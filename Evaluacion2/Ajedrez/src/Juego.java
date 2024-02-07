@@ -63,10 +63,10 @@ public class Juego {
      */
     public Movimiento jugada (String jugada, Tablero tablero) {
         Movimiento movimiento = null;
-        int filaInicial = jugada.charAt(1)-49;
-        int columnaInicial = (jugada.charAt(0)>90)?jugada.charAt(0)-97:jugada.charAt(0)-65;
-        int filaFinal = jugada.charAt(3)-49;
-        int columnaFinal = (jugada.charAt(2)>90)?jugada.charAt(2)-97:jugada.charAt(2)-65;
+        int filaInicial = 7-(jugada.charAt(1)-49);
+        int columnaInicial = jugada.charAt(0)-65;
+        int filaFinal = 7-(jugada.charAt(3)-49);
+        int columnaFinal = jugada.charAt(2)-65;
         if (jugada.length()!=4)
             System.out.println("Error. La jugada tiene que ser del tipo A2A3 (pieza origen/casilla destino)");
         else if (!((filaInicial<=7&&filaInicial>=0)&&(columnaInicial<=7&&columnaInicial>=0)&&(filaFinal<=7&&filaFinal>=0)&&(columnaFinal<=7&&columnaFinal>=0)))
@@ -75,12 +75,14 @@ public class Juego {
             System.out.println("Error. No hay pieza en esta casilla");
         else if (tablero.devuelvePieza(filaInicial,columnaInicial).getColor()!=darTurno())
             System.out.println("Error. Esa pieza no es tuya");
-        else if (!((tablero.hayPieza(filaFinal,columnaFinal)&&(tablero.devuelvePieza(filaInicial,columnaInicial).getColor()==darTurno()))))
+        else if ((tablero.hayPieza(filaFinal,columnaFinal)&&(tablero.devuelvePieza(filaInicial,columnaInicial).getColor()==darTurno())))
             System.out.println("Error. No puedes comerte una pieza tuya");
-        else if (!tablero.devuelvePieza(filaInicial,columnaInicial).validoMovimiento(movimiento,tablero)) {
+        /*else if (!tablero.devuelvePieza(filaInicial,columnaInicial).validoMovimiento(movimiento,tablero)) {
             System.out.println("Error. Movimiento no válido");
-        } else {
-            movimiento= new Movimiento();
+         */
+        //siempre entra por este camino
+        else {
+            movimiento= new Movimiento(new Posicion(filaInicial,columnaInicial),new Posicion(filaFinal,columnaFinal));
             contador++;
         }
         return movimiento;

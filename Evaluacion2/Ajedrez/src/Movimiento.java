@@ -74,7 +74,8 @@ public class Movimiento {
      * @return Devuelve true cuando es diagonal
      */
     public boolean isDiagonal () {
-        return (posInicial.getFila()!=posFinal.getFila()&&posInicial.getColumna()!=posFinal.getColumna());
+        //(Math.pow(Math.abs(posFinal.getFila()-posInicial.getFila()),2)+Math.pow(Math.abs(posFinal.getColumna()-posInicial.getColumna()),2))==Math.pow(,2)
+        return (Math.abs(saltoHorizontal())==Math.abs(saltoVertical()))?false:true;
     }
 
     /**

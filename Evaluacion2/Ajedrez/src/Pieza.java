@@ -34,8 +34,11 @@ public abstract class Pieza {
      *
      * @return Devuelve el color de la pieza
      */
-    public boolean getColor() {
-        return color;
+    public boolean getColor(Juego partida) {
+        return (!partida.darTurno())?color:!color;
+    }
+    public void setColor(boolean color) {
+        this.color = color;
     }
 
     /**

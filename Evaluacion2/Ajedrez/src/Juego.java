@@ -3,11 +3,14 @@ public class Juego {
     /**
      * Representa que jugador debe jugar (blancas si es par, negras si es impar)
      */
-    private int turno;
+    private int turno = 0;
     /**
      * Representa el crecimiento del valor de turno
      */
     private int contador = 0;
+
+    public Juego() {
+    }
 
     /**
      * Metodo que calcula el turno (par si juegan blancas e impar si juegan negras).
@@ -61,7 +64,7 @@ public class Juego {
      * @param tablero Es el tablero de juego concreto
      * @return Devuelve una jugada que sera el movimiento que va a realizar la pieza indicada
      */
-    public Movimiento jugada (String jugada, Tablero tablero) {
+    public Movimiento jugada (String jugada, Tablero tablero,Juego partida) {
         Movimiento movimiento = null;
         if (jugada.length()!=4)
             System.out.println("Error. La jugada tiene que ser del tipo A2A3 (pieza origen/casilla destino)");
@@ -74,17 +77,16 @@ public class Juego {
             System.out.println("Error. Jugada fuera de tablero");
         else if (!tablero.hayPieza(filaInicial,columnaInicial))
             System.out.println("Error. No hay pieza en esta casilla");
-        else if (tablero.devuelvePieza(filaInicial,columnaInicial).getColor()!=darTurno())
+        else if (tablero.devuelvePieza(filaInicial,columnaInicial).getColor(partida)!=darTurno())
             System.out.println("Error. Esa pieza no es tuya");
-        else if ((tablero.hayPieza(filaFinal,columnaFinal)&&(tablero.devuelvePieza(filaInicial,columnaInicial).getColor()==darTurno())))
+        else if ((tablero.hayPieza(filaFinal,columnaFinal)&&(tablero.devuelvePieza(filaInicial,columnaInicial).getColor(partida)==darTurno())))
             System.out.println("Error. No puedes comerte una pieza tuya");
         /*else if (!tablero.devuelvePieza(filaInicial,columnaInicial).validoMovimiento(movimiento,tablero)) {
             System.out.println("Error. Movimiento no válido");
          */
-            //siempre entra por este camino
         else {
             movimiento= new Movimiento(new Posicion(filaInicial,columnaInicial),new Posicion(filaFinal,columnaFinal));
-            contador++;
+            turno++;
         }
         }
         return movimiento;

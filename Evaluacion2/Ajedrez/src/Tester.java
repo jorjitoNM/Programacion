@@ -17,7 +17,8 @@ public class Tester {
             Pieza pieza = tablero.devuelvePieza(movimiento.getPosInicial().getFila(), movimiento.getPosInicial().getColumna());
             if (pieza.validoMovimiento(movimiento, tablero)) {
                 tablero.moverPieza(pieza, movimiento);
-            }
+            }else
+                System.out.println(pieza.getClass().getSimpleName() + " no puede realizar ese movimiento");
             tablero.pintarTablero();
 
         } while (juego.getContador() < 50);

@@ -91,10 +91,10 @@ public class Movimiento {
      * @return Devuelve el numero de casillas saltadas o -3 si no es un salto
      */
     public int saltoHorizontal () {
-        //if (isHorizontal()) {
-            return posFinal.getFila()- posInicial.getFila();
-        //}
-        //return -3;
+        if (isHorizontal()) {
+            return posFinal.getColumna()- posInicial.getColumna();
+        }
+        return 0;
     }
 
     /**
@@ -102,10 +102,10 @@ public class Movimiento {
      * @return Devuelve el numero de casillas saltadas o -3 si no es un salto
      */
     public int saltoVertical () {
-        //if (isVertical()) {
-            return posFinal.getColumna()-posInicial.getColumna();
-        //}
-        //return -3;
+        if (isVertical()) {
+            return posFinal.getFila()-posInicial.getFila();
+        }
+        return 0;
     }
 
     /**
@@ -115,6 +115,6 @@ public class Movimiento {
     public int saltoDiagonal () {
         if (isDiagonal())
             return (int)(Math.sqrt(Math.pow(Math.abs(posInicial.getFila()-posFinal.getFila()),2)+Math.pow(Math.abs(posInicial.getColumna()-posFinal.getColumna()),2)));
-        return -3;
+        return 0;
     }
 }

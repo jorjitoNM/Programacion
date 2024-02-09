@@ -24,7 +24,7 @@ public class Tablero {
         tablero[1][3] = new Peon(false);
         tablero[1][4] = new Peon(false);
         tablero[1][5] = new Peon(false);
-        tablero[1][6] = new Peon(false);
+        tablero[5][2] = new Peon(false);
         tablero[1][7] = new Peon(false);
 
         tablero[7][0] = new Torre(true);

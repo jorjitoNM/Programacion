@@ -1,6 +1,6 @@
 public abstract class Pieza {
     /**
-     * Es el color de la pieza, false si es blanca, true si es negra
+     * Es el color de la pieza, true si es blanca, false si es negra
      */
     private boolean color;
     /**
@@ -20,7 +20,8 @@ public abstract class Pieza {
      * @param color Es el color de la pieza que se va a crear (true si es blanca, false si es negra)
      */
     public Pieza(boolean color) {
-        nombre = String.valueOf(this.getClass().getSimpleName().charAt(0));
+        //nombre = String.valueOf(this.getClass().getSimpleName().charAt(0));
+        this.color= color;
     }
 
     /**
@@ -34,9 +35,10 @@ public abstract class Pieza {
      *
      * @return Devuelve el color de la pieza
      */
-    public boolean getColor(Juego partida) {
-        return (!partida.darTurno())?color:!color;
+    public boolean getColor() {
+        return color;
     }
+
     public void setColor(boolean color) {
         this.color = color;
     }

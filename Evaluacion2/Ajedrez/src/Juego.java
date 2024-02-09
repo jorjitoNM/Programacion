@@ -10,6 +10,7 @@ public class Juego {
     private int contador = 0;
 
     public Juego() {
+
     }
 
     /**
@@ -17,7 +18,7 @@ public class Juego {
      * @return Devuelve true cuando el turno no es par (el color true son las negras)
      */
     public boolean darTurno () {
-        return turno % 2 != 0;
+        return turno % 2 == 0;
     }
     /*public Movimiento jugada2 (String jugada, Tablero tablero) { //el String tiene que estar en mayuscula
         Movimiento movimiento = null;
@@ -77,16 +78,15 @@ public class Juego {
             System.out.println("Error. Jugada fuera de tablero");
         else if (!tablero.hayPieza(filaInicial,columnaInicial))
             System.out.println("Error. No hay pieza en esta casilla");
-        else if (tablero.devuelvePieza(filaInicial,columnaInicial).getColor(partida)!=darTurno())
+        else if (tablero.devuelvePieza(filaInicial,columnaInicial).getColor()!=darTurno())
             System.out.println("Error. Esa pieza no es tuya");
-        else if ((tablero.hayPieza(filaFinal,columnaFinal)&&(tablero.devuelvePieza(filaInicial,columnaInicial).getColor(partida)==darTurno())))
+        else if ((tablero.hayPieza(filaFinal,columnaFinal)&&(tablero.devuelvePieza(filaFinal,columnaFinal).getColor()==darTurno())))
             System.out.println("Error. No puedes comerte una pieza tuya");
         /*else if (!tablero.devuelvePieza(filaInicial,columnaInicial).validoMovimiento(movimiento,tablero)) {
             System.out.println("Error. Movimiento no válido");
          */
         else {
             movimiento= new Movimiento(new Posicion(filaInicial,columnaInicial),new Posicion(filaFinal,columnaFinal));
-            turno++;
         }
         }
         return movimiento;
@@ -102,10 +102,9 @@ public class Juego {
 
     /**
      * Metodo que actualiza el valor de turno
-     * @param turno Es el turno es un contador que representa si es el turno de las blancas (contador en par) o las negras (contador impar)
      */
-    public void setTurno(int turno) {
-        this.turno = turno;
+    public void setTurno() {
+        turno++;
     }
 
     public int getContador() {

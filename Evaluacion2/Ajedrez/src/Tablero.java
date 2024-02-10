@@ -24,7 +24,7 @@ public class Tablero {
         tablero[1][3] = new Peon(false);
         tablero[1][4] = new Peon(false);
         tablero[1][5] = new Peon(false);
-        tablero[5][2] = new Peon(false);
+        tablero[1][6] = new Peon(false);
         tablero[1][7] = new Peon(false);
 
         tablero[7][0] = new Torre(true);
@@ -76,7 +76,7 @@ public class Tablero {
      * @return Devuelve true cuando hay una pieza en la coordenada
      */
     public boolean hayPieza (int fila, int columna) {
-        return tablero[fila][columna]!=null;
+        return !tablero[fila][columna].toString().trim().equalsIgnoreCase("\u25A1")||!tablero[fila][columna].toString().trim().equalsIgnoreCase("\u25A0");
     }
 
     /**
@@ -85,7 +85,7 @@ public class Tablero {
      * @return Devuelve true cuando hay una pieza
      */
     public boolean hayPieza (Posicion posicion) {
-        return tablero[posicion.getFila()][posicion.getColumna()]!=null;
+        return !tablero[posicion.getFila()][posicion.getColumna()].toString().trim().equalsIgnoreCase("\u25A1")||!tablero[posicion.getFila()][posicion.getColumna()].toString().trim().equalsIgnoreCase("\u25A0");
     }
 
     /**
@@ -98,41 +98,41 @@ public class Tablero {
         if (movimiento.isHorizontal()) {
             if (movimiento.getPosInicial().getColumna()>movimiento.getPosFinal().getColumna()) {
                 for (int i = movimiento.getPosInicial().getColumna()-1; i > movimiento.getPosFinal().getColumna()&&!exit; i--) {
-                    if (tablero[movimiento.getPosInicial().getFila()][i]!=null) {
+                    if (hayPieza(movimiento.getPosInicial().getFila(),i)) {
                         exit = true;
                     }
                 }
             } else {
                 for (int i = movimiento.getPosInicial().getColumna()+1; i < movimiento.getPosFinal().getColumna()&&!exit; i++) {
-                    if (tablero[movimiento.getPosInicial().getFila()][i]!=null) {
+                    if (hayPieza(movimiento.getPosInicial().getFila(),i)) {
                         exit = true;
                     }
                 }
             }
         }
         else if (movimiento.isDiagonal()) {
-            if ((movimiento.getPosInicial().getFila()>movimiento.getPosFinal().getFila())==(movimiento.getPosInicial().getColumna()>movimiento.getPosFinal().getColumna())) {
+            if ((movimiento.getPosInicial().getFila()>movimiento.getPosFinal().getFila())&&(movimiento.getPosInicial().getColumna()>movimiento.getPosFinal().getColumna())&&(movimiento.saltoVertical())==(movimiento.saltoHorizontal())) {
                 for (int i = movimiento.getPosInicial().getFila()-1; i > movimiento.getPosFinal().getFila() && !exit; i--) {
-                    if (tablero[i][i]!=null) {
+                    if (hayPieza(i,i)) {
                         exit = true;
                     }
                 }
-            } else if ((movimiento.getPosInicial().getFila()<movimiento.getPosFinal().getFila())==(movimiento.getPosInicial().getColumna()<movimiento.getPosFinal().getColumna())) {
+            } else if ((movimiento.getPosInicial().getFila()<movimiento.getPosFinal().getFila())&&(movimiento.getPosInicial().getColumna()<movimiento.getPosFinal().getColumna())&&(movimiento.saltoVertical())==(movimiento.saltoHorizontal())) {
                 for (int i = movimiento.getPosFinal().getFila()+1; i < movimiento.getPosFinal().getFila() && !exit; i++) {
-                    if (tablero[i][i]!=null) {
+                    if (hayPieza(i,i)) {
                         exit = true;
                     }
                 }
             } else if ((movimiento.getPosInicial().getFila()>movimiento.getPosFinal().getFila())&&(movimiento.getPosInicial().getColumna()<movimiento.getPosFinal().getColumna())) {
                 for (int i = movimiento.getPosInicial().getFila()-1,j = movimiento.getPosInicial().getColumna()+1; i < movimiento.getPosFinal().getFila(); i--,j++) {
-                    if (tablero[i][j]!=null) {
+                    if (hayPieza(i,j)) {
                         exit = true;
                     }
                 }
             }
             else {
                 for (int i = movimiento.getPosInicial().getFila()+1,j = movimiento.getPosInicial().getColumna()-1; i < movimiento.getPosFinal().getFila(); i++,j--) {
-                    if (tablero[i][j]!=null) {
+                    if (hayPieza(i,j)) {
                         exit = true;
                     }
                 }
@@ -141,14 +141,14 @@ public class Tablero {
         } else if (movimiento.isVertical()) {
             if (movimiento.getPosInicial().getFila()>movimiento.getPosFinal().getFila()) {
                 for (int i = movimiento.getPosInicial().getFila()-1; i > movimiento.getPosFinal().getColumna()&&!exit; i--) {
-                    if (tablero[i][movimiento.getPosInicial().getColumna()]!=null) {
+                    if (hayPieza(i,movimiento.getPosInicial().getColumna())) {
                         exit = true;
                     }
                 }
             }
             else {
                 for (int i = movimiento.getPosInicial().getFila()+1; i < movimiento.getPosFinal().getColumna()&&!exit; i++) {
-                    if (tablero[i][movimiento.getPosInicial().getColumna()]!=null) {
+                    if (hayPieza(i,movimiento.getPosInicial().getColumna())) {
                         exit = true;
                     }
                 }

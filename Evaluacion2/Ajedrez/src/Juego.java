@@ -12,7 +12,6 @@ public class Juego {
     public Juego() {
 
     }
-
     /**
      * Metodo que calcula el turno (par si juegan blancas e impar si juegan negras).
      * @return Devuelve true cuando el turno no es par (el color true son las negras)

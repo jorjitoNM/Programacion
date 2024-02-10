@@ -14,8 +14,6 @@ public class Posicion {
         this.fila = fila;
         this.columna = columna;
     }
-
-
     /**
      *
      * @return Devuelve el valor de fila
@@ -39,7 +37,6 @@ public class Posicion {
     public int getColumna() {
         return columna;
     }
-
     /**
      * Metodo que actualiza el valor de columna
      * @param columna

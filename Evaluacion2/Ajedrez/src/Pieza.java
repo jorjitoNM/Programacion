@@ -20,7 +20,6 @@ public abstract class Pieza {
      * @param color Es el color de la pieza que se va a crear (true si es blanca, false si es negra)
      */
     public Pieza(boolean color) {
-        //nombre = String.valueOf(this.getClass().getSimpleName().charAt(0));
         this.color= color;
     }
 

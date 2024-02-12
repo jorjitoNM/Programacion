@@ -33,16 +33,7 @@ public class Peon extends Pieza {
                 return movimiento.saltoVertical()==1||movimiento.saltoVertical()==2;
             else if (!movimiento.isDiagonal()&&!tablero.hayPieza(movimiento.getPosFinal()))
                 return movimiento.saltoVertical()==1;
-            else if (movimiento.getPosFinal().getFila()==7) {
-                /*System.out.println("Acabas de coronar, que pieza quieres elegir?");
-                String respuesta;
-                boolean valido = false;
-                do {
-                    respuesta = teclado.nextLine();
-                    if (respuesta.equalsIgnoreCase())
-                }while(!valido)
-                 */
-            }
+
         }
         else { //es blanco
             if (tablero.hayPieza(movimiento.getPosFinal())&&movimiento.isDiagonal())

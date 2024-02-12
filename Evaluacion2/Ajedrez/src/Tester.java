@@ -17,6 +17,7 @@ public class Tester {
             Pieza pieza = tablero.devuelvePieza(movimiento.getPosInicial().getFila(), movimiento.getPosInicial().getColumna());
             if (pieza.validoMovimiento(movimiento, tablero)) {
                 tablero.moverPieza(pieza, movimiento);
+
                 juego.setTurno();
             }else
                 System.out.println(pieza.getClass().getSimpleName() + " no puede realizar ese movimiento");

@@ -76,7 +76,7 @@ public class Tablero {
      * @return Devuelve true cuando hay una pieza en la coordenada
      */
     public boolean hayPieza (int fila, int columna) {
-        return !tablero[fila][columna].toString().trim().equalsIgnoreCase("\u25A1")||!tablero[fila][columna].toString().trim().equalsIgnoreCase("\u25A0");
+        return tablero[fila][columna]!=null;
     }
 
     /**
@@ -85,7 +85,7 @@ public class Tablero {
      * @return Devuelve true cuando hay una pieza
      */
     public boolean hayPieza (Posicion posicion) {
-        return !tablero[posicion.getFila()][posicion.getColumna()].toString().trim().equalsIgnoreCase("\u25A1")||!tablero[posicion.getFila()][posicion.getColumna()].toString().trim().equalsIgnoreCase("\u25A0");
+        return tablero[posicion.getFila()][posicion.getColumna()]!=null;
     }
 
     /**
@@ -112,14 +112,14 @@ public class Tablero {
         }
         else if (movimiento.isDiagonal()) {
             if ((movimiento.getPosInicial().getFila()>movimiento.getPosFinal().getFila())&&(movimiento.getPosInicial().getColumna()>movimiento.getPosFinal().getColumna())&&(movimiento.saltoVertical())==(movimiento.saltoHorizontal())) {
-                for (int i = movimiento.getPosInicial().getFila()-1; i > movimiento.getPosFinal().getFila() && !exit; i--) {
-                    if (hayPieza(i,i)) {
+                for (int i = movimiento.getPosInicial().getFila()-1, j= movimiento.getPosInicial().getColumna()-1; i > movimiento.getPosFinal().getFila() && !exit; i--,j--) {
+                    if (hayPieza(i,j)) {
                         exit = true;
                     }
                 }
             } else if ((movimiento.getPosInicial().getFila()<movimiento.getPosFinal().getFila())&&(movimiento.getPosInicial().getColumna()<movimiento.getPosFinal().getColumna())&&(movimiento.saltoVertical())==(movimiento.saltoHorizontal())) {
-                for (int i = movimiento.getPosFinal().getFila()+1; i < movimiento.getPosFinal().getFila() && !exit; i++) {
-                    if (hayPieza(i,i)) {
+                for (int i = movimiento.getPosFinal().getFila()+1,j = movimiento.getPosFinal().getColumna()+1; i < movimiento.getPosFinal().getFila() && !exit; i++,j++) {
+                    if (hayPieza(i,j)) {
                         exit = true;
                     }
                 }

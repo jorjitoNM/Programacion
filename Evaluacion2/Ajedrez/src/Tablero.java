@@ -187,34 +187,36 @@ public class Tablero {
     public Pieza devuelvePieza(Posicion posicion) {
         return tablero[posicion.getFila()][posicion.getColumna()];
     }
+
+    /**
+     * Metodo que cambia una pieza a la posicion final y la elimina de la inicial (equivalente a un realizar un movimiento)
+     * @param figura Es la pieza que se va a mover
+     * @param movimiento Es el movimiento que va a realizar la pieza
+     */
     public void moverPieza (Pieza figura, Movimiento movimiento) {
         ponPieza(figura,movimiento.getPosFinal());
         quitaPieza(movimiento.getPosInicial());
     }
-    public void enroque (Pieza pieza,Movimiento movimiento) {
-              if (movimiento.getPosFinal().getColumna()>movimiento.getPosFinal().getColumna()) {
-                  if (((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+3)).isEnroque())
-                      moverPieza(((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+1)),new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+3),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()+1)));
-              }
-              else {
-                  if (((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()-4)).isEnroque())
-                      moverPieza(((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+1)),new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),7),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()-1)));
-              }
-              if (devuelvePieza(movimiento.getPosInicial().getFila(),))
-            Torre torre = ((Torre)devuelvePieza(movimiento.getPosFinal()));
-            if (torre == tablero[0][0]) {
-                if (hayPiezasEntre(new Movimiento(movimiento.getPosInicial(),new Posicion(0,0))))
-                    moverPieza(torre,new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),0),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()+1)));
-            } else if (torre == tablero[7][0]) {
-                if (hayPiezasEntre(new Movimiento(movimiento.getPosInicial(),new Posicion(7,0))))
-                    moverPieza(torre,new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),0),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()+1)));
-            } else if (torre == tablero[0][7]) {
-                if (hayPiezasEntre(new Movimiento(movimiento.getPosInicial(),new Posicion(0,7))))
-                    moverPieza(torre,new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),7),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()-1)));
-            } else if (torre == tablero[7][7]) {
-                if (hayPiezasEntre(new Movimiento(movimiento.getPosInicial(),new Posicion(7,7))))
-                    moverPieza(torre,new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),7),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()-1)));
-            }
+    /**
+     * Metodo que valida si el rey puede enrocarse con las torres, si estas no se han movido. Si puede realizarse un enroque (tanto largo como corto) se mueven a la posicion final las torres
+     * @param pieza Es el rey que va a realizar el enroque
+     * @param movimiento Es el movimiento que va a realizar el rey, y sobre el cual se moveran las torres
+     * @return Devuelve valido, que es un boleano que toma el valor true, cuando es valido el enroque por parte de las torres y estas se han movido, y false cuando las torres no cumplen las condiciones
+     */
+    public boolean enroque (Pieza pieza,Movimiento movimiento) {
+        boolean valido = true;
+        if (movimiento.getPosFinal().getColumna()>movimiento.getPosInicial().getColumna()) {
+            if (!((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+3)).isEnroque())
+                moverPieza(((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+3)),new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+3),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()-1)));
+            else
+                return !valido;
         }
+        else {
+            if (!((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()-4)).isEnroque())
+                moverPieza(((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()-4)),new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()-4),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()+1)));
+            else
+                return !valido;
+        }
+        return valido;
     }
 }

@@ -18,14 +18,14 @@ public class Rey extends Pieza {
     }
     @Override
     public boolean validoMovimiento(Movimiento movimiento,Tablero tablero) {
-        if (Math.abs(movimiento.saltoHorizontal())==2 && isEnroque()) {
-            tablero.enroque(this,movimiento);
-            return true;
+        if (Math.abs(movimiento.saltoHorizontal())==2 && !isEnroque()) {
+            if(tablero.enroque(this,movimiento))
+                return true;
+            else
+                return false;
         }
         else
             return (Math.abs(movimiento.saltoVertical())==1||Math.abs(movimiento.saltoHorizontal())==1||(movimiento.isDiagonal()&&(movimiento.saltoHorizontal()==1)))?enroque=true:false;
-        //return Math.abs(movimiento.saltoVertical())==1||Math.abs(movimiento.saltoHorizontal())==1||(movimiento.isDiagonal()&&(movimiento.saltoHorizontal()==1));
-
     }
 
     /**

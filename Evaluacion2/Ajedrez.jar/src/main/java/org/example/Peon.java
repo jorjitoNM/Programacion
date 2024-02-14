@@ -1,3 +1,5 @@
+package org.example;
+
 import java.util.Scanner;
 
 public class Peon extends Pieza {
@@ -23,12 +25,14 @@ public class Peon extends Pieza {
      * @param tablero Es el tablero de juego que se esta usando
      * @return Devuelve true cuando el movimiento es valido
      */
-    public boolean validoMovimiento(Movimiento movimiento,Tablero tablero) {
+    public boolean validoMovimiento(Movimiento movimiento, Tablero tablero) {
+        Scanner teclado = new Scanner(System.in);
         if (!getColor()) { //es negro
-            if (tablero.hayPieza(movimiento.getPosFinal())&&movimiento.isDiagonal())
+            if (tablero.hayPieza(movimiento.getPosFinal())&&movimiento.isDiagonal()) {
                 return movimiento.saltoVertical()==1;
+            }
             else  if (movimiento.getPosInicial().getFila()==1&&!movimiento.isDiagonal())
-                return movimiento.saltoVertical()==1||(!tablero.hayPiezasEntre(movimiento)&&movimiento.saltoVertical()==2);
+                return movimiento.saltoVertical()==1||movimiento.saltoVertical()==2;
             else if (!movimiento.isDiagonal()&&!tablero.hayPieza(movimiento.getPosFinal()))
                 return movimiento.saltoVertical()==1;
 
@@ -37,7 +41,7 @@ public class Peon extends Pieza {
             if (tablero.hayPieza(movimiento.getPosFinal())&&movimiento.isDiagonal())
                 return movimiento.saltoVertical()==-1;
             else if (movimiento.getPosInicial().getFila()==6&&!movimiento.isDiagonal())
-                return movimiento.saltoVertical()==-1||(!tablero.hayPiezasEntre(movimiento)&&movimiento.saltoVertical()==-2);
+                return movimiento.saltoVertical()==-1||movimiento.saltoVertical()==-2;
             else if (!movimiento.isDiagonal()&&!tablero.hayPieza(movimiento.getPosFinal()))
                 return movimiento.saltoVertical()==-1;
         }

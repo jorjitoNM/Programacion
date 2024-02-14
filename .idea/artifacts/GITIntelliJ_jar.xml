@@ -1,0 +1,25 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GITIntelliJ:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GITIntelliJ_jar</output-path>
+    <root id="archive" name="GITIntelliJ.jar">
+      <element id="module-output" name="CorreoELectronico" />
+      <element id="module-output" name="Evaluacion2" />
+      <element id="module-output" name="Ej1-Puntos" />
+      <element id="module-output" name="Ejercicios1" />
+      <element id="module-output" name="Ej2-Asignaturas" />
+      <element id="module-output" name="Progrsmacion modular" />
+      <element id="module-output" name="Ejercicio 1" />
+      <element id="module-output" name="EjerciciosPOO" />
+      <element id="module-output" name="Ejercicio 2" />
+      <element id="module-output" name="Ejercicio 3" />
+      <element id="module-output" name="Ejercicios" />
+      <element id="module-output" name="BusquedaBinaria" />
+      <element id="module-output" name="MiGranja" />
+      <element id="module-output" name="Ej3-Cuentas" />
+      <element id="module-output" name="Tienda" />
+      <element id="module-output" name="Ej4-Medicos" />
+      <element id="module-output" name="Ajedrez" />
+      <element id="module-output" name="Ajedrez.jar" />
+    </root>
+  </artifact>
+</component>

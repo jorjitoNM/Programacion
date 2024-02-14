@@ -1,3 +1,5 @@
+package org.example;
+
 import java.util.Scanner;
 
 public class Tester {
@@ -64,9 +66,6 @@ public class Tester {
                                 tablero.moverPieza(pieza,movimiento);
                         } while (!exit);
                     }
-                }
-                if (pieza instanceof Rey && tablero.devuelvePieza(movimiento.getPosFinal()) instanceof Torre) {
-                    tablero.enroque(pieza,movimiento);
                 }
                 juego.setTurno();
             }else

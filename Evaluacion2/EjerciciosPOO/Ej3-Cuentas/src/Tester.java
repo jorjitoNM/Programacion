@@ -28,7 +28,7 @@ public class Tester {
             switch (respuesta) {
                 case 1: {
                     mibanco.crearCuentaC(personas1);
-                    System.out.printf("Bienvenido a su cuenta nómina\nEstos son sus datos personales:\nNombre: %s\nApellidos: %S\nNúmero de cuenta: %s\nSaldo: %.3f",nombre,apellidos,mibanco.buscarCuentaC());
+                    //System.out.printf("Bienvenido a su cuenta nómina\nEstos son sus datos personales:\nNombre: %s\nApellidos: %S\nNúmero de cuenta: %s\nSaldo: %.3f",nombre,apellidos,mibanco.buscarCuentaC());
                 }
                 case 2: {
                     System.out.println("Si quiere abrir una nueva cuenta ahorro, pulse 1, si lo que quiere es convertir su cuenta corriente en una cuenta ahorro, pulse 2");

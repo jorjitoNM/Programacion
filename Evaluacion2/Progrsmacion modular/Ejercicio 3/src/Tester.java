@@ -1,8 +1,9 @@
+/*
 public class Tester {
     public static void main(String[] args) {
         int[] numeros = new int[10];
         System.out.println("Cargamos el array el Array");
-        numeros. = OperacionesArray.array();
+        numeros = OperacionesArray.array();
         OperacionesArray.array();
         System.out.println("Mostramos el Array");
         System.out.println(OperacionesArray.array());
@@ -10,4 +11,4 @@ public class Tester {
         System.out.println(OperacionesArray.ordenado(numeros));
 
     }
-}
+}*/

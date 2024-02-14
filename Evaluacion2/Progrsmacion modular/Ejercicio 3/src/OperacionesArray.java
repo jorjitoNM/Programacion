@@ -1,5 +1,5 @@
 import java.util.Arrays;
-
+/*
 public class OperacionesArray {
     public static int[] array () {
         resultado[10];
@@ -24,4 +24,4 @@ public class OperacionesArray {
         }
         return x;
     }
-}
+}*/

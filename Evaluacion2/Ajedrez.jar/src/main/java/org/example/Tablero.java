@@ -1,3 +1,5 @@
+package org.example;
+
 public class Tablero {
     /**
      * Es un array que representa un tablero de ajdrez donde se van a mover las piezas
@@ -118,20 +120,20 @@ public class Tablero {
                     }
                 }
             } else if ((movimiento.getPosInicial().getFila()<movimiento.getPosFinal().getFila())&&(movimiento.getPosInicial().getColumna()<movimiento.getPosFinal().getColumna())&&(movimiento.saltoVertical())==(movimiento.saltoHorizontal())) {
-                for (int i = movimiento.getPosInicial().getFila()+1,j = movimiento.getPosInicial().getColumna()+1; i < movimiento.getPosFinal().getFila() && !exit; i++,j++) {
+                for (int i = movimiento.getPosFinal().getFila()+1,j = movimiento.getPosFinal().getColumna()+1; i < movimiento.getPosFinal().getFila() && !exit; i++,j++) {
                     if (hayPieza(i,j)) {
                         exit = true;
                     }
                 }
             } else if ((movimiento.getPosInicial().getFila()>movimiento.getPosFinal().getFila())&&(movimiento.getPosInicial().getColumna()<movimiento.getPosFinal().getColumna())) {
-                for (int i = movimiento.getPosInicial().getFila()-1,j = movimiento.getPosInicial().getColumna()+1; i > movimiento.getPosFinal().getFila() && !exit; i--,j++) {
+                for (int i = movimiento.getPosInicial().getFila()-1,j = movimiento.getPosInicial().getColumna()+1; i < movimiento.getPosFinal().getFila(); i--,j++) {
                     if (hayPieza(i,j)) {
                         exit = true;
                     }
                 }
             }
             else {
-                for (int i = movimiento.getPosInicial().getFila()+1,j = movimiento.getPosInicial().getColumna()-1; i < movimiento.getPosFinal().getFila() && !exit; i++,j--) {
+                for (int i = movimiento.getPosInicial().getFila()+1,j = movimiento.getPosInicial().getColumna()-1; i < movimiento.getPosFinal().getFila(); i++,j--) {
                     if (hayPieza(i,j)) {
                         exit = true;
                     }
@@ -140,14 +142,14 @@ public class Tablero {
 
         } else if (movimiento.isVertical()) {
             if (movimiento.getPosInicial().getFila()>movimiento.getPosFinal().getFila()) {
-                for (int i = movimiento.getPosInicial().getFila()-1; i > movimiento.getPosFinal().getFila()&&!exit; i--) {
+                for (int i = movimiento.getPosInicial().getFila()-1; i > movimiento.getPosFinal().getColumna()&&!exit; i--) {
                     if (hayPieza(i,movimiento.getPosInicial().getColumna())) {
                         exit = true;
                     }
                 }
             }
             else {
-                for (int i = movimiento.getPosInicial().getFila()+1; i < movimiento.getPosFinal().getFila()&&!exit; i++) {
+                for (int i = movimiento.getPosInicial().getFila()+1; i < movimiento.getPosFinal().getColumna()&&!exit; i++) {
                     if (hayPieza(i,movimiento.getPosInicial().getColumna())) {
                         exit = true;
                     }
@@ -180,7 +182,7 @@ public class Tablero {
     }
 
     /**
-     * Metodo que sirve para devolver la pieza que haya en una posicion, para poder usarla
+     *
      * @param posicion Coordenada de busqueda
      * @return Devuelve la pieza que se encuentre en esa posicion (o null si no hay pieza)
      */
@@ -190,23 +192,5 @@ public class Tablero {
     public void moverPieza (Pieza figura, Movimiento movimiento) {
         ponPieza(figura,movimiento.getPosFinal());
         quitaPieza(movimiento.getPosInicial());
-    }
-    public void enroque (Pieza pieza,Movimiento movimiento) {
-        if (!((Rey)pieza).isEnroque() && !((Torre)devuelvePieza(movimiento.getPosFinal())).isEnroque()) {
-            Torre torre = ((Torre)devuelvePieza(movimiento.getPosFinal()));
-            if (torre == tablero[0][0]) {
-                if (hayPiezasEntre(new Movimiento(movimiento.getPosInicial(),new Posicion(0,0))))
-                    moverPieza(torre,new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),0),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()+1)));
-            } else if (torre == tablero[7][0]) {
-                if (hayPiezasEntre(new Movimiento(movimiento.getPosInicial(),new Posicion(7,0))))
-                    moverPieza(torre,new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),0),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()+1)));
-            } else if (torre == tablero[0][7]) {
-                if (hayPiezasEntre(new Movimiento(movimiento.getPosInicial(),new Posicion(0,7))))
-                    moverPieza(torre,new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),7),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()-1)));
-            } else if (torre == tablero[7][7]) {
-                if (hayPiezasEntre(new Movimiento(movimiento.getPosInicial(),new Posicion(7,7))))
-                    moverPieza(torre,new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),7),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()-1)));
-            }
-        }
     }
 }

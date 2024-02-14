@@ -18,9 +18,9 @@ public class Rey extends Pieza {
     }
     @Override
     public boolean validoMovimiento(Movimiento movimiento,Tablero tablero) {
-        if (movimiento.saltoHorizontal()==2) {
+        if (Math.abs(movimiento.saltoHorizontal())==2 && isEnroque()) {
             tablero.enroque(this,movimiento);
-            return  true;
+            return true;
         }
         else
             return (Math.abs(movimiento.saltoVertical())==1||Math.abs(movimiento.saltoHorizontal())==1||(movimiento.isDiagonal()&&(movimiento.saltoHorizontal()==1)))?enroque=true:false;

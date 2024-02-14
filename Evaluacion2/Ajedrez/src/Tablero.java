@@ -192,7 +192,15 @@ public class Tablero {
         quitaPieza(movimiento.getPosInicial());
     }
     public void enroque (Pieza pieza,Movimiento movimiento) {
-        if (!((Rey)pieza).isEnroque() && !((Torre)devuelvePieza(movimiento.getPosFinal())).isEnroque()) {
+              if (movimiento.getPosFinal().getColumna()>movimiento.getPosFinal().getColumna()) {
+                  if (((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+3)).isEnroque())
+                      moverPieza(((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+1)),new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+3),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()+1)));
+              }
+              else {
+                  if (((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()-4)).isEnroque())
+                      moverPieza(((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+1)),new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),7),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()-1)));
+              }
+              if (devuelvePieza(movimiento.getPosInicial().getFila(),))
             Torre torre = ((Torre)devuelvePieza(movimiento.getPosFinal()));
             if (torre == tablero[0][0]) {
                 if (hayPiezasEntre(new Movimiento(movimiento.getPosInicial(),new Posicion(0,0))))

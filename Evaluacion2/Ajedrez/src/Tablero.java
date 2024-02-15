@@ -11,12 +11,12 @@ public class Tablero {
     public Tablero () {
         tablero = new Pieza[8][8];
         tablero[0][0] = new Torre(false);
-        tablero[0][1] = new Caballo(false);
-        tablero[0][2] = new Alfil(false);
-        tablero[0][3] = new Dama(false);
+        //tablero[0][1] = new Caballo(false);
+        //tablero[0][2] = new Alfil(false);
+        //tablero[0][3] = new Dama(false);
         tablero[0][4] = new Rey(false);
-        tablero[0][5] = new Alfil(false);
-        tablero[0][6] = new Caballo(false);
+        //tablero[0][5] = new Alfil(false);
+        //tablero[0][6] = new Caballo(false);
         tablero[0][7] = new Torre(false);
         tablero[1][0] = new Peon(false);
         tablero[1][1] = new Peon(false);
@@ -29,11 +29,11 @@ public class Tablero {
 
         tablero[7][0] = new Torre(true);
         tablero[7][1] = new Caballo(true);
-        tablero[7][2] = new Alfil(true);
-        tablero[7][3] = new Dama(true);
+        //tablero[7][2] = new Alfil(true);
+        //tablero[7][3] = new Dama(true);
         tablero[7][4] = new Rey(true);
-        tablero[7][5] = new Alfil(true);
-        tablero[7][6] = new Caballo(true);
+        //tablero[7][5] = new Alfil(true);
+        //tablero[7][6] = new Caballo(true);
         tablero[7][7] = new Torre(true);
         tablero[6][0] = new Peon(true);
         tablero[6][1] = new Peon(true);
@@ -206,13 +206,13 @@ public class Tablero {
     public boolean enroque (Pieza pieza,Movimiento movimiento) {
         boolean valido = true;
         if (movimiento.getPosFinal().getColumna()>movimiento.getPosInicial().getColumna()) {
-            if (!((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+3)).isEnroque())
+            if (!((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+3)).isEnroque() && !hayPiezasEntre((new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+3),movimiento.getPosInicial()))))
                 moverPieza(((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+3)),new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+3),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()-1)));
             else
                 return !valido;
         }
         else {
-            if (!((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()-4)).isEnroque())
+            if (!((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()-4)).isEnroque() && !hayPiezasEntre((new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()-4),movimiento.getPosInicial()))))
                 moverPieza(((Torre)devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()-4)),new Movimiento(new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()-4),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosFinal().getColumna()+1)));
             else
                 return !valido;

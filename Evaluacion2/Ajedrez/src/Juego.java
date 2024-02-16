@@ -81,9 +81,8 @@ public class Juego {
             System.out.println("Error. Esa pieza no es tuya");
         else if ((tablero.hayPieza(filaFinal,columnaFinal)&&(tablero.devuelvePieza(filaFinal,columnaFinal).getColor()==darTurno())))
             System.out.println("Error. No puedes comerte una pieza tuya");
-        else {
+        else
             movimiento= new Movimiento(new Posicion(filaInicial,columnaInicial),new Posicion(filaFinal,columnaFinal));
-        }
         }
         return movimiento;
     }

@@ -13,7 +13,10 @@ public class Tester {
                 System.out.println("Introduzca una jugada (tipo a2a4, pieza que quiero mover y el destino)");
                 respuesta = teclado.nextLine();
                 movimiento = juego.jugada(respuesta.toUpperCase(),tablero,juego);
-            } while (movimiento == null);
+                if (tablero.jaque(juego)) {
+                    System.out.println("Estas en jaque, tienes que proteger tu rey (mueve tu rey a un lugar seguro o protegelo con otra pieza)");
+                }
+            } while (movimiento == null && !tablero.jaque(juego));
             Pieza pieza = tablero.devuelvePieza(movimiento.getPosInicial().getFila(), movimiento.getPosInicial().getColumna());
             if (pieza.validoMovimiento(movimiento, tablero)) {
                 tablero.moverPieza(pieza, movimiento);

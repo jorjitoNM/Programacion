@@ -11,12 +11,12 @@ public class Tablero {
     public Tablero () {
         tablero = new Pieza[8][8];
         tablero[0][0] = new Torre(false);
-        //tablero[0][1] = new Caballo(false);
-        //tablero[0][2] = new Alfil(false);
-        //tablero[0][3] = new Dama(false);
+        tablero[0][1] = new Caballo(false);
+        tablero[0][2] = new Alfil(false);
+        tablero[0][3] = new Dama(false);
         tablero[0][4] = new Rey(false);
-        //tablero[0][5] = new Alfil(false);
-        //tablero[0][6] = new Caballo(false);
+        tablero[0][5] = new Alfil(false);
+        tablero[0][6] = new Caballo(false);
         tablero[0][7] = new Torre(false);
         tablero[1][0] = new Peon(false);
         tablero[1][1] = new Peon(false);
@@ -29,11 +29,11 @@ public class Tablero {
 
         tablero[7][0] = new Torre(true);
         tablero[7][1] = new Caballo(true);
-        //tablero[7][2] = new Alfil(true);
-        //tablero[7][3] = new Dama(true);
+        tablero[7][2] = new Alfil(true);
+        tablero[7][3] = new Dama(true);
         tablero[7][4] = new Rey(true);
-        //tablero[7][5] = new Alfil(true);
-        //tablero[7][6] = new Caballo(true);
+        tablero[7][5] = new Alfil(true);
+        tablero[7][6] = new Caballo(true);
         tablero[7][7] = new Torre(true);
         tablero[6][0] = new Peon(true);
         tablero[6][1] = new Peon(true);
@@ -218,5 +218,31 @@ public class Tablero {
                 return !valido;
         }
         return valido;
+    }
+    public boolean jaque (Juego partida) {
+        Posicion posicion = buscarRey(partida);
+        boolean amenaza = false;
+        for (int i = 0; i < tablero.length && !amenaza; i++) {
+            for (int j = 0; j < tablero[i].length && !amenaza; j++) {
+                if (tablero[i][j]!=null && tablero[i][j].getColor()!=devuelvePieza(posicion.getFila(), posicion.getColumna()).getColor()) {
+                        if (tablero[i][j].validoMovimiento(new Movimiento(new Posicion(i,j),posicion),this))
+                            amenaza = true;
+                }
+            }
+        }
+        return amenaza;
+    }
+    private Posicion buscarRey (Juego partida) {
+        boolean encontrado = false;
+        for (int i = 0; i < tablero.length && !encontrado; i++) {
+            for (int j = 0; j < tablero[i].length && !encontrado; j++) {
+                if (tablero[i][j]!=null && tablero[i][j].getColor()==partida.darTurno())
+                    if (tablero[i][j] instanceof Rey) {
+                        encontrado = true;
+                        return new Posicion(i, j);
+                    }
+            }
+        }
+        return null;
     }
 }

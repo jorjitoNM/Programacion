@@ -58,10 +58,16 @@ public class Tablero {
                     System.out.printf(" " + tablero[i][j].toString() + " "); //podria hacerse con un printf para que ocupe 2 huecos??
                 }
                 else {
-                    if (j%2==0)
-                        System.out.print(" \u25A1  ");
+                    if (i%2==0)
+                        if (j%2==0)
+                            System.out.print(" \u25A1  ");
+                        else
+                            System.out.print(" \u25A0  ");
                     else
-                        System.out.print(" \u25A0  ");
+                        if (j%2==0)
+                            System.out.print(" \u25A0  ");
+                        else
+                            System.out.print(" \u25A1  ");
                 }
             }
             contador--;

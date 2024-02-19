@@ -1,3 +1,5 @@
+package Ajedrez;
+
 public class Rey extends Pieza {
     /**
      * Es un booleano que representa si el rey ha realizado un mivimiento durante la partida
@@ -10,10 +12,10 @@ public class Rey extends Pieza {
     public Rey (boolean color) {
         super(color);
         if (!color) {
-            nombre = "\u2654";
+            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/ReyNegro.png";
         }
         else {
-            nombre = "\u265A";
+            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/ReyBlanco.png";
         }
     }
     @Override

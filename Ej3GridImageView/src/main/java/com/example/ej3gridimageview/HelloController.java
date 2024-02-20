@@ -1,9 +1,6 @@
 package com.example.ej3gridimageview;
 
-import Ajedrez.Movimiento;
-import Ajedrez.Posicion;
-import Ajedrez.Tablero;
-import Ajedrez.Torre;
+import Ajedrez.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,6 +22,7 @@ public class HelloController implements Initializable {
     private GridPane mainGrid;
     private Tablero tablero;
     private Movimiento movimiento;
+    private Juego partida;
 
     @FXML
     protected void onHelloButtonClick() {
@@ -76,8 +74,13 @@ public class HelloController implements Initializable {
             movimiento = new Movimiento();
         if (movimiento.getPosInicial()==null)
             movimiento.setPosInicial(new Posicion(x,y));
-        if (movimiento.getPosInicial()!=null && movimiento.getPosFinal()==null)
-            movimiento.setPosFinal(new Posicion(x,y));
+        if (movimiento.getPosInicial()!=null && movimiento.getPosFinal()==null) {
+            movimiento.setPosFinal(new Posicion(x, y));
+            if (partida.validarMovimiento(movimiento,tablero,partida)==null)
+                tablero.moverPieza(tablero.devuelvePieza(movimiento.getPosInicial()), movimiento);
+            else
+                label.setText(partida.validarMovimiento(movimiento,tablero,partida));
+        }
     }
     private void pintarTablero() {
         Pane pane;

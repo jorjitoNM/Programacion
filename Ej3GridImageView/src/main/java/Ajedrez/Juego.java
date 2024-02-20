@@ -75,7 +75,7 @@ public class Juego {
             int columnaInicial = jugada.charAt(0)-65;
             int filaFinal = 7-(jugada.charAt(3)-49);
             int columnaFinal = jugada.charAt(2)-65;
-            if (!((filaInicial<=7&&filaInicial>=0)&&(columnaInicial<=7&&columnaInicial>=0)&&(filaFinal<=7&&filaFinal>=0)&&(columnaFinal<=7&&columnaFinal>=0)))
+            if (!((filaInicial<=7&&filaInicial>=0)&&(columnaInicial<=7&&columnaInicial>=0)))
             System.out.println("Error. Jugada fuera de tablero");
         else if (!tablero.hayPieza(filaInicial,columnaInicial))
             System.out.println("Error. No hay pieza en esta casilla");
@@ -87,6 +87,18 @@ public class Juego {
             movimiento= new Movimiento(new Posicion(filaInicial,columnaInicial),new Posicion(filaFinal,columnaFinal));
         }
         return movimiento;
+    }
+    public String validarMovimiento (Movimiento movimiento, Tablero tablero, Juego partida) {
+        String respuesta = null;
+            if (!((movimiento.getPosInicial().getFila()<=7&&movimiento.getPosInicial().getFila()>=0)&&(movimiento.getPosInicial().getColumna()<=7&&movimiento.getPosFinal().getColumna()>=0)))
+                respuesta = "Error. Jugada fuera de tablero";
+            else if (!tablero.hayPieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()))
+                respuesta = "Error. No hay pieza en esta casilla";
+            else if (tablero.devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()).getColor()!=darTurno())
+                respuesta = "Error. Esa pieza no es tuya";
+            else if ((tablero.hayPieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna())&&(tablero.devuelvePieza(movimiento.getPosFinal().getFila(),movimiento.getPosFinal().getColumna()).getColor()==darTurno())))
+                respuesta = "Error. No puedes comerte una pieza tuya";
+        return respuesta;
     }
 
     /**

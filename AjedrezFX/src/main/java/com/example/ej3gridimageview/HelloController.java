@@ -22,7 +22,7 @@ public class HelloController implements Initializable {
     private GridPane mainGrid;
     private Tablero tablero;
     private Movimiento movimiento;
-    private Juego partida;
+    private Juego partida = new Juego();
 
     @FXML
     protected void onHelloButtonClick() {
@@ -68,6 +68,7 @@ public class HelloController implements Initializable {
         int columna = Integer.parseInt(args[1]);
         System.out.println(fila+"-"+columna);
     }
+    @FXML
     public void accion(int x, int y){
         System.out.println(x+"-"+y);
         if (movimiento==null) //la primera vez seleccionen posicion

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Ajedrez.Jar:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Ajedrez_Jar_jar</output-path>
+    <root id="archive" name="Ajedrez.Jar.jar">
+      <element id="module-output" name="Ajedrez.Jar" />
+    </root>
+  </artifact>
+</component>

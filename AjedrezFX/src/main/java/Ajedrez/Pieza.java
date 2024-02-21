@@ -9,6 +9,10 @@ public abstract class Pieza {
      * Es el caracter Unicode de la pieza (su dibujo)
      */
     protected String nombre;
+    /**
+     * Variable que guarda la ruta de acceso a la imagen para el entorno grafico
+     */
+    protected String ruta;
 
     /**
      * Constructor que crea una pieza de color aleatorio
@@ -50,6 +54,12 @@ public abstract class Pieza {
      */
     @Override
     public String toString() {
+        return String.format("%s",ruta);
+    }
+    public String getNombre() {
         return String.format("%s",nombre);
+    }
+    public String getRuta() {
+        return String.format("%s",ruta);
     }
 }

@@ -244,7 +244,7 @@ public class Tablero {
         boolean encontrado = false;
         for (int i = 0; i < tablero.length && !encontrado; i++) {
             for (int j = 0; j < tablero[i].length && !encontrado; j++) {
-                if (tablero[i][j]!=null && tablero[i][j].getColor()==partida.darTurno())
+                if (tablero[i][j]!=null && tablero[i][j].getColor()==partida.darTurnoBoolean())
                     if (tablero[i][j] instanceof Rey) {
                         encontrado = true;
                         return new Posicion(i, j);

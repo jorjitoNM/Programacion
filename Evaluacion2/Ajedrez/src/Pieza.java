@@ -1,6 +1,6 @@
 public abstract class Pieza {
     /**
-     * Es el color de la pieza, true si es blanca, false si es negra
+     * Es el color de la pieza, false si es blanca, true si es negra
      */
     private boolean color;
     /**

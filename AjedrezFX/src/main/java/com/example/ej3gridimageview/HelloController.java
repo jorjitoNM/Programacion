@@ -17,16 +17,18 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
     @FXML
-    private Label label;
+    private Label mensajes;
+    @FXML
+    private Label turno;
     @FXML
     private GridPane mainGrid;
     private Tablero tablero;
     private Movimiento movimiento;
-    private Juego partida = new Juego();
+    private Juego partida;
 
     @FXML
     protected void onHelloButtonClick() {
-        label.setText("Welcome to JavaFX Application!");
+        mensajes.setText("Welcome to JavaFX Application!");
     }
 
     /*public void click(MouseEvent mouseEvent) {
@@ -61,6 +63,9 @@ public class HelloController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tablero = new Tablero();
         pintarTablero();
+        partida = new Juego();
+        movimiento = new Movimiento();
+        turno.setText("Mueven blancas");
     }
     public void accion(String coordenadas){
         String args[] = coordenadas.split(";");
@@ -71,16 +76,32 @@ public class HelloController implements Initializable {
     @FXML
     public void accion(int x, int y){
         System.out.println(x+"-"+y);
-        if (movimiento==null) //la primera vez seleccionen posicion
-            movimiento = new Movimiento();
-        if (movimiento.getPosInicial()==null)
-            movimiento.setPosInicial(new Posicion(x,y));
-        if (movimiento.getPosInicial()!=null && movimiento.getPosFinal()==null) {
+        if (movimiento.getPosInicial()==null) {
+            movimiento.setPosInicial(new Posicion(x, y));
+            mensajes.setText(tablero.devuelvePieza(movimiento.getPosInicial()).getNombre());
+        }
+        else if (movimiento.getPosInicial()!=null && movimiento.getPosFinal()==null) {
             movimiento.setPosFinal(new Posicion(x, y));
-            if (partida.validarMovimiento(movimiento,tablero,partida)==null)
-                tablero.moverPieza(tablero.devuelvePieza(movimiento.getPosInicial()), movimiento);
-            else
-                label.setText(partida.validarMovimiento(movimiento,tablero,partida));
+            String error =partida.validarMovimiento(movimiento,tablero,partida);
+            if (error==null) {
+                if (tablero.devuelvePieza(movimiento.getPosInicial()).validoMovimiento(movimiento,tablero)) {
+                    tablero.moverPieza(tablero.devuelvePieza(movimiento.getPosInicial()), movimiento);
+                    movimiento.setPosInicial(null);
+                    movimiento.setPosFinal(null);
+                    partida.setTurno();
+                    mensajes.setText(null);
+                    turno.setText(partida.darTurnoString());
+                    pintarTablero();
+                } else {
+                    mensajes.setText(String.format("%s no puede realizar ese movimiento", tablero.devuelvePieza(movimiento.getPosInicial()).getClass().getSimpleName()));
+                    movimiento.setPosInicial(null);
+                    movimiento.setPosFinal(null);
+                }
+            } else {
+                mensajes.setText(error);
+                movimiento.setPosInicial(null);
+                movimiento.setPosFinal(null);
+            }
         }
     }
     private void pintarTablero() {
@@ -94,7 +115,7 @@ public class HelloController implements Initializable {
                     pane.setStyle("-fx-background-color: #FFFFFF");
                 }
                 if (tablero.hayPieza(i,j))
-                    pane.getChildren().add(new ImageView(new Image(tablero.devuelvePieza(i,j).toString())));
+                    pane.getChildren().add(new ImageView(new Image(tablero.devuelvePieza(i,j).getRuta())));
                 mainGrid.add(pane, j, i);
                 String message = "Click on cell ["+i+", "+j+"]";
                 String envio = i+";"+j;

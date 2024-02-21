@@ -9,10 +9,12 @@ public class Dama extends Pieza {
     public Dama (boolean color) {
         super(color);
         if (!color) {
-            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/ReinaNegra.png";
+            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/ReinaNegra.png";
+            nombre = "\u265B";
         }
         else {
-            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/ReinaBlanca.png";
+            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/ReinaBlanca.png";
+            nombre = "\u2655";
         }
     }
     @Override

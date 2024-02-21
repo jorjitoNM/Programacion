@@ -12,10 +12,12 @@ public class Torre extends Pieza {
     public Torre (boolean color) {
         super(color);
         if (!color) {
-            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/TorreNegra.png";
+            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/TorreNegra.png";
+            nombre = "\u265C";
         }
         else {
-            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/TorreBlanca.png";
+            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/TorreBlanca.png";
+            nombre = "\u2656";
         }
     }
 

@@ -9,10 +9,12 @@ public class Peon extends Pieza {
     public Peon(boolean color) {
         super(color);
         if (!color) {
-            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/PeonNegro.png";
+            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/PeonNegro.png";
+            nombre = "\u265F";
         }
         else {
-            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/PeonBlanco.png";
+            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/PeonBlanco.png";
+            nombre = "\u2659";
         }
     }
 
@@ -27,18 +29,18 @@ public class Peon extends Pieza {
         if (!getColor()) { //es negro
             if (tablero.hayPieza(movimiento.getPosFinal())&&movimiento.isDiagonal())
                 return movimiento.saltoVertical()==1;
-            else  if (movimiento.getPosInicial().getFila()==1&&!movimiento.isDiagonal())
+            else  if (movimiento.getPosInicial().getFila()==1&&!movimiento.isDiagonal()&&movimiento.saltoHorizontal()==0)
                 return movimiento.saltoVertical()==1||(!tablero.hayPiezasEntre(movimiento)&&movimiento.saltoVertical()==2);
-            else if (!movimiento.isDiagonal()&&!tablero.hayPieza(movimiento.getPosFinal()))
+            else if (!movimiento.isDiagonal()&&!tablero.hayPieza(movimiento.getPosFinal())&&movimiento.saltoHorizontal()==0)
                 return movimiento.saltoVertical()==1;
 
         }
         else { //es blanco
             if (tablero.hayPieza(movimiento.getPosFinal())&&movimiento.isDiagonal())
                 return movimiento.saltoVertical()==-1;
-            else if (movimiento.getPosInicial().getFila()==6&&!movimiento.isDiagonal())
+            else if (movimiento.getPosInicial().getFila()==6&&!movimiento.isDiagonal()&&movimiento.saltoHorizontal()==0)
                 return movimiento.saltoVertical()==-1||(!tablero.hayPiezasEntre(movimiento)&&movimiento.saltoVertical()==-2);
-            else if (!movimiento.isDiagonal()&&!tablero.hayPieza(movimiento.getPosFinal()))
+            else if (!movimiento.isDiagonal()&&!tablero.hayPieza(movimiento.getPosFinal())&&movimiento.saltoHorizontal()==0)
                 return movimiento.saltoVertical()==-1;
         }
         return false;

@@ -6,10 +6,6 @@ public class Juego {
      * Representa que jugador debe jugar (blancas si es par, negras si es impar)
      */
     private int turno = 0;
-    /**
-     * Representa el crecimiento del valor de turno
-     */
-    private int contador = 0;
 
     public Juego() {
 
@@ -18,8 +14,11 @@ public class Juego {
      * Metodo que calcula el turno (par si juegan blancas e impar si juegan negras).
      * @return Devuelve true cuando el turno no es par (el color true son las negras)
      */
-    public boolean darTurno () {
+    public boolean darTurnoBoolean () {
         return turno % 2 == 0;
+    }
+    public String darTurnoString () {
+        return (darTurnoBoolean())?"Mueven blancas":"Mueven negras";
     }
     /*public Movimiento jugada2 (String jugada, Tablero tablero) { //el String tiene que estar en mayuscula
         Movimiento movimiento = null;
@@ -79,9 +78,9 @@ public class Juego {
             System.out.println("Error. Jugada fuera de tablero");
         else if (!tablero.hayPieza(filaInicial,columnaInicial))
             System.out.println("Error. No hay pieza en esta casilla");
-        else if (tablero.devuelvePieza(filaInicial,columnaInicial).getColor()!=darTurno())
+        else if (tablero.devuelvePieza(filaInicial,columnaInicial).getColor()!=darTurnoBoolean())
             System.out.println("Error. Esa pieza no es tuya");
-        else if ((tablero.hayPieza(filaFinal,columnaFinal)&&(tablero.devuelvePieza(filaFinal,columnaFinal).getColor()==darTurno())))
+        else if ((tablero.hayPieza(filaFinal,columnaFinal)&&(tablero.devuelvePieza(filaFinal,columnaFinal).getColor()==darTurnoBoolean())))
             System.out.println("Error. No puedes comerte una pieza tuya");
         else
             movimiento= new Movimiento(new Posicion(filaInicial,columnaInicial),new Posicion(filaFinal,columnaFinal));
@@ -90,13 +89,11 @@ public class Juego {
     }
     public String validarMovimiento (Movimiento movimiento, Tablero tablero, Juego partida) {
         String respuesta = null;
-            if (!((movimiento.getPosInicial().getFila()<=7&&movimiento.getPosInicial().getFila()>=0)&&(movimiento.getPosInicial().getColumna()<=7&&movimiento.getPosFinal().getColumna()>=0)))
-                respuesta = "Error. Jugada fuera de tablero";
-            else if (!tablero.hayPieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()))
+            if (!tablero.hayPieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()))
                 respuesta = "Error. No hay pieza en esta casilla";
-            else if (tablero.devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()).getColor()!=darTurno())
+            else if (tablero.devuelvePieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()).getColor()!=darTurnoBoolean())
                 respuesta = "Error. Esa pieza no es tuya";
-            else if ((tablero.hayPieza(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna())&&(tablero.devuelvePieza(movimiento.getPosFinal().getFila(),movimiento.getPosFinal().getColumna()).getColor()==darTurno())))
+            else if ((tablero.hayPieza(movimiento.getPosFinal().getFila(),movimiento.getPosFinal().getColumna())&&(tablero.devuelvePieza(movimiento.getPosFinal().getFila(),movimiento.getPosFinal().getColumna()).getColor()==darTurnoBoolean())))
                 respuesta = "Error. No puedes comerte una pieza tuya";
         return respuesta;
     }
@@ -114,13 +111,5 @@ public class Juego {
      */
     public void setTurno() {
         turno++;
-    }
-
-    public int getContador() {
-        return contador;
-    }
-
-    public void setContador(int contador) {
-        this.contador = contador;
     }
 }

@@ -9,10 +9,12 @@ public class Alfil extends Pieza {
     public Alfil (boolean color) {
         super(color);
         if (!color) {
-            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/AlfilNegro.png";
+            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/AlfilNegro.png";
+            nombre = "\u265D";
         }
         else {
-            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/AlfilBlanco.png";
+            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/AlfilBlanco.png";
+            nombre = "\u2657";
         }
     }
     @Override

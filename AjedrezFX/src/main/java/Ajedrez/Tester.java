@@ -78,6 +78,6 @@ public class Tester {
                 System.out.println(pieza.getClass().getSimpleName() + " no puede realizar ese movimiento");
             tablero.pintarTablero();
 
-        } while (juego.getContador() < 50);
+        } while (juego.getTurno() < 50);
     }
 }

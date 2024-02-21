@@ -12,10 +12,12 @@ public class Rey extends Pieza {
     public Rey (boolean color) {
         super(color);
         if (!color) {
-            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/ReyNegro.png";
+            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/ReyNegro.png";
+            nombre = "\u265A";
         }
         else {
-            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/ReyBlanco.png";
+            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/ReyBlanco.png";
+            nombre = "\u2654";
         }
     }
     @Override

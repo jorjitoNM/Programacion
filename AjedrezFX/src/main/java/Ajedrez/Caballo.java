@@ -9,10 +9,12 @@ public class Caballo extends Pieza {
     public Caballo (boolean color) {
         super(color);
         if (!color) {
-            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/CaballoNegro.png";
+            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/CaballoNegro.png";
+            nombre = "\u265E";
         }
         else {
-            nombre = "File:src/main/resources/com/example/ej3gridimageview/imagenes/CaballoBlanco.png";
+            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/CaballoBlanco.png";
+            nombre = "\u2658";
         }
     }
     @Override

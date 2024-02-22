@@ -56,9 +56,19 @@ public abstract class Pieza {
     public String toString() {
         return String.format("%s",ruta);
     }
+
+    /**
+     *
+     * @return Metodo que devuelve el unicode de la pieza
+     */
     public String getNombre() {
         return String.format("%s",nombre);
     }
+
+    /**
+     *
+     * @return Metodo que devuelve la ruta de acceso a la imagen de la pieza
+     */
     public String getRuta() {
         return String.format("%s",ruta);
     }

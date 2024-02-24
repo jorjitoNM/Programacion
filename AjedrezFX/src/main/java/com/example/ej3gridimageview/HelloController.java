@@ -73,6 +73,12 @@ public class HelloController implements Initializable {
         int columna = Integer.parseInt(args[1]);
         System.out.println(fila+"-"+columna);
     }
+
+    /**
+     * Metodo que recibe las coordenadas del tablero pulsadas y contruye un movimiento (para crear un movimiento entero tiene que ejecutarse 2 veces)
+     * @param x Coordenada x (fila)
+     * @param y  Coordenada y (columna)
+     */
     @FXML
     public void accion(int x, int y){
         System.out.println(x+"-"+y);

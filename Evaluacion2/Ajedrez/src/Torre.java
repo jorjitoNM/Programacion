@@ -28,4 +28,15 @@ public class Torre extends Pieza {
     public boolean isEnroque() {
         return enroque;
     }
+
+    public void setEnroque(boolean enroque) {
+        this.enroque = enroque;
+    }
+
+    @Override
+    public Pieza clonarPieza () {
+        Torre torre = new Torre(this.getColor());
+        torre.setEnroque(isEnroque());
+        return torre;
+    }
 }

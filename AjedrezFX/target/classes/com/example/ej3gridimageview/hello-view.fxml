@@ -4,6 +4,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<!--
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.ej2alertcombopromocionpeon.HelloController">
+<padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+</padding>
+<Label fx:id="Has coronado!!"/>
+<Button text="Hello!" onAction="#onHelloButtonClick"/>
+<Button text="Adios!" onAction="#onAdiosButtonClick"/>
+</VBox>
+-->
+
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ej3gridimageview.HelloController">
     <children>
         <!--onMouseClicked="#click" en GridPane o listener en cada pane 8x8 en el controller con java-->

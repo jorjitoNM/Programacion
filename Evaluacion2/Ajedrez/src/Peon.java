@@ -43,4 +43,9 @@ public class Peon extends Pieza {
         }
         return false;
     }
+    @Override
+    public Pieza clonarPieza () {
+        Peon peon = new Peon(this.getColor());
+        return peon;
+    }
 }

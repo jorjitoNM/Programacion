@@ -1,10 +1,14 @@
+import java.util.Scanner;
+
 public class Tablero {
     /**
      * Es un array que representa un tablero de ajdrez donde se van a mover las piezas
      */
     private Pieza[][] tablero;
 
-
+    public Tablero (Pieza[][] tablero) {
+        this.tablero = tablero;
+    }
     /**
      * Metodo que incializa el tablero con todas las piezas en sus posiciones adecuadas
      */
@@ -231,8 +235,11 @@ public class Tablero {
         for (int i = 0; i < tablero.length && !amenaza; i++) {
             for (int j = 0; j < tablero[i].length && !amenaza; j++) {
                 if (tablero[i][j]!=null && tablero[i][j].getColor()!=devuelvePieza(posicion.getFila(), posicion.getColumna()).getColor()) {
-                        if (tablero[i][j].validoMovimiento(new Movimiento(new Posicion(i,j),posicion),this))
-                            amenaza = true;
+                    if (tablero[i][j].validoMovimiento(new Movimiento(new Posicion(i,j),posicion),this)) {
+                        amenaza = true;
+                        atacante.setFila(i);
+                        atacante.setColumna(j);
+                    }
                 }
             }
         }
@@ -250,5 +257,63 @@ public class Tablero {
             }
         }
         return null;
+    }
+    Scanner teclado = new Scanner(System.in);
+    private String respuesta;
+    private Movimiento movimiento;
+    private Posicion atacante;
+    public boolean salirJaque (Juego juego) { //tener en cuenta si es enroque que no puede hacerlo si hay piezas en el movimiento del enroque
+        Pieza[][] copia = new Pieza[8][8];
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (hayPieza(i,j))
+                    copia[i][j] = devuelvePieza(i,j).clonarPieza();
+            }
+        }
+        Tablero copiaTablero = new Tablero(copia);
+            do {
+                System.out.println("Introduzca una jugada para salvar a tu rey");
+                respuesta = teclado.nextLine();
+                movimiento = juego.jugada(respuesta.toUpperCase(), this, juego);
+            } while (movimiento == null);
+            if (devuelvePieza(movimiento.getPosInicial()).validoMovimiento(movimiento,this))
+                copiaTablero.moverPieza(devuelvePieza(movimiento.getPosInicial()),movimiento);
+            else {
+                System.out.println(devuelvePieza(movimiento.getPosInicial()).getClass().getSimpleName() + " no puede realizar ese movimiento");
+                this.pintarTablero();
+            }
+        return (jaque(juego))?salirJaque(juego):true;
+    }
+    public boolean jaqueMate (Juego partida) {
+        boolean mate = true;
+        Posicion posicion = buscarRey(partida);
+        Movimiento[] movimientos = new Movimiento[8];
+        for (int i = -1; i < 2; i++) {
+            movimientos[i] = new Movimiento(movimiento.getPosInicial(),new Posicion(movimiento.getPosInicial().getFila()+1,movimiento.getPosInicial().getColumna()+i));
+        }
+        movimientos[3] = new Movimiento(movimiento.getPosInicial(),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+1));
+        movimientos[4] = new Movimiento(movimiento.getPosInicial(),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()-1));
+        for (int i = -1; i < 2; i++) {
+            movimientos[i] = new Movimiento(movimiento.getPosInicial(),new Posicion(movimiento.getPosInicial().getFila()-1,movimiento.getPosInicial().getColumna()+i));
+        }
+        for (int i = 0; i < movimientos.length && mate; i++) {
+            if (movimientos[i].getPosInicial()!=null)
+                if (devuelvePieza(posicion).validoMovimiento(movimientos[i],this)) {
+                    mate = false;
+                }
+        }
+
+        if (mate) {
+            for (int i = 0; i < tablero.length; i++) {
+                for (int j = 0; j < tablero[i].length; j++) {
+                    if (tablero[i][j]!=null && devuelvePieza(posicion).getColor()==tablero[i][j].getColor()) {
+                        if (tablero[i][j].validoMovimiento(new Movimiento(new Posicion(i,j),atacante),this)) {
+                            mate = false;
+                        }
+                    }
+                }
+            }
+        }
+        return  mate;
     }
 }

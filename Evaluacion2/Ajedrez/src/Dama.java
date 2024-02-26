@@ -17,4 +17,9 @@ public class Dama extends Pieza {
     public boolean validoMovimiento(Movimiento movimiento,Tablero tablero) {
         return (tablero.hayPiezasEntre(movimiento))?false:(movimiento.isHorizontal()||movimiento.isDiagonal()||movimiento.isVertical());
     }
+    @Override
+    public Pieza clonarPieza () {
+        Dama dama = new Dama(this.getColor());
+        return dama;
+    }
 }

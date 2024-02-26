@@ -38,8 +38,17 @@ public abstract class Pieza {
         return color;
     }
 
+    /**
+     * Metodo que actualiza el valor del color de la pieza
+     * @param color Es el color al que vas a cambiar la pieza
+     */
     public void setColor(boolean color) {
         this.color = color;
+    }
+    public abstract Pieza clonarPieza ();
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**

@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -91,7 +94,23 @@ public class HelloController implements Initializable {
             String error =partida.validarMovimiento(movimiento,tablero,partida);
             if (error==null) {
                 if (tablero.devuelvePieza(movimiento.getPosInicial()).validoMovimiento(movimiento,tablero)) {
-                    tablero.moverPieza(tablero.devuelvePieza(movimiento.getPosInicial()), movimiento);
+                    Pieza pieza = tablero.devuelvePieza(movimiento.getPosInicial());
+                    tablero.moverPieza(pieza, movimiento);
+                    if (pieza instanceof Peon) {
+                        if (movimiento.getPosFinal().getFila()==0 && pieza.getColor() || movimiento.getPosFinal().getFila()==7 && !pieza.getColor()) {
+                            String result = coronacion(movimiento);
+                            if (result.equals("caballo")) {
+                                pieza = new Caballo(pieza.getColor());
+                            } else if (result.equals("alfil")) {
+                                pieza = new Alfil(pieza.getColor());
+                            } else if (result.equals("dama")) {
+                                pieza = new Dama(pieza.getColor());
+                            } else if (result.equals("torre")) {
+                                pieza = new Torre(pieza.getColor());
+                            }
+                            tablero.moverPieza(pieza,movimiento);
+                        }
+                    }
                     movimiento.setPosInicial(null);
                     movimiento.setPosFinal(null);
                     partida.setTurno();
@@ -110,6 +129,23 @@ public class HelloController implements Initializable {
             }
         }
     }
+    public String coronacion (Movimiento movimiento) {
+        boolean exit = false;
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("Acabas de coronar. Escoge la pieza por la que quieres cambiar el peon (recuerda que no puede ser otro peon o un rey)");
+                ButtonType dama = new ButtonType("dama");
+                ButtonType caballo = new ButtonType("caballo");
+                ButtonType alfil = new ButtonType("alfil");
+                ButtonType torre = new ButtonType("torre");
+
+                alert.getButtonTypes().setAll(dama, caballo, alfil, torre);
+                Optional<ButtonType> result = alert.showAndWait();
+
+            return result.get().getText();
+    }
+
+
     private void pintarTablero() {
         Pane pane;
         for (int i = 0; i <= 7; i++) {

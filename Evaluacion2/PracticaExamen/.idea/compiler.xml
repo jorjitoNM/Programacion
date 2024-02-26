@@ -9,8 +9,5 @@
         <module name="PracticaExamen" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Ajedrez.jar" target="21" />
-    </bytecodeTargetLevel>
   </component>
 </project>

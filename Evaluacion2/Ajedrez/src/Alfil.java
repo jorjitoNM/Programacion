@@ -17,4 +17,9 @@ public class Alfil extends Pieza {
     public boolean validoMovimiento(Movimiento movimiento, Tablero tablero) {
         return (tablero.hayPiezasEntre(movimiento))?false:movimiento.isDiagonal();
     }
+    @Override
+    public Pieza clonarPieza () {
+        Alfil alfil = new Alfil(this.getColor());
+        return alfil;
+    }
 }

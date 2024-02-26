@@ -19,8 +19,10 @@ public class Rey extends Pieza {
     @Override
     public boolean validoMovimiento(Movimiento movimiento,Tablero tablero) {
         if (Math.abs(movimiento.saltoHorizontal())==2 && !isEnroque()) {
-            if(tablero.enroque(this,movimiento))
+            if(tablero.enroque(this,movimiento)) {
+                enroque = true;
                 return true;
+            }
             else
                 return false;
         }
@@ -34,5 +36,15 @@ public class Rey extends Pieza {
      */
     public boolean isEnroque() {
         return enroque;
+    }
+
+    public void setEnroque(boolean enroque) {
+        this.enroque = enroque;
+    }
+    @Override
+    public Pieza clonarPieza () {
+        Rey rey = new Rey(this.getColor());
+        rey.setEnroque(isEnroque());
+        return rey;
     }
 }

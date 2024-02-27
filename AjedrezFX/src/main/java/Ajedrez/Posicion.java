@@ -46,4 +46,9 @@ public class Posicion {
     public void setColumna(int columna) {
         this.columna = columna;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Puedes mover a %(s,%s)",fila,columna);
+    }
 }

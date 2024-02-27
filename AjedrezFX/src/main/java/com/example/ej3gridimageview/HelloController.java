@@ -34,34 +34,6 @@ public class HelloController implements Initializable {
         mensajes.setText("Welcome to JavaFX Application!");
     }
 
-    /*public void click(MouseEvent mouseEvent) {
-        int columna = 0;
-        int fila = 0;
-        for (Node node : mainGrid.getChildren()) {
-            if (node.getBoundsInParent().contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())) {
-                columna = GridPane.getColumnIndex(node);
-                fila = GridPane.getRowIndex(node);
-            }
-        }
-        boolean encontrado=false;
-        for (int i=0; i< mainGrid.getChildren().size()  && !encontrado;i++) {
-            Node node = mainGrid.getChildren().get(i);
-            if (node.getBoundsInParent().contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())) {
-                columna = GridPane.getColumnIndex(node);
-                fila = GridPane.getRowIndex(node);
-                encontrado = true;
-            }
-        }
-        System.out.println(fila+" "+columna);
-        //Otra forma
-        /*Node node = (Node) mouseEvent.getTarget();
-        if (node != null && node.getBoundsInParent().contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())) {
-            columna = GridPane.getColumnIndex(node);
-            fila = GridPane.getRowIndex(node);
-            System.out.println("Row : " + fila + ", Col : " + columna);
-        }
-    }*/
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tablero = new Tablero();
@@ -77,6 +49,28 @@ public class HelloController implements Initializable {
         System.out.println(fila+"-"+columna);
     }
 
+    private Posicion[] asistencia (Pieza pieza, Posicion posicionInicial) {
+        Posicion[] posiciones;
+        int contador = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (pieza.validoMovimiento(new Movimiento(posicionInicial, new Posicion(i, j)), tablero))
+                    contador++;
+            }
+        }
+        posiciones = new Posicion[contador];
+        if (contador != 0) {
+            for (int i = 0; i < contador; i++) {
+                for (int j = 0; j < 8; j++) {
+                    for (int k = 0; k < 8; k++) {
+                        if (pieza.validoMovimiento(new Movimiento(posicionInicial, new Posicion(i, j)), tablero))
+                            posiciones[i] = new Posicion(j, k);
+                    }
+                }
+            }
+        }
+        return posiciones;
+    }
     /**
      * Metodo que recibe las coordenadas del tablero pulsadas y contruye un movimiento (para crear un movimiento entero tiene que ejecutarse 2 veces)
      * @param x Coordenada x (fila)
@@ -88,6 +82,9 @@ public class HelloController implements Initializable {
         if (movimiento.getPosInicial()==null) {
             movimiento.setPosInicial(new Posicion(x, y));
             mensajes.setText(tablero.devuelvePieza(movimiento.getPosInicial()).getNombre());
+            for (int i = 0; i < asistencia(tablero.devuelvePieza(movimiento.getPosInicial()),movimiento.getPosInicial()).length; i++) {
+                System.out.println(asistencia(tablero.devuelvePieza(movimiento.getPosInicial()),movimiento.getPosInicial())[i].toString());
+            }
         }
         else if (movimiento.getPosInicial()!=null && movimiento.getPosFinal()==null) {
             movimiento.setPosFinal(new Posicion(x, y));

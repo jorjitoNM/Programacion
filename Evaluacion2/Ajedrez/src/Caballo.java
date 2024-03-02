@@ -17,4 +17,9 @@ public class Caballo extends Pieza {
     public boolean validoMovimiento(Movimiento movimiento,Tablero tablero) {
         return ((Math.abs(movimiento.saltoHorizontal())==2)&&(Math.abs(movimiento.saltoVertical())==1))||((Math.abs(movimiento.saltoVertical())==2)&&(Math.abs(movimiento.saltoHorizontal())==1));
     }
+    @Override
+    public Pieza clonarPieza () {
+        Caballo caballo = new Caballo(this.getColor());
+        return caballo;
+    }
 }

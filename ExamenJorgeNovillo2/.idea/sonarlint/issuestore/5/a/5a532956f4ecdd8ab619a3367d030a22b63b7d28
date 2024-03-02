@@ -1,0 +1,45 @@
+
+L	java:S106"+Replace this use of System.out by a logger.(°şİÄşÿÿÿÿ8ÀŒ“Òß1
+L	java:S106!"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÁŒ“Òß1
+L	java:S106#"+Replace this use of System.out by a logger.(ç¼ºıÿÿÿÿ8ÁŒ“Òß1
+L	java:S106%"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÁŒ“Òß1
+L	java:S106'"+Replace this use of System.out by a logger.(°şİÄşÿÿÿÿ8ÁŒ“Òß1
+L	java:S106)"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÁŒ“Òß1
+L	java:S106+"+Replace this use of System.out by a logger.(ç¼ºıÿÿÿÿ8ÁŒ“Òß1
+L	java:S106-"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÂŒ“Òß1
+L	java:S106/"+Replace this use of System.out by a logger.(°şİÄşÿÿÿÿ8ÂŒ“Òß1
+L	java:S1061"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÂŒ“Òß1
+L	java:S1063"+Replace this use of System.out by a logger.(ç¼ºıÿÿÿÿ8ÂŒ“Òß1
+L	java:S1065"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÂŒ“Òß1
+L	java:S1067"+Replace this use of System.out by a logger.(°şİÄşÿÿÿÿ8ÂŒ“Òß1
+L	java:S1069"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÂŒ“Òß1
+L	java:S106;"+Replace this use of System.out by a logger.(ç¼ºıÿÿÿÿ8ÂŒ“Òß1
+L	java:S106="+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÂŒ“Òß1
+L	java:S106?"+Replace this use of System.out by a logger.(°şİÄşÿÿÿÿ8ÃŒ“Òß1
+L	java:S106A"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÃŒ“Òß1
+L	java:S106C"+Replace this use of System.out by a logger.(ç¼ºıÿÿÿÿ8ÃŒ“Òß1
+L	java:S106E"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÃŒ“Òß1
+L	java:S106G"+Replace this use of System.out by a logger.(°şİÄşÿÿÿÿ8ÃŒ“Òß1
+L	java:S106I"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÃŒ“Òß1
+L	java:S106K"+Replace this use of System.out by a logger.(ç¼ºıÿÿÿÿ8ÃŒ“Òß1
+L	java:S106M"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÃŒ“Òß1
+L	java:S106T"+Replace this use of System.out by a logger.(ĞâíÅüÿÿÿÿ8ÅŒ“Òß1
+L	java:S106U"+Replace this use of System.out by a logger.(¶î³±ûÿÿÿÿ8ÆŒ“Òß1
+G	java:S106V"+Replace this use of System.out by a logger.(ÿ”éÉ8ÆŒ“Òß1
+L	java:S106W"+Replace this use of System.out by a logger.(ƒïÆáÿÿÿÿÿ8ÆŒ“Òß1
+K
+java:S2140Z")Use "java.util.Random.nextInt()" instead.(ØÑÁÙÿÿÿÿÿ8ÆŒ“Òß1
+L	java:S106["+Replace this use of System.out by a logger.(ºß¾ıÿÿÿÿ8ÇŒ“Òß1
+L	java:S106`"+Replace this use of System.out by a logger.(÷Ç‰Ñşÿÿÿÿ8ÇŒ“Òß1
+G	java:S106a"+Replace this use of System.out by a logger.(éŞ–Š8ÇŒ“Òß1
+Z
+java:S1854o"8Remove this useless assignment to local variable "exit".(œ·£Ÿùÿÿÿÿ8ÈŒ“Òß1
+Z
+java:S1854w"8Remove this useless assignment to local variable "exit".(œ·£Ÿùÿÿÿÿ8ÈŒ“Òß1
+[
+java:S1854ƒ"8Remove this useless assignment to local variable "exit".(œ·£Ÿùÿÿÿÿ8İç“Òß1
+[
+java:S1854Š"8Remove this useless assignment to local variable "exit".(œ·£Ÿùÿÿÿÿ8İç“Òß1
+H	java:S106§"+Replace this use of System.out by a logger.(˜€à8ËŒ“Òß1
+O
+java:S1068"-Remove this unused "jugadores" private field.(¹¢ìüúÿÿÿÿ8ÌŒ“Òß1

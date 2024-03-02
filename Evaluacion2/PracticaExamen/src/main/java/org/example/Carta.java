@@ -3,11 +3,15 @@ package org.example;
 public abstract class Carta {
     protected String tipo;
     protected int puntos;
-    private String[] tipos = {"Tijera","Piedra","Papel"};
+    private static String[] tipos = {"Tijera","Piedra","Papel"};
 
     public Carta () {
-        this.tipo = tipos[(int)(Math.random()*3)];
-        this.puntos = calcularValor();
+        tipo = tipos[(int)(Math.random()*3)];
+        puntos = calcularValor();
+    }
+    public Carta (String tipo) {
+        this.tipo = tipo;
+        puntos = calcularValor();
     }
     public abstract int calcularValor () ;
 
@@ -23,5 +27,17 @@ public abstract class Carta {
     }
     public void setPuntos(int puntos) {
         this.puntos = puntos;
+    }
+
+    public static String[] getTipos() {
+        return tipos;
+    }
+
+    @Override
+    public String toString() {
+        return "Carta{" +
+                "tipo='" + tipo + '\'' +
+                ", puntos=" + puntos +
+                '}';
     }
 }

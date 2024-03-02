@@ -82,9 +82,10 @@ public class HelloController implements Initializable {
         if (movimiento.getPosInicial()==null) {
             movimiento.setPosInicial(new Posicion(x, y));
             mensajes.setText(tablero.devuelvePieza(movimiento.getPosInicial()).getNombre());
+            /*asistencia(tablero.devuelvePieza(movimiento.getPosInicial()),movimiento.getPosInicial());
             for (int i = 0; i < asistencia(tablero.devuelvePieza(movimiento.getPosInicial()),movimiento.getPosInicial()).length; i++) {
                 System.out.println(asistencia(tablero.devuelvePieza(movimiento.getPosInicial()),movimiento.getPosInicial())[i].toString());
-            }
+            }*/
         }
         else if (movimiento.getPosInicial()!=null && movimiento.getPosFinal()==null) {
             movimiento.setPosFinal(new Posicion(x, y));

@@ -2,6 +2,11 @@ package org.example;
 
 public class Azul extends Carta {
 
+
+    public Azul () {}
+    public Azul (String tipo) {
+        super(tipo);
+    }
     @Override
     public int calcularValor() {
         int puntos = 0;

@@ -45,6 +45,11 @@ public abstract class Pieza {
     public void setColor(boolean color) {
         this.color = color;
     }
+
+    /**
+     * Metodo que crea un clon de una pieza
+     * @return Devuelve una pieza del tipo del hijo que implementa el metodo
+     */
     public abstract Pieza clonarPieza ();
 
     public void setNombre(String nombre) {

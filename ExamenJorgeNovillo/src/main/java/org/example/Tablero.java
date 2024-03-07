@@ -8,18 +8,6 @@ public class Tablero {
     public Tablero (Juego partida) {
         casillas[0] = new Salida();
         casillas[10] = new Bicicleta();
-        /*casillas[14] = new Mercadillo();
-        casillas[30] = new Mercadillo();
-        casillas[46] = new Mercadillo();
-        casillas[62] = new Mercadillo();
-        casillas[78] = new Mercadillo();
-        casillas[94] = new Mercadillo();
-        casillas[16] = new Atajo();
-        casillas[32] = new Atajo();
-        casillas[48] = new Atajo();
-        casillas[64] = new Atajo();
-        casillas[80] = new Atajo();
-         */
         casillas[40] = new Bicicleta();
         casillas[60] = new Bicicleta();
         casillas[94] = new Drogas();
@@ -165,13 +153,14 @@ public class Tablero {
         if (respuesta.equalsIgnoreCase("s")) {
             int tirada = (int)(Math.random()*10+1);
             System.out.println("Dado: " + tirada);
-            if (dimeCasilla(partida) instanceof Atajo) {
-                turno = false;
-            }
             mover(partida,tirada);
             System.out.println("Casilla nueva: " + devuelveCasilla(partida));
             System.out.println(casillas[devuelveCasilla(partida)].lanzarMensaje());
-            if (turno)
+            if (devuelveCasilla(partida)==95) {
+                System.out.println("Has ganado " + partida.devuelveJugador());
+                exit = true;
+            }
+            if (casillas[devuelveCasilla(partida)].cambiarTurno())
                 partida.siguienteTurno();
             pintarTablero();
         }

@@ -12,7 +12,15 @@ public class Mercadillo extends Casilla {
     }
 
     @Override
+    public boolean cambiarTurno() {
+        return true;
+    }
+
+    @Override
     public String toString() {
-        return " M ";
+        return String.format("%s",getClass().getSimpleName().charAt(0));
+    }
+    public void turnoExtra () {
+
     }
 }

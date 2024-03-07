@@ -1,9 +1,10 @@
 package org.example;
 
 public abstract class Casilla {
-    public Casilla () {
+    public Casilla() {
     }
+    public abstract int avanzar(int dado);
 
-    public abstract int avanzar (int dado);
-    public abstract String lanzarMensaje ();
+    public abstract String lanzarMensaje();
+    public abstract boolean cambiarTurno ();
 }

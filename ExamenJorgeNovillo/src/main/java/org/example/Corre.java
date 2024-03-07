@@ -12,8 +12,12 @@ public class Corre extends Casilla{
     }
 
     @Override
-    public String toString() {
+    public boolean cambiarTurno() {
+        return true;
+    }
 
+    @Override
+    public String toString() {
         return " / ";
     }
 }

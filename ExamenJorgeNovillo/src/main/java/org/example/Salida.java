@@ -13,7 +13,12 @@ public class Salida extends Casilla {
     }
 
     @Override
+    public boolean cambiarTurno() {
+        return true;
+    }
+
+    @Override
     public String toString() {
-        return " S ";
+        return String.format("%s",getClass().getSimpleName().charAt(0));
     }
 }

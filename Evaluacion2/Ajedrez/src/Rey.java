@@ -38,6 +38,10 @@ public class Rey extends Pieza {
         return enroque;
     }
 
+    /**
+     * Metodo que actualiza la variable enroque
+     * @param enroque Booleano que indica si el rey se puede o no enrocar
+     */
     public void setEnroque(boolean enroque) {
         this.enroque = enroque;
     }

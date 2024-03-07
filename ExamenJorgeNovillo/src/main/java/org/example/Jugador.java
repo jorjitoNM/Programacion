@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Jugador {
     private String nombre;
     private boolean boost;
-    private  boolean esta;
     public Jugador () {
         this.nombre = pedirNombre();
     }
@@ -39,13 +38,5 @@ public class Jugador {
 
     public String getNombre() {
         return nombre;
-    }
-
-    public boolean isEsta() {
-        return esta;
-    }
-
-    public void setEsta(boolean esta) {
-        this.esta = esta;
     }
 }

@@ -12,7 +12,12 @@ public class Final extends Casilla{
     }
 
     @Override
+    public boolean cambiarTurno() {
+        return true;
+    }
+
+    @Override
     public String toString() {
-        return " F ";
+        return String.format("%s",getClass().getSimpleName().charAt(0));
     }
 }

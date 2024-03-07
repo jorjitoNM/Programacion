@@ -1,6 +1,10 @@
 package org.example;
 
 public class Atajo extends Casilla {
+    @Override
+    public boolean cambiarTurno() {
+        return false;
+    }
 
     @Override
     public int avanzar(int dado) {
@@ -14,6 +18,6 @@ public class Atajo extends Casilla {
 
     @Override
     public String toString() {
-        return " A ";
+        return String.format("%s",getClass().getSimpleName().charAt(0));
     }
 }

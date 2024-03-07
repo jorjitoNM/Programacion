@@ -7,12 +7,21 @@ public class Mercadillo extends Casilla {
     }
 
     @Override
-    public String lanzarMensaje() {
-        return "¿Pero a donde vas?";
+    public void lanzarMensaje() {
+        System.out.println("¿Pero a donde vas?");
     }
 
     @Override
-    public String toString() {
-        return " M ";
+    public boolean cambiarTurno() {
+        return true;
+    }
+    public void turnoExtra (Juego partida) {
+        partida.devuelveJugador().setBloquearTurno(true);
+    }
+    @Override
+    public void accion(Juego partida) {
+        lanzarMensaje();
+        cambiarTurno();
+        turnoExtra(partida);
     }
 }

@@ -8,12 +8,17 @@ public class Drogas extends Casilla {
     }
 
     @Override
-    public String lanzarMensaje() {
-        return "Drogas No!!" ;
+    public void lanzarMensaje() {
+        System.out.println("Drogas No!!");
     }
 
     @Override
-    public String toString() {
-        return " D ";
+    public boolean cambiarTurno() {
+        return true;
+    }
+    @Override
+    public void accion(Juego partida) {
+        lanzarMensaje();
+        cambiarTurno();
     }
 }

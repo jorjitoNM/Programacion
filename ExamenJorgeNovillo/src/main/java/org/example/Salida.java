@@ -8,12 +8,17 @@ public class Salida extends Casilla {
     }
 
     @Override
-    public String lanzarMensaje() {
-        return "Que comienze la partida";
+    public void lanzarMensaje() {
+        System.out.println("Que comienze la partida");
     }
 
     @Override
-    public String toString() {
-        return " S ";
+    public boolean cambiarTurno() {
+        return true;
+    }
+    @Override
+    public void accion(Juego partida) {
+        lanzarMensaje();
+        cambiarTurno();
     }
 }

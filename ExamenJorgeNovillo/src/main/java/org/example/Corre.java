@@ -7,13 +7,20 @@ public class Corre extends Casilla{
     }
 
     @Override
-    public String lanzarMensaje() {
-        return "Corre corre que te pillan";
+    public void lanzarMensaje() {
+        System.out.println("Corre corre que te pillan");
     }
 
     @Override
-    public String toString() {
-
-        return " / ";
+    public boolean cambiarTurno() {
+        return true;
+    }
+    public String toString () {
+        return "  /  ";
+    }
+    @Override
+    public void accion(Juego partida) {
+        lanzarMensaje();
+        cambiarTurno();
     }
 }

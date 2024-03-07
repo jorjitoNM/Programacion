@@ -7,12 +7,17 @@ public class Final extends Casilla{
     }
 
     @Override
-    public String lanzarMensaje() { //jacer metodo para felicitar al usuario
-        return "Enrhorabuena, has ganado";
+    public void lanzarMensaje() { //jacer metodo para felicitar al usuario
+        System.out.println("Enrhorabuena, has llegado al final");
     }
 
     @Override
-    public String toString() {
-        return " F ";
+    public boolean cambiarTurno() {
+        return true;
+    }
+    @Override
+    public void accion(Juego partida) {
+        lanzarMensaje();
+        cambiarTurno();
     }
 }

@@ -5,6 +5,13 @@ public class Tablero {
      * Es un array que representa un tablero de ajdrez donde se van a mover las piezas
      */
     private Pieza[][] tablero;
+    Scanner teclado = new Scanner(System.in);
+    private String respuesta;
+    private Movimiento movimiento;
+    /**
+     * Es la posicion en la que se encuentra la pieza que esta amenazando al rey
+     */
+    private Posicion atacante;
 
     public Tablero (Pieza[][] tablero) {
         this.tablero = tablero;
@@ -229,6 +236,12 @@ public class Tablero {
         }
         return valido;
     }
+
+    /**
+     * Metodo que coge al rey del turno en el que se encuentra la partida y busca si esta amenazado por una pieza contraria
+     * @param partida Es la partida alctual
+     * @return Devuelve true cuando el rey esta amenazado y false cuando no lo esta
+     */
     public boolean jaque (Juego partida) {
         Posicion posicion = buscarRey(partida);
         boolean amenaza = false;
@@ -237,14 +250,19 @@ public class Tablero {
                 if (tablero[i][j]!=null && tablero[i][j].getColor()!=devuelvePieza(posicion.getFila(), posicion.getColumna()).getColor()) {
                     if (tablero[i][j].validoMovimiento(new Movimiento(new Posicion(i,j),posicion),this)) {
                         amenaza = true;
-                        atacante.setFila(i);
-                        atacante.setColumna(j);
+                        atacante = new Posicion(i,j);
                     }
                 }
             }
         }
         return amenaza;
     }
+
+    /**
+     * Metodo que recorre el tablero en busca del rey (el color lo indica el turno de la partida)
+     * @param partida Es la partida actual
+     * @return Devuelve la posicion en la que se encuentra el rey (sera null si no lo encuentra, cosa que nunca deberia pasar)
+     */
     private Posicion buscarRey (Juego partida) {
         boolean encontrado = false;
         for (int i = 0; i < tablero.length && !encontrado; i++) {
@@ -258,10 +276,30 @@ public class Tablero {
         }
         return null;
     }
-    Scanner teclado = new Scanner(System.in);
-    private String respuesta;
-    private Movimiento movimiento;
-    private Posicion atacante;
+
+    /**
+     * Metodo que recorre el tablero buscando a una pieza que pueda amenazar a la posicion que se provee
+     * @param posicion Es la posicion de la pieza amenazada (generalmente el rey)
+     * @return Devuelve true cuando la pieza esta amenazada y false cuando no lo esta
+     */
+    public boolean jaque (Posicion posicion) {
+        boolean amenaza = false;
+        for (int i = 0; i < tablero.length && !amenaza; i++) {
+            for (int j = 0; j < tablero[i].length && !amenaza; j++) {
+                if (tablero[i][j]!=null && tablero[i][j].getColor()!=devuelvePieza(posicion.getFila(), posicion.getColumna()).getColor()) {
+                    if (tablero[i][j].validoMovimiento(new Movimiento(new Posicion(i,j),posicion),this)) {
+                        amenaza = true;
+                    }
+                }
+            }
+        }
+        return amenaza;
+    }
+    /**
+     * Metodo recursivo que pide al jugador movimientos hasta que este introduzca uno valido que evite el jaque
+     * @param juego Es la partida
+     * @return Devuelve true cuando el jaque se ha evitado, y cuando no se ha evitado, vuelve a preguntar por una jugada para evitar el jaque
+     */
     public boolean salirJaque (Juego juego) { //tener en cuenta si es enroque que no puede hacerlo si hay piezas en el movimiento del enroque
         Pieza[][] copia = new Pieza[8][8];
         for (int i = 0; i < 8; i++) {
@@ -284,32 +322,63 @@ public class Tablero {
             }
         return (jaque(juego))?salirJaque(juego):true;
     }
+
+    /**
+     * Metodo que valida si hay jaque mate o no (sobre el rey del turno actual)
+     * @param partida Es la partida actual
+     * @return Devuelve true cuando es jaque mate y false cuando no
+     */
     public boolean jaqueMate (Juego partida) {
         boolean mate = true;
         Posicion posicion = buscarRey(partida);
-        Movimiento[] movimientos = new Movimiento[8];
-        for (int i = -1; i < 2; i++) {
-            movimientos[i] = new Movimiento(movimiento.getPosInicial(),new Posicion(movimiento.getPosInicial().getFila()+1,movimiento.getPosInicial().getColumna()+i));
+        int contador = 0;
+        int i = 0;
+        for (int j = -1; i < 3; i++,j++) {
+            if (tablero[posicion.getFila()+1][posicion.getColumna()+j]==null)
+                contador++;
         }
-        movimientos[3] = new Movimiento(movimiento.getPosInicial(),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()+1));
-        movimientos[4] = new Movimiento(movimiento.getPosInicial(),new Posicion(movimiento.getPosInicial().getFila(),movimiento.getPosInicial().getColumna()-1));
-        for (int i = -1; i < 2; i++) {
-            movimientos[i] = new Movimiento(movimiento.getPosInicial(),new Posicion(movimiento.getPosInicial().getFila()-1,movimiento.getPosInicial().getColumna()+i));
+        if (tablero[posicion.getFila()][posicion.getColumna()+1]==null)
+            contador++;
+        if (tablero[posicion.getFila()][posicion.getColumna()-1]==null)
+            contador++;
+        for (int j = -1; i < 8 && !(posicion.getFila()==0 || posicion.getColumna()==7); i++,j++) {
+            if (tablero[posicion.getFila()-1][posicion.getColumna()+j]==null)
+                contador++;
         }
-        for (int i = 0; i < movimientos.length && mate; i++) {
-            if (movimientos[i].getPosInicial()!=null)
-                if (devuelvePieza(posicion).validoMovimiento(movimientos[i],this)) {
+        Movimiento[] movimientos = new Movimiento[contador];
+        i = 0;
+        for (int j = -1,k = 0; k < 3; j++,k++) {
+            if (tablero[posicion.getFila() + 1][posicion.getColumna() + j] == null) {
+                movimientos[i] = new Movimiento(posicion, new Posicion(posicion.getFila() + 1, posicion.getColumna() + j));
+                i++;
+            }
+        }
+        if (tablero[posicion.getFila()][posicion.getColumna()+1]==null) {
+            movimientos[i] = new Movimiento(posicion, new Posicion(posicion.getFila(), posicion.getColumna() + 1));
+            i++;
+        }
+        if (tablero[posicion.getFila()][posicion.getColumna()-1]==null) {
+            movimientos[i] = new Movimiento(posicion,new Posicion(posicion.getFila(),posicion.getColumna()-1));
+            i++;
+        }
+        for (int j = -1, k=0; k < movimientos.length && !(posicion.getFila()==0 || posicion.getColumna()==7);k++,j++) { // se podria poner && movimientos[i+1]!=null
+            if (tablero[posicion.getFila()-1][posicion.getColumna()+j]==null) {
+                movimientos[i] = new Movimiento(posicion, new Posicion(posicion.getFila() - 1, posicion.getColumna() + j));
+                i++;
+            }
+        }
+        for (int j = 0; j < movimientos.length && mate; j++) {
+            if (movimientos[j].getPosInicial()!=null)
+                if (devuelvePieza(posicion).validoMovimiento(movimientos[j],this) && !jaque(posicion)) {
                     mate = false;
                 }
         }
 
-        if (mate) {
-            for (int i = 0; i < tablero.length; i++) {
-                for (int j = 0; j < tablero[i].length; j++) {
-                    if (tablero[i][j]!=null && devuelvePieza(posicion).getColor()==tablero[i][j].getColor()) {
-                        if (tablero[i][j].validoMovimiento(new Movimiento(new Posicion(i,j),atacante),this)) {
-                            mate = false;
-                        }
+        for (int j = 0; j < tablero.length && mate; j++) {
+            for (int k = 0; k < tablero[j].length; k++) {
+                if (tablero[j][k]!=null && devuelvePieza(posicion).getColor()==tablero[j][k].getColor()) {
+                    if (tablero[j][k].validoMovimiento(new Movimiento(new Posicion(j,k),atacante),this)) {
+                        mate = false;
                     }
                 }
             }

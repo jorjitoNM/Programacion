@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ExamenEntornos" />
         <module name="PracticaExamen" />
+        <module name="DataFaker" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

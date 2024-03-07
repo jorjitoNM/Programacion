@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Jugador {
     private String nombre;
     private boolean boost;
-    private  boolean esta;
+    private boolean bloquearTurno;
     public Jugador () {
         this.nombre = pedirNombre();
     }
@@ -41,11 +41,11 @@ public class Jugador {
         return nombre;
     }
 
-    public boolean isEsta() {
-        return esta;
+    public boolean isBloquearTurno() {
+        return bloquearTurno;
     }
 
-    public void setEsta(boolean esta) {
-        this.esta = esta;
+    public void setBloquearTurno(boolean bloquearTurno) {
+        this.bloquearTurno = bloquearTurno;
     }
 }

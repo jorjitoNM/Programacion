@@ -1,10 +1,12 @@
 package dao;
 
+import common.Constantes;
 import domain.Palabra;
 
+import java.util.Collections;
 import java.util.List;
 
-public class DaoPalabrasImplementacion implements DaoPalabras {
+public class DaoPalabrasImplementacion implements DaoPalabras,Comparable {
     protected final Palabras lista;
 
     public DaoPalabrasImplementacion() {
@@ -65,4 +67,26 @@ public class DaoPalabrasImplementacion implements DaoPalabras {
     public boolean modificarPalabra(int id, String incognita) {
         return false;
     }
+    @Override
+    public String ordenarDiccionario (boolean ascendente) {
+        List<Palabra> aux = lista.getListaPalabras();
+        Collections.sort(aux);
+        if (!ascendente)
+            Collections.reverse(aux);
+        return aux;
+    }
+
+    @Override
+    public String añadirPalabra() {
+        String feedback = Constantes.ERRORDESCONOCIDO;
+        if (lista.añadirPalabra())
+            feedback = Constantes.NUEVAPALABRAAÑADIDA;
+        return feedback;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return lista.getFirstLetter();
+    }
+
 }

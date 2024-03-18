@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class GestionPalabras implements IGestionPalabras {
-
     private final DaoPalabras daoPalabras;
-
 
     public GestionPalabras() {
         this.daoPalabras = new DaoPalabrasImplementacion();
@@ -106,5 +104,14 @@ public class GestionPalabras implements IGestionPalabras {
     @Override
     public boolean cargarFicheroBinario() {
         return false;
+    }
+
+    @Override
+    public String ordenarDiccionario(boolean ascendente) {
+        return daoPalabras.ordenarDiccionario(ascendente);
+    }
+    @Override
+    public String añadirPalabra() {
+        return daoPalabras.añadirPalabra();
     }
 }

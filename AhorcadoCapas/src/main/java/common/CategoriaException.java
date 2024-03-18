@@ -13,5 +13,4 @@ import java.util.Arrays;
  */
 public class CategoriaException extends Exception {
 
-
 }

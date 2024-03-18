@@ -3,6 +3,7 @@ package domain;
 
 import common.CategoriaException;
 import common.Comprobacion;
+import common.Utilities;
 import dao.Palabras;
 
 public class Palabra {
@@ -26,14 +27,6 @@ public class Palabra {
         Comprobacion.categoriaOk(categoria);
         this.categoria = categoria;
     }
-    public Palabra(int level, String incognita, String categoria) throws CategoriaException {
-        this.id = Palabras.getAutonumerico();
-        Palabras.setAutonumerico(Palabras.getAutonumerico()+1);
-        this.level = level;
-        this.incognita = incognita;
-        Comprobacion.categoriaOk(categoria);
-        this.categoria = categoria;
-    }
     public String getCategoria() {
         return categoria;
     }
@@ -41,5 +34,29 @@ public class Palabra {
     public void setCategoria(String categoria) throws CategoriaException {
         Comprobacion.categoriaOk(categoria);
         this.categoria = categoria;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public String getIncognita() {
+        return incognita;
+    }
+
+    public void setIncognita(String incognita) {
+        this.incognita = incognita;
     }
 }

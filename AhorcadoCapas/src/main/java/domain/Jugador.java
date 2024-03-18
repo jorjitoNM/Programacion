@@ -1,5 +1,11 @@
 package domain;
 
 public class Jugador {
-    //opcional nombre,
+    private String nombre;
+    public Jugador () {
+        nombre = "jugador";
+    }
+    public Jugador (String nombre) {
+        this.nombre = nombre;
+    }
 }

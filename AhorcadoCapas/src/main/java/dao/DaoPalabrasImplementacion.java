@@ -6,7 +6,7 @@ import domain.Palabra;
 import java.util.Collections;
 import java.util.List;
 
-public class DaoPalabrasImplementacion implements DaoPalabras,Comparable {
+public class DaoPalabrasImplementacion implements DaoPalabras {
     protected final Palabras lista;
 
     public DaoPalabrasImplementacion() {
@@ -68,7 +68,7 @@ public class DaoPalabrasImplementacion implements DaoPalabras,Comparable {
         return false;
     }
     @Override
-    public String ordenarDiccionario (boolean ascendente) {
+    public List<Palabra> ordenarDiccionario (boolean ascendente) {
         List<Palabra> aux = lista.getListaPalabras();
         Collections.sort(aux);
         if (!ascendente)
@@ -83,10 +83,4 @@ public class DaoPalabrasImplementacion implements DaoPalabras,Comparable {
             feedback = Constantes.NUEVAPALABRAAÑADIDA;
         return feedback;
     }
-
-    @Override
-    public int compareTo(Object o) {
-        return lista.getFirstLetter();
-    }
-
 }

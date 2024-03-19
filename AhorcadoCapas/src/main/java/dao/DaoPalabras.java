@@ -16,6 +16,6 @@ public interface DaoPalabras {
     public boolean modificarPalabra(int id, String incognita);
     public void eliminarPalabra(Palabra Palabra) ;
     public void eliminarPalabra(int id) ;
-    public String ordenarDiccionario (boolean ascendente) ;
+    public List<Palabra> ordenarDiccionario (boolean ascendente) ;
     public String añadirPalabra () ;
     }

@@ -6,7 +6,7 @@ import common.Comprobacion;
 import common.Utilities;
 import dao.Palabras;
 
-public class Palabra {
+public class Palabra implements Comparable<Palabra> {
     private int id;
     private int level;
     private String incognita;
@@ -58,5 +58,13 @@ public class Palabra {
 
     public void setIncognita(String incognita) {
         this.incognita = incognita;
+    }
+
+    @Override
+    public int compareTo(Palabra o) {
+        return getFirstLetter();
+    }
+    public char getFirstLetter () {
+        return incognita.charAt(0);
     }
 }

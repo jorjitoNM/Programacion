@@ -67,9 +67,6 @@ public class Palabras {
     public static int getAutonumerico() {
         return autonumerico;
     }
-    public char getFirstLetter () {
-        return palabras.get(0).toString().charAt(0);
-    }
 
     public void setListaPalabras(List<Palabra> Palabras) {
         this.palabras.clear();

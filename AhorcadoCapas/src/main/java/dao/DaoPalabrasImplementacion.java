@@ -5,6 +5,7 @@ import domain.Palabra;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class DaoPalabrasImplementacion implements DaoPalabras {
     protected final Palabras lista;
@@ -83,4 +84,21 @@ public class DaoPalabrasImplementacion implements DaoPalabras {
             feedback = Constantes.NUEVAPALABRAAÑADIDA;
         return feedback;
     }
+
+    @Override
+    public String cambiarIncognita () {
+        String feedback = Constantes.ERRORDESCONOCIDO;
+        if (lista.cambiarIncognita())
+            feedback = Constantes.INCOGNITACAMBIADA;
+        return feedback;
+    }
+
+    @Override
+    public String cambiarCategoria() {
+        String feedback = Constantes.ERRORDESCONOCIDO;
+        if (lista.cambiarCategoria())
+            feedback = Constantes.INCOGNITACAMBIADA;
+        return feedback;
+    }
+
 }

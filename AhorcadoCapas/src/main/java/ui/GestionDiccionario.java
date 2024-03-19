@@ -25,7 +25,7 @@ public class GestionDiccionario {
         do {
             try {
                 System.out.println(Constantes.MENU+"\n"+Constantes.OPCION1+"\n"+Constantes.OPCION2+"\n"+Constantes.OPCION3+"\n"+Constantes.OPCION4);
-                opcion = lector.nextInt(); //tratar la excepción para evitar que se pare el programa si no introduce un número
+                opcion = lector.nextInt();
                 valido = true;
             } catch (InputMismatchException exception) {
                 System.out.println(Constantes.ENTRADANONUMERO);
@@ -42,9 +42,11 @@ public class GestionDiccionario {
                 break;
             case 2:
                 controlSeguridad();
-                servicio.añadirPalabra();
+                System.out.println(servicio.añadirPalabra());
                 break;
             case 3:
+                controlSeguridad();
+                menuCampos();
                 break;
             case 4:
                 break;
@@ -63,5 +65,35 @@ public class GestionDiccionario {
             password = teclado.nextLine();
             contador++;
         }while(Comprobacion.controlSeguridad(password) || contador<=3);
+    }
+    public void menuCampos () {
+        int opcion = mostrarMenuCampos();
+        switch (opcion) {
+            case 1:
+                controlSeguridad();
+                servicio.ordenarDiccionario(true);
+                System.out.println(servicio.cambiarIncognita());
+                break;
+            case 2:
+                controlSeguridad();
+                servicio.ordenarDiccionario(true);
+                System.out.println(servicio.cambiarCategoria());
+        }
+    }
+
+    private int mostrarMenuCampos() {
+        Scanner teclado = new Scanner(System.in);
+        boolean valido = false;
+        int opcion = 0;
+        do {
+            try {
+                System.out.println(Constantes.MENUCAMPOS+"\n"+Constantes.INCOGNITA+"\n"+Constantes.CATEGORIA);
+                opcion = teclado.nextInt();
+                valido = true;
+            } catch (InputMismatchException exception) {
+                System.out.println(Constantes.ENTRADANONUMERO);
+            }
+        }while(!valido);
+        return opcion;
     }
 }

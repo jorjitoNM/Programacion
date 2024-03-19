@@ -2,13 +2,19 @@ package common;
 
 public class Constantes {
     public static final String FICHERO = "elementos";
+    public static final String INCOGNITACAMBIADA = "Su lapabra ha sido cambiada con exito";
     public static final String ERRORDESCONOCIDO ="Debido a un error desconocido no hemos podido añadir su palabra al diccionario";
     public static final String CATEGORIAINVALIDA = "Categoria inválida, pruebe otra vez";
     public static final String PALABRAREPETIDA = "Esta palabra ya se encuentra en el diccionario, pruebe con otra"; // o salga de esta opcion dejando en blancoel hueco
     public static final String PEDIRCONTRASEÑA = "Por favor, introduzca la contraseña de administrador";
     public static final String FICHEROB = "copiaSeguridad";
+    public static final String IDPALABRA = "Introduzca el id de la palabra que desea cambiar";
+    public static final String CAMBIARINCOGNITA = "Introduzca la palabra: ";
     public static final String MENU = "Introduce opción: ";
-    public static final String OPCION1 ="1. Listar Diccionario Ordenado";
+    public static final String MENUCAMPOS = "Introduce el campo de la palabra que quiere cambiar: ";
+    public static final String INCOGNITA = "1. Cambiar una palabra";
+    public static final String CATEGORIA = "2. Cambiar la categoria de una palabra";
+    public static final String OPCION1 = "1. Listar Diccionario Ordenado";
     public static final String OPCION2 = "2. Insertar un elemento al diccionario";
     public static final String OPCION3 = "3. Modificar algún campo de un elemento del diccionario";
     public static final String OPCION4 = "4. Eliminar un elemento del diccionario";

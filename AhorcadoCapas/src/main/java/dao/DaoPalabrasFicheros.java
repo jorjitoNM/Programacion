@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DaoPalabrasFicheros {
-    public static final String FICHERO = "Fichero";
+    public static final String DICIONARIO = "Diccionario";
     public static final String FICHEROB = "FicheroBinario";
     public static void crearFicheros() throws IOException {
-        File fichero1 = new File(FICHERO);
+        File fichero1 = new File(DICIONARIO);
         File fichero2 = new File(FICHEROB);
         if (!fichero1.exists())
                 fichero1.createNewFile();
@@ -19,7 +19,7 @@ public class DaoPalabrasFicheros {
             fichero2.createNewFile();
     }
     public static List<Palabra> leerFichero() throws IOException {
-        return leerFichero(DaoPalabrasFicheros.FICHERO);
+        return leerFichero(DaoPalabrasFicheros.DICIONARIO);
     }
     public static List<Palabra> leerFichero(String fichero) throws IOException {
         crearFicheros();
@@ -68,5 +68,11 @@ public class DaoPalabrasFicheros {
             java.util.logging.Logger.getLogger(DaoPalabrasFicheros.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
         }
         return escrito;
+    }
+    public static boolean escribitDiccionario (List<Palabra> diccionario) throws FileNotFoundException {
+        PrintWriter pw = new PrintWriter(DICIONARIO);
+        for (int i = 0; i < diccionario.size(); i++) {
+            pw.println(diccionario.get(i).toString());
+        }
     }
   }

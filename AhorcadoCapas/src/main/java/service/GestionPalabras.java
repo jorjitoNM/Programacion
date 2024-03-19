@@ -107,11 +107,21 @@ public class GestionPalabras implements IGestionPalabras {
     }
 
     @Override
-    public String ordenarDiccionario(boolean ascendente) {
-        return daoPalabras.ordenarDiccionario(ascendente);
+    public void ordenarDiccionario(boolean ascendente) {
+        System.out.println(daoPalabras.ordenarDiccionario(ascendente).toString());
     }
     @Override
     public String añadirPalabra() {
         return daoPalabras.añadirPalabra();
     }
+
+    @Override
+    public String cambiarIncognita() {
+        return daoPalabras.cambiarIncognita();
+    }
+    @Override
+    public String cambiarCategoria() {
+        return daoPalabras.cambiarCategoria();
+    }
+
 }

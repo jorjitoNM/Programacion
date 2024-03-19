@@ -130,13 +130,24 @@ public class Palabras {
         }
         return id;
     }
-    private boolean isRepited (String palabra) {
+    public boolean isRepited (String palabra) {
         boolean repetido = false;
         for (int i = 0; i < palabras.size(); i++) {
             if (palabra.equals(palabras.get(i).getIncognita()))
                 repetido = true;
         }
         return repetido;
+    }
+    public Palabra buscarPalabra (int id) {
+        boolean exit = false;
+        Palabra aux = null;
+        for (int i = 0; i < palabras.size() && !exit; i++) {
+            if (palabras.get(i).getId() == id) {
+                exit = true;
+                aux = palabras.get(i);
+            }
+        }
+        return aux;
     }
     public boolean añadirPalabra () { //revisar logica, no se si se va a hacer un lio al salir
         Scanner teclado = new Scanner(System.in);
@@ -156,11 +167,54 @@ public class Palabras {
         if (exit) {
             try {
                 palabras.add(new Palabra(darID(), asignarNivel(palabra), palabra, categoria));
-                exit = true;
-            } catch (CategoriaException exception) {
-
-            }
+            } catch (CategoriaException exception) {}
         }
         return exit;
+    }
+    public boolean cambiarIncognita () { //mismo trozo de codigo que nueva palabra, quizas se puede simplificar
+        Scanner teclado = new Scanner(System.in);
+        boolean exit = true;
+        System.out.println(Constantes.IDPALABRA);
+        int ID = teclado.nextInt();
+        System.out.println(Constantes.CAMBIARINCOGNITA);
+        String incognita = teclado.nextLine();
+        palabraRepetida(incognita);
+        if (incognita!=null) {
+            buscarPalabra(ID).setIncognita(incognita);
+        }
+        return exit;
+    }
+    public boolean cambiarCategoria () { //mismo trozo de codigo que nueva palabra, quizas se puede simplificar (booleano para incognita o atributo)
+        Scanner teclado = new Scanner(System.in);
+        boolean exit = false;
+        System.out.println(Constantes.IDPALABRA);
+        int ID = teclado.nextInt();
+        System.out.println(Constantes.INTRODUCIRCATEGORIA);
+        String categoria = teclado.nextLine();
+        palabraRepetida(categoria);
+        if (categoria!=null) {
+            try { //no quiero tratar la excepcion porque la elige el usuario
+                buscarPalabra(ID).setCategoria(categoria);
+            } catch (CategoriaException e) {
+
+            }
+            exit = true;
+        }
+        return exit;
+    }
+    private String palabraRepetida (String incognita) {
+        Scanner teclado = new Scanner(System.in);
+        boolean exit = true;
+        do {
+            if (!isRepited(incognita)) {
+                System.out.println(Constantes.PALABRAREPETIDA);
+                incognita = teclado.nextLine();
+                if (incognita.equals("\n")) {
+                    incognita = null;
+                    exit = false;
+                }
+            }
+        }while(exit || !isRepited(incognita));
+        return incognita;
     }
 }

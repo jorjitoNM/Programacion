@@ -55,8 +55,15 @@ public class DaoPalabrasImplementacion implements DaoPalabras {
     }
 
     @Override
-    public void eliminarPalabra(int id) {
-
+    public String eliminarPalabra() {
+        Scanner teclado = new Scanner(System.in);
+        String feedback = Constantes.PALABRANOELIMINADA;
+        System.out.println(Constantes.IDPALABRA);
+        int id = teclado.nextInt();
+        lista.eliminarPalabra(id);
+        if (lista.buscarPalabra(id)!=null)
+            feedback = Constantes.PALABRAELIMINADA;
+        return feedback;
     }
 
     @Override

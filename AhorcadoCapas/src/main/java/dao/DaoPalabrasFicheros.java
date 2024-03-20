@@ -30,15 +30,11 @@ public class DaoPalabrasFicheros {
                 String cadena = sc.nextLine();
                 String[] trozos = cadena.split(";");
                 //crear Palabra y añadirlo a auxiliar.
-
             };
         } catch (FileNotFoundException ex) {
             java.util.logging.Logger.getLogger(DaoPalabrasFicheros.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
-
         }
-
         return auxiliar;
-
     }
 
     /**
@@ -69,10 +65,12 @@ public class DaoPalabrasFicheros {
         }
         return escrito;
     }
-    public static boolean escribitDiccionario (List<Palabra> diccionario) throws FileNotFoundException {
+    public static boolean escribirDiccionario (List<Palabra> diccionario) throws FileNotFoundException {
         PrintWriter pw = new PrintWriter(DICIONARIO);
         for (int i = 0; i < diccionario.size(); i++) {
             pw.println(diccionario.get(i).toString());
         }
+        pw.close();
+        return true;
     }
   }

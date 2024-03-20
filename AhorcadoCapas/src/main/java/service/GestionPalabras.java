@@ -76,8 +76,8 @@ public class GestionPalabras implements IGestionPalabras {
     }
 
     @Override
-    public void eliminarPalabra(Palabra Palabra) {
-
+    public String eliminarPalabra() {
+        return daoPalabras.eliminarPalabra();
     }
 
 
@@ -114,7 +114,6 @@ public class GestionPalabras implements IGestionPalabras {
     public String añadirPalabra() {
         return daoPalabras.añadirPalabra();
     }
-
     @Override
     public String cambiarIncognita() {
         return daoPalabras.cambiarIncognita();

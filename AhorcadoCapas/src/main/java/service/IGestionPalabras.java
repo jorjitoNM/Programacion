@@ -29,7 +29,7 @@ public interface IGestionPalabras {
     public boolean modificarPalabra(int id, String incognita);
 
     public List<Palabra> getListaPalabrasCategoria();
-    public void eliminarPalabra(Palabra Palabra);
+    public String eliminarPalabra();
     public void crearFicheros()throws IOException;
     public boolean cargarFichero() throws IOException;
     public boolean escribirFichero();

@@ -6,49 +6,57 @@ import common.Constantes;
 import domain.Palabra;
 import net.datafaker.Faker;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 public class Palabras {
-    private final ArrayList<Palabra> palabras;
+    private List<Palabra> palabras;
     private static int autonumerico;
 
     public Palabras() {
-        this.palabras = new ArrayList<>();
         try {
-            Faker faker = new Faker();
-            for (int i = 0; i < 10;) {
-                String palabra = faker.basketball().players();
-                if (isRepited(palabra)) {
-                    palabras.add(new Palabra(darID(), asignarNivel(palabra), palabra, faker.basketball().getClass().getSimpleName()));
-                    i++;
+            if (DaoPalabrasFicheros.leerFichero(DaoPalabrasFicheros.DICIONARIO).isEmpty())
+                try {
+                    String palabra;
+                    palabras = new ArrayList<>();
+                    Faker faker = new Faker();
+                    for (int i = 0; i < 10;) {
+                        palabra = faker.basketball().players();
+                        if (isRepited(palabra)) {
+                            palabras.add(new Palabra(darID(), asignarNivel(palabra), palabra, faker.basketball().getClass().getSimpleName()));
+                            i++;
+                        }
+                    }
+                    for (int i = 0; i < 10;) {
+                        palabra = new Faker().dessert().toString();
+                        if (isRepited(palabra)) {
+                            palabras.add(new Palabra(darID(), asignarNivel(palabra), palabra, faker.dessert().getClass().getSimpleName()));
+                            i++;
+                        }
+                    }
+                    for (int i = 0; i < 10;) {
+                        palabra = new Faker().movie().toString(); //habria que splitearlo??
+                        if (isRepited(palabra)) {
+                            palabras.add(new Palabra(darID(),asignarNivel(palabra),palabra,faker.movie().getClass().getSimpleName()));
+                            i++;
+                        }
+                    }
+                    for (int i = 0; i < 10;) {
+                        palabra = new Faker().yoda().quote();
+                        if (isRepited(palabra)) {
+                            palabras.add(new Palabra(darID(),asignarNivel(palabra),palabra,faker.yoda().getClass().getSimpleName().concat("quotes")));
+                            i++;
+                        }
+                    }
+                } catch (CategoriaException e) {
+                    System.out.println(e.getMessage());
                 }
-            }
-            for (int i = 0; i < 10;) {
-                String palabra = new Faker().dessert().toString();
-                if (isRepited(palabra)) {
-                    palabras.add(new Palabra(darID(), asignarNivel(palabra), palabra, faker.dessert().getClass().getSimpleName()));
-                    i++;
-                }
-            }
-            for (int i = 0; i < 10;) {
-                String palabra = new Faker().movie().toString(); //habria que splitearlo??
-                if (isRepited(palabra)) {
-                    palabras.add(new Palabra(darID(),asignarNivel(palabra),palabra,faker.movie().getClass().getSimpleName()));
-                    i++;
-                }
-            }
-            for (int i = 0; i < 10;) {
-                String palabra = new Faker().yoda().quote();
-                if (isRepited(palabra)) {
-                    palabras.add(new Palabra(darID(),asignarNivel(palabra),palabra,faker.yoda().getClass().getSimpleName().concat("quotes")));
-                    i++;
-                }
-            }
-        } catch (CategoriaException e) {
-            System.out.println(e.getMessage());
+            else
+                palabras = DaoPalabrasFicheros.leerFichero(DaoPalabrasFicheros.DICIONARIO);
+        } catch (IOException e) {
+            // tratar la excepcion
         }
     }
 
@@ -149,6 +157,19 @@ public class Palabras {
         }
         return aux;
     }
+    /*public int buscarPalabra (int id) {
+        int i = 0;
+        boolean exit = false;
+        for (; i < palabras.size() && !exit; i++) {
+            if (palabras.get(i).getId() == id) {
+                exit = true;
+            }
+        }
+        return i-1;
+    }*/
+    public void eliminarPalabra (int id) {
+        palabras.set(id,null);
+    }
     public boolean añadirPalabra () { //revisar logica, no se si se va a hacer un lio al salir
         Scanner teclado = new Scanner(System.in);
         boolean exit = true;
@@ -156,15 +177,8 @@ public class Palabras {
         String palabra = teclado.nextLine();
         System.out.println(Constantes.INTRODUCIRCATEGORIA);
         String categoria = teclado.nextLine();
-        do {
-            if (isRepited(palabra)) {
-                System.out.println(Constantes.PALABRAREPETIDA);
-                palabra = teclado.nextLine();
-                if (palabra.equals("\n"))
-                    exit = false;
-            }
-        }while(exit || !isRepited(palabra));
-        if (exit) {
+        palabra = palabraRepetida(palabra);
+        if (palabra!=null) {
             try {
                 palabras.add(new Palabra(darID(), asignarNivel(palabra), palabra, categoria));
             } catch (CategoriaException exception) {}
@@ -178,7 +192,7 @@ public class Palabras {
         int ID = teclado.nextInt();
         System.out.println(Constantes.CAMBIARINCOGNITA);
         String incognita = teclado.nextLine();
-        palabraRepetida(incognita);
+        incognita = palabraRepetida(incognita);
         if (incognita!=null) {
             buscarPalabra(ID).setIncognita(incognita);
         }
@@ -191,7 +205,7 @@ public class Palabras {
         int ID = teclado.nextInt();
         System.out.println(Constantes.INTRODUCIRCATEGORIA);
         String categoria = teclado.nextLine();
-        palabraRepetida(categoria);
+        categoria = palabraRepetida(categoria);
         if (categoria!=null) {
             try { //no quiero tratar la excepcion porque la elige el usuario
                 buscarPalabra(ID).setCategoria(categoria);

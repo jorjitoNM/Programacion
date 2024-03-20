@@ -49,6 +49,8 @@ public class GestionDiccionario {
                 menuCampos();
                 break;
             case 4:
+                controlSeguridad();
+                System.out.println(servicio.eliminarPalabra());
                 break;
             case 5:
                 break;

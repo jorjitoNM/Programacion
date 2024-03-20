@@ -67,4 +67,31 @@ public class Palabra implements Comparable<Palabra> {
     public char getFirstLetter () {
         return incognita.charAt(0);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

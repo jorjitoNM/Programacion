@@ -25,5 +25,8 @@ public class Constantes {
     public static final String NUEVAPALABRAAÑADIDA = "Su palabra ha sido añadida con exito";
     public static final String PALABRANOELIMINADA = "La palabra no ha podido ser eliminada, compruebe que ha introducido bien el ID";
     public static final String PALABRAELIMINADA = "La palabra no ha podido ser eliminada, compruebe que ha introducido bien el ID";
+    public static final String NUEVAPARTIDA = "1. Comenzar una nueva partida";
+    public static final String RETOMARPARTIDA= "2. Retomar una partida";
+
 
 }

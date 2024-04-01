@@ -11,10 +11,10 @@ import java.util.Scanner;
 /**
  * Clase con métodos de administración para consola
  */
-public class GestionDiccionario {
+public class MenuAdministrador {
     private final IGestionPalabras servicio;
 
-    public GestionDiccionario() {
+    public MenuAdministrador() {
         servicio = new GestionPalabras();
     }
 
@@ -37,19 +37,15 @@ public class GestionDiccionario {
         int opcion = mostrarMenu();
         switch (opcion) {
             case 1:
-                controlSeguridad();
                 servicio.ordenarDiccionario(true);
                 break;
             case 2:
-                controlSeguridad();
                 System.out.println(servicio.añadirPalabra());
                 break;
             case 3:
-                controlSeguridad();
                 menuCampos();
                 break;
             case 4:
-                controlSeguridad();
                 System.out.println(servicio.eliminarPalabra());
                 break;
             case 5:
@@ -58,7 +54,7 @@ public class GestionDiccionario {
                 System.out.println(Constantes.ERROROPCION);
         }
     }
-    public void controlSeguridad () {
+    public boolean controlSeguridad () {
         Scanner teclado = new Scanner(System.in);
         System.out.println(Constantes.PEDIRCONTRASEÑA);
         int contador = 0;
@@ -67,6 +63,7 @@ public class GestionDiccionario {
             password = teclado.nextLine();
             contador++;
         }while(Comprobacion.controlSeguridad(password) || contador<=3);
+        return (Comprobacion.controlSeguridad(password) || contador<=3)?true:false;
     }
     public void menuCampos () {
         int opcion = mostrarMenuCampos();

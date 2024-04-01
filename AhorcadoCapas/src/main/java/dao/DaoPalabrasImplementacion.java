@@ -1,6 +1,7 @@
 package dao;
 
 import common.Constantes;
+import domain.Juego;
 import domain.Palabra;
 
 import java.util.Collections;
@@ -106,6 +107,11 @@ public class DaoPalabrasImplementacion implements DaoPalabras {
         if (lista.cambiarCategoria())
             feedback = Constantes.INCOGNITACAMBIADA;
         return feedback;
+    }
+
+    @Override
+    public void nuevaPartida() {
+        Juego partida = new Juego();
     }
 
 }

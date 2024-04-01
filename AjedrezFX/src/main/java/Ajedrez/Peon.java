@@ -9,7 +9,7 @@ public class Peon extends Pieza {
     public Peon(boolean color) {
         super(color);
         if (!color) {
-            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/PeonNegro.png";
+            ruta = "File:src/main/resources/com/example/ej3gridimageview/imagenes/"+getClass().getSimpleName() +"Negro.png";
             nombre = "\u265F";
         }
         else {

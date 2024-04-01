@@ -25,5 +25,23 @@ public class Constantes {
     public static final String NUEVAPALABRAAÑADIDA = "Su palabra ha sido añadida con exito";
     public static final String PALABRANOELIMINADA = "La palabra no ha podido ser eliminada, compruebe que ha introducido bien el ID";
     public static final String PALABRAELIMINADA = "La palabra no ha podido ser eliminada, compruebe que ha introducido bien el ID";
+    public static final String NUEVAPARTIDA = "1. Comenzar una nueva partida";
+    public static final String RETOMARPARTIDA = "2. Retomar una partida anterior";
+    public static final String NUEVALETRA = "Introduzca una letra:";
+    public static final String ADMINISTRAR = "1. Administrar el diccionario de juego";
+    public static final String JUGAR = "2. Comenzar o retomar una partida";
+    public static final String NUEVARONDA = "¿Quiere iniciar una nueva ronda?";
+    public static final String VICTORIA = "Enhorabuena, has adivinado la palabra sin morir. Puntos: ";
+    public static final String MUÑECO1 = "-------                    ";
+    public static final String MUÑECO2 = "   |\n   |\n   |\n   |\n   |\n   |\n   |\n-------                    ";
+    public static final String MUÑECO3 = "   ----------\n   |\n   |\n   |\n   |\n   |\n   |\n   |\n-------                    ";
+    public static final String MUÑECO4 = "   ----------\n   |         |\n   |         0\n   |\n   |\n   |\n   |\n   |\n-------                    ";
+    public static final String MUÑECO5 = "   ----------\n   |         |\n   |         0\n   |       [ |  \n   |       ^    \n   |\n   |\n   |\n-------                    ";
+    public static final String MUÑECO6 = "   ----------\n   |         |\n   |         0\n   |       [ | ]\n   |       ^   ^\n   |\n   |\n   |\n-------                    ";
+    public static final String MUÑECO7 = "   ----------\n   |         |\n   |         0\n   |       [ | ]\n   |       ^ | ^\n   |       _| \n   |\n   |\n-------                    ";
+    public static final String MUÑECO8 = "   ----------\n   |         |\n   |         0\n   |       [ | ]\n   |       ^ | ^\n   |       _| |_\n   |\n   |\n-------                    ";
+    //public static final String MUÑECO1 = "   ----------\n   |         |\n   |         0\n   |       [ | ]\n   |       ^ | ^\n   |       _| |_\n   |\n   |\n-------                    ";
+
+
 
 }

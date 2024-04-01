@@ -4,35 +4,47 @@ package ui;
 import common.Categoria;
 import common.CategoriaException;
 import common.Comprobacion;
+import common.Constantes;
 import net.datafaker.Faker;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args)  {
-        //En el main sólo hay que llamar a los métodos de la UI que darán paso al luego o administrar diccionario.
-        GestionDiccionario administrador = new GestionDiccionario();
+        Scanner teclado = new Scanner(System.in);
+        System.out.println(Constantes.MENU);
+        System.out.println(Constantes.ADMINISTRAR);
+        System.out.println(Constantes.JUGAR);
         int opcion = teclado.nextInt();
         switch (opcion) {
             case 1:
-
+                MenuAdministrador administrador = new MenuAdministrador();
+                if (administrador.controlSeguridad())
+                    administrador.opcionesMenu();
+                break;
+            case 2:
+                MenuUsuario usuario = new MenuUsuario();
+                usuario.opcionesMenu();
+                break;
+            default:
+                System.out.println(Constantes.ERROROPCION);
         }
-        //Este código no va aquí, pero es para que veáis cómo funciona ciertos aspectos de la aplicación a tener en cuenta
-        administrador.mostrarMenu();
         //dos opcinones, jugar o administrar
-        try {
+        /*try {
             Comprobacion.categoriaOk(Categoria.comedia.name());
             Comprobacion.categoriaOk("hola");
         }catch (CategoriaException e){
             System.out.println(e.getMessage());
-        }
+        }*/
 
 
-        Faker faker = new Faker();
+        /*Faker faker = new Faker();
         String nombre = faker.gameOfThrones().character();
         System.out.println(nombre);
         String animal = faker.animal().name();
         System.out.println(animal);
         String fecha = faker.date().birthday(10,15).toString();
-        System.out.println(fecha);
+        System.out.println(fecha);*/
 
 
 

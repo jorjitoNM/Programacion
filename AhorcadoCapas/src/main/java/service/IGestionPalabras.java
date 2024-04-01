@@ -39,4 +39,5 @@ public interface IGestionPalabras {
     public String añadirPalabra () ;
     public String cambiarIncognita () ;
     public String cambiarCategoria () ;
+    public void nuevaPartida();
 }

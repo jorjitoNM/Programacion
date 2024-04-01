@@ -67,4 +67,9 @@ public class Palabra implements Comparable<Palabra> {
     public char getFirstLetter () {
         return incognita.charAt(0);
     }
+
+    @Override
+    public String toString() {
+        return id + ";" + level + ";" + incognita + ";" + categoria;
+    }
 }

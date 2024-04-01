@@ -8,21 +8,26 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DaoPalabrasFicheros {
-    public static final String DICIONARIO = "Diccionario";
+    public static final String DICCIONARIO = "Diccionario";
     public static final String FICHEROB = "FicheroBinario";
-    public static void crearFicheros() throws IOException {
-        File fichero1 = new File(DICIONARIO);
+   /* public static void crearFicheros() throws IOException {
+        File fichero1 = new File(DICCIONARIO);
         File fichero2 = new File(FICHEROB);
         if (!fichero1.exists())
                 fichero1.createNewFile();
         if (!fichero2.exists())
             fichero2.createNewFile();
-    }
+    }*/
+   public static void crearDiccionario() throws IOException {
+       File fichero1 = new File(DICCIONARIO);
+       if (!fichero1.exists())
+           fichero1.createNewFile();
+   }
     public static List<Palabra> leerFichero() throws IOException {
-        return leerFichero(DaoPalabrasFicheros.DICIONARIO);
+        return leerFichero(DaoPalabrasFicheros.DICCIONARIO);
     }
     public static List<Palabra> leerFichero(String fichero) throws IOException {
-        crearFicheros();
+        //crearFicheros();
         ArrayList<Palabra> auxiliar = null;
         try (Scanner sc = new Scanner(new File(fichero))) {
             auxiliar = new ArrayList<>();
@@ -66,10 +71,16 @@ public class DaoPalabrasFicheros {
         return escrito;
     }
     public static boolean escribirDiccionario (List<Palabra> diccionario) throws FileNotFoundException {
-        PrintWriter pw = new PrintWriter(DICIONARIO);
+        PrintWriter pw = new PrintWriter(DICCIONARIO);
         for (int i = 0; i < diccionario.size(); i++) {
             pw.println(diccionario.get(i).toString());
         }
+        pw.close();
+        return true;
+    }
+    public static boolean escribirDiccionarioTest (String entrada) throws FileNotFoundException {
+        PrintWriter pw = new PrintWriter(DICCIONARIO);
+        pw.println(entrada);
         pw.close();
         return true;
     }

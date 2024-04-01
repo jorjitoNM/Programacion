@@ -123,4 +123,9 @@ public class GestionPalabras implements IGestionPalabras {
         return daoPalabras.cambiarCategoria();
     }
 
+    @Override
+    public void nuevaPartida() {
+        daoPalabras.nuevaPartida();
+    }
+
 }

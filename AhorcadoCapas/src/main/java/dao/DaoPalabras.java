@@ -20,4 +20,5 @@ public interface DaoPalabras {
     public String añadirPalabra () ;
     public String cambiarIncognita () ;
     public String cambiarCategoria () ;
+    public void nuevaPartida();
 }

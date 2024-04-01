@@ -19,13 +19,13 @@ public class MenuAdministrador {
     }
 
     public int mostrarMenu(){
-        Scanner lector = new Scanner(System.in);
+        Scanner teclado = new Scanner(System.in);
         boolean valido = false;
         int opcion = 0;
         do {
             try {
                 System.out.println(Constantes.MENU+"\n"+Constantes.OPCION1+"\n"+Constantes.OPCION2+"\n"+Constantes.OPCION3+"\n"+Constantes.OPCION4);
-                opcion = lector.nextInt();
+                opcion = teclado.nextInt();
                 valido = true;
             } catch (InputMismatchException exception) {
                 System.out.println(Constantes.ENTRADANONUMERO);

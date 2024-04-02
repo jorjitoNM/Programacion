@@ -31,7 +31,17 @@ public class Constantes {
     public static final String ADMINISTRAR = "1. Administrar el diccionario de juego";
     public static final String JUGAR = "2. Comenzar o retomar una partida";
     public static final String NUEVARONDA = "¿Quiere iniciar una nueva ronda?";
+    public static final String RONDA = "Ronda: ";
     public static final String VICTORIA = "Enhorabuena, has adivinado la palabra sin morir. Puntos: ";
+    public static final String[] MUÑECOS = {"-------                    ",
+            "   |\n   |\n   |\n   |\n   |\n   |\n   |\n-------                    ",
+            "   ----------\n   |\n   |\n   |\n   |\n   |\n   |\n   |\n-------                    ",
+            "   ----------\n   |         |\n   |         0\n   |\n   |\n   |\n   |\n   |\n-------                    ",
+            "   ----------\n   |         |\n   |         0\n   |       [ |  \n   |       ^    \n   |\n   |\n   |\n-------                    ",
+            "   ----------\n   |         |\n   |         0\n   |       [ | ]\n   |       ^   ^\n   |\n   |\n   |\n-------                    ",
+            "   ----------\n   |         |\n   |         0\n   |       [ | ]\n   |       ^ | ^\n   |       _| \n   |\n   |\n-------                    ",
+            "   ----------\n   |         |\n   |         0\n   |       [ | ]\n   |       ^ | ^\n   |       _| |_\n   |\n   |\n-------                    "
+    };
     public static final String MUÑECO1 = "-------                    ";
     public static final String MUÑECO2 = "   |\n   |\n   |\n   |\n   |\n   |\n   |\n-------                    ";
     public static final String MUÑECO3 = "   ----------\n   |\n   |\n   |\n   |\n   |\n   |\n   |\n-------                    ";

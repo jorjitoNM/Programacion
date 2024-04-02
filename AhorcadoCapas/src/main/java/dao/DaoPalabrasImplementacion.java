@@ -86,32 +86,44 @@ public class DaoPalabrasImplementacion implements DaoPalabras {
     }
 
     @Override
-    public String añadirPalabra() {
+    public String añadirPalabra(String palabra,String categoria) {
         String feedback = Constantes.ERRORDESCONOCIDO;
-        if (lista.añadirPalabra())
+        if (lista.añadirPalabra(palabra,categoria))
             feedback = Constantes.NUEVAPALABRAAÑADIDA;
         return feedback;
     }
 
     @Override
-    public String cambiarIncognita () {
+    public String cambiarIncognita (int ID, String incognita) {
         String feedback = Constantes.ERRORDESCONOCIDO;
-        if (lista.cambiarIncognita())
+        if (lista.cambiarIncognita(ID,incognita))
             feedback = Constantes.INCOGNITACAMBIADA;
         return feedback;
     }
 
     @Override
-    public String cambiarCategoria() {
+    public String cambiarCategoria(int ID, String categoria) {
         String feedback = Constantes.ERRORDESCONOCIDO;
-        if (lista.cambiarCategoria())
+        if (lista.cambiarCategoria(ID,categoria))
             feedback = Constantes.INCOGNITACAMBIADA;
         return feedback;
     }
 
     @Override
     public void nuevaPartida() {
-        Juego partida = new Juego();
+        Juego partida = new Juego(lista.palabraAleatoria());
+    }
+    @Override
+    public void nuevaPartida(int dificultad) {
+        Juego partida = new Juego(lista.palabraAleatoria(dificultad));
     }
 
+    @Override
+    public Palabra palabraAleatoria(int dificultad) {
+        return lista.palabraAleatoria(dificultad);
+    }
+    @Override
+    public Palabra palabraAleatoria() {
+        return lista.palabraAleatoria();
+    }
 }

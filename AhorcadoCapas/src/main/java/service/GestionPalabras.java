@@ -3,6 +3,7 @@ package service;
 import common.CategoriaException;
 import dao.DaoPalabras;
 import dao.DaoPalabrasImplementacion;
+import domain.Juego;
 import domain.Palabra;
 
 import java.io.IOException;
@@ -107,25 +108,28 @@ public class GestionPalabras implements IGestionPalabras {
     }
 
     @Override
-    public void ordenarDiccionario(boolean ascendente) {
-        System.out.println(daoPalabras.ordenarDiccionario(ascendente).toString());
+    public String ordenarDiccionario(boolean ascendente) {
+        return daoPalabras.ordenarDiccionario(ascendente).toString();
     }
     @Override
-    public String añadirPalabra() {
-        return daoPalabras.añadirPalabra();
+    public String añadirPalabra(String palabra,String categoria) {
+        return daoPalabras.añadirPalabra(palabra,categoria);
     }
     @Override
-    public String cambiarIncognita() {
-        return daoPalabras.cambiarIncognita();
+    public String cambiarIncognita(int ID, String incognita) {
+        return daoPalabras.cambiarIncognita(ID,incognita);
     }
     @Override
-    public String cambiarCategoria() {
+    public String cambiarCategoria(int ID, String categoria) {
         return daoPalabras.cambiarCategoria();
     }
 
     @Override
     public void nuevaPartida() {
-        daoPalabras.nuevaPartida();
+        Juego partida = new Juego(daoPalabras.palabraAleatoria());
     }
-
+    @Override
+    public void nuevaPartida(int dificultad) {
+        Juego partida = new Juego(daoPalabras.palabraAleatoria(dificultad));
+    }
 }

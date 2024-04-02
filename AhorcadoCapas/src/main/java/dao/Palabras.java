@@ -3,6 +3,7 @@ package dao;
 
 import common.CategoriaException;
 import common.Constantes;
+import common.RepeatedException;
 import domain.Palabra;
 import net.datafaker.Faker;
 
@@ -24,28 +25,28 @@ public class Palabras {
                     Faker faker = new Faker();
                     for (int i = 0; i < 10;) {
                         palabra = faker.basketball().players();
-                        if (!isRepited(palabra)) {
+                        if (!isRepeated(palabra)) {
                             palabras.add(new Palabra(darID(), asignarNivel(palabra), palabra, faker.basketball().getClass().getSimpleName()));
                             i++;
                         }
                     }
                     for (int i = 0; i < 10;) {
                         palabra = new Faker().dessert().variety();
-                        if (!isRepited(palabra)) {
+                        if (!isRepeated(palabra)) {
                             palabras.add(new Palabra(darID(), asignarNivel(palabra), palabra, faker.dessert().getClass().getSimpleName()));
                             i++;
                         }
                     }
                     for (int i = 0; i < 10;) {
                         palabra = new Faker().movie().quote(); //habria que splitearlo??
-                        if (!isRepited(palabra)) {
+                        if (!isRepeated(palabra)) {
                             palabras.add(new Palabra(darID(),asignarNivel(palabra),palabra,faker.movie().getClass().getSimpleName()));
                             i++;
                         }
                     }
                     for (int i = 0; i < 10;) {
                         palabra = new Faker().yoda().quote();
-                        if (!isRepited(palabra)) {
+                        if (!isRepeated(palabra)) {
                             palabras.add(new Palabra(darID(),asignarNivel(palabra),palabra,faker.yoda().getClass().getSimpleName().concat("quotes")));
                             i++;
                         }
@@ -140,7 +141,7 @@ public class Palabras {
         }
         return id;
     }
-    public boolean isRepited (String palabra) {
+    public boolean isRepeated (String palabra) {
         boolean repetido = false;
         for (int i = 0; i < palabras.size(); i++) {
             if (palabra.equals(palabras.get(i).getIncognita()))
@@ -172,41 +173,25 @@ public class Palabras {
     public void eliminarPalabra (int id) {
         palabras.set(id,null);
     }
-    public boolean añadirPalabra () { //revisar logica, no se si se va a hacer un lio al salir
-        Scanner teclado = new Scanner(System.in);
-        boolean exit = true;
-        System.out.println(Constantes.NUEVAPALABRA);
-        String palabra = teclado.nextLine();
-        System.out.println(Constantes.INTRODUCIRCATEGORIA);
-        String categoria = teclado.nextLine();
-        palabra = palabraRepetida(palabra);
-        if (palabra!=null) {
-            try {
-                palabras.add(new Palabra(darID(), asignarNivel(palabra), palabra, categoria));
-            } catch (CategoriaException exception) {}
-        }
+    public boolean añadirPalabra (String palabra,String categoria) throws RepeatedException { //tiene que lanzar la exceptcion si la palabra esta repetida, luego la trato en el menu con un do while
+        boolean exit = false;
+        try {
+            palabras.add(new Palabra(darID(), asignarNivel(palabra), palabra, categoria));
+            exit = true;
+        } catch (CategoriaException exception) {}
         return exit;
     }
-    public boolean cambiarIncognita () { //mismo trozo de codigo que nueva palabra, quizas se puede simplificar
-        Scanner teclado = new Scanner(System.in);
-        boolean exit = true;
-        System.out.println(Constantes.IDPALABRA);
-        int ID = teclado.nextInt();
-        System.out.println(Constantes.CAMBIARINCOGNITA);
-        String incognita = teclado.nextLine();
+    public boolean cambiarIncognita (int ID, String incognita) { //mismo trozo de codigo que nueva palabra, quizas se puede simplificar
+        boolean exit = false;
         incognita = palabraRepetida(incognita);
         if (incognita!=null) {
             buscarPalabra(ID).setIncognita(incognita);
+            exit = true;
         }
         return exit;
     }
-    public boolean cambiarCategoria () { //mismo trozo de codigo que nueva palabra, quizas se puede simplificar (booleano para incognita o atributo)
-        Scanner teclado = new Scanner(System.in);
+    public boolean cambiarCategoria (int ID, String categoria) { //mismo trozo de codigo que nueva palabra, quizas se puede simplificar (booleano para incognita o atributo)
         boolean exit = false;
-        System.out.println(Constantes.IDPALABRA);
-        int ID = teclado.nextInt();
-        System.out.println(Constantes.INTRODUCIRCATEGORIA);
-        String categoria = teclado.nextLine();
         categoria = palabraRepetida(categoria);
         if (categoria!=null) {
             try { //no quiero tratar la excepcion porque la elige el usuario
@@ -217,21 +202,6 @@ public class Palabras {
             exit = true;
         }
         return exit;
-    }
-    private String palabraRepetida (String incognita) {
-        Scanner teclado = new Scanner(System.in);
-        boolean exit = true;
-        do {
-            if (!isRepited(incognita)) {
-                System.out.println(Constantes.PALABRAREPETIDA);
-                incognita = teclado.nextLine();
-                if (incognita.equals("\n")) {
-                    incognita = null;
-                    exit = false;
-                }
-            }
-        }while(exit || !isRepited(incognita));
-        return incognita;
     }
     public String incognitaAleatoria () {
         return palabras.get((int)(Math.random()*palabras.size())).getIncognita();

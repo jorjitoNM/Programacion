@@ -34,13 +34,18 @@ public class MenuAdministrador {
         return opcion;
     }
     public void opcionesMenu () {
+        Scanner teclado = new Scanner(System.in);
         int opcion = mostrarMenu();
         switch (opcion) {
             case 1:
-                servicio.ordenarDiccionario(true);
+                System.out.println(servicio.ordenarDiccionario(true));
                 break;
             case 2:
-                System.out.println(servicio.añadirPalabra());
+                System.out.println(Constantes.NUEVAPALABRA);
+                String palabra = teclado.nextLine();
+                System.out.println(Constantes.INTRODUCIRCATEGORIA);
+                String categoria = teclado.nextLine();
+                System.out.println(servicio.añadirPalabra(palabra,categoria));
                 break;
             case 3:
                 menuCampos();
@@ -67,17 +72,40 @@ public class MenuAdministrador {
     }
     public void menuCampos () {
         int opcion = mostrarMenuCampos();
+        Scanner teclado = new Scanner(System.in);
+        int ID;
         switch (opcion) {
             case 1:
-                controlSeguridad();
                 servicio.ordenarDiccionario(true);
-                System.out.println(servicio.cambiarIncognita());
+                System.out.println(Constantes.IDPALABRA);
+                ID = teclado.nextInt();
+                System.out.println(Constantes.CAMBIARINCOGNITA);
+                String incognita = teclado.nextLine();
+                System.out.println(servicio.cambiarIncognita(ID,incognita));
                 break;
             case 2:
-                controlSeguridad();
                 servicio.ordenarDiccionario(true);
-                System.out.println(servicio.cambiarCategoria());
+                System.out.println(Constantes.IDPALABRA);
+                ID = teclado.nextInt();
+                System.out.println(Constantes.INTRODUCIRCATEGORIA);
+                String categoria = teclado.nextLine();
+                System.out.println(servicio.cambiarCategoria(ID,categoria));
         }
+    }
+    private String palabraRepetida (String incognita) {
+        Scanner teclado = new Scanner(System.in);
+        boolean exit = true;
+        do {
+            if (!isRepeated(incognita)) {
+                System.out.println(Constantes.PALABRAREPETIDA);
+                incognita = teclado.nextLine();
+                if (incognita.equals("\n")) {
+                    incognita = null;
+                    exit = false;
+                }
+            }
+        }while(exit || !isRepeated(incognita));
+        return incognita;
     }
 
     private int mostrarMenuCampos() {

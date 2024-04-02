@@ -35,9 +35,10 @@ public interface IGestionPalabras {
     public boolean escribirFichero();
     public boolean escribirFicheroBinario();
     public boolean cargarFicheroBinario();
-    public void ordenarDiccionario (boolean ascendente) ;
-    public String añadirPalabra () ;
-    public String cambiarIncognita () ;
-    public String cambiarCategoria () ;
+    public String ordenarDiccionario (boolean ascendente) ;
+    public String añadirPalabra (String palabra,String categoria) ;
+    public String cambiarIncognita (int ID, String incognita) ;
+    public String cambiarCategoria (int ID, String categoria) ;
     public void nuevaPartida();
+    public void nuevaPartida(int difucltad);
 }

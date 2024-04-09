@@ -1,5 +1,7 @@
 package dao;
 
+import common.CategoriaException;
+import common.RepeatedException;
 import domain.Palabra;
 
 import java.util.List;
@@ -15,13 +17,14 @@ public interface DaoPalabras {
     public boolean modificarCategoria(int id, String categoria);
     public boolean modificarPalabra(int id, String incognita);
     public void eliminarPalabra(Palabra Palabra) ;
-    public String eliminarPalabra() ;
+    public String eliminarPalabra(int id) ;
     public List<Palabra> ordenarDiccionario (boolean ascendente) ;
-    public String añadirPalabra (String palabra,String categoria) ;
-    public String cambiarIncognita (int ID, String incognita) ;
-    public String cambiarCategoria (int ID, String categoria) ;
-    public void nuevaPartida();
-    public void nuevaPartida(int dificultad);
+    public void añadirPalabra (String palabra,String categoria) throws RepeatedException ;
+    public void cambiarIncognita (int ID, String incognita) throws RepeatedException;
+    //public String cambiarIncognita (int ID, String incognita) ;
+    //public String cambiarCategoria (int ID, String categoria) ;
+    public void cambiarCategoria (int ID, String categoria) throws CategoriaException;
     public Palabra palabraAleatoria(int dificultad);
     public Palabra palabraAleatoria();
+    public Palabra palabraAleatoria(String categoria);
 }

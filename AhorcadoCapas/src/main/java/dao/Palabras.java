@@ -1,9 +1,7 @@
 package dao;
 
 
-import common.CategoriaException;
-import common.Constantes;
-import common.RepeatedException;
+import common.*;
 import domain.Palabra;
 import net.datafaker.Faker;
 
@@ -26,32 +24,31 @@ public class Palabras {
                     for (int i = 0; i < 10;) {
                         palabra = faker.basketball().players();
                         if (!isRepeated(palabra)) {
-                            palabras.add(new Palabra(darID(), asignarNivel(palabra), palabra, faker.basketball().getClass().getSimpleName()));
+                            palabras.add(new Palabra(darID(), Utilities.asignarNivel(palabra), palabra, faker.basketball().getClass().getSimpleName()));
                             i++;
                         }
                     }
                     for (int i = 0; i < 10;) {
                         palabra = new Faker().dessert().variety();
                         if (!isRepeated(palabra)) {
-                            palabras.add(new Palabra(darID(), asignarNivel(palabra), palabra, faker.dessert().getClass().getSimpleName()));
+                            palabras.add(new Palabra(darID(), Utilities.asignarNivel(palabra), palabra, faker.dessert().getClass().getSimpleName()));
                             i++;
                         }
                     }
                     for (int i = 0; i < 10;) {
                         palabra = new Faker().movie().quote(); //habria que splitearlo??
                         if (!isRepeated(palabra)) {
-                            palabras.add(new Palabra(darID(),asignarNivel(palabra),palabra,faker.movie().getClass().getSimpleName()));
+                            palabras.add(new Palabra(darID(),Utilities.asignarNivel(palabra),palabra,faker.movie().getClass().getSimpleName()));
                             i++;
                         }
                     }
                     for (int i = 0; i < 10;) {
                         palabra = new Faker().yoda().quote();
                         if (!isRepeated(palabra)) {
-                            palabras.add(new Palabra(darID(),asignarNivel(palabra),palabra,faker.yoda().getClass().getSimpleName().concat("quotes")));
+                            palabras.add(new Palabra(darID(),Utilities.asignarNivel(palabra),palabra,faker.yoda().getClass().getSimpleName().concat("Quotes")));
                             i++;
                         }
                     }
-                    DaoPalabrasFicheros.crearDiccionario(); //tratar excepciones
                     DaoPalabrasFicheros.escribirDiccionario(palabras);
                 } catch (CategoriaException e) {
                     System.out.println(e.getMessage());
@@ -59,7 +56,7 @@ public class Palabras {
             else
                 palabras = DaoPalabrasFicheros.leerFichero(DaoPalabrasFicheros.DICCIONARIO);
         } catch (IOException e) {
-            // tratar la excepcion
+            throw new RuntimeException(Constantes.IOEXCEPTION);
         }
     }
 
@@ -83,54 +80,7 @@ public class Palabras {
         this.palabras.clear();
         this.palabras.addAll(Palabras);
     }
-    private int asignarNivel (String palabra) {
-        int contador = 0;
-        for (int i = 0; i < palabras.size(); i++) {
-            for (int j = 0; j < palabra.length(); j++) {
-                if (esVocal(palabra.charAt(j)))
-                    contador++;
-            }
-        }
-        return contador;
-    }
-    private void asignarNivel () {
-        int contador = 0;
-        for (int i = 0; i < palabras.size(); i++) {
-            String palabra = palabras.get(i).getIncognita();
-            for (int j = 0; j < palabra.length(); j++) {
-                if (esVocal(palabra.charAt(j)))
-                    contador++;
-            }
-            palabras.get(i).setLevel(contador);
-        }
-    }
-    private boolean esVocal (char letra) {
-        boolean esVocal = false;
-        switch(letra) {
-            case 'A':
-            case 'a':
-                esVocal = true;
-                break;
-            case 'E':
-            case 'e':
-                esVocal = true;
-                break;
-            case 'I':
-            case 'i':
-                esVocal = true;
-                break;
-            case 'O':
-            case 'o':
-                esVocal = true;
-                break;
-            case 'U':
-            case 'u':
-                esVocal = true;
-                break;
-            default:
-        }
-        return esVocal;
-    }
+
     public int darID () {
         int id = (int)(Math.random()*1000);
         for (int i = 0; i < palabras.size(); ) {
@@ -176,32 +126,28 @@ public class Palabras {
     public boolean añadirPalabra (String palabra,String categoria) throws RepeatedException { //tiene que lanzar la exceptcion si la palabra esta repetida, luego la trato en el menu con un do while
         boolean exit = false;
         try {
-            palabras.add(new Palabra(darID(), asignarNivel(palabra), palabra, categoria));
+            palabras.add(new Palabra(darID(), Utilities.asignarNivel(palabra), palabra, categoria));
             exit = true;
-        } catch (CategoriaException exception) {}
+        } catch (CategoriaException exception) {
+            System.out.println(exception.getMessage());
+        }
         return exit;
     }
-    public boolean cambiarIncognita (int ID, String incognita) { //mismo trozo de codigo que nueva palabra, quizas se puede simplificar
-        boolean exit = false;
-        incognita = palabraRepetida(incognita);
-        if (incognita!=null) {
+    public void cambiarIncognita (int ID, String incognita) throws RepeatedException {
+        if (isRepeated(incognita)) {
+            throw new RepeatedException();
+        }
+        else {
             buscarPalabra(ID).setIncognita(incognita);
-            exit = true;
         }
-        return exit;
     }
-    public boolean cambiarCategoria (int ID, String categoria) { //mismo trozo de codigo que nueva palabra, quizas se puede simplificar (booleano para incognita o atributo)
-        boolean exit = false;
-        categoria = palabraRepetida(categoria);
-        if (categoria!=null) {
-            try { //no quiero tratar la excepcion porque la elige el usuario
-                buscarPalabra(ID).setCategoria(categoria);
-            } catch (CategoriaException e) {
-
-            }
-            exit = true;
+    public void cambiarCategoria (int ID, String categoria) throws CategoriaException {
+        try { //no quiero tratar la excepcion porque la elige el usuario
+            Comprobacion.categoriaOk(categoria);
+            buscarPalabra(ID).setCategoria(categoria);
+        } catch (CategoriaException e) {
+            throw new CategoriaException();
         }
-        return exit;
     }
     public String incognitaAleatoria () {
         return palabras.get((int)(Math.random()*palabras.size())).getIncognita();
@@ -225,6 +171,16 @@ public class Palabras {
         do {
             palabra = palabras.get((int)(Math.random()*palabras.size()));
             if(palabra.getLevel()==dificultad)
+                exit = true;
+        }while(!exit);
+        return palabra;
+    }
+    public Palabra palabraAleatoria (String categoria) {
+        Palabra palabra;
+        boolean exit = false;
+        do {
+            palabra = palabras.get((int)(Math.random()*palabras.size()));
+            if(palabra.getCategoria().equalsIgnoreCase(categoria))
                 exit = true;
         }while(!exit);
         return palabra;

@@ -12,5 +12,11 @@ import java.util.Arrays;
  * @author examen
  */
 public class CategoriaException extends Exception {
+    public CategoriaException() {
+        super(Constantes.CATEGORIAINVALIDA);
+    }
 
+    public CategoriaException(String message) {
+        super(message);
+    }
 }

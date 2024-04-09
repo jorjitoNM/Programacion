@@ -1,16 +1,15 @@
 package ui;
 
+import common.CategoriaException;
 import common.Comprobacion;
 import common.Constantes;
+import common.RepeatedException;
 import service.GestionPalabras;
 import service.IGestionPalabras;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/**
- * Clase con métodos de administración para consola
- */
 public class MenuAdministrador {
     private final IGestionPalabras servicio;
 
@@ -41,17 +40,15 @@ public class MenuAdministrador {
                 System.out.println(servicio.ordenarDiccionario(true));
                 break;
             case 2:
-                System.out.println(Constantes.NUEVAPALABRA);
-                String palabra = teclado.nextLine();
-                System.out.println(Constantes.INTRODUCIRCATEGORIA);
-                String categoria = teclado.nextLine();
-                System.out.println(servicio.añadirPalabra(palabra,categoria));
+                añadirPalabra();
                 break;
             case 3:
                 menuCampos();
                 break;
             case 4:
-                System.out.println(servicio.eliminarPalabra());
+                System.out.println(Constantes.IDPALABRA);
+                opcion = teclado.nextInt();
+                System.out.println(servicio.eliminarPalabra(opcion));
                 break;
             case 5:
                 break;
@@ -67,32 +64,23 @@ public class MenuAdministrador {
         do {
             password = teclado.nextLine();
             contador++;
-        }while(Comprobacion.controlSeguridad(password) || contador<=3);
-        return (Comprobacion.controlSeguridad(password) || contador<=3)?true:false;
+        }while(!Comprobacion.controlSeguridad(password) && contador<=3);
+        return (Comprobacion.controlSeguridad(password) && contador<=3)?true:false;
     }
     public void menuCampos () {
         int opcion = mostrarMenuCampos();
-        Scanner teclado = new Scanner(System.in);
-        int ID;
         switch (opcion) {
             case 1:
-                servicio.ordenarDiccionario(true);
-                System.out.println(Constantes.IDPALABRA);
-                ID = teclado.nextInt();
-                System.out.println(Constantes.CAMBIARINCOGNITA);
-                String incognita = teclado.nextLine();
-                System.out.println(servicio.cambiarIncognita(ID,incognita));
+                cambiarIncognita();
                 break;
             case 2:
-                servicio.ordenarDiccionario(true);
-                System.out.println(Constantes.IDPALABRA);
-                ID = teclado.nextInt();
-                System.out.println(Constantes.INTRODUCIRCATEGORIA);
-                String categoria = teclado.nextLine();
-                System.out.println(servicio.cambiarCategoria(ID,categoria));
+                cambiarCategoria();
+                break;
+            default:
+                System.out.println(Constantes.ERROROPCION);
         }
     }
-    private String palabraRepetida (String incognita) {
+   /* private String palabraRepetida (String incognita) {
         Scanner teclado = new Scanner(System.in);
         boolean exit = true;
         do {
@@ -106,7 +94,7 @@ public class MenuAdministrador {
             }
         }while(exit || !isRepeated(incognita));
         return incognita;
-    }
+    }*/
 
     private int mostrarMenuCampos() {
         Scanner teclado = new Scanner(System.in);
@@ -122,5 +110,64 @@ public class MenuAdministrador {
             }
         }while(!valido);
         return opcion;
+    }
+    public void añadirPalabra () {
+        Scanner teclado = new Scanner(System.in);
+        boolean exit = false;
+        do {
+            System.out.println(Constantes.NUEVAPALABRA);
+            String palabra = teclado.nextLine();
+            System.out.println(Constantes.INTRODUCIRCATEGORIA);
+            System.out.println(Constantes.CATEGORIAS);
+            String categoria = teclado.nextLine();
+            try {
+                servicio.añadirPalabra(palabra, categoria);
+                exit = true;
+                System.out.println(Constantes.NUEVAPALABRAAÑADIDA);
+            } catch (RepeatedException exception) {
+                System.out.println(Constantes.PALABRAREPETIDA);
+            }
+        } while(!exit);
+    }
+    public void cambiarIncognita () {
+        Scanner teclado = new Scanner(System.in);
+        boolean exit;
+        int ID;
+        do {
+            exit = true;
+            servicio.ordenarDiccionario(true);
+            System.out.println(Constantes.IDPALABRA);
+            ID = teclado.nextInt();
+            System.out.println(Constantes.CAMBIARINCOGNITA);
+            String incognita = teclado.nextLine();
+            try {
+                servicio.cambiarIncognita(ID, incognita);
+                System.out.println(Constantes.INCOGNITACAMBIADA);
+            } catch (RepeatedException e) {
+                System.out.println(Constantes.ERRORDESCONOCIDO);
+                exit = false;
+            }
+        }while(!exit);
+    }
+    public void cambiarCategoria () {
+        Scanner teclado = new Scanner(System.in);
+        int ID;
+        boolean exit;
+        do {
+            exit = true;
+            servicio.ordenarDiccionario(true);
+            System.out.println(Constantes.IDPALABRA);
+            ID = teclado.nextInt();
+            System.out.println(Constantes.INTRODUCIRCATEGORIA);
+            System.out.println(Constantes.CATEGORIAS);
+            String categoria = teclado.nextLine();
+            try {
+                servicio.cambiarCategoria(ID,categoria);
+                System.out.println(Constantes.INCOGNITACAMBIADA);
+            } catch (CategoriaException e) {
+                System.out.println(Constantes.ERRORDESCONOCIDO);
+                exit = false;
+            }
+        }while(!exit);
     }
 }

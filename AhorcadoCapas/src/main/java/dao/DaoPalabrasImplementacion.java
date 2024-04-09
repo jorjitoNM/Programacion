@@ -1,6 +1,8 @@
 package dao;
 
+import common.CategoriaException;
 import common.Constantes;
+import common.RepeatedException;
 import domain.Juego;
 import domain.Palabra;
 
@@ -56,11 +58,8 @@ public class DaoPalabrasImplementacion implements DaoPalabras {
     }
 
     @Override
-    public String eliminarPalabra() {
-        Scanner teclado = new Scanner(System.in);
+    public String eliminarPalabra(int id) {
         String feedback = Constantes.PALABRANOELIMINADA;
-        System.out.println(Constantes.IDPALABRA);
-        int id = teclado.nextInt();
         lista.eliminarPalabra(id);
         if (lista.buscarPalabra(id)!=null)
             feedback = Constantes.PALABRAELIMINADA;
@@ -86,38 +85,33 @@ public class DaoPalabrasImplementacion implements DaoPalabras {
     }
 
     @Override
-    public String añadirPalabra(String palabra,String categoria) {
-        String feedback = Constantes.ERRORDESCONOCIDO;
-        if (lista.añadirPalabra(palabra,categoria))
-            feedback = Constantes.NUEVAPALABRAAÑADIDA;
-        return feedback;
+    public void añadirPalabra(String palabra,String categoria) throws RepeatedException {
+        lista.añadirPalabra(palabra,categoria);
     }
 
     @Override
+    public void cambiarIncognita (int ID, String incognita) throws RepeatedException {
+        lista.cambiarIncognita(ID,incognita);
+    }
+    /*@Override
     public String cambiarIncognita (int ID, String incognita) {
         String feedback = Constantes.ERRORDESCONOCIDO;
         if (lista.cambiarIncognita(ID,incognita))
             feedback = Constantes.INCOGNITACAMBIADA;
         return feedback;
-    }
+    }*/
 
-    @Override
-    public String cambiarCategoria(int ID, String categoria) {
+    /*@Override
+    public String cambiarCategoria(int ID, String categoria) throws CategoriaException {
         String feedback = Constantes.ERRORDESCONOCIDO;
         if (lista.cambiarCategoria(ID,categoria))
             feedback = Constantes.INCOGNITACAMBIADA;
         return feedback;
-    }
-
+    }*/
     @Override
-    public void nuevaPartida() {
-        Juego partida = new Juego(lista.palabraAleatoria());
+    public void cambiarCategoria(int ID, String categoria) throws CategoriaException {
+        lista.cambiarCategoria(ID,categoria);
     }
-    @Override
-    public void nuevaPartida(int dificultad) {
-        Juego partida = new Juego(lista.palabraAleatoria(dificultad));
-    }
-
     @Override
     public Palabra palabraAleatoria(int dificultad) {
         return lista.palabraAleatoria(dificultad);
@@ -126,4 +120,9 @@ public class DaoPalabrasImplementacion implements DaoPalabras {
     public Palabra palabraAleatoria() {
         return lista.palabraAleatoria();
     }
+    @Override
+    public Palabra palabraAleatoria(String categoria) {
+        return lista.palabraAleatoria(categoria);
+    }
+
 }

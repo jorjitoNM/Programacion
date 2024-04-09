@@ -1,6 +1,8 @@
 package service;
 
 import common.CategoriaException;
+import common.ErrorEntradaException;
+import common.RepeatedException;
 import domain.Palabra;
 
 import java.io.IOException;
@@ -29,16 +31,21 @@ public interface IGestionPalabras {
     public boolean modificarPalabra(int id, String incognita);
 
     public List<Palabra> getListaPalabrasCategoria();
-    public String eliminarPalabra();
+    public String eliminarPalabra(int id);
     public void crearFicheros()throws IOException;
     public boolean cargarFichero() throws IOException;
     public boolean escribirFichero();
     public boolean escribirFicheroBinario();
     public boolean cargarFicheroBinario();
     public String ordenarDiccionario (boolean ascendente) ;
-    public String añadirPalabra (String palabra,String categoria) ;
-    public String cambiarIncognita (int ID, String incognita) ;
-    public String cambiarCategoria (int ID, String categoria) ;
-    public void nuevaPartida();
-    public void nuevaPartida(int difucltad);
+    public void añadirPalabra (String palabra,String categoria) throws RepeatedException ;
+    public void cambiarIncognita (int ID, String incognita) throws RepeatedException;
+    //public String cambiarIncognita (int ID, String incognita) ;
+    public void cambiarCategoria (int ID, String categoria) throws CategoriaException ;
+    //public String cambiarCategoria (int ID, String categoria) ;
+    public void nuevaRonda(int ID) throws ErrorEntradaException, IOException;
+    public void nuevaRondaDificultad(int ID, int dificultad) throws ErrorEntradaException, IOException;
+    public void nuevaRondaIncognita(int ID, String incognita) throws ErrorEntradaException, IOException;
+    public void nuevaRondaCategoria(int ID, String categoria) throws ErrorEntradaException, IOException;
+    public void guardarPartida () throws IOException;
 }

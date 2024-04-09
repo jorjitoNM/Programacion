@@ -1,7 +1,10 @@
 package service;
 
 import common.CategoriaException;
+import common.ErrorEntradaException;
+import common.RepeatedException;
 import dao.DaoPalabras;
+import dao.DaoPalabrasFicheros;
 import dao.DaoPalabrasImplementacion;
 import domain.Juego;
 import domain.Palabra;
@@ -11,6 +14,7 @@ import java.util.List;
 
 public class GestionPalabras implements IGestionPalabras {
     private final DaoPalabras daoPalabras;
+    private Juego partida = null;
 
     public GestionPalabras() {
         this.daoPalabras = new DaoPalabrasImplementacion();
@@ -77,8 +81,8 @@ public class GestionPalabras implements IGestionPalabras {
     }
 
     @Override
-    public String eliminarPalabra() {
-        return daoPalabras.eliminarPalabra();
+    public String eliminarPalabra(int id) {
+        return daoPalabras.eliminarPalabra(id);
     }
 
 
@@ -112,24 +116,95 @@ public class GestionPalabras implements IGestionPalabras {
         return daoPalabras.ordenarDiccionario(ascendente).toString();
     }
     @Override
-    public String añadirPalabra(String palabra,String categoria) {
-        return daoPalabras.añadirPalabra(palabra,categoria);
+    public void añadirPalabra(String palabra,String categoria) throws RepeatedException {
+        daoPalabras.añadirPalabra(palabra,categoria);
     }
     @Override
+    public void cambiarIncognita(int ID, String incognita) throws RepeatedException {
+        daoPalabras.cambiarIncognita(ID,incognita);
+    }
+    /*@Override
     public String cambiarIncognita(int ID, String incognita) {
         return daoPalabras.cambiarIncognita(ID,incognita);
-    }
-    @Override
+    }*/
+    /*@Override
     public String cambiarCategoria(int ID, String categoria) {
-        return daoPalabras.cambiarCategoria();
+        return daoPalabras.cambiarCategoria(ID,categoria);
+    }*/
+    @Override
+    public void cambiarCategoria(int ID, String categoria) throws CategoriaException {
+        daoPalabras.cambiarCategoria(ID,categoria);
     }
 
     @Override
-    public void nuevaPartida() {
-        Juego partida = new Juego(daoPalabras.palabraAleatoria());
+    public void nuevaRonda(int ID) throws ErrorEntradaException, IOException {
+        if (ID==-1) {
+            if (partida==null)
+                partida = new Juego(daoPalabras.palabraAleatoria());
+            else
+                partida.nuevaRonda(daoPalabras.palabraAleatoria());
+        } else {
+            if (partida==null) {
+                partida = DaoPalabrasFicheros.retomarPartida();
+                partida.nuevaRonda(daoPalabras.palabraAleatoria());
+            }
+            else
+                partida.nuevaRonda(daoPalabras.palabraAleatoria());
+        }
+    }
+
+    @Override
+    public void nuevaRondaDificultad(int ID, int dificultad) throws ErrorEntradaException, IOException {
+        if (ID==-1) {
+            if (partida==null)
+                partida = new Juego(daoPalabras.palabraAleatoria(dificultad));
+            else
+                partida.nuevaRonda(daoPalabras.palabraAleatoria(dificultad));
+        } else {
+            if (partida==null) {
+                partida = DaoPalabrasFicheros.retomarPartida();
+                partida.nuevaRonda(daoPalabras.palabraAleatoria(dificultad));
+            }
+            else
+                partida.nuevaRonda(daoPalabras.palabraAleatoria(dificultad));
+        }
+    }
+
+    @Override
+    public void nuevaRondaIncognita(int ID, String incognita) throws ErrorEntradaException, IOException {
+        if (ID==-1) {
+            if (partida==null)
+                partida = new Juego(incognita);
+            else
+                partida.nuevaRondaPersonalizada(incognita);
+        } else {
+            if (partida==null) {
+                partida = DaoPalabrasFicheros.retomarPartida();
+                partida.nuevaRondaPersonalizada(incognita);
+            }
+            else
+                partida.nuevaRondaPersonalizada(incognita);
+        }
+    }
+
+    @Override
+    public void nuevaRondaCategoria(int ID, String categoria) throws ErrorEntradaException, IOException {
+        if (ID==-1) {
+            if (partida==null)
+                partida = new Juego(daoPalabras.palabraAleatoria(categoria));
+            else
+                partida.nuevaRonda(daoPalabras.palabraAleatoria(categoria));
+        } else {
+            if (partida==null) {
+                partida = DaoPalabrasFicheros.retomarPartida();
+                partida.nuevaRonda(daoPalabras.palabraAleatoria(categoria));
+            }
+            else
+                partida.nuevaRonda(daoPalabras.palabraAleatoria(categoria));
+        }
     }
     @Override
-    public void nuevaPartida(int dificultad) {
-        Juego partida = new Juego(daoPalabras.palabraAleatoria(dificultad));
+    public void guardarPartida() throws IOException {
+        DaoPalabrasFicheros.guardarPartida(partida);
     }
 }

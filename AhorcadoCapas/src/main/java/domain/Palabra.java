@@ -6,7 +6,9 @@ import common.Comprobacion;
 import common.Utilities;
 import dao.Palabras;
 
-public class Palabra implements Comparable<Palabra> {
+import java.io.Serializable;
+
+public class Palabra implements Comparable<Palabra>, Serializable {
     private int id;
     private int level;
     private String incognita;
@@ -70,6 +72,9 @@ public class Palabra implements Comparable<Palabra> {
 
     @Override
     public String toString() {
+        return "-ID: " + id + ", Nivel: " + level + ", Palabra: " + incognita + ", Categoria: " + categoria + "\n";
+    }
+    public String toStringFichero() {
         return id + ";" + level + ";" + incognita + ";" + categoria;
     }
 }

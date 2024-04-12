@@ -6,6 +6,7 @@ import common.RepeatedException;
 import domain.Juego;
 import domain.Palabra;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -83,14 +84,13 @@ public class DaoPalabrasImplementacion implements DaoPalabras {
             Collections.reverse(aux);
         return aux;
     }
-
     @Override
-    public void añadirPalabra(String palabra,String categoria) throws RepeatedException {
+    public void añadirPalabra(String palabra,String categoria) throws RepeatedException, CategoriaException, IOException {
         lista.añadirPalabra(palabra,categoria);
     }
 
     @Override
-    public void cambiarIncognita (int ID, String incognita) throws RepeatedException {
+    public void cambiarIncognita (int ID, String incognita) throws RepeatedException, IOException {
         lista.cambiarIncognita(ID,incognita);
     }
     /*@Override
@@ -109,7 +109,7 @@ public class DaoPalabrasImplementacion implements DaoPalabras {
         return feedback;
     }*/
     @Override
-    public void cambiarCategoria(int ID, String categoria) throws CategoriaException {
+    public void cambiarCategoria(int ID, String categoria) throws CategoriaException, IOException {
         lista.cambiarCategoria(ID,categoria);
     }
     @Override
@@ -123,6 +123,10 @@ public class DaoPalabrasImplementacion implements DaoPalabras {
     @Override
     public Palabra palabraAleatoria(String categoria) {
         return lista.palabraAleatoria(categoria);
+    }
+    @Override
+    public boolean buscarPalabra (String incognita) {
+        return lista.buscarPalabra(incognita);
     }
 
 }

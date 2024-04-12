@@ -38,14 +38,15 @@ public interface IGestionPalabras {
     public boolean escribirFicheroBinario();
     public boolean cargarFicheroBinario();
     public String ordenarDiccionario (boolean ascendente) ;
-    public void añadirPalabra (String palabra,String categoria) throws RepeatedException ;
-    public void cambiarIncognita (int ID, String incognita) throws RepeatedException;
+    public void añadirPalabra (String palabra,String categoria) throws RepeatedException, CategoriaException, IOException;
+    public void cambiarIncognita (int ID, String incognita) throws RepeatedException, IOException;
     //public String cambiarIncognita (int ID, String incognita) ;
-    public void cambiarCategoria (int ID, String categoria) throws CategoriaException ;
+    public void cambiarCategoria (int ID, String categoria) throws CategoriaException, IOException;
     //public String cambiarCategoria (int ID, String categoria) ;
-    public void nuevaRonda(int ID) throws ErrorEntradaException, IOException;
-    public void nuevaRondaDificultad(int ID, int dificultad) throws ErrorEntradaException, IOException;
-    public void nuevaRondaIncognita(int ID, String incognita) throws ErrorEntradaException, IOException;
-    public void nuevaRondaCategoria(int ID, String categoria) throws ErrorEntradaException, IOException;
+    public void nuevaRonda() throws IOException;
+    public void nuevaRondaDificultad(int dificultad) throws IOException;
+    public void nuevaRondaIncognita(String incognita) throws IOException;
+    public void nuevaRondaCategoria(String categoria) throws IOException;
     public void guardarPartida () throws IOException;
+    public void retomarPartida (int ID) throws IOException;
 }

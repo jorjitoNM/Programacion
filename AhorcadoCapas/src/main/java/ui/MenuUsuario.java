@@ -1,7 +1,6 @@
 package ui;
 
-import common.Constantes;
-import common.ErrorEntradaException;
+import common.*;
 import service.GestionPalabras;
 import service.IGestionPalabras;
 
@@ -12,8 +11,8 @@ import java.util.Scanner;
 
 public class MenuUsuario {
     private final IGestionPalabras servicio;
-    public MenuUsuario() {
-        servicio = new GestionPalabras();
+    public MenuUsuario(GestionPalabras servicio) {
+        this.servicio = servicio;
     }
 
     public int mostrarMenu(){
@@ -34,44 +33,43 @@ public class MenuUsuario {
     public void opcionesMenu () {
         Scanner teclado = new Scanner(System.in);
         int opcion = mostrarMenu();
-        int ID = -1;
         switch (opcion) {
             case 1:
-                nuevaPartida(-1);
+                nuevaPartida();
                 break;
             case 2:
-                System.out.println(Constantes.IDPALABRA);
-                ID = teclado.nextInt();
-                nuevaPartida(ID);
+                retomarPartida();
                 break;
             default:
                 System.out.println(Constantes.ERROROPCION);
         }
     }
-    public void nuevaPartida (int ID) {
+    public void nuevaPartida () {
         Scanner teclado = new Scanner(System.in);
         int opcion;
         int dificultad;
         String respuesta;
+        boolean exit = false;
         do {
             System.out.println(Constantes.MENURONDA + "\n" + Constantes.RONDANORMAL + "\n" + Constantes.RONDACATEGORIA + "\n" + Constantes.RONDADIFICULTAD + "\n" + Constantes.RONDAPERSONALIZADA);
-            opcion = teclado.nextInt();
+            opcion = teclado.nextInt(); //no puedo eliminar el enter
+            exit = false;
             try {
                 switch (opcion) {
                     case 1:
-                        servicio.nuevaRonda(ID);
+                        servicio.nuevaRonda();
                         break;
                     case 2:
-                        respuesta = teclado.nextLine();
-                        servicio.nuevaRondaCategoria(ID,respuesta);
+                        rondaCategoria();
                         break;
                     case 3:
                         dificultad = teclado.nextInt();
-                        servicio.nuevaRondaDificultad(ID,dificultad);
+                        servicio.nuevaRondaDificultad(dificultad);
                         break;
                     case 4:
+                        System.out.println(Constantes.CAMBIARINCOGNITA);
                         respuesta = teclado.nextLine();
-                        servicio.nuevaRondaIncognita(ID,respuesta);
+                        servicio.nuevaRondaIncognita(respuesta);
                         break;
                     case 5:
                         try {
@@ -85,12 +83,20 @@ public class MenuUsuario {
                     default:
                         System.out.println(Constantes.ERROROPCION);
                 }
-            } catch (ErrorEntradaException exception)  {
-                System.out.println(Constantes.ERROROPCION + Constantes.NUEVOINTENTO);
             } catch (IOException exception) {
-
+                System.out.println(Constantes.IOEXCEPTION);
             }
         } while(opcion >= 1 && opcion <= 5);
+    }
+    public void retomarPartida () {
+        Scanner teclado = new Scanner(System.in);
+        System.out.println(Constantes.IDPALABRA);
+        int ID = teclado.nextInt();
+        try {
+            servicio.retomarPartida(ID);
+        } catch (IOException e) {
+            throw new RuntimeException(Constantes.IOEXCEPTION);
+        }
     }
     public static String getIntento () {
         Scanner teclado = new Scanner(System.in);
@@ -106,4 +112,22 @@ public class MenuUsuario {
             ronda++;
         }
     }*/
+    private void rondaCategoria () {
+        Scanner teclado = new Scanner(System.in);
+        String respuesta;
+        boolean exit = false;
+        do {
+            System.out.println(Constantes.INTRODUCIRCATEGORIA);
+            respuesta = teclado.nextLine();
+            try {
+                Comprobacion.categoriaOk(respuesta);
+                servicio.nuevaRondaCategoria(respuesta);
+                exit = true;
+            } catch (CategoriaException exception) {
+                System.out.println(Constantes.CATEGORIAINVALIDA);
+            } catch (IOException exception) {
+                throw new RuntimeException(Constantes.IOEXCEPTION);
+            }
+        }while(!exit);
+    }
 }

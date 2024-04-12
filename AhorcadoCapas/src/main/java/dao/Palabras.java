@@ -5,6 +5,7 @@ import common.*;
 import domain.Palabra;
 import net.datafaker.Faker;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Palabras {
 
     public Palabras() {
         try {
-            if (DaoPalabrasFicheros.leerFichero(DaoPalabrasFicheros.DICCIONARIO).isEmpty())
+            if (!new File(Constantes.DICCIONARIO).exists())
                 try {
                     String palabra;
                     palabras = new ArrayList<>();
@@ -49,12 +50,12 @@ public class Palabras {
                             i++;
                         }
                     }
-                    DaoPalabrasFicheros.escribirDiccionario(palabras);
+                    DaoPalabrasFicheros.escribirDiccionario(palabras); //habria que crear un fichero cada vez que vamos a guardarlo
                 } catch (CategoriaException e) {
                     System.out.println(e.getMessage());
                 }
             else
-                palabras = DaoPalabrasFicheros.leerFichero(DaoPalabrasFicheros.DICCIONARIO);
+                palabras = DaoPalabrasFicheros.leerDiccionario(Constantes.DICCIONARIO);
         } catch (IOException e) {
             throw new RuntimeException(Constantes.IOEXCEPTION);
         }
@@ -120,34 +121,37 @@ public class Palabras {
         }
         return i-1;
     }*/
-    public void eliminarPalabra (int id) {
-        palabras.set(id,null);
-    }
-    public boolean añadirPalabra (String palabra,String categoria) throws RepeatedException { //tiene que lanzar la exceptcion si la palabra esta repetida, luego la trato en el menu con un do while
-        boolean exit = false;
-        try {
-            palabras.add(new Palabra(darID(), Utilities.asignarNivel(palabra), palabra, categoria));
-            exit = true;
-        } catch (CategoriaException exception) {
-            System.out.println(exception.getMessage());
+    public boolean buscarPalabra (String incognita) {
+        boolean exit = true;
+        for (int i = 0; i < palabras.size() && exit; i++) {
+            if (palabras.get(i).getIncognita().equalsIgnoreCase(incognita))
+                exit = false;
         }
         return exit;
     }
-    public void cambiarIncognita (int ID, String incognita) throws RepeatedException {
-        if (isRepeated(incognita)) {
-            throw new RepeatedException();
-        }
-        else {
-            buscarPalabra(ID).setIncognita(incognita);
+    public void eliminarPalabra (int id) {
+        for (int i = 0; i < palabras.size(); i++) {
+            if (id == palabras.get(i).getId())
+                palabras.remove(i);
         }
     }
-    public void cambiarCategoria (int ID, String categoria) throws CategoriaException {
-        try { //no quiero tratar la excepcion porque la elige el usuario
-            Comprobacion.categoriaOk(categoria);
-            buscarPalabra(ID).setCategoria(categoria);
-        } catch (CategoriaException e) {
-            throw new CategoriaException();
-        }
+    public void añadirPalabra (String palabra,String categoria) throws RepeatedException, CategoriaException, IOException {
+        if (isRepeated(palabra))
+            throw new RepeatedException();
+        Comprobacion.categoriaOk(categoria);
+        palabras.add(new Palabra(darID(), Utilities.asignarNivel(palabra), palabra, categoria));
+        DaoPalabrasFicheros.escribirDiccionario(palabras);
+    }
+    public void cambiarIncognita (int ID, String incognita) throws RepeatedException, IOException { //aqui no haria falta else?
+        if (isRepeated(incognita))
+            throw new RepeatedException();
+        buscarPalabra(ID).setIncognita(incognita);
+        DaoPalabrasFicheros.escribirDiccionario(palabras);
+    }
+    public void cambiarCategoria (int ID, String categoria) throws CategoriaException, IOException {
+        Comprobacion.categoriaOk(categoria);
+        buscarPalabra(ID).setCategoria(categoria);
+        DaoPalabrasFicheros.escribirDiccionario(palabras);
     }
     public String incognitaAleatoria () {
         return palabras.get((int)(Math.random()*palabras.size())).getIncognita();
@@ -184,5 +188,16 @@ public class Palabras {
                 exit = true;
         }while(!exit);
         return palabra;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder salida = new StringBuilder();
+        for (int i = 0; i < palabras.size(); i++) {
+            salida.append("-");
+            salida.append(palabras.get(i).toString());
+            salida.append("\n");
+        }
+        return salida.toString();
     }
 }

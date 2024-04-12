@@ -7,14 +7,15 @@ import common.RepeatedException;
 import service.GestionPalabras;
 import service.IGestionPalabras;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuAdministrador {
     private final IGestionPalabras servicio;
 
-    public MenuAdministrador() {
-        servicio = new GestionPalabras();
+    public MenuAdministrador(GestionPalabras servicio) {
+        this.servicio = servicio;
     }
 
     public int mostrarMenu(){
@@ -23,7 +24,7 @@ public class MenuAdministrador {
         int opcion = 0;
         do {
             try {
-                System.out.println(Constantes.MENU+"\n"+Constantes.OPCION1+"\n"+Constantes.OPCION2+"\n"+Constantes.OPCION3+"\n"+Constantes.OPCION4);
+                System.out.println(Constantes.MENU+"\n"+Constantes.OPCION1+"\n"+Constantes.OPCION2+"\n"+Constantes.OPCION3+"\n"+Constantes.OPCION4+"\n"+Constantes.MENUANTERIOR);
                 opcion = teclado.nextInt();
                 valido = true;
             } catch (InputMismatchException exception) {
@@ -34,27 +35,30 @@ public class MenuAdministrador {
     }
     public void opcionesMenu () {
         Scanner teclado = new Scanner(System.in);
-        int opcion = mostrarMenu();
-        switch (opcion) {
-            case 1:
-                System.out.println(servicio.ordenarDiccionario(true));
-                break;
-            case 2:
-                añadirPalabra();
-                break;
-            case 3:
-                menuCampos();
-                break;
-            case 4:
-                System.out.println(Constantes.IDPALABRA);
-                opcion = teclado.nextInt();
-                System.out.println(servicio.eliminarPalabra(opcion));
-                break;
-            case 5:
-                break;
-            default:
-                System.out.println(Constantes.ERROROPCION);
-        }
+        int opcion;
+        do {
+            opcion = mostrarMenu();
+            switch (opcion) {
+                case 1:
+                    System.out.println(servicio.ordenarDiccionario(true));
+                    break;
+                case 2:
+                    añadirPalabra();
+                    break;
+                case 3:
+                    menuCampos();
+                    break;
+                case 4:
+                    System.out.println(Constantes.IDPALABRA);
+                    opcion = teclado.nextInt();
+                    System.out.println(servicio.eliminarPalabra(opcion));
+                    break;
+                case 5:
+                    break;
+                default:
+                    System.out.println(Constantes.ERROROPCION);
+            }
+        }while(opcion!=5);
     }
     public boolean controlSeguridad () {
         Scanner teclado = new Scanner(System.in);
@@ -118,7 +122,6 @@ public class MenuAdministrador {
             System.out.println(Constantes.NUEVAPALABRA);
             String palabra = teclado.nextLine();
             System.out.println(Constantes.INTRODUCIRCATEGORIA);
-            System.out.println(Constantes.CATEGORIAS);
             String categoria = teclado.nextLine();
             try {
                 servicio.añadirPalabra(palabra, categoria);
@@ -126,6 +129,10 @@ public class MenuAdministrador {
                 System.out.println(Constantes.NUEVAPALABRAAÑADIDA);
             } catch (RepeatedException exception) {
                 System.out.println(Constantes.PALABRAREPETIDA);
+            } catch (CategoriaException e) {
+                System.out.println(Constantes.CATEGORIAINVALIDA);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         } while(!exit);
     }
@@ -146,6 +153,8 @@ public class MenuAdministrador {
             } catch (RepeatedException e) {
                 System.out.println(Constantes.ERRORDESCONOCIDO);
                 exit = false;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }while(!exit);
     }
@@ -167,6 +176,8 @@ public class MenuAdministrador {
             } catch (CategoriaException e) {
                 System.out.println(Constantes.ERRORDESCONOCIDO);
                 exit = false;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }while(!exit);
     }

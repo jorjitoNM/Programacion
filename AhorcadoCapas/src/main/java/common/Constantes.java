@@ -1,15 +1,17 @@
 package common;
 
 public class Constantes {
+    public static final String MENUANTERIOR = "5. Voler al menu anterior";
     public static final String IOEXCEPTION = "Error desconocido";
-    public static final String FICHERO = "elementos";
-    public static final String ERRORENTRADA = "";
+    public static final String DICCIONARIO = "Diccionario";
+    public static final String PARTIDA = "Partida";
+    public static final String COMFIRMARSALIDA = "Esta seguro que quiere salir del programa?";
     public static final String INCOGNITACAMBIADA = "Su palabra ha sido actualizada con exito";
     public static final String ERRORDESCONOCIDO ="Debido a un error desconocido no hemos podido añadir su palabra al diccionario";
     public static final String CATEGORIAINVALIDA = "Categoria inválida, pruebe otra vez";
     public static final String PALABRAREPETIDA = "Esta palabra ya se encuentra en el diccionario, pruebe con otra"; // o salga de esta opcion dejando en blancoel hueco
     public static final String PEDIRCONTRASEÑA = "Por favor, introduzca la contraseña de administrador";
-    public static final String FICHEROB = "copiaSeguridad";
+    public static final String MENSAJEPERDEDOR = "Has perdido, la palabra a adivinar era: ";
     public static final String IDPALABRA = "Introduzca el id de la palabra que desea cambiar";
     public static final String CAMBIARINCOGNITA = "Introduzca la palabra: ";
     public static final String MENU = "Introduce opción: ";
@@ -23,7 +25,7 @@ public class Constantes {
     public static final String ENTRADANONUMERO = "La opcion tiene que ser un número";
     public static final String ERROROPCION = "Opcion no válida.";
     public static final String NUEVAPALABRA = "Introduzca la palabra que desea introducir al diccionario";
-    public static final String INTRODUCIRCATEGORIA = "Introduzca la categoria de la palabra, recuerda que solo puede ser Yoda quotes, Movies, Desserts o Basketball";
+    public static final String INTRODUCIRCATEGORIA = "Introduzca la categoria, recuerda que solo puede ser YodaQuotes, Movie, Dessert o Basketball";
     public static final String NUEVAPALABRAAÑADIDA = "Su palabra ha sido añadida con exito";
     public static final String PALABRANOELIMINADA = "La palabra no ha podido ser eliminada, compruebe que ha introducido bien el ID";
     public static final String PALABRAELIMINADA = "La palabra no ha podido ser eliminada, compruebe que ha introducido bien el ID";

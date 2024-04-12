@@ -1,6 +1,7 @@
 package common;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Utilities {
     private static ArrayList<Integer> codigos = new ArrayList<>();
@@ -61,5 +62,10 @@ public class Utilities {
             default:
         }
         return esVocal;
+    }
+    public static boolean comfirmarSalida () {
+        Scanner teclado = new Scanner(System.in);
+        System.out.println(Constantes.COMFIRMARSALIDA);
+        return teclado.nextLine().equalsIgnoreCase("si");
     }
 }

@@ -1,11 +1,11 @@
 package com.example.ejemploahorcado.java.ui;
 
-import common.CategoriaException;
-import common.Comprobacion;
-import common.Constantes;
-import common.RepeatedException;
-import service.GestionPalabras;
-import service.IGestionPalabras;
+import com.example.ejemploahorcado.java.common.CategoriaException;
+import com.example.ejemploahorcado.java.common.Comprobacion;
+import com.example.ejemploahorcado.java.common.Constantes;
+import com.example.ejemploahorcado.java.common.RepeatedException;
+import com.example.ejemploahorcado.java.service.GestionPalabras;
+import com.example.ejemploahorcado.java.service.IGestionPalabras;
 
 import java.io.IOException;
 import java.util.InputMismatchException;

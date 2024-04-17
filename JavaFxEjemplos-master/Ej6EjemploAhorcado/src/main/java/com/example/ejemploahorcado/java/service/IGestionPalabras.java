@@ -1,8 +1,8 @@
 package com.example.ejemploahorcado.java.service;
 
-import common.CategoriaException;
-import common.RepeatedException;
-import domain.Palabra;
+import com.example.ejemploahorcado.java.common.CategoriaException;
+import com.example.ejemploahorcado.java.common.RepeatedException;
+import com.example.ejemploahorcado.java.domain.Palabra;
 
 import java.io.IOException;
 import java.util.List;
@@ -48,4 +48,8 @@ public interface IGestionPalabras {
     public void nuevaRondaCategoria(String categoria) throws IOException;
     public void guardarPartida () throws IOException;
     public void retomarPartida (int ID) throws IOException;
+    public Palabra palabraAleatoria () ;
+    public Palabra palabraAleatoriaCategoria (String categoria) ;
+    public Palabra palabraAleatoriaDificultad (int dificultad) ;
+
 }

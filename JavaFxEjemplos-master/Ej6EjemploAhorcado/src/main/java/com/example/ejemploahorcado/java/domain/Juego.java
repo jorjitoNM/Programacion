@@ -26,6 +26,11 @@ public class Juego implements Serializable { //tengo que guardar los errores y l
         ID = Utilities.darIDPartida();
         nuevaRonda(palabra);
     }
+    public Juego () throws IOException {
+        DaoPalabrasFicheros.crearFicheroPartida();
+        letrasProbadas = new ArrayList<>();
+        ID = Utilities.darIDPartida();
+    }
     public Juego (String palabra) throws IOException {
         DaoPalabrasFicheros.crearFicheroPartida();
         letrasProbadas = new ArrayList<>();
@@ -39,10 +44,10 @@ public class Juego implements Serializable { //tengo que guardar los errores y l
         Arrays.fill(aciertos,false);
         System.out.println(Constantes.RONDA + ronda);
         System.out.println(palabra.getIncognita());
-        System.out.println(imprimirRayas());
+        //System.out.println(imprimirRayas());
         do {
-            buscarLetra();
-            System.out.println(imprimirRayas());
+            //buscarLetra();
+            //System.out.println(imprimirRayas());
         }while (!finRonda() || errores < 8);
         if (finRonda()) {
             puntos += calcularPuntos();
@@ -60,10 +65,10 @@ public class Juego implements Serializable { //tengo que guardar los errores y l
         Arrays.fill(aciertos,false);
         System.out.println(Constantes.RONDA + ronda);
         System.out.println(incognita);
-        System.out.println(imprimirRayas());
+        //System.out.println(imprimirRayas());
         do {
-            buscarLetra();
-            System.out.println(imprimirRayas());
+            //buscarLetra();
+            //System.out.println(imprimirRayas());
         }while (!finRonda() || errores < 8);
         if (finRonda()) {
             puntos += calcularPuntosPersonalizado();
@@ -75,10 +80,10 @@ public class Juego implements Serializable { //tengo que guardar los errores y l
         }
     }
     public void retomarRonda () throws IOException {
-        System.out.println(imprimirRayas());
+        //System.out.println(imprimirRayas());
         do {
-            buscarLetra();
-            System.out.println(imprimirRayas());
+            //buscarLetra();
+            //System.out.println(imprimirRayas());
         }while (!finRonda() || errores < 8);
         if (finRonda()) {
             puntos += calcularPuntos();
@@ -90,10 +95,10 @@ public class Juego implements Serializable { //tengo que guardar los errores y l
         }
     }
     public void retomarRondaPersonalizada () throws IOException {
-        System.out.println(imprimirRayas());
+        //System.out.println(imprimirRayas());
         do {
-            buscarLetra();
-            System.out.println(imprimirRayas());
+            //buscarLetra();
+            //System.out.println(imprimirRayas());
         }while (!finRonda() || errores < 8);
         if (finRonda()) {
             puntos += calcularPuntosPersonalizado();
@@ -104,7 +109,8 @@ public class Juego implements Serializable { //tengo que guardar los errores y l
             System.out.println(Constantes.MENSAJEPERDEDOR + this.palabra.getIncognita());
         }
     }
-    private String imprimirRayas () throws IOException {
+    public String imprimirRayas (String intento) throws IOException {
+        buscarLetra(intento);
         StringBuilder palabra = new StringBuilder();
         for (int i = 0; i < this.palabra.getIncognita().length(); i++) {
             if (this.palabra.getIncognita().charAt(i)==32) {
@@ -121,8 +127,8 @@ public class Juego implements Serializable { //tengo que guardar los errores y l
         DaoPalabrasFicheros.guardarPartida(this);
         return palabra.toString();
     }
-    private void buscarLetra () {
-        String intento = validarIntento();
+    private void buscarLetra (String intento) {
+        //String intento = validarIntento();
         boolean exit = false;
         if (intento.length()==1) {
             ArrayList<Integer> coincidencias = new ArrayList<>();
@@ -186,5 +192,53 @@ public class Juego implements Serializable { //tengo que guardar los errores y l
     }
     public Palabra getPalabra() {
         return palabra;
+    }
+
+    public int getRonda() {
+        return ronda;
+    }
+
+    public void setRonda(int ronda) {
+        this.ronda = ronda;
+    }
+
+    public int getErrores() {
+        return errores;
+    }
+
+    public void setErrores(int errores) {
+        this.errores = errores;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+
+    public void setPalabra(Palabra palabra) {
+        this.palabra = palabra;
+    }
+
+    public boolean[] getAciertos() {
+        return aciertos;
+    }
+
+    public void setAciertos(boolean[] aciertos) {
+        this.aciertos = aciertos;
+    }
+
+    public ArrayList<Character> getLetrasProbadas() {
+        return letrasProbadas;
+    }
+
+    public void setLetrasProbadas(ArrayList<Character> letrasProbadas) {
+        this.letrasProbadas = letrasProbadas;
+    }
+
+    public int getID() {
+        return ID;
     }
 }

@@ -29,9 +29,7 @@ public class DaoPalabrasFicheros  {
         pw.close();
         return true;
     }
-    public static List<Palabra> leerFichero(String diccionario) throws IOException {
-        return leerFichero(Constantes.DICCIONARIO);
-    }
+
     public static List<Palabra> leerDiccionario(String fichero) throws IOException {
         ArrayList<Palabra> auxiliar = null;
         try (Scanner sc = new Scanner(new File(fichero))) {

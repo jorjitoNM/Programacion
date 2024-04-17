@@ -177,4 +177,19 @@ public class GestionPalabras implements IGestionPalabras {
     public void guardarPartida() throws IOException {
         DaoPalabrasFicheros.guardarPartida(partida);
     }
+
+    @Override
+    public Palabra palabraAleatoria() {
+        return daoPalabras.palabraAleatoria();
+    }
+
+    @Override
+    public Palabra palabraAleatoriaCategoria(String categoria) {
+        return daoPalabras.palabraAleatoria(categoria);
+    }
+
+    @Override
+    public Palabra palabraAleatoriaDificultad(int dificultad) {
+        return daoPalabras.palabraAleatoria(dificultad);
+    }
 }

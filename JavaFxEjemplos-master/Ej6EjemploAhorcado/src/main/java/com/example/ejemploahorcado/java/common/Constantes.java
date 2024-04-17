@@ -25,13 +25,14 @@ public class Constantes {
     public static final String OPCION4 = "4. Eliminar un elemento del diccionario";
     public static final String ENTRADANONUMERO = "La opcion tiene que ser un número";
     public static final String ERROROPCION = "Opcion no válida.";
-    public static final String NUEVAPALABRA = "Introduzca la palabra que desea introducir al diccionario";
+    public static final String NUEVAPALABRADICCIONARIO = "Introduzca la palabra que desea introducir al diccionario";
+    public static final String NUEVAPALABRA = "Introduzca la palabra: ";
     public static final String INTRODUCIRCATEGORIA = "Introduzca la categoria, recuerda que solo puede ser YodaQuotes, Movie, Dessert o Basketball";
     public static final String NUEVAPALABRAAÑADIDA = "Su palabra ha sido añadida con exito";
     public static final String PALABRANOELIMINADA = "La palabra no ha podido ser eliminada, compruebe que ha introducido bien el ID";
     public static final String PALABRAELIMINADA = "La palabra no ha podido ser eliminada, compruebe que ha introducido bien el ID";
-    public static final String NUEVAPARTIDA = "1. Comenzar una nueva partida";
-    public static final String RETOMARPARTIDA = "2. Retomar una partida anterior";
+    public static final String NUEVAPARTIDA = "Comenzar una nueva partida";
+    public static final String RETOMARPARTIDA = "Retomar una partida anterior";
     public static final String NUEVOINTENTO = "Introduzca una letra o, si quieres la palabra entera:";
     public static final String ADMINISTRAR = "1. Administrar el diccionario de juego";
     public static final String JUGAR = "2. Comenzar o retomar una partida";
@@ -56,6 +57,7 @@ public class Constantes {
     public static final String MUÑECO7 = "   ----------\n   |         |\n   |         0\n   |       [ | ]\n   |       ^ | ^\n   |       _| \n   |\n   |\n-------                    ";
     public static final String MUÑECO8 = "   ----------\n   |         |\n   |         0\n   |       [ | ]\n   |       ^ | ^\n   |       _| |_\n   |\n   |\n-------                    ";
     public static final String MENURONDA = "Seleccione como quiere la ronda:";
+    public static final String MENURONDAFX = "Seleccione como quiere la ronda: \n1. Todo aleatorio\n2. Introduciendo la categoria\n3. Introduciendo la dificultad\n4. Introduciendo la palabra";
     public static final String RONDADIFICULTAD = "3. Introduciendo la dificultad";
     public static final String RONDACATEGORIA = "2. Introduciendo la categoria";
     public static final String RONDANORMAL = "1. Todo aleatorio";

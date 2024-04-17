@@ -12,7 +12,6 @@ import java.util.List;
 
 public class Palabras {
     private List<Palabra> palabras;
-    private static int autonumerico;
 
     public Palabras() {
         try {
@@ -64,16 +63,8 @@ public class Palabras {
         this.palabras = Palabras;
     }
 
-    public static void setAutonumerico(int i) {
-        autonumerico = i;
-    }
-
     public List<Palabra> getListaPalabras() {
         return palabras;
-    }
-
-    public static int getAutonumerico() {
-        return autonumerico;
     }
 
     public void setListaPalabras(List<Palabra> Palabras) {

@@ -1,8 +1,8 @@
 package com.example.ejemploahorcado.java.domain;
 
 
-import common.CategoriaException;
-import common.Comprobacion;
+import com.example.ejemploahorcado.java.common.CategoriaException;
+import com.example.ejemploahorcado.java.common.Comprobacion;
 
 import java.io.Serializable;
 

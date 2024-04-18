@@ -1,4 +1,4 @@
-package EmpresaProgramadores.src.main.java.org.example.ui;
+package org.example.ui;
 
 public class Main {
 

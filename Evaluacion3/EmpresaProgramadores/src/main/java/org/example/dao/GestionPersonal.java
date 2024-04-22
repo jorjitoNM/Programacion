@@ -30,14 +30,16 @@ public class GestionPersonal {
         return exit;*/
     }
     public boolean eliminarTrabajadores (int año) {
-        empleados.stream().filter(t -> t.getAñoIncorporacion()<año).forEach(t -> empleados.remove(t)); //no entiendo esta logica, el iterador esta dentro del remove o dentro del foreach??/es el remove que tiene el iterator??
+        //empleados.stream().filter(t -> t.getAñoIncorporacion()<año).forEach(t -> empleados.remove(t)); //no entiendo esta logica, el iterador esta dentro del remove o dentro del foreach??/es el remove que tiene el iterator??
+        empleados.removeAll(empleados.stream().filter(t -> t.getAñoIncorporacion()<año).toList());
         if (empleados.stream().anyMatch(t -> t.getAñoIncorporacion() < año))
             return false;
         else
             return true;
     }
     public boolean eliminarTrabajador (String nombre, String apellido) {
-        empleados.stream().filter(e -> e.getNombre().equalsIgnoreCase(nombre) && e.getApellido().equalsIgnoreCase(apellido)).iterator().remove();
+        //empleados.stream().filter(e -> e.getNombre().equalsIgnoreCase(nombre) && e.getApellido().equalsIgnoreCase(apellido)).iterator().remove();
+        empleados.removeIf(e -> e.getNombre().equalsIgnoreCase(nombre) && e.getApellido().equalsIgnoreCase(apellido));
         if (empleados.stream().anyMatch(e -> e.getNombre().equalsIgnoreCase(nombre) && e.getApellido().equalsIgnoreCase(apellido)))
             return false;
         else

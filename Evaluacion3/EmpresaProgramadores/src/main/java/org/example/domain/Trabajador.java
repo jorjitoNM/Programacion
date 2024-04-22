@@ -61,10 +61,10 @@ public abstract class Trabajador {
 
     @Override
     public String toString() {
-        return "Nombre:" + nombre +
-                " Apellido='" + apellido +
-                " Año de Incorporacion=" + añoIncorporacion +
-                " Departamento='" + departamento +
-                " Sueldo diario:=" + sueldoDia;
+        return "Nombre: " + nombre +
+                " Apellido: " + apellido +
+                " Año de Incorporacion: " + añoIncorporacion +
+                " Departamento: " + departamento +
+                " Sueldo diario: " + sueldoDia;
     }
 }

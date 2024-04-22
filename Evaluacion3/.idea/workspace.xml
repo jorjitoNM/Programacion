@@ -1,56 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="71f4369b-39bb-4411-9564-aaafdf5c0d73" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFxEjemplos-master/Evaluacion3/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFxEjemplos-master/Evaluacion3/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFxEjemplos-master/Evaluacion3/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFxEjemplos-master/Evaluacion3/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFxEjemplos-master/Evaluacion3/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFxEjemplos-master/Evaluacion3/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataFaker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFxEjemplos-master/Evaluacion3/DataFaker/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataFaker/src/main/java/org/example/Exception.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFxEjemplos-master/Evaluacion3/DataFaker/src/main/java/org/example/Exception.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataFaker/target/classes/org/example/Exception.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFxEjemplos-master/Evaluacion3/DataFaker/target/classes/org/example/Exception.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFxEjemplos-master/Evaluacion3/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__com_github_mifmif_generex_1_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__com_google_code_gson_gson_2_10_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__dk_brics_automaton_automaton_1_11_8.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__io_github_palexdev_materialfx_11_13_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__io_github_palexdev_materialfx_11_13_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__io_github_palexdev_virtualizedfx_11_2_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__net_datafaker_datafaker_1_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_20_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_apache_logging_log4j_log4j_core_2_20_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_8_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_8_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_8_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_8_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_base_19_0_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_base_19_ea_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_base_win_19_0_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_base_win_19_ea_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_controls_19_0_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_controls_19_ea_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_controls_win_19_0_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_controls_win_19_ea_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_fxml_19_0_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_fxml_19_ea_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_19_0_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_19_ea_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_graphics_19_0_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_graphics_19_ea_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_19_0_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_19_ea_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_projectlombok_lombok_1_18_26.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/libraries/Maven__org_yaml_snakeyaml_1_33.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaFxEjemplos-master/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaFxEjemplos-master/Ej8MultiPantallas/CRUDFX (1).iml" beforeDir="false" />
+    <list default="true" id="71f4369b-39bb-4411-9564-aaafdf5c0d73" name="Changes" comment="18/04/2024 Creado el esqueleto de la empresa de programadores">
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,9 +16,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;jorjitoNM&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/jorjitoNM/Programacion.git&quot;,
+    &quot;accountId&quot;: &quot;f30cd68c-fcd0-4a2a-b395-5d5429b7822a&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2fHSJbN5BbFbHOSMbx6FkMa9W2J" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -74,11 +42,23 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Usuario/Desktop/Jorge/Programacion/GitIntelliJ/Evaluacion3/EmpresaProgramadores",
+    "last_opened_file_path": "C:/Users/cnovi/OneDrive/Escritorio/Jorge/Programacion/GITIntelliJ/Evaluacion3/EmpresaProgramadores",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -88,10 +68,27 @@
       <option name="presentableId" value="Default" />
       <updated>1713456439120</updated>
       <workItem from="1713456440204" duration="23000" />
+      <workItem from="1713530709586" duration="363000" />
+      <workItem from="1713773899570" duration="377000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="18/04/2024 Creado el esqueleto de la empresa de programadores" />
+    <option name="LAST_COMMIT_MESSAGE" value="18/04/2024 Creado el esqueleto de la empresa de programadores" />
   </component>
 </project>

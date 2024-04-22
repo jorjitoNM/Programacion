@@ -45,4 +45,7 @@ public class GestionPersonal {
         else
             return true;
     }
+    public String mostrarPorSalario (int numeroA, int numeroB) {
+        return empleados.stream().filter(e -> numeroA < e.sueldoMensual() && e.sueldoMensual() < numeroB).toList().toString();
+    }
 }

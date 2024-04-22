@@ -18,6 +18,7 @@ public class Menu {
         System.out.println(Constantes.ELIMINAR_EMPLEADOS);
         System.out.println(Constantes.ELIMINAR_EMPLEADO);
         System.out.println(Constantes.MOSTRAR_EMPLEADOS);
+        System.out.println(Constantes.MOSTRAR_EMPLEADOS_POR_SALARIO);
         return teclado.nextInt();
     }
     public void menu () {
@@ -34,6 +35,8 @@ public class Menu {
             case 4:
                 mostrarTrabajadores();
                 break;
+            case 5:
+                mostrarPorSalario();
             default:
                 System.out.println(Constantes.OPCION_INCORRECTA);
         }
@@ -92,5 +95,23 @@ public class Menu {
     }
     private void mostrarTrabajadores () {
         System.out.println(servicio.mostrarTrabajadores());
+    }
+    private void mostrarPorSalario () {
+        Scanner teclado = new Scanner(System.in);
+        System.out.println(Constantes.INTRODUZCA_SALARIO);
+        String rango = teclado.nextLine();
+        boolean exit = false;
+        int numeroA = 0;
+        int numeroB = 0;
+        do {
+            try {
+                numeroA = Integer.parseInt(rango.split(" ")[0]);
+                numeroB = Integer.parseInt(rango.split(" ")[1]);
+                exit = true;
+            } catch (NumberFormatException exception) {
+                System.out.println(Constantes.INTRODUZCA_NUMERO);
+            }
+        }while (!exit);
+        System.out.println(servicio.mostrarPorSalario(numeroA, numeroB));
     }
 }

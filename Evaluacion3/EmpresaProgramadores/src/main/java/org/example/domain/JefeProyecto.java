@@ -13,7 +13,11 @@ public class JefeProyecto extends Trabajador {
     }
     @Override
     public int calcularSueldo (int dias) {
-        return (int)((dias)*(getSueldoDia()*personas*1.02));
+        return (int)((dias)*(sueldoDia*personas*1.02));
+    }
+    @Override
+    public int sueldoMensual () {
+        return sueldoDia*30;
     }
 
     @Override

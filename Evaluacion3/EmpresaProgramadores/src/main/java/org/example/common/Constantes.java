@@ -21,5 +21,8 @@ public class Constantes {
     public static final String ELIMINAR_EMPLEADOS = "2. Eliminar varios trabajadores";
     public static final String ELIMINAR_EMPLEADO = "3. Eliminar un trabajador";
     public static final String MOSTRAR_EMPLEADOS = "4. Mostrar empleados";
+    public static final String INTRODUZCA_SALARIO = "Introduzca el rango de salario";
+    public static final String MOSTRAR_EMPLEADOS_POR_SALARIO = "5. Mostrar los empoleados que cobren un dentro de el rango introducido";
+    public static final String INTRODUZCA_NUMERO = "Por favor, introduzca solamente numeros ";
 
 }

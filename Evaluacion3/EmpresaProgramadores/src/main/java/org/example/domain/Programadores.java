@@ -25,11 +25,15 @@ public class Programadores extends Trabajador {
 
     @Override
     public int calcularSueldo(int dias) {
-        return (int)(dias*getSueldoDia());
+        return dias*sueldoDia;
     }
 
     @Override
     public String toString() {
         return super.toString() + " Lenguajes:" + lenguajes;
+    }
+    @Override
+    public int sueldoMensual () {
+        return (int)(sueldoDia*30);
     }
 }

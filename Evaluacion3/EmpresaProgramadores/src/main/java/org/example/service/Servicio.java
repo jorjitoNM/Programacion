@@ -24,4 +24,7 @@ public class Servicio {
     public String mostrarTrabajadores() {
         return gestionPersonal.toString();
     }
+    public String mostrarPorSalario (int numeroA, int numeroB) {
+        return gestionPersonal.mostrarPorSalario(numeroA, numeroB);
+    }
 }

@@ -1,11 +1,11 @@
 package org.example.domain;
 
 public abstract class Trabajador {
-    private String nombre;
-    private String apellido;
-    private int añoIncorporacion;
-    private String departamento;
-    private int sueldoDia;
+    protected String nombre;
+    protected String apellido;
+    protected int añoIncorporacion;
+    protected String departamento;
+    protected int sueldoDia;
 
     public Trabajador(String nombre, String apellido, int añoIncorporacion, String departamento, int sueldoDia) {
         this.nombre = nombre;
@@ -18,6 +18,7 @@ public abstract class Trabajador {
     public Trabajador() {
     }
     public abstract int calcularSueldo (int dias) ;
+    public abstract int sueldoMensual () ;
 
     public String getNombre() {
         return nombre;

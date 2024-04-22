@@ -15,5 +15,13 @@ public class Servicio {
     public boolean nuevoJefe (String nombre, String apellido, int año, String departamento, int sueldoDia, int personas) {
         return gestionPersonal.nuevoJefe(nombre,apellido,año,departamento,sueldoDia,personas);
     }
-    public boolean eliminarTrabajadores (int año) ;
+    public boolean eliminarTrabajadores (int año) {
+        return gestionPersonal.eliminarTrabajadores(año);
+    }
+    public boolean eliminarTrabajador (String nombre, String apellido) {
+        return gestionPersonal.eliminarTrabajador(nombre,apellido);
+    }
+    public String mostrarTrabajadores() {
+        return gestionPersonal.toString();
+    }
 }

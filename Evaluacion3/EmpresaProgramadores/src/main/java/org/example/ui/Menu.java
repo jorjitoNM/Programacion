@@ -15,15 +15,25 @@ public class Menu {
         Scanner teclado = new Scanner(System.in);
         System.out.println(Constantes.MENU_USUARIO);
         System.out.println(Constantes.NUEVO_EMPLEADO);
+        System.out.println(Constantes.ELIMINAR_EMPLEADOS);
+        System.out.println(Constantes.ELIMINAR_EMPLEADO);
+        System.out.println(Constantes.MOSTRAR_EMPLEADOS);
         return teclado.nextInt();
     }
-    private void menu () {
+    public void menu () {
         switch (opcionMenu()) {
             case 1:
                 nuevoTrabajador();
                 break;
             case 2:
                 eliminarTrabajadores();
+                break;
+            case 3:
+                eliminarTrabajador();
+                break;
+            case 4:
+                mostrarTrabajadores();
+                break;
             default:
                 System.out.println(Constantes.OPCION_INCORRECTA);
         }
@@ -67,7 +77,20 @@ public class Menu {
         if (servicio.eliminarTrabajadores(teclado.nextInt()))
             System.out.println(Constantes.TRABAJADORES_ELIMINADOS);
         else
-            System.out.println();
+            System.out.println(Constantes.ERROR_ELIMINAR);
 
+    }
+    private void eliminarTrabajador () {
+        Scanner teclado = new Scanner(System.in);
+        System.out.println(Constantes.NOMBRE_ELIMINAR);
+        String nombre = teclado.nextLine();
+        System.out.println(Constantes.APELLIDO_ELMINAR);
+        if (servicio.eliminarTrabajador(nombre,teclado.nextLine()))
+            System.out.println(Constantes.TRABAJADOR_ELIMINADOS);
+        else
+            System.out.println(Constantes.ERROR_ELIMINAR);
+    }
+    private void mostrarTrabajadores () {
+        System.out.println(servicio.mostrarTrabajadores());
     }
 }

@@ -8,11 +8,16 @@ public class JefeProyecto extends Trabajador {
     }
 
     public JefeProyecto(String nombre, String apellido, int añoIncorporacion, String departamento, int sueldoDia, int personas) {
-        //super(nombre, apellido, añoIncorporacion, departamento, calcularSueldo(sueldoDia,personas)); //como calculo el sueldo
         super(nombre, apellido, añoIncorporacion, departamento, sueldoDia);
         this.personas = personas;
     }
-    private int calcularSueldo (int dias, int sueldoDia, int personas) {
-        return (int)((dias)*(sueldoDia*personas*1.02));
+    @Override
+    public int calcularSueldo (int dias) {
+        return (int)((dias)*(getSueldoDia()*personas*1.02));
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " Personas al cargo:" + personas;
     }
 }

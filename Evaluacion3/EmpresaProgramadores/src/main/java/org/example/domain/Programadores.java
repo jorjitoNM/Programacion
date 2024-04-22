@@ -25,6 +25,11 @@ public class Programadores extends Trabajador {
 
     @Override
     public int calcularSueldo(int dias) {
-        return (int)(dias*getSueldoDia()); //esto esta bien??
+        return (int)(dias*getSueldoDia());
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " Lenguajes:" + lenguajes;
     }
 }

@@ -58,4 +58,13 @@ public abstract class Trabajador {
     public void setSueldoDia(int sueldoDia) {
         this.sueldoDia = sueldoDia;
     }
+
+    @Override
+    public String toString() {
+        return "Nombre:" + nombre +
+                " Apellido='" + apellido +
+                " Año de Incorporacion=" + añoIncorporacion +
+                " Departamento='" + departamento +
+                " Sueldo diario:=" + sueldoDia;
+    }
 }

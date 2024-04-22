@@ -14,34 +14,33 @@ public class GestionPersonal {
         empleados = new HashSet<>();
     }
     public boolean nuevoProgramador (String nombre, String apellido, int añoIncorporacion, String departamento, int sueldo, String lenguajes) {
-        if(empleados.add(new Programadores(nombre, apellido, añoIncorporacion, departamento, sueldo,lenguajes)))
-            //if (buscarEmpleado()) //como saco ahora a este empleado??
-            return false;
-        else
-            return true;
-
+        return (empleados.add(new Programadores(nombre, apellido, añoIncorporacion, departamento, sueldo,lenguajes)));
     }
     public boolean nuevoJefe (String nombre, String apellido, int añoIncorporacion, String departamento, int sueldo, int personas) {
-        if(empleados.add(new JefeProyecto(nombre,apellido,añoIncorporacion,departamento,sueldo,personas)))
+        return empleados.add(new JefeProyecto(nombre, apellido, añoIncorporacion, departamento, sueldo, personas));
     }
     private boolean buscarEmpleado (Trabajador empelado) {
-        Iterator<Trabajador> it = empleados.iterator();
-        empleados.forEach(e -> (e.equals(it.next())?true:false)); // alguna forma de hacer esto??
-        boolean exit = false;
+        return empleados.stream().filter(e -> e.equals(empelado)).findFirst().orElse(null) != null;
+        //Iterator<Trabajador> it = empleados.iterator();
+        /*boolean exit = false;
         while (it.hasNext() && !exit) {
             if (it.next().equals(empelado))
                 exit = true;
         }
-        return true;
+        return exit;*/
     }
     public boolean eliminarTrabajadores (int año) {
-        empleados.stream().filter(t -> t.getAñoIncorporacion()<año).forEach(t -> empleados.remove(t)); //no entiendo esta logica, el iterador esta dentro del remove o dentro del foreach??
+        empleados.stream().filter(t -> t.getAñoIncorporacion()<año).forEach(t -> empleados.remove(t)); //no entiendo esta logica, el iterador esta dentro del remove o dentro del foreach??/es el remove que tiene el iterator??
         if (empleados.stream().anyMatch(t -> t.getAñoIncorporacion() < año))
             return false;
         else
             return true;
     }
-    public boolean eliminarTrabajador () {
-
+    public boolean eliminarTrabajador (String nombre, String apellido) {
+        empleados.stream().filter(e -> e.getNombre().equalsIgnoreCase(nombre) && e.getApellido().equalsIgnoreCase(apellido)).iterator().remove();
+        if (empleados.stream().anyMatch(e -> e.getNombre().equalsIgnoreCase(nombre) && e.getApellido().equalsIgnoreCase(apellido)))
+            return false;
+        else
+            return true;
     }
 }

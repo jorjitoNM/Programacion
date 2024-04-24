@@ -15,7 +15,7 @@ public class MenuPersonal {
                 default:
                     System.out.println(Constantes.OPCION_NO_VALIDA);
             }
-        } while (!false);
+        } while (!exit);
     }
 
 

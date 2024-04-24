@@ -23,7 +23,7 @@ public class MenuInicial {
                 default:
                     System.out.println(Constantes.OPCION_NO_VALIDA);
             }
-        } while ();
+        } while (!exit);
     }
     public int opcionMenuInicial () {
         Scanner teclado = new Scanner(System.in);

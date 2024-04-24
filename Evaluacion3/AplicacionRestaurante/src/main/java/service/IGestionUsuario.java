@@ -9,4 +9,6 @@ public interface IGestionUsuario {
     String mostrarCarrito ();
     boolean eliminarPlato ();
     boolean añadirCodigo ();
+    boolean existePedido ();
+    void nuevoPedido ();
 }

@@ -1,5 +1,7 @@
 package domain;
 
 public class Factura {
-    private Cliente cliente;
+    private int idFactura;
+    private int idCliente;
+    private int idCamarero;
 }

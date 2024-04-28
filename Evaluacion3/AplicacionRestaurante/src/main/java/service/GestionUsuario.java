@@ -1,8 +1,16 @@
 package service;
 
+import dao.DaoPersonal;
+import dao.IDaoPersonal;
 import domain.Factura;
 
 public class GestionUsuario implements IGestionUsuario{
+    private IDaoPersonal daoPersonal;
+
+    public GestionUsuario() {
+       daoPersonal = new DaoPersonal();
+    }
+
     @Override
     public String mostrarMenu() {
         return "";
@@ -14,8 +22,8 @@ public class GestionUsuario implements IGestionUsuario{
     }
 
     @Override
-    public void añadirPlato(String nombre) {
-
+    public void añadirPlato(String nombre, int cantidad) {
+        daoPersonal.añadirPlato(nombre, cantidad);
     }
 
     @Override
@@ -36,5 +44,10 @@ public class GestionUsuario implements IGestionUsuario{
     @Override
     public boolean existePedido() {
         return false;
+    }
+
+    @Override
+    public void nuevoPedido() {
+
     }
 }

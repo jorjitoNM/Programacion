@@ -16,4 +16,16 @@ public class Plato {
         this.calorias = calorias;
         this.nombre = nombre;
     }
+
+    public Plato(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
 }

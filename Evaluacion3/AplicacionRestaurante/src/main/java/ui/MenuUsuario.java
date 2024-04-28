@@ -34,10 +34,10 @@ public class MenuUsuario {
     }
     public void añadirPlato () {
         Scanner teclado = new Scanner(System.in);
-        servicio.mostrarMenu();
         do {
+            servicio.mostrarMenu();
             System.out.println();
-        }
+        }while();
     }
     public void verCesta () {
         Scanner teclado = new Scanner(System.in);

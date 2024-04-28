@@ -4,6 +4,6 @@ import domain.Empleado;
 
 import java.util.List;
 
-public class Plantilla {
+public class Empleados {
     private List<Empleado> empleados;
 }

@@ -14,6 +14,11 @@ public class Constantes {
     public static final String INICIAR_PEDIDO = "1. Comenzar un nuevo pedido ";
     public static final String VER_CESTA = "2. Ver la cesta ";
     public static final String NO_EXISTE_PEDIDO = "Todavia no ha iniciado un nuevo pedido, ¿desea crear uno nuevo? ";
+    public static final String NOMBRE_PLATO = "Introduce el nombre del plato que quiere añadir, si no quiere añadir mas platos escriba 'suficiente': ";
+    public static final String CANTIDAD = "Introduzca la cantidad: ";
+    public static final String SUFICIENTE = "suficiente";
+    public static final String ELIMINAR_PLATO = "¿Que plato desea eliminar?";
+    public static final String INTRODUZCA_NOMBRE = "Introduzca su nombre se usuario";
 
 
 
@@ -33,6 +38,9 @@ public class Constantes {
     public static final String OPCION_NO_VALIDA = "Opcion no, valida, pruebe otra vez ";
     public static final String SOLO_NUMEROS = "Porfavor, introduzca solamente números ";
     public static final String CAMARERO_CLIENTE = "En la empresa solamente trabajan camareros o cocineros, pruebe otra vez ";
+    public static final String NOMBRE_USUARIO_INCORRCTO = "Nombre de usuario incorrecto";
+    public static final String CONTRASEÑA_INCORRECTA = "Constraseña incorrecta";
+    public static final String ERROR_PEDIDO = "No se ha podido completar la accion porque no existe pedido";
 
 
     //utilidades

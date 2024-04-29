@@ -7,4 +7,8 @@ public class Persona {
     protected String nombre;
     protected String apellidos;
     protected LocalDate fechaNacimiento;
+
+    public String getNombre() {
+        return nombre;
+    }
 }

@@ -45,9 +45,13 @@ public class GestionUsuario implements IGestionUsuario{
     public boolean existePedido() {
         return false;
     }
+    @Override
+    public int darIDPedido (String nombreUsuario) {
+        return
+    }
 
     @Override
-    public void nuevoPedido() {
-
+    public int nuevoPedido() {
+        daoPersonal.
     }
 }

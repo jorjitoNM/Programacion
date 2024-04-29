@@ -15,10 +15,9 @@ public class MenuInicial {
                     break;
                 case 2:
                     if (controlSeguridad()) {
-                        MenuPersonal menuCamarero = new MenuPersonal();
-                        menuCamarero.menuCamarero();
+                        MenuPersonal menuersonal = new MenuPersonal();
+                        menuersonal.menuPersonal();
                     }
-
                     break;
                 default:
                     System.out.println(Constantes.OPCION_NO_VALIDA);
@@ -31,7 +30,7 @@ public class MenuInicial {
         int opcion = 0;
         do {
             try {
-                System.out.println(Constantes.MENU_INICIAL + "\n" + Constantes.CLIENTE + "\n" + Constantes.CAMARERO + "\n" + Constantes.COCINERO);
+                System.out.println(Constantes.MENU_INICIAL + "\n" + Constantes.CLIENTE + "\n" + Constantes.TRABAJADOR);
                 opcion = teclado.nextInt();
                 exit = true;
             } catch (InputMismatchException exception) {

@@ -1,6 +1,7 @@
 package dao;
 
 import domain.Pedido;
+import domain.Promocion;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -35,13 +36,32 @@ public class Pedidos {
     }
     public int darIDPedido (int idUsuario) {
         Iterator<Pedido> it = pedidos.iterator();
+        while (it.hasNext()) {
+            if (it.next().getIdUsuario() == idUsuario) {
+                return it.next().getIdPedido();
+            }
+        }
+        return -1;
+    }
+    public int iniciarPedido () {
+        Iterator<Pedido> it = pedidos.iterator();
+        boolean exit = false;
+        while (it.hasNext() && !exit) {
+            if (it.next().getIdPedido() == idPedido) {
+                it.next().setActivo(true);
+                exit = true;
+            }
+        }
+    }
+    public int iniciarPedido (String codigo) {
+        Iterator<Pedido> it = pedidos.iterator();
         boolean exit = false;
         Pedido pedido = null;
         while (it.hasNext() && !exit) {
             if (it.next().getIdPedido() == idPedido) {
                 pedido = it.next();
-                return pedido.getIdPedido();
-                pedido.añadirPlato(idPlato, cantidad);
+                pedido.setActivo(true);
+                pedido.setPromocion(new Promocion(codigo));
                 exit = true;
             }
         }

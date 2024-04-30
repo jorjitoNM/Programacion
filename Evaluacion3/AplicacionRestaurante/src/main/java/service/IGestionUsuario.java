@@ -12,4 +12,7 @@ public interface IGestionUsuario {
     boolean existePedido ();
     int nuevoPedido ();
     int darIDPedido (String nombreUsuario);
+    void iniciarPedido();
+    String mostrarCupones ();
+    String añadirCupon(String cupon);
 }

@@ -1,19 +1,21 @@
 package service;
 
+import dao.DaoClientes;
 import dao.DaoPersonal;
+import dao.IDaoClientes;
 import dao.IDaoPersonal;
 import domain.Factura;
 
 public class GestionUsuario implements IGestionUsuario{
-    private IDaoPersonal daoPersonal;
+    private IDaoClientes daoClientes;
 
     public GestionUsuario() {
-       daoPersonal = new DaoPersonal();
+        daoClientes = new DaoClientes();
     }
 
     @Override
     public String mostrarMenu() {
-        return "";
+        return daoClientes.mostrarMenu();
     }
 
     @Override
@@ -22,8 +24,8 @@ public class GestionUsuario implements IGestionUsuario{
     }
 
     @Override
-    public void añadirPlato(String nombre, int cantidad) {
-        daoPersonal.añadirPlato(nombre, cantidad);
+    public void añadirPlato(String nombre, int cantidad, int idPedido) {
+        daoClientes.añadirPlato(nombre, cantidad, idPedido);
     }
 
     @Override
@@ -47,11 +49,15 @@ public class GestionUsuario implements IGestionUsuario{
     }
     @Override
     public int darIDPedido (String nombreUsuario) {
-        return
+        return daoClientes.darIDPedido(nombreUsuario);
     }
 
     @Override
     public int nuevoPedido() {
-        daoPersonal.
+        return daoClientes.nuevoPedido();
+    }
+    @Override
+    public void iniciarPedido () {
+        daoClientes.iniciarPedido();
     }
 }

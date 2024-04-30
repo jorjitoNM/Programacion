@@ -9,13 +9,11 @@ import java.util.List;
 import java.util.Random;
 
 public class Database {
-
-
-    private final ArrayList<Alojamiento> alojamientos;
+    private final List<Alojamiento> alojamientos;
 
     public Database() {
         this.alojamientos = new ArrayList<>();
-        //String nombre, String provincia, double precio, ArrayList<Integer> valoraciones,boolean piscina
+        /*//String nombre, String provincia, double precio, ArrayList<Integer> valoraciones,boolean piscina
         alojamientos.add(new Hotel("Melia", "Madrid", 45, new ArrayList<>(), 5));
         alojamientos.add(new Hotel("NH", "Murcia", 30, new ArrayList<>(), 3));
         alojamientos.add(new Hotel("Hilton", "Madrid", 63, new ArrayList<>(), 4));
@@ -28,10 +26,10 @@ public class Database {
             alojamiento.getValoraciones().add(r.nextInt(6));
             alojamiento.getValoraciones().add(r.nextInt(6));
             alojamiento.getValoraciones().add(r.nextInt(6));
-        }
+        }*/
     }
 
-    public Database (ArrayList<Alojamiento> alojamientos){
+    public Database (List<Alojamiento> alojamientos){
         this.alojamientos = alojamientos;
     }
 

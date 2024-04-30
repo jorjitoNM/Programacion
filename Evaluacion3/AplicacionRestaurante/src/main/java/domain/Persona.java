@@ -11,4 +11,8 @@ public class Persona {
     public String getNombre() {
         return nombre;
     }
+
+    public int getId() {
+        return id;
+    }
 }

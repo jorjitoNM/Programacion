@@ -57,6 +57,7 @@ public class MenuUsuario {
         Scanner teclado = new Scanner(System.in);
         boolean exit = opcionCrearPedido();
         while(!exit) {
+            servicio.verPedidos(); //aqui muestro los pedidos ativos?? que el clietne tiene abierto, habiendo preguntado previamente por su id
             servicio.mostrarMenu();
             System.out.println(Constantes.NOMBRE_PLATO);
             String nombrePalto = teclado.nextLine();
@@ -102,11 +103,24 @@ public class MenuUsuario {
         return exist;
     }
     private int idPedido () {
-        Scanner teclado = new Scanner(System.in);
+        Scanner teclado = new Scanner(System.in); //pedir el id del pedido cada vez que realiza una accion con el pedido
         System.out.println(Constantes.INTRODUZCA_NOMBRE);
         return servicio.darIDPedido(teclado.nextLine());
     }
     private void iniciarPedido () {
-
+        Scanner teclado = new Scanner(System.in);
+        System.out.println(Constantes.QUIERE_AÑADIR_CUPONES);
+        if (teclado.nextLine().equalsIgnoreCase("si")) {
+            servicio.mostrarCupones();
+            servicio.iniciarPedido(añadirCupon());
+        }
+        else
+            servicio.iniciarPedido();
+        System.out.println(Constantes.PEDIDO_COMENZADO);
+    }
+    private String añadirCupon () {
+        Scanner teclado = new Scanner(System.in);
+        System.out.println(Constantes.INTRODUZCA_CUPON);
+        return teclado.nextLine();
     }
 }

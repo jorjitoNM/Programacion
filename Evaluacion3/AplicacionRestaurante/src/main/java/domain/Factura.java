@@ -11,4 +11,7 @@ public class Factura {
     public LocalDate getFecha() {
         return fecha;
     }
+    public double calcualrPrecio () {
+        return 0;
+    }
 }

@@ -11,6 +11,7 @@ public class Pedido {
     private ArrayList<Integer> ids = new ArrayList<>();
     private boolean activo;
     private int idUsuario;
+    private Promocion promocion;
 
 
     public Pedido() {
@@ -33,5 +34,17 @@ public class Pedido {
     }
     public void añadirPlato (int idPlato, int cantidad) {
         carrito.put(idPlato, cantidad);
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setPromocion(Promocion promocion) {
+        this.promocion = promocion;
     }
 }

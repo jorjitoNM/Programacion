@@ -1,8 +1,10 @@
 package dao;
 
+import common.PedidoNoEncontrado;
 import domain.Pedido;
 import domain.Promocion;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.TreeSet;
@@ -64,6 +66,20 @@ public class Pedidos {
                 pedido.setPromocion(new Promocion(codigo));
                 exit = true;
             }
+        }
+    }
+    public String verPedidos (int idUsuario) {
+        StringBuilder sb = new StringBuilder();
+        pedidos.stream().filter(p -> p.getIdUsuario()==idUsuario).filter(Pedido::isActivo).forEach(sb::append);
+        return sb.toString();
+    }
+
+    public TreeSet<Pedido> getPedidos() {
+        return pedidos;
+    }
+    public void validarPedido (int idPedido) throws PedidoNoEncontrado {
+        if (pedidos.stream().filter(p -> p.getIdPedido() == idPedido).findFirst().orElse(null) == null) {
+            throw new PedidoNoEncontrado();
         }
     }
 }

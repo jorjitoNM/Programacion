@@ -1,9 +1,8 @@
 package service;
 
+import common.PedidoNoEncontrado;
 import dao.DaoClientes;
-import dao.DaoPersonal;
 import dao.IDaoClientes;
-import dao.IDaoPersonal;
 import domain.Factura;
 
 public class GestionUsuario implements IGestionUsuario{
@@ -34,8 +33,8 @@ public class GestionUsuario implements IGestionUsuario{
     }
 
     @Override
-    public boolean eliminarPlato() {
-        return false;
+    public boolean eliminarPlato(String nombrePlato, int idPedido) {
+        return daoClientes.eliminarPedido(nombrePlato,idPedido);
     }
 
     @Override
@@ -59,5 +58,29 @@ public class GestionUsuario implements IGestionUsuario{
     @Override
     public void iniciarPedido () {
         daoClientes.iniciarPedido();
+    }
+
+    @Override
+    public void iniciarPedido(String cupon) {
+
+    }
+
+    @Override
+    public String mostrarCupones() {
+        return null;
+    }
+
+    @Override
+    public String añadirCupon(String cupon) {
+        return null;
+    }
+
+    @Override
+    public String verPedidos (String nombreUsuario) {
+        return daoClientes.verPedidos(nombreUsuario);
+    }
+    @Override
+    public void validarPedido (int idPedido) throws PedidoNoEncontrado {
+        daoClientes.validarPedido(idPedido);
     }
 }

@@ -11,6 +11,7 @@ public class GestionPersonal implements IGestionPersonal {
     public GestionPersonal(IDaoPersonal iDaoPersonal) {
         this.iDaoPersonal = iDaoPersonal;
     }
-
-
+    public String verComandas() {
+        return iDaoPersonal.verComandas();
+    }
 }

@@ -1,5 +1,7 @@
 package dao;
 
+import common.PedidoNoEncontrado;
+
 public class DaoClientes implements IDaoClientes{
     private Restaurante restaurante;
     public DaoClientes () {
@@ -13,9 +15,15 @@ public class DaoClientes implements IDaoClientes{
     public void añadirPlato(String nombre, int cantidad, int idPedido) {
         restaurante.añadirPlato(nombre, cantidad, idPedido);
     }
+
+    @Override
+    public int darIDCliente(String nombreUsuario) {
+        return 0;
+    }
+
     @Override
     public int darIDPedido (String nombreUsario) {
-        restaurante.darIDPedido(nombreUsario);
+        return restaurante.darIDPedido(nombreUsario);
     }
     @Override
     public void iniciarPedido() {
@@ -32,5 +40,18 @@ public class DaoClientes implements IDaoClientes{
     @Override
     public boolean existePedido() {
         return false;
+    }
+    @Override
+    public String verPedidos (String nombreUsuario) {
+        return restaurante.verPedidos(nombreUsuario);
+    }
+
+    @Override
+    public boolean eliminarPedido(String nombrePlato, int idPedido) {
+        return restaurante.eliminarPedido(nombrePlato,idPedido);
+    }
+    @Override
+    public void validarPedido (int idPedido) throws PedidoNoEncontrado {
+        restaurante.validarPedido(idPedido);
     }
 }

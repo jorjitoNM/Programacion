@@ -7,5 +7,7 @@ public class DaoPersonal implements IDaoPersonal{
         this.restaurante = new Restaurante();
     }
 
-
+    public String verComandas () {
+        return restaurante.verComandas();
+    }
 }

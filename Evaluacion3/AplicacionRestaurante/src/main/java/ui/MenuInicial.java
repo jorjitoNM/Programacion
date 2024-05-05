@@ -12,11 +12,12 @@ public class MenuInicial {
         do {
             switch (opcionMenuInicial()) {
                 case 1:
+                    inicioSesion();
                     break;
                 case 2:
                     if (controlSeguridad()) {
-                        MenuPersonal menuersonal = new MenuPersonal();
-                        menuersonal.menuPersonal();
+                        MenuPersonal menuPersonal = new MenuPersonal();
+                        menuPersonal.menuPersonal();
                     }
                     break;
                 default:
@@ -54,5 +55,12 @@ public class MenuInicial {
                 contador++;
         }while(contador <= 5);
         return logged;
+    }
+    private void inicioSesion () {
+        Scanner teclado = new Scanner(System.in);
+        System.out.println(Constantes.INTRODUZCA_NOMBRE);
+        String nombreUsuario = teclado.nextLine();
+        MenuUsuario menuUsuario = new MenuUsuario();
+        menuUsuario.menuUsuario(nombreUsuario);
     }
 }

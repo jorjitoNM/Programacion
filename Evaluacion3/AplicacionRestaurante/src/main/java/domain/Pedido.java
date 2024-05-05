@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Pedido {
-    //private List<Plato> carrito;
     private LocalDate fecha;
     private HashMap<Integer, Integer> carrito; //idPlato, cantidad
     private int idPedido;
@@ -15,6 +14,7 @@ public class Pedido {
 
 
     public Pedido() {
+        fecha = LocalDate.now();
         carrito = new HashMap<>();
         idPedido = darID();
         activo = true;
@@ -46,5 +46,34 @@ public class Pedido {
 
     public void setPromocion(Promocion promocion) {
         this.promocion = promocion;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+    public void eliminarPlato (int idPlato) {
+        carrito.remove(idPlato);
+    }
+
+    public String getPlatos() {
+        StringBuilder sb = new StringBuilder();
+        return carrito.forEach((k,v) -> sb.append(k.)); //quiero imprimir el nombre del plato
+    }
+    public String getInfo () {
+        return idPedido + " (" + //aqui iria el nombre del usuario
+        + ")";
+    }
+    public double tiempoEspera () {
+        carrito.forEach((k,v) -> k.); //problema, es un id de plato
+        return
+    }
+    @Override
+    public String toString() {
+        return "-Pedido " + idPedido +
+                " , fecha: " + fecha +
+                " , productos: " + carrito +
+                ", activo=" + activo +
+                " , cliente: " + idUsuario +
+                " , promocion añadidas: " + promocion + "\n";
     }
 }

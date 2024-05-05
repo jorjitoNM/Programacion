@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class GestionUsuarioTest {
+class GestionUsuarioTest2 {
     @InjectMocks
     GestionUsuario gestionUsuario;
     @Mock
@@ -67,7 +67,7 @@ class GestionUsuarioTest {
         Pedido pedido = new Pedido();
 
         //When
-        when(daoClientes.e)
+        when(daoClientes.existePedido()).thenReturn(true);
     }
 
     @Test

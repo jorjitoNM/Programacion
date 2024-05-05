@@ -1,12 +1,14 @@
 package dao;
 
+import common.Constantes;
+import common.PedidoNoEncontrado;
 import domain.Pedido;
 import domain.Persona;
 import domain.Plato;
 
-import java.util.Comparator;
+
 import java.util.HashSet;
-import java.util.TreeSet;
+
 
 public class Restaurante {
 
@@ -22,9 +24,10 @@ public class Restaurante {
     }
 
     public boolean añadirPlato (String nombre, int cantidad, int idPedido) {
-        int idPlato = carta.stream().filter(p -> p.getNombre().equalsIgnoreCase(nombre)).findFirst().orElse(new Plato(0)).getId();
-        if (idPlato!=0 && pedidos.last()!=null){ //aqui deberia pedir el id del pedido y guardarmelo en una variable despues de tener el correcto
-            pedidos.añadirPlato(idPlato,cantidad);
+        int idPlato = carta.stream().filter(p -> p.getNombre().equalsIgnoreCase(nombre)).findFirst().orElse(new Plato(-1)).getId();
+        Pedido pedido = pedidos.getPedidos().stream().filter(p -> p.getIdPedido() == idPedido).findFirst().orElse(null);
+        if (idPlato!=0 && pedido!=null){
+            pedido.añadirPlato(idPlato,cantidad);
             return true;
         }
         else
@@ -75,6 +78,7 @@ public class Restaurante {
         pedidos.iniciarPedido();
     }
     public void iniciarPedido (String codigo) {
+        comprobarCodigo(codigo);
         pedidos.iniciarPedido(codigo);
     }
 
@@ -83,6 +87,30 @@ public class Restaurante {
         for (Plato plato : carta) {
             sb.append(plato.toString());
         }
+        return sb.toString();
+    }
+    private boolean comprobarCodigo (String codigo) {
+        if ()
+    }
+    public String verPedidos (String nombreUsuario) {
+        return pedidos.verPedidos(clientes.getClientes().stream().filter(c -> c.getNombre().equalsIgnoreCase(nombreUsuario)).mapToInt( Persona::getId).findFirst().orElse(-1));
+    }
+    public boolean eliminarPedido (String nombrePlato, int idPedido) {
+        int idPlato = carta.stream().filter(p -> p.getNombre().equalsIgnoreCase(nombrePlato)).findFirst().orElse(new Plato(-1)).getId();
+        Pedido pedido = pedidos.getPedidos().stream().filter(p -> p.getIdPedido() == idPedido).findFirst().orElse(null);
+        if (idPlato!=0 && pedido!=null){
+            pedido.eliminarPlato(idPlato);
+            return true;
+        }
+        else
+            return false;
+    }
+    public void validarPedido (int idPedido) throws PedidoNoEncontrado {
+        pedidos.validarPedido(idPedido);
+    }
+    public String verComandas () {
+        StringBuilder sb = new StringBuilder();
+        pedidos.getPedidos().forEach(p -> sb.append(Constantes.PEDIDO).append(p.getInfo()).append(p.getPlatos()));
         return sb.toString();
     }
 }

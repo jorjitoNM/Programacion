@@ -17,11 +17,14 @@ public class Constantes {
     public static final String NOMBRE_PLATO = "Introduce el nombre del plato que quiere añadir, si no quiere añadir mas platos escriba 'suficiente': ";
     public static final String CANTIDAD = "Introduzca la cantidad: ";
     public static final String SUFICIENTE = "suficiente";
-    public static final String ELIMINAR_PLATO = "¿Que plato desea eliminar?";
-    public static final String INTRODUZCA_NOMBRE = "Introduzca su nombre se usuario";
+    public static final String ELIMINAR_PLATO = "¿Que plato desea eliminar? (si no desea eliminar ninguno introduzca 'ninguno')";
+    public static final String INTRODUZCA_NOMBRE = "Introduzca su nombre se usuario: ";
     public static final String PEDIDO_COMENZADO = "Su pedido ha comenzado a preparase";
     public static final String QUIERE_AÑADIR_CUPONES = "¿Quiere añadir algun cupon a su pedido?";
     public static final String INTRODUZCA_CUPON = "Introduzca el cupon que desea añadir a su pedido";
+    public static final String INTRODUZCA_ID_PEDIDO = "Introduzca el id del pedido: ";
+    public static final String PEDIDO_NO_ENCONTRADO = "ID de pedido no valido, intentelo otra vez";
+    public static final String NINGUNO = "Ninguno";
 
 
 
@@ -34,6 +37,9 @@ public class Constantes {
     public static final String VER_PEDIDOS_CAMARERO = "2. Ver las comandas del restaurante ";
     public static final String VER_PLATOS = "1. Ver los platos a preparar ";
     public static final String COMFIRMAR_PLATO = "2. Comfirmar un plato ";
+    public static final String PREPARADO = "listo ";
+    public static final String NO_PREPARADO = "en preparacion ";
+    public static final String PEDIDO = "Pedido ";
 
 
 

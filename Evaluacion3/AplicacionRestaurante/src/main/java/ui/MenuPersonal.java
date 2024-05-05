@@ -3,11 +3,19 @@ package ui;
 import common.Constantes;
 import common.OpcionNoValidaException;
 import common.Utilidades;
+import service.GestionPersonal;
+import service.IGestionPersonal;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuPersonal {
+    private IGestionPersonal servicio;
+
+    public MenuPersonal() {
+        servicio = new GestionPersonal();
+    }
+
     public void menuPersonal () {
         boolean exit = false;
         do {
@@ -44,6 +52,7 @@ public class MenuPersonal {
         do {
             switch (opcionMenuCocinero()) {
                 case 1:
+                    verComandas();
                     break;
                 case 2:
 
@@ -98,5 +107,8 @@ public class MenuPersonal {
             }
         }while (!exit);
         return opcion;
+    }
+    private void verComandas () {
+        System.out.println(servicio.verComandas());
     }
 }

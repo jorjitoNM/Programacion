@@ -45,7 +45,7 @@ public class Pedidos {
         }
         return idPedido;
     }
-    public int iniciarPedido () {
+    public void iniciarPedido (int idPedido) {
         Iterator<Pedido> it = pedidos.iterator();
         boolean exit = false;
         while (it.hasNext() && !exit) {
@@ -55,7 +55,7 @@ public class Pedidos {
             }
         }
     }
-    public int iniciarPedido (String codigo) { //arreglar el metodo iniciarPedido
+    public void iniciarPedido (String codigo, int idPedido) {
         Iterator<Pedido> it = pedidos.iterator();
         boolean exit = false;
         Pedido pedido = null;
@@ -87,5 +87,16 @@ public class Pedidos {
         if (pedido == null)
             throw new PedidoNoEncontrado();
         return pedido;
+    }
+    public double calcularPrecio (int idPedido) {
+        Iterator<Pedido> it = pedidos.iterator();
+        boolean exit = false;
+        Pedido pedido = null;
+        while (it.hasNext() && !exit) {
+            if (it.next().getIdPedido() == idPedido) {
+
+                exit = true;
+            }
+        }
     }
 }

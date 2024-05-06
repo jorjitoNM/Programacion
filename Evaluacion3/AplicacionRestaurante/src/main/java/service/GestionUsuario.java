@@ -57,13 +57,13 @@ public class GestionUsuario implements IGestionUsuario{
         return daoClientes.nuevoPedido();
     }
     @Override
-    public void iniciarPedido () {
-        daoClientes.iniciarPedido();
+    public void iniciarPedido (int idPedido) {
+        daoClientes.iniciarPedido(idPedido);
     }
 
     @Override
-    public void iniciarPedido(String codigo) {
-        daoClientes.iniciarPedido(codigo);
+    public void iniciarPedido(String codigo, int idPedido) {
+        daoClientes.iniciarPedido(codigo,idPedido);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class GestionUsuario implements IGestionUsuario{
         daoClientes.validarPedido(idPedido);
     }
     @Override
-    public String tiempoEspera (int idPedido) throws PedidoNoEncontrado {
+    public double tiempoEspera (int idPedido) throws PedidoNoEncontrado {
         return daoClientes.tiempoEspera(idPedido);
     }
     @Override

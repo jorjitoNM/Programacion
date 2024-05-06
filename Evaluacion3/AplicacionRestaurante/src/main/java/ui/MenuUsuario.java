@@ -126,23 +126,32 @@ public class MenuUsuario {
     private void iniciarPedido (String nombreUsuario) {
         Scanner teclado = new Scanner(System.in);
         System.out.println(Constantes.QUIERE_AÑADIR_CUPONES);
+        servicio.verPedidos(nombreUsuario);
         if (teclado.nextLine().equalsIgnoreCase("si")) {
             servicio.mostrarCupones();
             try {
-                servicio.iniciarPedido(añadirCupon(nombreUsuario));
-            } catch (CuponNoValidoException e) {
-                System.out.println(Constantes.CUPON_NO_VALIDO);
+                servicio.iniciarPedido(añadirCupon(nombreUsuario),idPedido());
+            } catch (PedidoNoEncontrado e) {
+                System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
             }
         }
         else
-            servicio.iniciarPedido();
+            servicio.iniciarPedido(idPedido());
         System.out.println(Constantes.PEDIDO_COMENZADO);
     }
-    private String añadirCupon (String nombreUsuario) throws CuponNoValidoException {
+    private String añadirCupon (String nombreUsuario) {
         Scanner teclado = new Scanner(System.in);
+        boolean exit = false;
         System.out.println(Constantes.INTRODUZCA_CUPON);
         String codigo = teclado.nextLine();
-        servicio.validarCupon(codigo,nombreUsuario);
+        do {
+            try {
+                servicio.validarCupon(codigo,nombreUsuario);
+                exit = true;
+            } catch (CuponNoValidoException e) {
+                System.out.println(Constantes.CUPON_NO_VALIDO);
+            }
+        }while(!exit);
         return codigo;
     }
     private void tiempoEspera () {

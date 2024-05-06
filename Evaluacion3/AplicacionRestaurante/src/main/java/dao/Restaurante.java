@@ -77,11 +77,11 @@ public class Restaurante {
         int idUsuario = clientes.getClientes().stream().filter(c -> c.getNombre().equalsIgnoreCase(nombreUsuario)).mapToInt(Persona::getId).findFirst().orElse(-1); //no me encuentra los clientes
         return pedidos.darIDPedido(idUsuario);
     }
-    public void iniciarPedido () {
-        pedidos.iniciarPedido();
+    public void iniciarPedido (int idPedido) {
+        pedidos.iniciarPedido(idPedido);
     }
-    public void iniciarPedido (String codigo) {
-        pedidos.iniciarPedido(codigo);
+    public void iniciarPedido (String codigo, int idPedido) {
+        pedidos.iniciarPedido(codigo,idPedido);
     }
     public String getCarta() {
         StringBuilder sb = new StringBuilder();
@@ -131,11 +131,13 @@ public class Restaurante {
     }
     public String crearFactura (int idPedido) throws PedidoNoEncontrado {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%-25s", clientes.getCliente(pedidos.getPedido(idPedido).getIdUsuario()).getNombre())); // aqui iria el nombre del cliente, que lo consigo gracias a un metodo que buscar el nombre del usuario con el id que hay en el pedido (en la calse clientes)
-        sb.append(String.format("%-15s",idPedido));
-        Pedido pedido = pedidos.getPedido(idPedido);
-        sb.append(pedido.getFecha());
-        sb.append(pedido.getPlatosString());
+        sb.append(String.format("%-25s ", clientes.getCliente(pedidos.getPedido(idPedido).getIdUsuario()).getNombre())); // aqui iria el nombre del cliente, que lo consigo gracias a un metodo que buscar el nombre del usuario con el id que hay en el pedido (en la calse clientes)
+        sb.append(idPedido);
+        sb.append("\n");
+        sb.append(pedidos.getPedido(idPedido).getFecha());
+        sb.append("\n");
+        sb.append(imprimirPlatos(idPedido));
+        sb.append(pedidos.calcularPrecio(idPedido));
         return sb.toString();
     }
     public double tiempoEspera (int idPedido) throws PedidoNoEncontrado {
@@ -154,5 +156,14 @@ public class Restaurante {
     }
     private String getNombrePlato (int idPlato) {
         return Objects.requireNonNull(carta.stream().filter(p -> p.getId() == idPlato).findFirst().orElse(null)).getNombre();
+    }
+    private String imprimirPlatos (int idPedido) throws PedidoNoEncontrado {
+        StringBuilder sb = new StringBuilder();
+        for (Integer idPlato : pedidos.getPedido(idPedido).getPlatos().keySet()) {
+            sb.append(String.format("- %s ",getNombrePlato(idPlato)));
+            sb.append(String.format(": %d",pedidos.getPedido(idPedido).getPlatos().get(idPlato)));
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }

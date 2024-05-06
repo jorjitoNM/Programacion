@@ -14,12 +14,12 @@ public interface IGestionUsuario {
     boolean existePedido ();
     int nuevoPedido ();
     int darIDPedido (String nombreUsuario);
-    void iniciarPedido();
-    void iniciarPedido(String codigo);
+    void iniciarPedido(int idPedido);
+    void iniciarPedido(String codigo, int idPedido);
     String mostrarCupones ();
     String añadirCupon(String cupon);
     String verPedidos(String nombreUsuario) ;
     void validarPedido (int idPedido) throws PedidoNoEncontrado;
-    String tiempoEspera (int idPedido) throws PedidoNoEncontrado;
+    double tiempoEspera (int idPedido) throws PedidoNoEncontrado;
     void validarCupon (String cupon,String nombreUsuario) throws CuponNoValidoException;
 }

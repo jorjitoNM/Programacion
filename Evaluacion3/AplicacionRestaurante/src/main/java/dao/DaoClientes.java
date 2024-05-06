@@ -27,13 +27,13 @@ public class DaoClientes implements IDaoClientes{
         return restaurante.darIDPedido(nombreUsario);
     }
     @Override
-    public void iniciarPedido() {
-        restaurante.iniciarPedido();
+    public void iniciarPedido(int idPedido) {
+        restaurante.iniciarPedido(idPedido);
     }
 
     @Override
-    public void iniciarPedido(String codigo) {
-        restaurante.iniciarPedido(codigo);
+    public void iniciarPedido(String codigo, int idPedido) {
+        restaurante.iniciarPedido(codigo,idPedido);
     }
 
     @Override

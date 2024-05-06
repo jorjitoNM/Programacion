@@ -13,18 +13,20 @@ public class Pedido {
     private Promocion promocion;
 
 
-    public Pedido() {
+    public Pedido(int idUsuario) {
         fecha = LocalDate.now();
         carrito = new HashMap<>();
         idPedido = darID();
         activo = true;
+        this.idUsuario = idUsuario;
     }
-    public Pedido(Promocion promocion) {
+    public Pedido(Promocion promocion, int idUsuario) {
         fecha = LocalDate.now();
         carrito = new HashMap<>();
         idPedido = darID();
         activo = true;
         this.promocion = promocion;
+        this.idUsuario = idUsuario;
     }
 
     public LocalDate getFecha() {

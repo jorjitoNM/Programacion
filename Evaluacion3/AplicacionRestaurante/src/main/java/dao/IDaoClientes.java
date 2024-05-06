@@ -1,5 +1,6 @@
 package dao;
 
+import common.CuponNoValidoException;
 import common.PedidoNoEncontrado;
 
 public interface IDaoClientes {
@@ -14,4 +15,7 @@ public interface IDaoClientes {
     String verPedidos (String nombreUsuario);
     boolean eliminarPedido (String nombrePlato, int idPedido);
     void validarPedido (int idPedido) throws PedidoNoEncontrado;
+    double tiempoEspera (int idPedido) throws PedidoNoEncontrado;
+    String verCarrito (int idPedido) throws PedidoNoEncontrado;
+    void validarCupon (String cupon,String nombreUsuario) throws CuponNoValidoException;
 }

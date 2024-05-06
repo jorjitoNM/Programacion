@@ -26,6 +26,8 @@ public class MenuPersonal {
                 case 2:
                     menuCocinero();
                     break;
+                case 3:
+                    menuJefe();
                 default:
                     System.out.println(Constantes.OPCION_NO_VALIDA);
             }
@@ -46,7 +48,23 @@ public class MenuPersonal {
         }while (!exit);
         return opcion;
     }
-
+    private void menuJefe () {
+        boolean exit = false;
+        do {
+            switch (opcionMenuJefe()) {
+                case 1:
+                    nuevoEmpleado();
+                    break;
+                case 2:
+                    eliminarEmpleado();
+                    break;
+                case 3:
+                    cambiarPrecio();
+                default:
+                    System.out.println(Constantes.OPCION_NO_VALIDA);
+            }
+        } while (!exit);
+    }
     public void menuCocinero () {
         boolean exit = false;
         do {
@@ -110,5 +128,12 @@ public class MenuPersonal {
     }
     private void verComandas () {
         System.out.println(servicio.verComandas());
+    }
+    private void nuevoEmpleado () {
+        System.out.println();
+    }
+    private void cambiarPrecio () {
+        servicio.verCarta();
+        System.out.println();
     }
 }

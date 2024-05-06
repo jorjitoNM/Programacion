@@ -1,5 +1,6 @@
 package dao;
 
+import common.CuponNoValidoException;
 import common.PedidoNoEncontrado;
 
 public class DaoClientes implements IDaoClientes{
@@ -29,10 +30,12 @@ public class DaoClientes implements IDaoClientes{
     public void iniciarPedido() {
         restaurante.iniciarPedido();
     }
+
     @Override
     public void iniciarPedido(String codigo) {
         restaurante.iniciarPedido(codigo);
     }
+
     @Override
     public String mostrarMenu () {
         return restaurante.getCarta();
@@ -53,5 +56,18 @@ public class DaoClientes implements IDaoClientes{
     @Override
     public void validarPedido (int idPedido) throws PedidoNoEncontrado {
         restaurante.validarPedido(idPedido);
+    }
+    @Override
+    public double tiempoEspera (int idPedido) throws PedidoNoEncontrado {
+        return restaurante.tiempoEspera(idPedido);
+    }
+    @Override
+    public String verCarrito (int idPedido) throws PedidoNoEncontrado {
+        return restaurante.verCarrito();
+    }
+
+    @Override
+    public void validarCupon(String cupon,String nombreUsuario) throws CuponNoValidoException {
+        restaurante.validarCupon(cupon,nombreUsuario);
     }
 }

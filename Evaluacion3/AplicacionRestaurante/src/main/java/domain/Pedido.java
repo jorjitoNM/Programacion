@@ -19,6 +19,13 @@ public class Pedido {
         idPedido = darID();
         activo = true;
     }
+    public Pedido(Promocion promocion) {
+        fecha = LocalDate.now();
+        carrito = new HashMap<>();
+        idPedido = darID();
+        activo = true;
+        this.promocion = promocion;
+    }
 
     public LocalDate getFecha() {
         return fecha;
@@ -55,16 +62,16 @@ public class Pedido {
         carrito.remove(idPlato);
     }
 
-    public String getPlatos() {
+    public String getPlatosString() {
         StringBuilder sb = new StringBuilder();
-        return carrito.forEach((k,v) -> sb.append(k.)); //quiero imprimir el nombre del plato
+        return carrito.forEach((k,v) -> sb.append(k.getPlato())); //quiero imprimir el nombre del plato
     }
-    public String getInfo () {
-        return idPedido + " (" + //aqui iria el nombre del usuario
-        + ")";
+    public HashMap<Integer, Integer> getPlatos() {
+        return carrito;
     }
+
     public double tiempoEspera () {
-        carrito.forEach((k,v) -> k.); //problema, es un id de plato
+        carrito.forEach((k,v) -> k.); //problema, es un id de plato (esto va en restaurante)
         return
     }
     @Override

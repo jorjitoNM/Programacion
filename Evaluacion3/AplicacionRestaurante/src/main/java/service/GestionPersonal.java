@@ -4,14 +4,17 @@ import dao.DaoPersonal;
 import dao.IDaoPersonal;
 
 public class GestionPersonal implements IGestionPersonal {
-    private final IDaoPersonal iDaoPersonal;
+    private final IDaoPersonal daoPersonal;
     public GestionPersonal() {
-        iDaoPersonal = new DaoPersonal();
+        daoPersonal = new DaoPersonal();
     }
     public GestionPersonal(IDaoPersonal iDaoPersonal) {
-        this.iDaoPersonal = iDaoPersonal;
+        this.daoPersonal = iDaoPersonal;
     }
     public String verComandas() {
-        return iDaoPersonal.verComandas();
+        return daoPersonal.verComandas();
+    }
+    public String verCarta () {
+        return daoPersonal.verCarta();
     }
 }

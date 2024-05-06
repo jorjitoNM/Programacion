@@ -11,8 +11,11 @@ public class Constantes {
 
     //Menu Usuario
     public static final String  MENU_USUARIO = "Introduzca una opcion: ";
-    public static final String INICIAR_PEDIDO = "1. Comenzar un nuevo pedido ";
+    public static final String AÑADIR_PLATO = "1. Añadir platos ";
     public static final String VER_CESTA = "2. Ver la cesta ";
+    public static final String OPCION_ELIMINAR_PLATO = "3. Eliminar platos ";
+    public static final String INICIAR_PEDIDO = "4. Pedir la comida ";
+    public static final String TIEMPO_ESPERA = "5. Consultar el tiempo estimado de preparacion de su pedido ";
     public static final String NO_EXISTE_PEDIDO = "Todavia no ha iniciado un nuevo pedido, ¿desea crear uno nuevo? ";
     public static final String NOMBRE_PLATO = "Introduce el nombre del plato que quiere añadir, si no quiere añadir mas platos escriba 'suficiente': ";
     public static final String CANTIDAD = "Introduzca la cantidad: ";
@@ -50,6 +53,7 @@ public class Constantes {
     public static final String NOMBRE_USUARIO_INCORRCTO = "Nombre de usuario incorrecto";
     public static final String CONTRASEÑA_INCORRECTA = "Constraseña incorrecta";
     public static final String ERROR_PEDIDO = "No se ha podido completar la accion porque no existe pedido";
+    public static final String CUPON_NO_VALIDO = "El cupon introducido no es válido ";
 
 
     //utilidades

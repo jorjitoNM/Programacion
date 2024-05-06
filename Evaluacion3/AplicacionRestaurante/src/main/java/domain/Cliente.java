@@ -32,4 +32,8 @@ public class Cliente extends Persona {
             errores[1] = Constantes.NOMBRE_USUARIO_INCORRCTO;
         return errores;
     }
+
+    public List<Promocion> getPromociones() {
+        return promociones;
+    }
 }

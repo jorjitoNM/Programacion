@@ -69,6 +69,14 @@ public class Plato {
                 " , extras='" + extras +
                 " , estado: " + devolverEstado(preparado) + "\n";
     }
+    public String toStringAdmin () {
+        return "- Nombre='" + nombre +
+                " , precio=" + precio +
+                "€ , calorias=" + calorias +
+                "Kcal , tipo='" + tipo +
+                " , extras='" + extras +
+                " , estado: " + devolverEstado(preparado) + "\n";
+    }
     private String devolverEstado (boolean preparado) {
         if (preparado)
             return Constantes.PREPARADO;

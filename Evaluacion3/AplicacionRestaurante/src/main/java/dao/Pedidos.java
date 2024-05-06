@@ -4,10 +4,7 @@ import common.PedidoNoEncontrado;
 import domain.Pedido;
 import domain.Promocion;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Pedidos {
     private TreeSet<Pedido> pedidos;
@@ -38,12 +35,15 @@ public class Pedidos {
     }
     public int darIDPedido (int idUsuario) {
         Iterator<Pedido> it = pedidos.iterator();
-        while (it.hasNext()) {
+        int idPedido = -1;
+        boolean exit = false;
+        while (it.hasNext() && !exit) {
             if (it.next().getIdUsuario() == idUsuario) {
-                return it.next().getIdPedido();
+                idPedido = it.next().getIdPedido();
+                exit = true;
             }
         }
-        return -1;
+        return idPedido;
     }
     public int iniciarPedido () {
         Iterator<Pedido> it = pedidos.iterator();
@@ -55,7 +55,7 @@ public class Pedidos {
             }
         }
     }
-    public int iniciarPedido (String codigo) {
+    public int iniciarPedido (String codigo) { //arreglar el metodo iniciarPedido
         Iterator<Pedido> it = pedidos.iterator();
         boolean exit = false;
         Pedido pedido = null;
@@ -81,5 +81,11 @@ public class Pedidos {
         if (pedidos.stream().filter(p -> p.getIdPedido() == idPedido).findFirst().orElse(null) == null) {
             throw new PedidoNoEncontrado();
         }
+    }
+    public Pedido getPedido (int idPedido) throws PedidoNoEncontrado {
+        Pedido pedido = pedidos.stream().filter(p -> p.getIdPedido() == idPedido).findFirst().orElse(null);
+        if (pedido == null)
+            throw new PedidoNoEncontrado();
+        return pedido;
     }
 }

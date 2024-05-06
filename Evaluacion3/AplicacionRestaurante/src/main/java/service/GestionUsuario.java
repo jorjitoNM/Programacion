@@ -1,5 +1,6 @@
 package service;
 
+import common.CuponNoValidoException;
 import common.PedidoNoEncontrado;
 import dao.DaoClientes;
 import dao.IDaoClientes;
@@ -28,8 +29,8 @@ public class GestionUsuario implements IGestionUsuario{
     }
 
     @Override
-    public String mostrarCarrito() {
-        return "";
+    public String mostrarCarrito(int idPedido) throws PedidoNoEncontrado {
+        return daoClientes.verCarrito(idPedido);
     }
 
     @Override
@@ -61,8 +62,8 @@ public class GestionUsuario implements IGestionUsuario{
     }
 
     @Override
-    public void iniciarPedido(String cupon) {
-
+    public void iniciarPedido(String codigo) {
+        daoClientes.iniciarPedido(codigo);
     }
 
     @Override
@@ -82,5 +83,13 @@ public class GestionUsuario implements IGestionUsuario{
     @Override
     public void validarPedido (int idPedido) throws PedidoNoEncontrado {
         daoClientes.validarPedido(idPedido);
+    }
+    @Override
+    public String tiempoEspera (int idPedido) throws PedidoNoEncontrado {
+        return daoClientes.tiempoEspera(idPedido);
+    }
+    @Override
+    public void validarCupon (String cupon, String nombreUsuario) throws CuponNoValidoException {
+        daoClientes.validarCupon(cupon,nombreUsuario);
     }
 }

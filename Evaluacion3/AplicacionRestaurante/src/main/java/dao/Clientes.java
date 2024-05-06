@@ -5,7 +5,7 @@ import domain.Cliente;
 import java.util.HashSet;
 
 public class Clientes {
-    private HashSet clientes;
+    private HashSet<Cliente> clientes;
 
     public Clientes() {
     }
@@ -16,4 +16,11 @@ public class Clientes {
     public HashSet<Cliente> getClientes() {
         return clientes;
     }
+    public Cliente getCliente(int idCliente) {
+        return clientes.stream().filter(c -> c.getId()==idCliente).findFirst().orElse(null);
+    }
+    public Cliente getCliente (String nombreUsuario) {
+        return clientes.stream().filter(c -> c.getNombre().equals(nombreUsuario)).findFirst().orElse(null);
+    }
+
 }

@@ -10,4 +10,7 @@ public class DaoPersonal implements IDaoPersonal{
     public String verComandas () {
         return restaurante.verComandas();
     }
+    public String verCarta () {
+        return restaurante.verCartaAdmin();
+    }
 }

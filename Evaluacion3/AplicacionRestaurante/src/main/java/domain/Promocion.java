@@ -6,4 +6,8 @@ public class Promocion {
     public Promocion(String codigo) {
         this.codigo = codigo;
     }
+
+    public String getCodigo() {
+        return codigo;
+    }
 }

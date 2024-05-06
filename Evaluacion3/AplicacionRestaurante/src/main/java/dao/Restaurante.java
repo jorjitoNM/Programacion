@@ -1,13 +1,16 @@
 package dao;
 
 import common.Constantes;
+import common.CuponNoValidoException;
 import common.PedidoNoEncontrado;
 import domain.Pedido;
 import domain.Persona;
 import domain.Plato;
+import domain.Promocion;
 
 
 import java.util.HashSet;
+import java.util.Objects;
 
 
 public class Restaurante {
@@ -78,10 +81,8 @@ public class Restaurante {
         pedidos.iniciarPedido();
     }
     public void iniciarPedido (String codigo) {
-        comprobarCodigo(codigo);
         pedidos.iniciarPedido(codigo);
     }
-
     public String getCarta() {
         StringBuilder sb = new StringBuilder();
         for (Plato plato : carta) {
@@ -89,8 +90,17 @@ public class Restaurante {
         }
         return sb.toString();
     }
-    private boolean comprobarCodigo (String codigo) {
-        if ()
+    public String verCartaAdmin () {
+        StringBuilder sb = new StringBuilder();
+        for (Plato plato : carta) {
+            sb.append(plato.toString());
+        }
+        return sb.toString();
+    }
+    private void validarCupon (String codigo, String nombreUsuario) throws CuponNoValidoException {
+        if (clientes.getCliente(nombreUsuario).getPromociones().stream().filter(p -> p.getCodigo().equalsIgnoreCase(codigo)).findFirst().orElse(null) != null) {
+            throw new CuponNoValidoException();
+        }
     }
     public String verPedidos (String nombreUsuario) {
         return pedidos.verPedidos(clientes.getClientes().stream().filter(c -> c.getNombre().equalsIgnoreCase(nombreUsuario)).mapToInt( Persona::getId).findFirst().orElse(-1));
@@ -110,7 +120,39 @@ public class Restaurante {
     }
     public String verComandas () {
         StringBuilder sb = new StringBuilder();
-        pedidos.getPedidos().forEach(p -> sb.append(Constantes.PEDIDO).append(p.getInfo()).append(p.getPlatos()));
+        pedidos.getPedidos().forEach(p -> {
+            try {
+                sb.append(Constantes.PEDIDO).append(p.getIdPedido()).append("(").append(clientes.getCliente(p.getIdUsuario()).getNombre()).append(")").append(getPlatos(p.getIdPedido()));
+            } catch (PedidoNoEncontrado e) {
+                throw new RuntimeException(e); //esta excepcion unnca va a saltar
+            }
+        });
         return sb.toString();
+    }
+    public String crearFactura (int idPedido) throws PedidoNoEncontrado {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%-25s", clientes.getCliente(pedidos.getPedido(idPedido).getIdUsuario()).getNombre())); // aqui iria el nombre del cliente, que lo consigo gracias a un metodo que buscar el nombre del usuario con el id que hay en el pedido (en la calse clientes)
+        sb.append(String.format("%-15s",idPedido));
+        Pedido pedido = pedidos.getPedido(idPedido);
+        sb.append(pedido.getFecha());
+        sb.append(pedido.getPlatosString());
+        return sb.toString();
+    }
+    public double tiempoEspera (int idPedido) throws PedidoNoEncontrado {
+        return pedidos.getPedido(idPedido).tiempoEspera();
+    }
+    public String verCarrito (int idPedido) throws PedidoNoEncontrado {
+        return pedidos.getPedido(idPedido).getPlatosString();
+    }
+    public String getPlatos (int idPedido) throws PedidoNoEncontrado {
+        //por cada plato que hay en el pedido recorrer la carta para coger el nombre
+        StringBuilder sb = new StringBuilder();
+        for (Integer idPlato:pedidos.getPedido(idPedido).getPlatos().keySet()) { //revisar velocidad de ejecucion
+            sb.append(String.format("(%s)",getNombrePlato(idPlato)));
+        }
+        return sb.toString();
+    }
+    private String getNombrePlato (int idPlato) {
+        return Objects.requireNonNull(carta.stream().filter(p -> p.getId() == idPlato).findFirst().orElse(null)).getNombre();
     }
 }

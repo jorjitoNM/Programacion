@@ -2,12 +2,14 @@ package ui;
 
 import common.Constantes;
 import common.Utilidades;
+import dao.Clientes;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuInicial {
-    public void menuInicial () {
+    public void menuInicial () throws IOException {
         boolean exit = false;
         do {
             switch (opcionMenuInicial()) {
@@ -56,11 +58,21 @@ public class MenuInicial {
         }while(contador <= 5);
         return logged;
     }
-    private void inicioSesion () {
+    private void inicioSesion () throws IOException {
         Scanner teclado = new Scanner(System.in);
-        System.out.println(Constantes.INTRODUZCA_NOMBRE);
-        String nombreUsuario = teclado.nextLine();
-        MenuUsuario menuUsuario = new MenuUsuario();
-        menuUsuario.menuUsuario(nombreUsuario);
+        Clientes clientes = new Clientes();
+        boolean exit = false;
+        do {
+            System.out.println(clientes.mostrarIDsUsuarios());
+            System.out.println(Constantes.INTRODUZCA_ID_USUARIO);
+            int idUsuario = teclado.nextInt();
+            if(clientes.comprobarCliente(idUsuario)) {
+                MenuUsuario menuUsuario = new MenuUsuario();
+                menuUsuario.menuUsuario(idUsuario);
+                exit = true;
+            } else
+                System.out.println(Constantes.ERROR_NO_REGISTRADO);
+        }while(!exit);
+
     }
 }

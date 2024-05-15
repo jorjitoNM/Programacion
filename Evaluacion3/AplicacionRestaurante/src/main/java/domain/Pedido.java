@@ -1,10 +1,10 @@
 package domain;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class Pedido {
-    private LocalDate fecha;
+    private LocalDateTime fecha;
     private HashMap<Integer, Integer> carrito; //idPlato, cantidad
     private int idPedido;
     private ArrayList<Integer> ids = new ArrayList<>();
@@ -14,14 +14,14 @@ public class Pedido {
 
 
     public Pedido(int idUsuario) {
-        fecha = LocalDate.now();
+        fecha = LocalDateTime.now();
         carrito = new HashMap<>();
         idPedido = darID();
         activo = true;
         this.idUsuario = idUsuario;
     }
     public Pedido(Promocion promocion, int idUsuario) {
-        fecha = LocalDate.now();
+        fecha = LocalDateTime.now();
         carrito = new HashMap<>();
         idPedido = darID();
         activo = true;
@@ -29,7 +29,7 @@ public class Pedido {
         this.idUsuario = idUsuario;
     }
 
-    public LocalDate getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
@@ -40,6 +40,9 @@ public class Pedido {
     private int darID () {
         int id = (int) (Math.random()*1000);
         return (ids.contains(id))?id:darID();
+    }
+    public LocalDateTime horaEntrega (double tiempoEspera) {
+        return fecha.plusSeconds((long)tiempoEspera);
     }
     public void añadirPlato (int idPlato, int cantidad) {
         carrito.put(idPlato, cantidad);
@@ -63,18 +66,8 @@ public class Pedido {
     public void eliminarPlato (int idPlato) {
         carrito.remove(idPlato);
     }
-
-    public String getPlatosString() {
-        StringBuilder sb = new StringBuilder();
-        return carrito.forEach((k,v) -> sb.append(k.getPlato())); //quiero imprimir el nombre del plato
-    }
     public HashMap<Integer, Integer> getPlatos() {
         return carrito;
-    }
-
-    public double tiempoEspera () {
-        carrito.forEach((k,v) -> k.); //problema, es un id de plato (esto va en restaurante)
-        return
     }
     @Override
     public String toString() {

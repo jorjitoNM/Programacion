@@ -10,4 +10,8 @@ public class Promocion {
     public String getCodigo() {
         return codigo;
     }
+
+    public String toStringFichero() {
+        return codigo;
+    }
 }

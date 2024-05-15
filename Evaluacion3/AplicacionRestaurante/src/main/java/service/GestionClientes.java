@@ -6,16 +6,27 @@ import dao.DaoClientes;
 import dao.IDaoClientes;
 import domain.Factura;
 
-public class GestionUsuario implements IGestionUsuario{
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.LocalDateTime;
+
+public class GestionClientes implements IGestionClientes {
     private IDaoClientes daoClientes;
 
-    public GestionUsuario() {
+    public GestionClientes() throws IOException {
         daoClientes = new DaoClientes();
+    }
+    public GestionClientes(DaoClientes daoClientes) throws IOException {
+        this.daoClientes = daoClientes;
     }
 
     @Override
     public String mostrarMenu() {
         return daoClientes.mostrarMenu();
+    }
+    @Override
+    public String mostrarMenu(String tipo) {
+        return daoClientes.mostrarMenu(tipo);
     }
 
     @Override
@@ -24,8 +35,8 @@ public class GestionUsuario implements IGestionUsuario{
     }
 
     @Override
-    public void añadirPlato(String nombre, int cantidad, int idPedido) {
-        daoClientes.añadirPlato(nombre, cantidad, idPedido);
+    public boolean añadirPlato(String nombre, int cantidad, int idPedido) throws FileNotFoundException {
+        return daoClientes.añadirPlato(nombre, cantidad, idPedido);
     }
 
     @Override
@@ -35,7 +46,7 @@ public class GestionUsuario implements IGestionUsuario{
 
     @Override
     public boolean eliminarPlato(String nombrePlato, int idPedido) {
-        return daoClientes.eliminarPedido(nombrePlato,idPedido);
+        return daoClientes.eliminarPlato(nombrePlato,idPedido);
     }
 
     @Override
@@ -44,25 +55,25 @@ public class GestionUsuario implements IGestionUsuario{
     }
 
     @Override
-    public boolean existePedido() {
-        return false;
+    public boolean existePedido(int idPedido) {
+        return daoClientes.existePedido(idPedido);
     }
     @Override
     public int darIDPedido (String nombreUsuario) {
         return daoClientes.darIDPedido(nombreUsuario);
-    }
+    } //no tiene usos
 
     @Override
-    public int nuevoPedido() {
-        return daoClientes.nuevoPedido();
+    public int nuevoPedido(int idUsuario) {
+        return daoClientes.nuevoPedido(idUsuario);
     }
     @Override
-    public void iniciarPedido (int idPedido) {
+    public void iniciarPedido (int idUsuario,int idPedido) {
         daoClientes.iniciarPedido(idPedido);
     }
 
     @Override
-    public void iniciarPedido(String codigo, int idPedido) {
+    public void iniciarPedido(int idUsuario,String codigo, int idPedido) {
         daoClientes.iniciarPedido(codigo,idPedido);
     }
 
@@ -77,8 +88,8 @@ public class GestionUsuario implements IGestionUsuario{
     }
 
     @Override
-    public String verPedidos (String nombreUsuario) {
-        return daoClientes.verPedidos(nombreUsuario);
+    public String verPedidos (int idUsuario) {
+        return daoClientes.verPedidos(idUsuario);
     }
     @Override
     public void validarPedido (int idPedido) throws PedidoNoEncontrado {
@@ -89,7 +100,11 @@ public class GestionUsuario implements IGestionUsuario{
         return daoClientes.tiempoEspera(idPedido);
     }
     @Override
-    public void validarCupon (String cupon, String nombreUsuario) throws CuponNoValidoException {
-        daoClientes.validarCupon(cupon,nombreUsuario);
+    public void validarCupon (String cupon, int idUsuario) throws CuponNoValidoException {
+        daoClientes.validarCupon(cupon,idUsuario);
+    }
+    @Override
+    public LocalDateTime horaEntrega (int idPedido) throws PedidoNoEncontrado {
+        return daoClientes.horaEntrega(idPedido);
     }
 }

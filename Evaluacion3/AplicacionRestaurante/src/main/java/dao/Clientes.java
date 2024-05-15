@@ -1,16 +1,21 @@
 package dao;
 
 import domain.Cliente;
+import net.datafaker.Faker;
 
+import java.io.IOException;
 import java.util.HashSet;
 
 public class Clientes {
     private HashSet<Cliente> clientes;
 
-    public Clientes() {
+    public Clientes() throws IOException {
+        if (!DaoFicheros.existClientes())
+            DaoFicheros.crearFicheroClientes();
+        clientes = crearClientes();
     }
 
-    public Clientes(HashSet clientes) {
+    public Clientes(HashSet<Cliente> clientes) throws IOException {
         this.clientes = clientes;
     }
     public HashSet<Cliente> getClientes() {
@@ -22,5 +27,26 @@ public class Clientes {
     public Cliente getCliente (String nombreUsuario) {
         return clientes.stream().filter(c -> c.getNombre().equals(nombreUsuario)).findFirst().orElse(null);
     }
-
+    public String mostrarIDsUsuarios () {
+        StringBuilder sb = new StringBuilder();
+        clientes.forEach(c -> sb.append(c.getNombre()).append(": ").append(c.getId()).append("\n"));
+        return sb.toString();
+    }
+    private HashSet<Cliente> crearClientes() throws IOException { //al volver a llamar al metodo me devuelve el array vacio
+        HashSet<Cliente> clientes = new HashSet<>();
+            if (DaoFicheros.clientesIsEmpty()) {
+                Faker faker = new Faker();
+                for (int i = 0; i < 15; i++) {
+                    clientes.add(new Cliente(faker.name().name(),faker.name().lastName(),faker.date().birthdayLocalDate(),"1234"));
+                }
+                DaoFicheros.guardarClientes(clientes);
+            }
+            else {
+                clientes = DaoFicheros.leerClientes();
+            }
+        return clientes;
+    }
+    public boolean comprobarCliente (int idUsuario) {
+        return clientes.stream().filter(c -> c.getId()==idUsuario).findFirst().orElse(null) != null;
+    }
 }

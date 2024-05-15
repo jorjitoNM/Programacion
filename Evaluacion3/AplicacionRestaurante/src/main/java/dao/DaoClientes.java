@@ -3,18 +3,25 @@ package dao;
 import common.CuponNoValidoException;
 import common.PedidoNoEncontrado;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.LocalDateTime;
+
 public class DaoClientes implements IDaoClientes{
     private Restaurante restaurante;
-    public DaoClientes () {
+    public DaoClientes () throws IOException {
         restaurante = new Restaurante();
     }
-    @Override
-    public int nuevoPedido() {
-        return restaurante.nuevoPedido();
+    public DaoClientes (Restaurante restaurante) throws IOException {
+        this.restaurante = restaurante;
     }
     @Override
-    public void añadirPlato(String nombre, int cantidad, int idPedido) {
-        restaurante.añadirPlato(nombre, cantidad, idPedido);
+    public int nuevoPedido(int idUsuario) {
+        return restaurante.nuevoPedido(idUsuario);
+    }
+    @Override
+    public boolean añadirPlato(String nombre, int cantidad, int idPedido) throws FileNotFoundException {
+        return restaurante.añadirPlato(nombre, cantidad, idPedido);
     }
 
     @Override
@@ -41,17 +48,21 @@ public class DaoClientes implements IDaoClientes{
         return restaurante.getCarta();
     }
     @Override
-    public boolean existePedido() {
-        return false;
+    public String mostrarMenu (String tipo) {
+        return restaurante.getCarta(tipo);
     }
     @Override
-    public String verPedidos (String nombreUsuario) {
-        return restaurante.verPedidos(nombreUsuario);
+    public boolean existePedido(int idPedido) {
+        return restaurante.existePedido(idPedido);
+    }
+    @Override
+    public String verPedidos (int idUsuario) {
+        return restaurante.verPedidos(idUsuario);
     }
 
     @Override
-    public boolean eliminarPedido(String nombrePlato, int idPedido) {
-        return restaurante.eliminarPedido(nombrePlato,idPedido);
+    public boolean eliminarPlato(String nombrePlato, int idPedido) {
+        return restaurante.eliminarPlato(nombrePlato,idPedido);
     }
     @Override
     public void validarPedido (int idPedido) throws PedidoNoEncontrado {
@@ -63,11 +74,15 @@ public class DaoClientes implements IDaoClientes{
     }
     @Override
     public String verCarrito (int idPedido) throws PedidoNoEncontrado {
-        return restaurante.verCarrito();
+        return restaurante.verCarrito(idPedido);
     }
 
     @Override
-    public void validarCupon(String cupon,String nombreUsuario) throws CuponNoValidoException {
-        restaurante.validarCupon(cupon,nombreUsuario);
+    public void validarCupon(String cupon,int idusuario) throws CuponNoValidoException {
+        restaurante.validarCupon(cupon,idusuario);
+    }
+    @Override
+    public LocalDateTime horaEntrega (int idPedido) throws PedidoNoEncontrado {
+        return restaurante.horaEntrega(idPedido);
     }
 }

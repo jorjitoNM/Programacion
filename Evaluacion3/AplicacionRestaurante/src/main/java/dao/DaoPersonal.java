@@ -1,9 +1,11 @@
 package dao;
 
+import java.io.IOException;
+
 public class DaoPersonal implements IDaoPersonal{
     private Restaurante restaurante;
 
-    public DaoPersonal() {
+    public DaoPersonal() throws IOException {
         this.restaurante = new Restaurante();
     }
 
@@ -12,5 +14,11 @@ public class DaoPersonal implements IDaoPersonal{
     }
     public String verCarta () {
         return restaurante.verCartaAdmin();
+    }
+    public boolean cambiarPrecio (int idPlato, int precio) {
+        return restaurante.cambiarPrecio(idPlato,precio);
+    }
+    public boolean eliminarCarta () {
+        return restaurante.eliminarCarta();
     }
 }

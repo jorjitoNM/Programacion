@@ -2,10 +2,11 @@ package domain;
 
 import common.Constantes;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Plato {
+public class Plato implements Serializable {
     private double precio;
     private String nombre;
     private int calorias;
@@ -35,7 +36,7 @@ public class Plato {
     }
     private int darID () {
         int id = (int) (Math.random()*1000);
-        return (ids.contains(id))?id:darID();
+        return (ids.contains(id))?darID():id;
     }
     public String getNombre() {
         return nombre;
@@ -45,8 +46,24 @@ public class Plato {
         return id;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
     public boolean isPreparado() {
         return preparado;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public double getTiempoPreparacion() {
+        return tiempoPreparacion;
     }
 
     public void setPreparado(boolean preparado) {

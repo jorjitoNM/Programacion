@@ -4,6 +4,7 @@ import common.PedidoNoEncontrado;
 import domain.Pedido;
 import domain.Promocion;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class Pedidos {
@@ -16,8 +17,8 @@ public class Pedidos {
             }
         });
     }
-    public int nuevoPedido () {
-        Pedido pedido = new Pedido();
+    public int nuevoPedido (int idUsuario) {
+        Pedido pedido = new Pedido(idUsuario);
         pedidos.add(pedido);
         return pedido.getIdPedido();
     }
@@ -26,8 +27,8 @@ public class Pedidos {
         boolean exit = false;
         Pedido pedido = null;
         while (it.hasNext() && !exit) {
-            if (it.next().getIdPedido() == idPedido) {
-                pedido = it.next();
+            pedido = it.next();
+            if (pedido.getIdPedido() == idPedido) {
                 pedido.añadirPlato(idPlato, cantidad);
                 exit = true;
             }
@@ -37,9 +38,11 @@ public class Pedidos {
         Iterator<Pedido> it = pedidos.iterator();
         int idPedido = -1;
         boolean exit = false;
+        Pedido pedido = null;
         while (it.hasNext() && !exit) {
-            if (it.next().getIdUsuario() == idUsuario) {
-                idPedido = it.next().getIdPedido();
+            pedido = it.next();
+            if (pedido.getIdUsuario() == idUsuario) {
+                idPedido = pedido.getIdPedido();
                 exit = true;
             }
         }
@@ -48,9 +51,11 @@ public class Pedidos {
     public void iniciarPedido (int idPedido) {
         Iterator<Pedido> it = pedidos.iterator();
         boolean exit = false;
+        Pedido pedido = null;
         while (it.hasNext() && !exit) {
-            if (it.next().getIdPedido() == idPedido) {
-                it.next().setActivo(true);
+            pedido = it.next();
+            if (pedido.getIdPedido() == idPedido) {
+                pedido.setActivo(true);
                 exit = true;
             }
         }
@@ -60,8 +65,8 @@ public class Pedidos {
         boolean exit = false;
         Pedido pedido = null;
         while (it.hasNext() && !exit) {
-            if (it.next().getIdPedido() == idPedido) {
-                pedido = it.next();
+            pedido = it.next();
+            if (pedido.getIdPedido() == idPedido) {
                 pedido.setActivo(true);
                 pedido.setPromocion(new Promocion(codigo));
                 exit = true;
@@ -88,15 +93,17 @@ public class Pedidos {
             throw new PedidoNoEncontrado();
         return pedido;
     }
-    public double calcularPrecio (int idPedido) {
+    /*public double calcularPrecio (int idPedido) { //aqui hay que arreglar, porque el metodo calcularPrecio solo lo puedo hacer en Restaurante
         Iterator<Pedido> it = pedidos.iterator();
         boolean exit = false;
         Pedido pedido = null;
+        double precio = 0;
         while (it.hasNext() && !exit) {
-            if (it.next().getIdPedido() == idPedido) {
-
+            pedido = it.next();
+            if (pedido.getIdPedido() == idPedido) {
+                precio = pedido.calcularPrecio();
                 exit = true;
             }
         }
-    }
+    }*/
 }

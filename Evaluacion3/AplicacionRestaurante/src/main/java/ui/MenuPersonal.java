@@ -6,13 +6,14 @@ import common.Utilidades;
 import service.GestionPersonal;
 import service.IGestionPersonal;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuPersonal {
     private IGestionPersonal servicio;
 
-    public MenuPersonal() {
+    public MenuPersonal() throws IOException {
         servicio = new GestionPersonal();
     }
 
@@ -48,6 +49,21 @@ public class MenuPersonal {
         }while (!exit);
         return opcion;
     }
+    private int opcionMenuJefe () {
+        Scanner teclado = new Scanner(System.in);
+        boolean exit = false;
+        int opcion = 0;
+        do {
+            try {
+                System.out.println(Constantes.ELEGIR_ROL + "\n" + Constantes.CLIENTE + "\n-" + Constantes.CAMARERO + "\n-" + Constantes.COCINERO);
+                Utilidades.validarOpcionMenuUsuario(teclado.nextLine());
+                exit = true;
+            } catch (OpcionNoValidaException exception) {
+                System.out.println(exception.getMessage());
+            }
+        }while (!exit);
+        return opcion;
+    }
     private void menuJefe () {
         boolean exit = false;
         do {
@@ -60,6 +76,8 @@ public class MenuPersonal {
                     break;
                 case 3:
                     cambiarPrecio();
+                case 4:
+                    eliminarCarta();
                 default:
                     System.out.println(Constantes.OPCION_NO_VALIDA);
             }
@@ -132,8 +150,27 @@ public class MenuPersonal {
     private void nuevoEmpleado () {
         System.out.println();
     }
+    private void eliminarEmpleado () {
+
+    }
     private void cambiarPrecio () {
+        Scanner teclado = new Scanner(System.in);
         servicio.verCarta();
-        System.out.println();
+        System.out.println(Constantes.INTRODUZCA_ID_PLATO);
+        int idPlato = teclado.nextInt();
+        System.out.println(Constantes.NUEVO_PECIO);
+        if (servicio.cambiarPrecio(idPlato, teclado.nextInt()))
+            System.out.println(Constantes.PRECIO_CAMBIADO);
+        else
+            System.out.println(Constantes.ERROR_CAMBIAR_PRECIO);
+    }
+    private void eliminarCarta() {
+        Scanner teclado = new Scanner(System.in);
+        System.out.println(Constantes.COMFIRMACION_ELIMINAR_PEDIDO);
+        if (teclado.nextLine().equalsIgnoreCase("si"))
+            if (servicio.eliminarCarta())
+                System.out.println(Constantes.CARTA_ELIMINADA);
+            else
+                System.out.println(Constantes.ERROR_ELIMINAR_CARTA);
     }
 }

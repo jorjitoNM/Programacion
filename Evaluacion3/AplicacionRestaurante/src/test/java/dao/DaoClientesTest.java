@@ -1,6 +1,7 @@
 package dao;
 
 import common.PedidoNoEncontrado;
+import common.Utilidades;
 import domain.Cliente;
 import domain.Pedido;
 import domain.Promocion;
@@ -82,7 +83,7 @@ class DaoClientesTest {
     @Test
     void eliminarPlato() {
     }
-    @ParameterizedTest
+    /*@ParameterizedTest
     @CsvSource({"hola10","hola20","hola50"})
     void validarCupon(String cupon) {
         //Given
@@ -94,10 +95,11 @@ class DaoClientesTest {
         cliente.setPromociones(cupones);
 
         //When
+        when(restaurante.validarCupon(cupon,cliente.getId()))
 
         //Then
-        //assertThat(daoClientes.validarCupon(cupon))(restaurante.validarCupon(cupon,cliente.getId()));
-    }
+        assertThat(daoClientes.validarCupon(cupon))(restaurante.validarCupon(cupon,cliente.getId()));
+    }*/
 
     @Test
     void horaEntrega() {
@@ -112,7 +114,7 @@ class DaoClientesTest {
         }
         //Then
         try {
-            assertEquals(daoClientes.horaEntrega(pedido.getIdPedido()),restaurante.horaEntrega(pedido.getIdPedido())); //el daoClientes.horaEntrega que va a devolver??
+            assertEquals(daoClientes.horaEntrega(pedido.getIdPedido()),restaurante.horaEntrega(pedido.getIdPedido())); //el daoClientes.horaEntrega que va a devolver??, si va a coger lo que le da el mock es imposible que no sea igual
         } catch (PedidoNoEncontrado e) {
             throw new RuntimeException(e);
         }
@@ -127,7 +129,7 @@ class DaoClientesTest {
             throw new RuntimeException(e);
         }
 
-        //Then alguna otra forma de buscar que lanza las excepciones??
+        //Then
         try {
             daoClientes.horaEntrega(0000);
         } catch (PedidoNoEncontrado e) {

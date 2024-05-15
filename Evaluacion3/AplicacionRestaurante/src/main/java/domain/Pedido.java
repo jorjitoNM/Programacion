@@ -39,7 +39,7 @@ public class Pedido {
 
     private int darID () {
         int id = (int) (Math.random()*1000);
-        return (ids.contains(id))?id:darID();
+        return (ids.contains(id))?darID():id;
     }
     public LocalDateTime horaEntrega (double tiempoEspera) {
         return fecha.plusSeconds((long)tiempoEspera);

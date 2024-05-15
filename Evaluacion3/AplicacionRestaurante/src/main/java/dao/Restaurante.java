@@ -152,7 +152,7 @@ public class Restaurante implements Serializable {
             try {
                 sb.append(Constantes.PEDIDO).append(p.getIdPedido()).append("(").append(clientes.getCliente(p.getIdUsuario()).getNombre()).append(")").append(getPlatos(p.getIdPedido()));
             } catch (PedidoNoEncontrado e) {
-                throw new RuntimeException(e); //esta excepcion nunca va a saltar
+                throw new RuntimeException(e);
             }
         });
         return sb.toString();

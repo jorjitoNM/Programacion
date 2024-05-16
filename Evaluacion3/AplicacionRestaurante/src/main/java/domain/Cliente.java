@@ -9,8 +9,6 @@ public class Cliente extends Persona {
     private TreeSet<Factura> facturas;
     private List<Promocion> promociones;
     private String contraseña;
-    private int idUsuario;
-    private ArrayList<Integer> ids = new ArrayList();
 
     public Cliente(String nombre, String apellidos, LocalDate fechaNacimiento, String contraseña) {
         super(nombre, apellidos, fechaNacimiento);
@@ -22,18 +20,17 @@ public class Cliente extends Persona {
         });
         promociones = new ArrayList<>();
         this.contraseña = contraseña;
-        idUsuario = darID();
     }
     public Cliente() {
     }
     public Cliente(int id) {
-        this.idUsuario = id;
+        super(id);
     }
     public Cliente(TreeSet<Factura> facturas, List<Promocion> promociones, String contraseña, int idUsuario, LocalDate fechaNacimiento, String apellidos, String nombre) {
         super(nombre, apellidos, fechaNacimiento);
         this.facturas = facturas;
         this.promociones = promociones;
-        this.idUsuario = idUsuario;
+        this.id = idUsuario;
         this.contraseña = contraseña;
     }
 
@@ -49,10 +46,6 @@ public class Cliente extends Persona {
                 errores[1] = Constantes.NOMBRE_USUARIO_INCORRCTO;
             return errores;
         }*/
-    private int darID () {
-        int id = (int) (Math.random()*1000);
-        return (ids.contains(id))?darID():id;
-    }
     public List<Promocion> getPromociones() {
         return promociones;
     }
@@ -81,7 +74,7 @@ public class Cliente extends Persona {
         return  imprimirFacturas()
                 + Constantes.SEPARADOR_FICHEROSTXT + imprimirPromociones()
                 + Constantes.SEPARADOR_FICHEROSTXT + contraseña
-                + Constantes.SEPARADOR_FICHEROSTXT + idUsuario
+                + Constantes.SEPARADOR_FICHEROSTXT + id
                 + Constantes.SEPARADOR_FICHEROSTXT + fechaNacimiento
                 + Constantes.SEPARADOR_FICHEROSTXT + apellidos
                 + Constantes.SEPARADOR_FICHEROSTXT + nombre;

@@ -64,7 +64,7 @@ public class GestionClientes implements IGestionClientes {
     } //no tiene usos
 
     @Override
-    public int nuevoPedido(int idUsuario) {
+    public boolean nuevoPedido(int idUsuario) {
         return daoClientes.nuevoPedido(idUsuario);
     }
     @Override

@@ -1,14 +1,13 @@
 package service;
 
-import common.Constantes;
 import common.PedidoNoEncontrado;
 import dao.DaoClientes;
 import domain.Pedido;
 import domain.Plato;
+import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
@@ -23,9 +22,9 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@Log4j2
 @ExtendWith(MockitoExtension.class)
 class gestionClientesTest {
 
@@ -33,7 +32,14 @@ class gestionClientesTest {
     GestionClientes gestionClientes;
     @Mock
     DaoClientes daoClientes;
-
+    @AfterAll
+    public static void mensajeFinalLog () {
+        log.info("Finalizados todos los test");
+    }
+    @BeforeAll
+    public static void mensajeInicialLog () {
+        log.info("Comenzando los test");
+    }
     @BeforeEach
     public void intro () {
         System.out.println("Probando un nuevo test");
@@ -106,14 +112,14 @@ class gestionClientesTest {
         try {
             when(daoClientes.añadirPlato("Wrap de Vegetales a la Parrilla",2,1234)).thenReturn(true);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            log.fatal("No se ha encontrado el archivo carta.json");
         }
 
         //Then
         try {
             assertTrue(daoClientes.añadirPlato("Wrap de Vegetales a la Parrilla",2,1234));
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            log.fatal("No se ha encontrado el archivo carta.json");
         }
     }
 
@@ -135,12 +141,12 @@ class gestionClientesTest {
             for (Integer idPlato:carrito.keySet()) {
                 sb.append(idPlato.toString());
             }
-            String mockResult;
+            String mockResult = "";
             try {
                 when(daoClientes.verCarrito(idPedido)).thenReturn(sb.toString());
                 mockResult = daoClientes.verCarrito(idPedido);
             } catch (PedidoNoEncontrado ex) {
-                throw new RuntimeException(ex);
+                log.error("No se ha encontrado el pedido");
             }
 
             //Then
@@ -163,7 +169,7 @@ class gestionClientesTest {
 
             //When
             try {
-                when(daoClientes.verCarrito(idPedido)).thenThrow(PedidoNoEncontrado.class); //Como puedo hacer para comprobar que salta la excepcion si tengo que
+                when(daoClientes.verCarrito(idPedido)).thenThrow(PedidoNoEncontrado.class);
             } catch (PedidoNoEncontrado e) {
                 fail("Ha saltado la excepcion");
             }
@@ -202,8 +208,8 @@ class gestionClientesTest {
 
         gestionClientes.iniciarPedido(0000,pedido.getIdPedido());
         //Then
-        //verify(daoClientes.iniciarPedido("0000",pedido.getIdPedido()),1); //no entiendo este error
-      //  assertThat(pedido.isActivo()).isEqualTo(true);
+        //verify(gestionClientes.iniciarPedido(0000,pedido.getIdPedido()),1); //no entiendo este error
+        assertThat(pedido.isActivo()).isEqualTo(true);
     }
 
     @Order(6)
@@ -220,14 +226,14 @@ class gestionClientesTest {
         try {
             when(daoClientes.tiempoEspera(pedido.getIdPedido())).thenReturn(tiempoEspera);
         } catch (PedidoNoEncontrado e) {
-            System.out.println("Pedido no encontrado");
+            log.error("No se ha encontrado el pedido");
         }
 
         //Then
         try {
             assertEquals(gestionClientes.tiempoEspera(pedido.getIdPedido()),daoClientes.tiempoEspera(pedido.getIdPedido()));
         } catch (PedidoNoEncontrado e) {
-            System.out.println("Pedido no encontrado");
+            log.error("No se ha encontrado el pedido");
         }
     }
 }

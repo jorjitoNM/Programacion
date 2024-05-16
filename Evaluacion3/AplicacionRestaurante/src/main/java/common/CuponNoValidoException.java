@@ -1,4 +1,4 @@
 package common;
 
-public class CuponNoValidoException extends Exception{
+public class CuponNoValidoException extends Exception {
 }

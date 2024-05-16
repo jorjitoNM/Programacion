@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 
 public interface IDaoClientes {
-    int nuevoPedido (int idUsuario);
+    boolean nuevoPedido (int idUsuario);
     boolean añadirPlato (String nombre, int cantidad, int idPedido) throws FileNotFoundException;
     int darIDCliente (String nombreUsuario);
     void iniciarPedido(int idPedido);

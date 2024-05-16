@@ -7,7 +7,7 @@ public class Pedido {
     private LocalDateTime fecha;
     private HashMap<Integer, Integer> carrito; //idPlato, cantidad
     private int idPedido;
-    private ArrayList<Integer> ids = new ArrayList<>();
+    private static final ArrayList<Integer> ids = new ArrayList<>();
     private boolean activo;
     private int idUsuario;
     private Promocion promocion;
@@ -17,6 +17,7 @@ public class Pedido {
         fecha = LocalDateTime.now();
         carrito = new HashMap<>();
         idPedido = darID();
+        ids.add(idPedido);
         activo = true;
         this.idUsuario = idUsuario;
     }
@@ -24,6 +25,7 @@ public class Pedido {
         fecha = LocalDateTime.now();
         carrito = new HashMap<>();
         idPedido = darID();
+        ids.add(idPedido);
         activo = true;
         this.promocion = promocion;
         this.idUsuario = idUsuario;

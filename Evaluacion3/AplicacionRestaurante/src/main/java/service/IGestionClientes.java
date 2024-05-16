@@ -16,7 +16,7 @@ public interface IGestionClientes {
     boolean eliminarPlato (String nombrePlato, int idPedido);
     boolean añadirCodigo ();
     boolean existePedido (int idPedido);
-    int nuevoPedido (int idUsuario);
+    boolean nuevoPedido (int idUsuario);
     int darIDPedido (String nombreUsuario);
     void iniciarPedido(int idUsuario,int idPedido);
     void iniciarPedido(int idUsuario,String codigo, int idPedido);

@@ -16,6 +16,9 @@ public abstract class Persona {
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
     }
+    public Persona (int id) {
+        this.id = id;
+    }
     private int darID () {
         int id = (int) (Math.random()*1000);
         return (ids.contains(id))?darID():id;

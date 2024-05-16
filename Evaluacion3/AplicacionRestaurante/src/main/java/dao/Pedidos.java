@@ -17,10 +17,9 @@ public class Pedidos {
             }
         });
     }
-    public int nuevoPedido (int idUsuario) {
+    public boolean nuevoPedido (int idUsuario) {
         Pedido pedido = new Pedido(idUsuario);
-        pedidos.add(pedido);
-        return pedido.getIdPedido();
+        return pedidos.add(pedido);
     }
     public void añadirPlato (int idPlato, int cantidad, int idPedido) {
         Iterator<Pedido> it = pedidos.iterator();

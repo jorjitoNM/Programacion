@@ -16,7 +16,7 @@ public class DaoClientes implements IDaoClientes{
         this.restaurante = restaurante;
     }
     @Override
-    public int nuevoPedido(int idUsuario) {
+    public boolean nuevoPedido(int idUsuario) {
         return restaurante.nuevoPedido(idUsuario);
     }
     @Override

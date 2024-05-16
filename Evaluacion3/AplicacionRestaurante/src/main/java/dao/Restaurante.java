@@ -48,7 +48,7 @@ public class Restaurante implements Serializable {
             return false;
     }
 
-    public int nuevoPedido (int idUsuario) {
+    public boolean nuevoPedido (int idUsuario) {
         return pedidos.nuevoPedido(idUsuario);
     }
     private HashSet<Plato> crearCarta () throws IOException {

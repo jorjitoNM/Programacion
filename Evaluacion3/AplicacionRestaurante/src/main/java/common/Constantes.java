@@ -72,6 +72,7 @@ public class Constantes {
     public static final String ERROR_ELIMINAR_PLATO = "Ha ocurrido un error al eliminar su plato, compruebe que ha introducido correctamente el id ";
     public static final String ERROR_ELIMINAR_CARTA = "No se ha podido eliminar la carta, compruebe sus privilegios sobre el archivo carta.json ";
     public static final String ERROR_NO_REGISTRADO = "No se ha podido iniciar sesion porque el id introducido no esta registrado ";
+    public static final String ERROR_NUEVO_PEDIDO = "Debido a un error inesperado no se ha podido crear su pedido, intentelo de nuevo ";
 
 
 

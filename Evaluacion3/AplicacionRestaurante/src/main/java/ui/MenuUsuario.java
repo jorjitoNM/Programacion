@@ -138,8 +138,12 @@ public class MenuUsuario {
         boolean exist = true;
         System.out.println(Constantes.NO_EXISTE_PEDIDO);
         int respuesta = teclado.nextInt();
-        if (respuesta == 1)
-            servicio.nuevoPedido(idUsuario);
+        if (respuesta == 1) {
+            if (servicio.nuevoPedido(idUsuario)) {
+                System.out.println(Constantes.ERROR_NUEVO_PEDIDO);
+                exist =  false;
+            }
+        }
         else
             exist = false;
         return exist;

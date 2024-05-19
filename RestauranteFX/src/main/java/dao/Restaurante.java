@@ -6,6 +6,7 @@ import common.PedidoNoEncontrado;
 import domain.Pedido;
 import domain.Persona;
 import domain.Plato;
+import javafx.fxml.FXML;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

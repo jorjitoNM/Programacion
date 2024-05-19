@@ -1,11 +1,13 @@
 package ui;
 
-import dao.Restaurante;
 import domain.Plato;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class RestauranteController {
     @FXML
@@ -24,5 +26,12 @@ public class RestauranteController {
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
+    }
+    @FXML
+    public void añadirPlato () {
+
+    }
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

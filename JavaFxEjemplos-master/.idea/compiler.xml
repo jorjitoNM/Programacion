@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="AhorcadoFX" />
         <module name="CRUDFX (2)" />
         <module name="Ej00" />
         <module name="javafxFaker2" />
@@ -17,11 +18,10 @@
         <module name="Ej0" />
         <module name="Ej2AlertComboPromocionPeon" />
         <module name="Ej2AlertCombo" />
-        <module name="EjemploAhorcado" />
+        <module name="CRUDFX" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="CRUDFX" target="17" />
       <module name="Ej2AlertCombo" target="19" />
     </bytecodeTargetLevel>
   </component>

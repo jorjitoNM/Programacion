@@ -49,7 +49,7 @@ class DaoClientesTest {
     @DisplayName("Crear un nuevo pedido")
     @Test
     void nuevoPedido() {
-        //Given usar un verify
+        //Given
         Cliente cliente = new Cliente(1234);
 
         //When
@@ -58,7 +58,7 @@ class DaoClientesTest {
         //Then
         assertEquals(daoClientes.nuevoPedido(cliente.getId()),restaurante.nuevoPedido(cliente.getId()));
 
-        //Tiene sentido esta comprobacion?? estoy comprobando que al añadir un pedido, luego aparece en el treeSet de pedidos
+
         //Given
         Pedidos pedidos = new Pedidos();
 
@@ -67,18 +67,6 @@ class DaoClientesTest {
 
         //Then
         assertFalse(daoClientes.nuevoPedido(cliente.getId()));
-
-        //Comprobacion en masa
-        for (int i = 0; i < 15; i++) {
-            Cliente clienteMass = new Cliente(i);
-
-            //When
-            when(restaurante.nuevoPedido(cliente.getId())).thenReturn(true);
-
-            //Then
-            assertEquals(daoClientes.nuevoPedido(cliente.getId()),restaurante.nuevoPedido(cliente.getId()));
-            System.out.println("Cliente " + clienteMass.getId() + " pedidos: " + restaurante.verPedidos(cliente.getId()));
-        }
     }
 
     @Test
@@ -89,7 +77,7 @@ class DaoClientesTest {
     void mostrarMenu() {
     }
 
-   /* @Order(1)
+    @Order(1)
     @DisplayName("Visualizar los pedidos de un cliente")
     @Test
     void verPedidos() {
@@ -109,7 +97,7 @@ class DaoClientesTest {
         //Then
         assertEquals(daoClientes.verPedidos(cliente.getId()),pedidos.verPedidos(cliente.getId()));
         assertThat(daoClientes.verPedidos(cliente.getId()).split("\n")).isNotEmpty().hasSize(3);
-    }*/
+    }
 
 
     @Test
@@ -117,26 +105,37 @@ class DaoClientesTest {
     }
     @Order(2)
     @DisplayName("Comprobar que un cupon descuento es valido")
-    @ParameterizedTest
-    @CsvSource({"hola10","hola20","hola30"}) //Quiero lanzar excepcion en el hola50
-    void validarCupon(String cupon) {
-        //Given
-        Cliente cliente = new Cliente(1234);
-        List<Promocion> cupones = new ArrayList<>();
-        cupones.add(new Promocion("hola10"));
-        cupones.add(new Promocion("hola20"));
-        cupones.add(new Promocion("hola30"));
-        cliente.setPromociones(cupones);
+    @Nested
+    class validarCupon {
+        @ParameterizedTest
+        @CsvSource({"hola10","hola20","hola"})
+        void validarCuponValido (String cupon) {
+            //Given
+            Cliente cliente = new Cliente(1234);
+            List<Promocion> cupones = new ArrayList<>();
+            cupones.add(new Promocion("hola10"));
+            cupones.add(new Promocion("hola20"));
+            cupones.add(new Promocion("hola"));
+            cliente.setPromociones(cupones);
 
-        //When
-        try {
-            restaurante.validarCupon(cupon,cliente.getId());
-        } catch (CuponNoValidoException e) {
-            log.error("El cupon introducido no es valido");
+            //When
+
+            //Then
+            assertDoesNotThrow(() -> restaurante.validarCupon(cupon, cliente.getId()));
         }
 
-        //Then
-        assertDoesNotThrow(() -> restaurante.validarCupon(cupon,cliente.getId()));
+        void validarCuponNoValido () {
+            String cupon = "hola50";
+            Cliente cliente = new Cliente(1234);
+            List<Promocion> cupones = new ArrayList<>();
+            cupones.add(new Promocion("hola10"));
+            cliente.setPromociones(cupones);
+
+            //When
+
+            //Then
+            assertThrows(CuponNoValidoException.class, () -> restaurante.validarCupon(cupon, cliente.getId()));
+        }
     }
     @Order(3)
     @DisplayName("Ver la hora de entrega de mi pedido")

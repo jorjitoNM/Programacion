@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>AhorcadoFX</artifactId>
+    <artifactId>EjemploAhorcado</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>EjemploAhorcado</name>
 
@@ -38,13 +38,6 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/net.datafaker/datafaker -->
-        <dependency>
-            <groupId>net.datafaker</groupId>
-            <artifactId>datafaker</artifactId>
-            <version>1.8.0</version>
-        </dependency>
-
     </dependencies>
 
     <build>

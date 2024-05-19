@@ -25,7 +25,7 @@ public class Constantes {
     public static final String PEDIDO_COMENZADO = "Su pedido ha comenzado a preparase";
     public static final String QUIERE_AÑADIR_CUPONES = "¿Quiere añadir algun cupon a su pedido?";
     public static final String INTRODUZCA_CUPON = "Introduzca el cupon que desea añadir a su pedido";
-    public static final String INTRODUZCA_ID_PEDIDO = "Introduzca el id del pedido: ";
+    public static final String INTRODUZCA_ID_PEDIDO = "Introduzca el id del pedido, si lo que desea es introducir un nuevo pedido introduzca 'nuevo pedido' ";
     public static final String PEDIDO_NO_ENCONTRADO = "ID de pedido no valido, intentelo otra vez";
     public static final String INTRODUZCA_ID_USUARIO = "Introduzca su id de Usuario";
     public static final String EL_TIEMPO_ESTIMAD_ES = "El tiempo estimado de rpeapracion de su producto es de ";
@@ -86,4 +86,8 @@ public class Constantes {
     public static final String MINUTOS = "min ";
     public static final String SEPARADOR_COLECCIONES = ":";
     public static final String SEPARADOR_ELEMENTOS_FACTURA = ",";
+
+
+    //Logs
+    public static final String LOG_FILE_NOT_FOUND = "No se ha encintrado el fichero y el programa se ha parado ";
 }

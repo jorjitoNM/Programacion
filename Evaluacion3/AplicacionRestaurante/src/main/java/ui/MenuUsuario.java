@@ -3,6 +3,7 @@ package ui;
 import common.Constantes;
 import common.CuponNoValidoException;
 import common.PedidoNoEncontrado;
+import lombok.extern.log4j.Log4j2;
 import service.GestionClientes;
 import service.IGestionClientes;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+@Log4j2
 public class MenuUsuario {
     private final IGestionClientes servicio;
 
@@ -30,14 +32,19 @@ public class MenuUsuario {
                     break;
                 case 3:
                     eliminarPlato(idUsuario);
+                    break;
                 case 4:
                     iniciarPedido(idUsuario);
+                    break;
                 case 5:
                     tiempoEspera(idUsuario);
+                    break;
                 case 6:
                     verPlatosPorTipo();
+                    break;
                 case 7:
                     pedirCuenta(idUsuario);
+                    break;
                 default:
                     System.out.println(Constantes.OPCION_NO_VALIDA);
             }
@@ -62,69 +69,54 @@ public class MenuUsuario {
     private void añadirPlato (int idUsuario) {
         Scanner teclado = new Scanner(System.in);
         int idPedido = -1;
-        boolean exit = false;
-        servicio.verPedidos(idUsuario);
-        do {
-            try {
-                idPedido = idPedido();
-                exit = true;
-            } catch (PedidoNoEncontrado e) {
-                if (opcionCrearPedido(idUsuario))
-                    exit = true;
-            }
-        }while(!exit);
-        while(exit) {
-            servicio.verPedidos(idUsuario);
+        try {
+            idPedido = idPedido(idUsuario);
+        } catch (PedidoNoEncontrado e) {
+            System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
+        }
+        while(idPedido != -1) {
             servicio.mostrarMenu();
             System.out.println(Constantes.NOMBRE_PLATO);
             String nombrePalto = teclado.nextLine();
             if (!nombrePalto.equalsIgnoreCase(Constantes.SUFICIENTE))
-                exit = false;
+                idPedido = -1;
             else {
                 System.out.println(Constantes.CANTIDAD);
                 int cantidad = teclado.nextInt();
                 try {
-                    if(servicio.añadirPlato(nombrePalto,cantidad,idPedido()))
+                    if(servicio.añadirPlato(nombrePalto,cantidad,idPedido))
                         System.out.println(Constantes.PLATO_AÑADIDO_CORRECTAMENTE);
                     else
                         System.out.println(Constantes.ERROR_AÑADIR_PLATO);
-                } catch (PedidoNoEncontrado e) {
-                    System.out.println(Constantes.ERROR_PEDIDO);
                 } catch (FileNotFoundException e) {
-
+                    log.fatal(Constantes.LOG_FILE_NOT_FOUND);
                 }
             }
         }
     }
     private void verCesta (int idUsuario) {
-        boolean validado = opcionCrearPedido(idUsuario);
-        if (validado) {
-            try {
-                servicio.mostrarCarrito(idPedido());
-            } catch (PedidoNoEncontrado e) {
-                System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
-            }
+        int idPedido = 0;
+        try {
+            idPedido = idPedido(idUsuario);
+        if (idPedido != -1)
+            servicio.mostrarCarrito(idPedido);
+        } catch (PedidoNoEncontrado e) {
+            System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
         }
     }
     private void eliminarPlato (int idUsuario) {
         Scanner teclado = new Scanner(System.in);
-        int idPedido = -1;
-        boolean exit = false;
-        servicio.verPedidos(idUsuario);
-        do {
-            try {
-                idPedido = idPedido();
-                exit = true;
-            } catch (PedidoNoEncontrado e) {
-                if (opcionCrearPedido(idUsuario))
-                    exit = true;
-            }
-        }while(!exit);
-        while(exit) {
+        int idPedido = 0;
+        try {
+            idPedido = idPedido(idUsuario);
+        } catch (PedidoNoEncontrado e) {
+            System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
+        }
+        while(idPedido != -1) {
             System.out.println(Constantes.ELIMINAR_PLATO);
             String nombrePlato = teclado.nextLine();
             if (!nombrePlato.equalsIgnoreCase(Constantes.NINGUNO))
-                exit = false;
+                idPedido = -1;
             else {
                 if(servicio.eliminarPlato(nombrePlato,idPedido))
                     System.out.println(Constantes.PLATO_ELIMINADO_CORRECTAMENTE);
@@ -133,47 +125,56 @@ public class MenuUsuario {
             }
         }
     }
-    private boolean opcionCrearPedido (int idUsuario) {
+    private int opcionCrearPedido (int idUsuario) {
         Scanner teclado = new Scanner(System.in);
-        boolean exist = true;
+        int idPedido = -1;
         System.out.println(Constantes.NO_EXISTE_PEDIDO);
         int respuesta = teclado.nextInt();
         if (respuesta == 1) {
-            if (servicio.nuevoPedido(idUsuario)) {
+            idPedido = servicio.nuevoPedido(idUsuario);
+            if (idPedido == -1) {
                 System.out.println(Constantes.ERROR_NUEVO_PEDIDO);
-                exist =  false;
             }
         }
-        else
-            exist = false;
-        return exist;
+        return idPedido;
     }
-    private int idPedido () throws PedidoNoEncontrado {
+    private int opcionCrearPedido2 (int idUsuario) {
+        int idPedido;
+        idPedido = servicio.nuevoPedido(idUsuario);
+        if (idPedido == -1) {
+            System.out.println(Constantes.ERROR_NUEVO_PEDIDO);
+        }
+        return idPedido;
+    }
+    private int idPedido (int idUsuario) throws PedidoNoEncontrado {
         Scanner teclado = new Scanner(System.in);
+        int idPedido;
+        servicio.verPedidos(idUsuario);
         System.out.println(Constantes.INTRODUZCA_ID_PEDIDO);
-        int idPedido = teclado.nextInt();
-        servicio.validarPedido(idPedido);
+        if (teclado.nextLine().equalsIgnoreCase(" nuevo pedido")) {
+            idPedido = opcionCrearPedido2(idUsuario);
+        }
+        else {
+            idPedido = teclado.nextInt();
+            servicio.validarPedido(idPedido);
+        }
         return idPedido;
     }
     private void iniciarPedido (int idUsuario) {
         Scanner teclado = new Scanner(System.in);
         System.out.println(Constantes.QUIERE_AÑADIR_CUPONES);
-        servicio.verPedidos(idUsuario);
+        int idPedido = -1;
+        try {
+            idPedido = idPedido(idUsuario);
+        } catch (PedidoNoEncontrado e) {
+            System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
+        }
         if (teclado.nextLine().equalsIgnoreCase("si")) {
-            servicio.mostrarCupones();
-            try {
-                servicio.iniciarPedido(idUsuario,añadirCupon(idUsuario),idPedido());
-            } catch (PedidoNoEncontrado e) {
-                System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
-            }
+            servicio.mostrarCupones(idUsuario);
+            servicio.iniciarPedido(idUsuario,añadirCupon(idUsuario),idPedido);
         }
-        else {
-            try {
-                servicio.iniciarPedido(idUsuario,idPedido());
-            } catch (PedidoNoEncontrado e) {
-                System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
-            }
-        }
+        else
+            servicio.iniciarPedido(idUsuario,idPedido);
         System.out.println(Constantes.PEDIDO_COMENZADO);
     }
     private String añadirCupon (int idUsuario) {
@@ -192,10 +193,14 @@ public class MenuUsuario {
         return codigo;
     }
     private void tiempoEspera (int idUsuario) {
-        int idPedido = 0;
-        if (opcionCrearPedido(idUsuario)) {
+        int idPedido = -1;
+        try {
+            idPedido = idPedido(idUsuario);
+        } catch (PedidoNoEncontrado e) {
+            System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
+        }
+        if (idPedido != -1) {
             try {
-                idPedido = idPedido();
                 System.out.println(Constantes.EL_TIEMPO_ESTIMAD_ES + servicio.tiempoEspera(idPedido) + Constantes.MINUTOS);
                 System.out.println(Constantes.PEDIDO_LLEGARA + servicio.horaEntrega(idPedido).toLocalTime().toString());
             } catch (PedidoNoEncontrado e) {
@@ -207,12 +212,12 @@ public class MenuUsuario {
         Scanner teclado = new Scanner(System.in);
         boolean exit = false;
         System.out.println(Constantes.TIPO_PLATO);
-        String tipo = teclado.nextLine();
+        String tipo;
         do{
+            tipo = teclado.nextLine();
             switch (tipo) {
                 case "Principal":
                 case "principal":
-                    servicio.mostrarMenu(tipo);
                     exit = true;
                     break;
                 case "Acompañante":
@@ -235,12 +240,17 @@ public class MenuUsuario {
                     System.out.println(Constantes.TIPO_NO_VALIDO);
             }
         }while(!exit);
+        System.out.println(servicio.mostrarMenu(tipo));
     }
     private void pedirCuenta (int idUsuario) {
-        if (opcionCrearPedido(idUsuario)) {
-
+        int idPedido = -1;
+        try {
+            idPedido = idPedido(idUsuario);
+        } catch (PedidoNoEncontrado e) {
+            System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
         }
-        System.out.println(servicio.pedirCuenta());
+        if (idPedido != -1)
+            System.out.println(servicio.pedirCuenta());
     }
 
 }

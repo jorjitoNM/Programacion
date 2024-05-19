@@ -15,8 +15,12 @@ public class DaoClientes implements IDaoClientes{
     public DaoClientes (Restaurante restaurante) throws IOException {
         this.restaurante = restaurante;
     }
-    @Override
+    /*@Override
     public boolean nuevoPedido(int idUsuario) {
+        return restaurante.nuevoPedido(idUsuario);
+    }*/
+    @Override
+    public int nuevoPedido(int idUsuario) {
         return restaurante.nuevoPedido(idUsuario);
     }
     @Override

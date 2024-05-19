@@ -63,8 +63,12 @@ public class GestionClientes implements IGestionClientes {
         return daoClientes.darIDPedido(nombreUsuario);
     } //no tiene usos
 
-    @Override
+    /*@Override
     public boolean nuevoPedido(int idUsuario) {
+        return daoClientes.nuevoPedido(idUsuario);
+    }*/
+    @Override
+    public int nuevoPedido(int idUsuario) {
         return daoClientes.nuevoPedido(idUsuario);
     }
     @Override
@@ -78,7 +82,7 @@ public class GestionClientes implements IGestionClientes {
     }
 
     @Override
-    public String mostrarCupones() {
+    public String mostrarCupones(int idUsuario) {
         return null;
     }
 

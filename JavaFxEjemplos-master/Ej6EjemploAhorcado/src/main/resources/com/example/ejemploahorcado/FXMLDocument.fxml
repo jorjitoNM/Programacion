@@ -14,8 +14,8 @@
       </Label>
       <GridPane fx:id="mainGrid" alignment="CENTER" layoutX="20.0" layoutY="45.0" prefHeight="240.0" prefWidth="480.0"> <!--onMouseClicked="#click" -->
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="52.400000000000006" minWidth="0.0" prefWidth="0.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.80000000000001" minWidth="10.0" prefWidth="120.80000000000001" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
@@ -30,7 +30,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <Label fx:id="palabra" layoutX="14.0" layoutY="289.0" text="Esperando al usuario..." textFill="WHITE">
+      <Label fx:id="palabra" layoutX="14.0" layoutY="291.0" text="Esperando al usuario..." textFill="WHITE">
          <font>
             <Font size="30.0" />
          </font>
@@ -41,34 +41,5 @@
             <Font size="24.0" />
          </font>
       </Label>
-
-
-      <!--<DialogPane fx:id="startDialog" layoutX="200.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="480.0" visible="true">
-          <header>
-            <Label fx:id="dialogHeader">
-               <text>Bienvenido al Ahorcado</text>
-            </Label>
-          </header>
-         <content>
-            <Button fx:id="retomarPartida" layoutX="258.0" layoutY="218.0" onAction="#retomarPartida" text="Retomar Partida">
-               <Font size="30.0" />
-            </Button>
-            <Button fx:id="nuevaPartida" layoutX="534.0" layoutY="218.0" onAction="#nuevaPartida" text="Nueva Partida">
-               <Font size="30.0" />
-            </Button>
-            <Button fx:id="aleatoria" layoutX="258.0" layoutY="218.0" onAction="#nuevaRonda" text="Ronda aleatoria">
-               <Font size="30.0" />
-            </Button>
-            <Button fx:id="categoria" layoutX="534.0" layoutY="218.0" onAction="#nuevaRondaCategoria" text="Ronda Categoria">
-               <Font size="30.0" />
-            </Button>
-            <Button fx:id="dificultad" layoutX="258.0" layoutY="218.0" onAction="#nuevaRondaDificultad" text="Ronda Dificultad">
-               <Font size="30.0" />
-            </Button>
-            <Button fx:id="personalizada" layoutX="534.0" layoutY="218.0" onAction="#nuevaPartida" text="Ronda Personalziada">
-               <Font size="30.0" />
-            </Button>
-         </content>
-      </DialogPane>-->
    </children>
 </Pane>

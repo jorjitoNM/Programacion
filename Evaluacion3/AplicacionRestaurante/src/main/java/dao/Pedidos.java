@@ -11,15 +11,22 @@ public class Pedidos {
     private TreeSet<Pedido> pedidos;
     public Pedidos() {
         pedidos = new TreeSet<>(new Comparator<Pedido>() {
-            @Override
-            public int compare(Pedido o1, Pedido o2) {
-                return o1.getFecha().compareTo(o2.getFecha());
-            }
-        });
+                    @Override
+                    public int compare(Pedido o1, Pedido o2) {
+                        int respuesta = o1.getFecha().compareTo(o2.getFecha());
+                        if (respuesta == 0) {
+                            respuesta = Integer.compare(o1.getIdPedido(),o2.getIdPedido());
+                        }
+                        return respuesta;
+                    }
+                });
     }
-    public boolean nuevoPedido (int idUsuario) {
+    public int nuevoPedido (int idUsuario) {
         Pedido pedido = new Pedido(idUsuario);
-        return pedidos.add(pedido);
+        int idPedido = -1;
+        if (pedidos.add(pedido))
+            idPedido = pedido.getIdPedido();
+        return idPedido;
     }
     public void añadirPlato (int idPlato, int cantidad, int idPedido) {
         Iterator<Pedido> it = pedidos.iterator();

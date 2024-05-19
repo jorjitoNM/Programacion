@@ -16,11 +16,12 @@ public interface IGestionClientes {
     boolean eliminarPlato (String nombrePlato, int idPedido);
     boolean añadirCodigo ();
     boolean existePedido (int idPedido);
-    boolean nuevoPedido (int idUsuario);
+    //boolean nuevoPedido (int idUsuario);
+    int nuevoPedido (int idUsuario);
     int darIDPedido (String nombreUsuario);
     void iniciarPedido(int idUsuario,int idPedido);
     void iniciarPedido(int idUsuario,String codigo, int idPedido);
-    String mostrarCupones ();
+    String mostrarCupones (int idUsuario);
     String añadirCupon(String cupon);
     String verPedidos(int idUsuario) ;
     void validarPedido (int idPedido) throws PedidoNoEncontrado;

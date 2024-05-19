@@ -83,7 +83,7 @@ class gestionClientesTest {
         carta.stream().filter(p -> p.getTipo().equalsIgnoreCase(tipo)).forEach(sb::append);
         when(daoClientes.mostrarMenu(tipo)).thenReturn(sb.toString());
 
-        String cartaRealString = gestionClientes.mostrarMenu(tipo); //ejecución prueba
+        String cartaRealString = gestionClientes.mostrarMenu(tipo);
         //Then
         assertThat(cartaRealString).isEqualTo(daoClientes.mostrarMenu(tipo));
 
@@ -182,7 +182,7 @@ class gestionClientesTest {
     @ParameterizedTest
     @MethodSource("testEliminarPlato")
     @DisplayName("Eliminar un plato del pedido")
-    void eliminarPlato(boolean respuesta) { //por ejemplo, como comprobaria en este metodo que cuando meto el pedido 0000 salta la excepcion de PedidoNoEncontrado
+    void eliminarPlato(boolean respuesta) {
         //Given
 
         //When
@@ -204,11 +204,9 @@ class gestionClientesTest {
         Pedido pedido = new Pedido(1234);
 
         //when
-        //que mas puedo probar aqui?????
 
         gestionClientes.iniciarPedido(0000,pedido.getIdPedido());
         //Then
-        //verify(gestionClientes.iniciarPedido(0000,pedido.getIdPedido()),1); //no entiendo este error
         assertThat(pedido.isActivo()).isEqualTo(true);
     }
 

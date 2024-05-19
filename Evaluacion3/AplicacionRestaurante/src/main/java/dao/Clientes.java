@@ -15,7 +15,7 @@ public class Clientes {
         clientes = crearClientes();
     }
 
-    public Clientes(HashSet<Cliente> clientes) throws IOException {
+    public Clientes(HashSet<Cliente> clientes) {
         this.clientes = clientes;
     }
     public HashSet<Cliente> getClientes() {
@@ -32,7 +32,7 @@ public class Clientes {
         clientes.forEach(c -> sb.append(c.getNombre()).append(": ").append(c.getId()).append("\n"));
         return sb.toString();
     }
-    private HashSet<Cliente> crearClientes() throws IOException { //al volver a llamar al metodo me devuelve el array vacio
+    private HashSet<Cliente> crearClientes() throws IOException {
         HashSet<Cliente> clientes = new HashSet<>();
             if (DaoFicheros.clientesIsEmpty()) {
                 Faker faker = new Faker();

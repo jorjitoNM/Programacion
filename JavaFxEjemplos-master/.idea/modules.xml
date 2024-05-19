@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Ej2AlertCombo/Ej2AlertCombo.iml" filepath="$PROJECT_DIR$/Ej2AlertCombo/Ej2AlertCombo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Ej6EjemploAhorcado/EjemploAhorcado.iml" filepath="$PROJECT_DIR$/Ej6EjemploAhorcado/EjemploAhorcado.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/EjemplosJavaFX.iml" filepath="$PROJECT_DIR$/.idea/EjemplosJavaFX.iml" />
     </modules>
   </component>

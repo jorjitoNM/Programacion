@@ -13,13 +13,12 @@ public class AhorcadoVisual extends Application {
     @Override
     public void start(Stage stage)  {
         try {
-            //Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+           // Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
             FXMLLoader fxmlLoader = new FXMLLoader(AhorcadoVisual.class.getResource("FXMLDocument.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            System.out.println(e.getClass().getSimpleName());
             System.out.println(e.getStackTrace());
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
@@ -31,8 +30,6 @@ public class AhorcadoVisual extends Application {
         try {
             launch(args);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCause().getMessage());
             System.out.printf("Ha ocurrido una excepción:\n%s", e);
         }
     }

@@ -4,7 +4,6 @@ import common.PedidoNoEncontrado;
 import domain.Pedido;
 import domain.Promocion;
 
-import java.time.LocalDate;
 import java.util.*;
 
 public class Pedidos {
@@ -27,18 +26,6 @@ public class Pedidos {
         if (pedidos.add(pedido))
             idPedido = pedido.getIdPedido();
         return idPedido;
-    }
-    public void añadirPlato (int idPlato, int cantidad, int idPedido) {
-        Iterator<Pedido> it = pedidos.iterator();
-        boolean exit = false;
-        Pedido pedido = null;
-        while (it.hasNext() && !exit) {
-            pedido = it.next();
-            if (pedido.getIdPedido() == idPedido) {
-                pedido.añadirPlato(idPlato, cantidad);
-                exit = true;
-            }
-        }
     }
     public int darIDPedido (int idUsuario) {
         Iterator<Pedido> it = pedidos.iterator();

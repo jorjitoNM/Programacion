@@ -1,8 +1,13 @@
 package domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+@Getter
+@Setter
 public abstract class Persona {
     protected int id;
     protected String nombre;
@@ -25,12 +30,5 @@ public abstract class Persona {
     }
 
     public Persona() {
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-    public int getId() {
-        return id;
     }
 }

@@ -1,7 +1,5 @@
 package common;
 
-import java.util.ArrayList;
-
 public class Constantes {
     public static final String[] NOMBRES = {"Merlin","Gandalf","Zatanna","Alatar","Morgana","Rincewind","Saruman","Circe","Prospero","Radagast","Elminster","Mordenkainen","Tasha","Raistlin","Yennefer","Altair", "Ezio", "Artemis", "Silas", "Katarina", "Thane", "Viper", "Shadow", "Nyx", "Blaze", "Raven", "Lilith", "Scythe", "Reaper", "Jinx"};
     public static final String[] HABILIDADES = {"inspiracion","valor","brujeria","precicsion","dominacion"};
@@ -12,4 +10,42 @@ public class Constantes {
     public static final String INPUT_MISSMATCH_EXCEPTION = "Número no valido (recuerde que debe ser un numero entero entre 25 y 100) ";
     public static final String INTRODUZCA_SKINS = "Introduzca el numero de skins del campeon ";
     public static final String INTRODUZCA_HABILIDADES = "Introduzca las habilidades del heroe, pueden ser inspiracion, valor, brujeria, precicsion y dominacion ";
+    public static final String ASCENDENTE_O_DESCENDENTE = "Itrnoduzca 1 si desea que sea en orden descendente, sino pulse cualquier otra tecla ";
+    public static final String RANGO_ATAQUE = "Introduzca el rango de ataque ";
+    public static final String MAGO = "Mago";
+    public static final String ASESINO = "Asesino";
+    public static final String INTRODUZCA_ID_ASESINO = "Introduzca el id del asesino que desea modificar ";
+    public static final String INTRODUZCA_ID_ELIMINAR_CAMEPEON = "Introduzca el id del campeon que desea eliminar ";
+    public static final String INTRODUZCA_BURST = "Introduzca la probabilidad de burst ";
+    public static final String INTRODUZCA_ALTURA = "Introduzca la altura del campeon ";
+    public static final String TIENE_STUNT = "¿El mago hace stunt? ";
+    public static final String EXITO_CAMBIO_CARACTERISTICA = "Caracteristica cambiada con exito ";
+    public static final String ERROR_CAMBIO_CARACTERISTICA = "No se ha podido cambiar la caraceristica deseada ";
+    public static final String ERROR_OPCION  = "Opcion no valida ";
+    public static final String ID_NO_VALIDO = "No se ha encontrado un campeon con ese identificador ";
+    public static final String CAMPEON_ELIMINADO = "Campon eliminado con exito ";
+    public static final String ERROR_ELIMINAR_CAMPEON = "No se ha podido eliminar al campeon, pruebe pruebe otra vez ";
+    public static final String FICHERO_TXT = "pathTXT";
+    public static final String SEPARADOR_CAMPEONES = "\n";
+    public static final String SEPARADOR_ATRIBUTOS_CAMPEON = ";";
+    public static final String SEPARADOR_HABILIDADES = "|";
+    public static final String SEPARADOR_HABILIDADES_USUARIO = ",";
+    public static final String FICHERO_BINARIO = "pathBinario";
+    public static final String HABILIDAD_NO_VALIDA = "Habilidad no valida, intentlo de nuevo ";
+    public static final String ASESINO_AÑADIDO = "Asesino añadido con exito ";
+    public static final String MAGO_AÑADIDO = "Mago añadido con exito ";
+    public static final String ERROR_AÑADIR_CAMPEON = "Ha ocurrido un arror al añadir su campeon ";
+    public static final String OPCION_1_LISTAR_CAMPEONES = "1. Listar campeones ";
+    public static final String OPCION_2_LISTAR_CAMPEONES_ORDENADOS = "2. Listar los campeones ordenados por orden alfabetico ";
+    public static final String OPCION_3_NUEVO_CAMPEON = "3. Añadir un nuevo campeon ";
+    public static final String OPCION_4_MOSTRAR_CAMPEONES_RANGO_ATAQUE = "4. Mostrar los campeones que tengan un ataque dentro de cierto rango ";
+    public static final String OPCION_5_ACTUALIZAR_BURST = "5. Actualizar el burst de un asesino ";
+    public static final String OPCION_6_ELIMINAR_CAMPEON = "6. Eliminar un campeon ";
+    public static final String OPCION_7_GUARDAR_CAMPEONES_TXT = "7. Guardar los campeones alctuales en un ficheros .txt ";
+    public static final String OPCION_8_CARGAR_CAMPEONES_TXT = "8. Cargar los campeones del fichero .txt ";
+    public static final String OPCION_9_GUARDAR_CAMPEONES_BINARIO = "9. Guardar los campeones actuales en un fichero binario ";
+    public static final String OPCION_10_CARGAR_CAMEPONES_BINARIO = "10. Cargar los campeones del fichero binario ";
+    public static final String OPCION_11_MOSTRAR_CAMPEONES_POR_HABILIDADES = "11. Mostrar que campeones poseen cada habilidad ";
+    public static final String SALIR = "12. Salir de la aplicacion ";
+    public static final String MENU_USUARIO = "Bienvenido al LOL, que es lo que quiere hacer? ";
 }

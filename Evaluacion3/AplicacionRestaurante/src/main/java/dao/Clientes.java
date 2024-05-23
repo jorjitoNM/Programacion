@@ -1,11 +1,15 @@
 package dao;
 
 import domain.Cliente;
+import lombok.Getter;
+import lombok.Setter;
 import net.datafaker.Faker;
 
 import java.io.IOException;
 import java.util.HashSet;
 
+@Getter
+@Setter
 public class Clientes {
     private HashSet<Cliente> clientes;
 
@@ -17,9 +21,6 @@ public class Clientes {
 
     public Clientes(HashSet<Cliente> clientes) {
         this.clientes = clientes;
-    }
-    public HashSet<Cliente> getClientes() {
-        return clientes;
     }
     public Cliente getCliente(int idCliente) {
         return clientes.stream().filter(c -> c.getId()==idCliente).findFirst().orElse(null);

@@ -45,6 +45,9 @@ public class MenuUsuario {
                 case 7:
                     pedirCuenta(idUsuario);
                     break;
+                case 8:
+                    exit = true;
+                    break;
                 default:
                     System.out.println(Constantes.OPCION_NO_VALIDA);
             }
@@ -56,11 +59,10 @@ public class MenuUsuario {
         int opcion = 0;
         do {
             try {
-                System.out.println(Constantes.MENU_USUARIO + "\n" + Constantes.AÑADIR_PLATO + "\n" + Constantes.VER_CESTA + "\n" + Constantes.OPCION_ELIMINAR_PLATO + "\n" + Constantes.INICIAR_PEDIDO + "\n" + Constantes.TIEMPO_ESPERA + "\n" + Constantes.VER_PLATOS_POR_TIPO + "\n" + Constantes.PEDIR_CUENTA);
-                opcion = teclado.nextInt();
+                System.out.println(Constantes.MENU_USUARIO + "\n" + Constantes.AÑADIR_PLATO + "\n" + Constantes.VER_CESTA + "\n" + Constantes.OPCION_ELIMINAR_PLATO + "\n" + Constantes.INICIAR_PEDIDO + "\n" + Constantes.TIEMPO_ESPERA + "\n" + Constantes.VER_PLATOS_POR_TIPO + "\n" + Constantes.PEDIR_CUENTA + "\n" + Constantes.OPCION_8_SALIR);
+                opcion = Integer.parseInt(teclado.nextLine());
                 exit = true;
             } catch (InputMismatchException exception) {
-                teclado.nextLine();
                 System.out.println(Constantes.SOLO_NUMEROS);
             }
         }while (!exit);
@@ -75,16 +77,17 @@ public class MenuUsuario {
             System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
         }
         while(idPedido != -1) {
-            servicio.mostrarMenu();
+            System.out.println(servicio.mostrarMenu());
             System.out.println(Constantes.NOMBRE_PLATO);
-            String nombrePalto = teclado.nextLine();
-            if (!nombrePalto.equalsIgnoreCase(Constantes.SUFICIENTE))
+            String nombrePlato = teclado.nextLine();
+            if (nombrePlato.equalsIgnoreCase(Constantes.SUFICIENTE))
                 idPedido = -1;
             else {
                 System.out.println(Constantes.CANTIDAD);
-                int cantidad = teclado.nextInt();
+                int cantidad = 0;
+                    cantidad= Integer.parseInt(teclado.nextLine());
                 try {
-                    if(servicio.añadirPlato(nombrePalto,cantidad,idPedido))
+                    if(servicio.añadirPlato(nombrePlato,cantidad,idPedido))
                         System.out.println(Constantes.PLATO_AÑADIDO_CORRECTAMENTE);
                     else
                         System.out.println(Constantes.ERROR_AÑADIR_PLATO);
@@ -95,11 +98,11 @@ public class MenuUsuario {
         }
     }
     private void verCesta (int idUsuario) {
-        int idPedido = 0;
+        int idPedido;
         try {
             idPedido = idPedido(idUsuario);
         if (idPedido != -1)
-            servicio.mostrarCarrito(idPedido);
+            System.out.println(servicio.mostrarCarrito(idPedido));
         } catch (PedidoNoEncontrado e) {
             System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
         }
@@ -109,13 +112,14 @@ public class MenuUsuario {
         int idPedido = 0;
         try {
             idPedido = idPedido(idUsuario);
+            System.out.println(servicio.mostrarCarrito(idPedido));
         } catch (PedidoNoEncontrado e) {
             System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
         }
         while(idPedido != -1) {
             System.out.println(Constantes.ELIMINAR_PLATO);
             String nombrePlato = teclado.nextLine();
-            if (!nombrePlato.equalsIgnoreCase(Constantes.NINGUNO))
+            if (nombrePlato.equalsIgnoreCase(Constantes.NINGUNO))
                 idPedido = -1;
             else {
                 if(servicio.eliminarPlato(nombrePlato,idPedido))
@@ -129,53 +133,54 @@ public class MenuUsuario {
         Scanner teclado = new Scanner(System.in);
         int idPedido = -1;
         System.out.println(Constantes.NO_EXISTE_PEDIDO);
-        int respuesta = teclado.nextInt();
+        int respuesta = 0;
+               respuesta = Integer.parseInt(teclado.nextLine());
         if (respuesta == 1) {
             idPedido = servicio.nuevoPedido(idUsuario);
-            if (idPedido == -1) {
+            if (idPedido == -1)
                 System.out.println(Constantes.ERROR_NUEVO_PEDIDO);
-            }
         }
         return idPedido;
     }
     private int opcionCrearPedido2 (int idUsuario) {
         int idPedido;
         idPedido = servicio.nuevoPedido(idUsuario);
-        if (idPedido == -1) {
+        if (idPedido == -1)
             System.out.println(Constantes.ERROR_NUEVO_PEDIDO);
-        }
         return idPedido;
     }
     private int idPedido (int idUsuario) throws PedidoNoEncontrado {
         Scanner teclado = new Scanner(System.in);
         int idPedido;
-        servicio.verPedidos(idUsuario);
+        System.out.println(servicio.verPedidos(idUsuario));
         System.out.println(Constantes.INTRODUZCA_ID_PEDIDO);
-        if (teclado.nextLine().equalsIgnoreCase(" nuevo pedido")) {
+        String respuesta = teclado.nextLine();
+        if (respuesta.equalsIgnoreCase("nuevo pedido"))
             idPedido = opcionCrearPedido2(idUsuario);
-        }
         else {
-            idPedido = teclado.nextInt();
+            idPedido = Integer.parseInt(respuesta);
             servicio.validarPedido(idPedido);
         }
         return idPedido;
     }
     private void iniciarPedido (int idUsuario) {
         Scanner teclado = new Scanner(System.in);
-        System.out.println(Constantes.QUIERE_AÑADIR_CUPONES);
         int idPedido = -1;
         try {
             idPedido = idPedido(idUsuario);
+            if (!servicio.pedidoIsEmpty(idPedido)) {
+                System.out.println(Constantes.QUIERE_AÑADIR_CUPONES);
+                if (teclado.nextLine().equalsIgnoreCase("si")) {
+                    servicio.mostrarCupones(idUsuario);
+                    servicio.iniciarPedido(idUsuario, añadirCupon(idUsuario), idPedido);
+                } else
+                    servicio.iniciarPedido(idUsuario, idPedido);
+                System.out.println(Constantes.PEDIDO_COMENZADO);
+            } else
+                System.out.println(Constantes.ERROR_INICIAR_PEDIDO_VACIO);
         } catch (PedidoNoEncontrado e) {
             System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
         }
-        if (teclado.nextLine().equalsIgnoreCase("si")) {
-            servicio.mostrarCupones(idUsuario);
-            servicio.iniciarPedido(idUsuario,añadirCupon(idUsuario),idPedido);
-        }
-        else
-            servicio.iniciarPedido(idUsuario,idPedido);
-        System.out.println(Constantes.PEDIDO_COMENZADO);
     }
     private String añadirCupon (int idUsuario) {
         Scanner teclado = new Scanner(System.in);
@@ -201,7 +206,7 @@ public class MenuUsuario {
         }
         if (idPedido != -1) {
             try {
-                System.out.println(Constantes.EL_TIEMPO_ESTIMAD_ES + servicio.tiempoEspera(idPedido) + Constantes.MINUTOS);
+                System.out.printf("%s%.2f%s\n",Constantes.EL_TIEMPO_ESTIMAD_ES,servicio.tiempoEspera(idPedido),Constantes.MINUTOS);
                 System.out.println(Constantes.PEDIDO_LLEGARA + servicio.horaEntrega(idPedido).toLocalTime().toString());
             } catch (PedidoNoEncontrado e) {
                 System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
@@ -246,11 +251,11 @@ public class MenuUsuario {
         int idPedido = -1;
         try {
             idPedido = idPedido(idUsuario);
+            if (idPedido != -1)
+                System.out.println(servicio.pedirCuenta(idPedido,idUsuario));
         } catch (PedidoNoEncontrado e) {
             System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
         }
-        if (idPedido != -1)
-            System.out.println(servicio.pedirCuenta());
     }
 
 }

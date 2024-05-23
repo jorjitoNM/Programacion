@@ -1,11 +1,15 @@
 package domain;
 
 import common.Constantes;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+@Getter
+@Setter
 public class Plato implements Serializable {
     private double precio;
     private String nombre;
@@ -32,42 +36,11 @@ public class Plato implements Serializable {
     }
 
     private double calcularTiempoPreparacion () {
-        return Math.random()*calorias+1;
+        return (Math.random()*calorias+1)/60;
     }
     private int darID () {
         int id = (int) (Math.random()*1000);
         return (ids.contains(id))?darID():id;
-    }
-    public String getNombre() {
-        return nombre;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public boolean isPreparado() {
-        return preparado;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public double getTiempoPreparacion() {
-        return tiempoPreparacion;
-    }
-
-    public void setPreparado(boolean preparado) {
-        this.preparado = preparado;
     }
 
     @Override

@@ -1,11 +1,15 @@
 package domain;
 
 import common.Constantes;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
+import java.util.Objects;
 
+@Getter
+@Setter
 public class Factura {
     private int idFactura;
     private int idCliente;
@@ -16,6 +20,7 @@ public class Factura {
 
     public Factura(int idCliente, LocalDate fecha,String platos) {
         idFactura = darID();
+        ids.add(idFactura);
         this.idCliente = idCliente;
         this.platos = platos;
         this.fecha = fecha;
@@ -25,10 +30,6 @@ public class Factura {
         this.idCliente = idCliente;
         this.platos = platos;
         this.fecha = fecha;
-    }
-
-    public LocalDate getFecha() {
-        return fecha;
     }
     public double calcualrPrecio () {
         return 0;
@@ -43,5 +44,18 @@ public class Factura {
                 + idCliente + Constantes.SEPARADOR_ELEMENTOS_FACTURA
                 + fecha + Constantes.SEPARADOR_ELEMENTOS_FACTURA
                 + platos + Constantes.SEPARADOR_ELEMENTOS_FACTURA;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Factura factura = (Factura) o;
+        return idFactura == factura.idFactura;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idFactura, idCliente, idCamarero, fecha, platos, ids);
     }
 }

@@ -3,15 +3,13 @@ package dao;
 import common.Constantes;
 import common.CuponNoValidoException;
 import common.PedidoNoEncontrado;
-import domain.Pedido;
-import domain.Persona;
-import domain.Plato;
-import domain.Promocion;
+import domain.*;
 
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.security.Key;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -39,20 +37,14 @@ public class Restaurante implements Serializable {
     public boolean añadirPlato (String nombre, int cantidad, int idPedido) throws FileNotFoundException {
         int idPlato = carta.stream().filter(p -> p.getNombre().equalsIgnoreCase(nombre)).findFirst().orElse(new Plato(-1)).getId();
         Pedido pedido = pedidos.getPedidos().stream().filter(p -> p.getIdPedido() == idPedido).findFirst().orElse(null);
-        if (idPlato!=0 && pedido!=null){
-            pedido.añadirPlato(idPlato,cantidad);
+        if (idPlato > 0 && pedido != null) {
+            pedido.añadirPlato(idPlato, cantidad);
             DaoFicheros.guardarCarta(carta);
             return true;
-        }
-        else
+        } else
             return false;
     }
-
-    /*public boolean nuevoPedido (int idUsuario) {
-        return pedidos.nuevoPedido(idUsuario);
-    }*/
     public int nuevoPedido (int idUsuario) {
-        if ()
         return pedidos.nuevoPedido(idUsuario);
     }
     private HashSet<Plato> crearCarta () throws IOException {
@@ -117,9 +109,7 @@ public class Restaurante implements Serializable {
     }
     public String getCarta(String tipo) {
         StringBuilder sb = new StringBuilder();
-        for (Plato plato : carta.stream().filter(p -> p.getTipo().equalsIgnoreCase(tipo)).collect(Collectors.toSet())) {
-            sb.append(plato.toString());
-        }
+        carta.stream().filter(p -> p.getTipo().equalsIgnoreCase(tipo)).forEach(p -> sb.append(p).append("\n"));
         return sb.toString();
     }
     public String verCartaAdmin () {
@@ -130,12 +120,16 @@ public class Restaurante implements Serializable {
         return sb.toString();
     }
     public void validarCupon (String codigo, int idUsuario) throws CuponNoValidoException {
-        if (clientes.getCliente(idUsuario).getPromociones().stream().filter(p -> p.getCodigo().equalsIgnoreCase(codigo)).findFirst().orElse(null) != null) {
+        if (clientes.getCliente(idUsuario).getPromociones().stream().filter(p -> p.getCodigo().equalsIgnoreCase(codigo)).findFirst().orElse(null) == null) {
             throw new CuponNoValidoException();
         }
     }
     public String verPedidos (int idUsuario) {
-        return pedidos.verPedidos(Objects.requireNonNull(clientes.getClientes().stream().filter(c -> c.getId() == idUsuario).findFirst().orElse(null)).getId());
+        String resultado = pedidos.verPedidos(Objects.requireNonNull(clientes.getClientes().stream().filter(c -> c.getId() == idUsuario).findFirst().orElse(null)).getId());
+        if (resultado.isEmpty()) {
+            resultado = Constantes.NO_HAY_PEDIDOS;
+        }
+        return resultado;
     }
     public boolean eliminarPlato (String nombrePlato, int idPedido) {
         int idPlato = carta.stream().filter(p -> p.getNombre().equalsIgnoreCase(nombrePlato)).findFirst().orElse(new Plato(-1)).getId();
@@ -170,7 +164,7 @@ public class Restaurante implements Serializable {
         sb.append("\n");
         sb.append(imprimirPlatos(idPedido));
         sb.append(calcularPrecio(idPedido));
-        clientes.getCliente(idUsuario).nuevaFactura(idUsuario,LocalDate.from(pedidos.getPedido(idPedido).getFecha()),imprimirPlatos(idPedido));
+        clientes.getCliente(idUsuario).nuevaFactura(LocalDate.from(pedidos.getPedido(idPedido).getFecha()),imprimirPlatos(idPedido));
         return sb.toString();
     }
     public double tiempoEspera (int idPedido) throws PedidoNoEncontrado {
@@ -188,10 +182,12 @@ public class Restaurante implements Serializable {
         return getPlatos(idPedido);
     }
     public String getPlatos (int idPedido) throws PedidoNoEncontrado {
-        //por cada plato que hay en el pedido recorrer la carta para coger el nombre
         StringBuilder sb = new StringBuilder();
-        for (Integer idPlato:pedidos.getPedido(idPedido).getPlatos().keySet()) { //revisar velocidad de ejecucion
-            sb.append(String.format("(%s)",getNombrePlato(idPlato)));
+        Set<Integer> claves = pedidos.getPedido(idPedido).getPlatos().keySet();
+        Pedido pedido = pedidos.getPedido(idPedido);
+        for (Integer idPlato:claves) {
+            sb.append(String.format("-%s  -->  %d uds.",getNombrePlato(idPlato),pedido.getPlatos().get(idPlato)));
+            sb.append("\n");
         }
         return sb.toString();
     }
@@ -211,7 +207,7 @@ public class Restaurante implements Serializable {
         return sb.toString();
     }
     public boolean cambiarPrecio (int idPlato, double precio) {
-        carta.stream().filter(p -> p.getId()==idPlato).findFirst().ifPresent(p -> {p.setPrecio(precio);});
+        carta.stream().filter(p -> p.getId()==idPlato).findFirst().ifPresent(p -> p.setPrecio(precio));
         return Objects.requireNonNull(carta.stream().filter(p -> p.getId() == idPlato).findFirst().orElse(null)).getPrecio()==precio;
     }
     private double calcularPrecio (int idPedido) throws PedidoNoEncontrado {
@@ -221,5 +217,9 @@ public class Restaurante implements Serializable {
             precio += getPlato(idPlato).getPrecio();
         }
         return precio;
+    }
+
+    public boolean pedidoIsEmpty(int idPedido) throws PedidoNoEncontrado {
+        return pedidos.getPedido(idPedido).getPlatos().isEmpty();
     }
 }

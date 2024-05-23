@@ -1,10 +1,18 @@
 package domain;
 
 import common.Constantes;
+import common.ContraseñaNoValidaExcepcion;
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.logging.log4j.core.layout.PatternMatch;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+@Getter
+@Setter
 public class Cliente extends Persona {
     private TreeSet<Factura> facturas;
     private List<Promocion> promociones;
@@ -12,12 +20,7 @@ public class Cliente extends Persona {
 
     public Cliente(String nombre, String apellidos, LocalDate fechaNacimiento, String contraseña) {
         super(nombre, apellidos, fechaNacimiento);
-        facturas = new TreeSet<>(new Comparator<Factura>() {
-            @Override
-            public int compare(Factura o1, Factura o2) {
-                return o1.getFecha().compareTo(o2.getFecha());
-            }
-        });
+        facturas = new TreeSet<>(Comparator.comparingInt(Factura::getIdFactura));
         promociones = new ArrayList<>();
         this.contraseña = contraseña;
     }
@@ -34,10 +37,6 @@ public class Cliente extends Persona {
         this.contraseña = contraseña;
     }
 
-    public void setPromociones(List<Promocion> promociones) {
-        this.promociones = promociones;
-    }
-
     /*public String[] controlSeguridad (String contraseña, String nombreUsuario) {
             String[] errores = new String[2];
             if (nombreUsuario.equals(this.nombreUsuario))
@@ -46,9 +45,6 @@ public class Cliente extends Persona {
                 errores[1] = Constantes.NOMBRE_USUARIO_INCORRCTO;
             return errores;
         }*/
-    public List<Promocion> getPromociones() {
-        return promociones;
-    }
     private String imprimirFacturas () {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -79,10 +75,19 @@ public class Cliente extends Persona {
                 + Constantes.SEPARADOR_FICHEROSTXT + apellidos
                 + Constantes.SEPARADOR_FICHEROSTXT + nombre;
     }
-    public void nuevaFactura (int idUsuario, LocalDate fecha, String platos) { //excepcion error añadir factura
-        Factura factura = new Factura(idUsuario,fecha,platos);
+    public void nuevaFactura (LocalDate fecha, String platos) { //excepcion error añadir factura
+        Factura factura = new Factura(id,fecha,platos);
         //if(!facturas.add(factura))
             //excepcion
         facturas.add(factura);
+    }
+    public void validarContraseña (String contraseña) throws ContraseñaNoValidaExcepcion {
+        Pattern p = Pattern.compile("^(?=.*[0-9])"
+                + "(?=.*[a-z])(?=.*[A-Z])"
+                + "(?=.*[@#$%^&+=])"
+                + "(?=\\S+$).{8,20}$");
+        Matcher m = p.matcher(contraseña);
+        if (!m.matches())
+            throw new ContraseñaNoValidaExcepcion();
     }
 }

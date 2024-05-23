@@ -4,7 +4,6 @@ import common.CuponNoValidoException;
 import common.PedidoNoEncontrado;
 import dao.DaoClientes;
 import dao.IDaoClientes;
-import domain.Factura;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,9 +28,8 @@ public class GestionClientes implements IGestionClientes {
         return daoClientes.mostrarMenu(tipo);
     }
 
-    @Override
-    public Factura pedirCuenta() {
-        return null;
+    public String pedirCuenta(int idPedido, int idUsuario) throws PedidoNoEncontrado {
+        return daoClientes.pedirCuenta(idPedido,idUsuario);
     }
 
     @Override
@@ -110,5 +108,10 @@ public class GestionClientes implements IGestionClientes {
     @Override
     public LocalDateTime horaEntrega (int idPedido) throws PedidoNoEncontrado {
         return daoClientes.horaEntrega(idPedido);
+    }
+
+    @Override
+    public boolean pedidoIsEmpty(int idPedido) throws PedidoNoEncontrado {
+        return daoClientes.pedidoIsEmpty(idPedido);
     }
 }

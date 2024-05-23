@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+
 public class Camarero extends Empleado {
-    private String idiomas;
+    private ArrayList<String> idiomas;
 }

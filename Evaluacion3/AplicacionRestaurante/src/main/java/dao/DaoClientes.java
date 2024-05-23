@@ -2,6 +2,7 @@ package dao;
 
 import common.CuponNoValidoException;
 import common.PedidoNoEncontrado;
+import domain.Factura;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -88,5 +89,15 @@ public class DaoClientes implements IDaoClientes{
     @Override
     public LocalDateTime horaEntrega (int idPedido) throws PedidoNoEncontrado {
         return restaurante.horaEntrega(idPedido);
+    }
+
+    @Override
+    public boolean pedidoIsEmpty(int idPedido) throws PedidoNoEncontrado {
+        return restaurante.pedidoIsEmpty(idPedido);
+    }
+
+    @Override
+    public String pedirCuenta(int idPedido,int idUsuario) throws PedidoNoEncontrado {
+        return restaurante.crearFactura(idPedido,idUsuario);
     }
 }

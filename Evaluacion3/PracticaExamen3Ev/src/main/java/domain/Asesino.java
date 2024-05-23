@@ -1,27 +1,53 @@
 package domain;
 
+import common.Constantes;
 import common.HabilidadNoValidaException;
 import lombok.Data;
 
-@Data
-public class Asesino extends Campeon {
-    private boolean busrt;
+import java.io.Serializable;
+import java.util.Objects;
 
-    public Asesino(String nombre, int ataque, int skins, String[] habilidades, int altura, boolean busrt) throws HabilidadNoValidaException {
+@Data
+public class Asesino extends Campeon implements Serializable {
+    private double burst;
+
+    public Asesino(String nombre, int ataque, int skins, String habilidades, double altura, double burst) throws HabilidadNoValidaException {
         super(nombre, ataque, skins, habilidades, altura);
-        this.busrt = busrt;
+        this.burst = burst;
+    }
+
+    public Asesino(int id, String nombre, int ataque, int skins, String habilidades, double altura, double burst) {
+        super(id, nombre, ataque, skins, habilidades, altura);
+        this.burst = burst;
     }
 
     public Asesino() {
         super();
-        if (Math.random()*10>5)
-            busrt = true;
-        else
-            busrt = false;
+        this.burst = Math.random();
     }
 
     @Override
     public double ataqueReal() {
         return ataque*1.15;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " burst: " + burst;
+    }
+    public String toStringFichero() {
+        return super.toStringFichero() + burst + Constantes.SEPARADOR_ATRIBUTOS_CAMPEON + getClass().getSimpleName() + Constantes.SEPARADOR_ATRIBUTOS_CAMPEON;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), burst);
     }
 }

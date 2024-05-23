@@ -6,8 +6,7 @@ public class Utilidades {
         return contraseña.equals(password);
     }
     public static void validarOpcionMenuUsuario (String opcion) throws OpcionNoValidaException {
-        if (opcion.equalsIgnoreCase(Constantes.COCINERO) || opcion.equalsIgnoreCase(Constantes.CAMARERO)) {
+        if (opcion.equalsIgnoreCase(Constantes.COCINERO) || opcion.equalsIgnoreCase(Constantes.CAMARERO) || opcion.equalsIgnoreCase(Constantes.JEFE))
             throw new OpcionNoValidaException(Constantes.CAMARERO_CLIENTE);
-        }
     }
 }

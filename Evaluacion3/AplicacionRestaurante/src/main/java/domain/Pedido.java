@@ -1,8 +1,13 @@
 package domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.*;
 
+@Getter
+@Setter
 public class Pedido {
     private LocalDateTime fecha;
     private HashMap<Integer, Integer> carrito; //idPlato, cantidad
@@ -31,39 +36,15 @@ public class Pedido {
         this.idUsuario = idUsuario;
     }
 
-    public LocalDateTime getFecha() {
-        return fecha;
-    }
-
-    public int getIdPedido() {
-        return idPedido;
-    }
-
     private int darID () {
         int id = (int) (Math.random()*1000);
         return (ids.contains(id))?darID():id;
     }
     public LocalDateTime horaEntrega (double tiempoEspera) {
-        return fecha.plusSeconds((long)tiempoEspera);
+        return fecha.plusMinutes((long)tiempoEspera);
     }
     public void añadirPlato (int idPlato, int cantidad) {
         carrito.put(idPlato, cantidad);
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setPromocion(Promocion promocion) {
-        this.promocion = promocion;
-    }
-
-    public boolean isActivo() {
-        return activo;
     }
     public void eliminarPlato (int idPlato) {
         carrito.remove(idPlato);

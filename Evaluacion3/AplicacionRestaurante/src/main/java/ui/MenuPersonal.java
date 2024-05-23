@@ -29,6 +29,7 @@ public class MenuPersonal {
                     break;
                 case 3:
                     menuJefe();
+                    break;
                 default:
                     System.out.println(Constantes.OPCION_NO_VALIDA);
             }
@@ -40,11 +41,11 @@ public class MenuPersonal {
         int opcion = 0;
         do {
             try {
-                System.out.println(Constantes.ELEGIR_ROL + "\n" + Constantes.CLIENTE + "\n-" + Constantes.CAMARERO + "\n-" + Constantes.COCINERO);
-                Utilidades.validarOpcionMenuUsuario(teclado.nextLine());
+                System.out.println(Constantes.ELEGIR_ROL + "\n" + Constantes.CAMARERO + "\n" + Constantes.COCINERO + "\n" + Constantes.JEFE);
+                opcion = Integer.parseInt(teclado.nextLine());
                 exit = true;
-            } catch (OpcionNoValidaException exception) {
-                System.out.println(exception.getMessage());
+            } catch (NumberFormatException exception) {
+                System.out.println(Constantes.SOLO_NUMEROS);
             }
         }while (!exit);
         return opcion;
@@ -55,11 +56,11 @@ public class MenuPersonal {
         int opcion = 0;
         do {
             try {
-                System.out.println(Constantes.ELEGIR_ROL + "\n" + Constantes.CLIENTE + "\n-" + Constantes.CAMARERO + "\n-" + Constantes.COCINERO);
-                Utilidades.validarOpcionMenuUsuario(teclado.nextLine());
+                System.out.println(Constantes.MENU_USUARIO + "\n" + Constantes.JEFE_OPCION_1_NUEVO_EMPLEADO + "\n" + Constantes.JEFE_OPCION_2_ELIMINAR_EMPLEADO + "\n" + Constantes.JEFE_OPCION_3_CAMBIAR_PRECIO + "\n" + Constantes.JEFE_OPCION_4_ELIMINAR_CARTA);
+                opcion = Integer.parseInt(teclado.nextLine());
                 exit = true;
-            } catch (OpcionNoValidaException exception) {
-                System.out.println(exception.getMessage());
+            } catch (NumberFormatException exception) {
+                System.out.println(Constantes.SOLO_NUMEROS);
             }
         }while (!exit);
         return opcion;
@@ -76,8 +77,10 @@ public class MenuPersonal {
                     break;
                 case 3:
                     cambiarPrecio();
+                    break;
                 case 4:
                     eliminarCarta();
+                    break;
                 default:
                     System.out.println(Constantes.OPCION_NO_VALIDA);
             }
@@ -166,7 +169,7 @@ public class MenuPersonal {
     }
     private void eliminarCarta() {
         Scanner teclado = new Scanner(System.in);
-        System.out.println(Constantes.COMFIRMACION_ELIMINAR_PEDIDO);
+        System.out.println(Constantes.COMFIRMACION_ELIMINAR_CARTA);
         if (teclado.nextLine().equalsIgnoreCase("si"))
             if (servicio.eliminarCarta())
                 System.out.println(Constantes.CARTA_ELIMINADA);

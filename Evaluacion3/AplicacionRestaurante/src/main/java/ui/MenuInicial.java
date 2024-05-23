@@ -22,6 +22,9 @@ public class MenuInicial {
                         menuPersonal.menuPersonal();
                     }
                     break;
+                case 3:
+                    exit = true;
+                    break;
                 default:
                     System.out.println(Constantes.OPCION_NO_VALIDA);
             }
@@ -33,7 +36,7 @@ public class MenuInicial {
         int opcion = 0;
         do {
             try {
-                System.out.println(Constantes.MENU_INICIAL + "\n" + Constantes.CLIENTE + "\n" + Constantes.TRABAJADOR);
+                System.out.println(Constantes.MENU_INICIAL + "\n" + Constantes.CLIENTE + "\n" + Constantes.TRABAJADOR + "\n" + Constantes.OPCION_3_SALIR);
                 opcion = teclado.nextInt();
                 exit = true;
             } catch (InputMismatchException exception) {
@@ -47,14 +50,16 @@ public class MenuInicial {
         Scanner teclado = new Scanner(System.in);
         int contador = 0;
         boolean logged = false;
-        System.out.println(Constantes.INTRODUZCA_CONTRASEÑA);
         do {
+            System.out.println(Constantes.INTRODUZCA_CONTRASEÑA);
             if (Utilidades.controlSeguridad(teclado.nextLine()))  {
                 logged = true;
                 contador = 6;
             }
-            else
+            else {
+                System.out.println(Constantes.CONTRASEÑA_INCORRECTA);
                 contador++;
+            }
         }while(contador <= 5);
         return logged;
     }

@@ -22,7 +22,7 @@ public class DaoFicheros {
         return carta.exists();
     }
     public static void crearCartaJson () throws IOException {
-        File carta = new File(new Configuracion().loadPathProperties("pathJson")); //aqui va la ruta que estara en el properties
+        File carta = new File(new Configuracion().loadPathProperties("pathJson"));
         if (!carta.exists())
             carta.createNewFile();
     }
@@ -41,7 +41,7 @@ public class DaoFicheros {
     public static HashSet<Plato> leerCarta () throws FileNotFoundException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
-        Type userListType = new TypeToken<HashSet<Plato>>() {}.getType(); //como es una coleccion tengo que usar el TypeToken
+        Type userListType = new TypeToken<HashSet<Plato>>() {}.getType();
         FileReader fr = new FileReader(new Configuracion().loadPathProperties("pathJson"));
         return gson.fromJson(fr, userListType);
     }

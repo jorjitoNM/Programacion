@@ -2,6 +2,7 @@ package domain;
 
 import common.Constantes;
 import common.ContraseñaNoValidaExcepcion;
+import common.PedidoNoEncontrado;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.logging.log4j.core.layout.PatternMatch;
@@ -17,17 +18,36 @@ public class Cliente extends Persona {
     private TreeSet<Factura> facturas;
     private List<Promocion> promociones;
     private String contraseña;
+    private TreeSet<Pedido> pedidos;
 
     public Cliente(String nombre, String apellidos, LocalDate fechaNacimiento, String contraseña) {
         super(nombre, apellidos, fechaNacimiento);
         facturas = new TreeSet<>(Comparator.comparingInt(Factura::getIdFactura));
         promociones = new ArrayList<>();
         this.contraseña = contraseña;
-    }
-    public Cliente() {
+        pedidos = new TreeSet<>(new Comparator<Pedido>() {
+            @Override
+            public int compare(Pedido o1, Pedido o2) {
+                int respuesta = o1.getFecha().compareTo(o2.getFecha());
+                if (respuesta == 0) {
+                    respuesta = Integer.compare(o1.getIdPedido(),o2.getIdPedido());
+                }
+                return respuesta;
+            }
+        });
     }
     public Cliente(int id) {
         super(id);
+        pedidos = new TreeSet<>(new Comparator<Pedido>() {
+            @Override
+            public int compare(Pedido o1, Pedido o2) {
+                int respuesta = o1.getFecha().compareTo(o2.getFecha());
+                if (respuesta == 0) {
+                    respuesta = Integer.compare(o1.getIdPedido(),o2.getIdPedido());
+                }
+                return respuesta;
+            }
+        });
     }
     public Cliente(TreeSet<Factura> facturas, List<Promocion> promociones, String contraseña, int idUsuario, LocalDate fechaNacimiento, String apellidos, String nombre) {
         super(nombre, apellidos, fechaNacimiento);
@@ -35,16 +55,58 @@ public class Cliente extends Persona {
         this.promociones = promociones;
         this.id = idUsuario;
         this.contraseña = contraseña;
+        pedidos = new TreeSet<>(new Comparator<Pedido>() {
+            @Override
+            public int compare(Pedido o1, Pedido o2) {
+                int respuesta = o1.getFecha().compareTo(o2.getFecha());
+                if (respuesta == 0) {
+                    respuesta = Integer.compare(o1.getIdPedido(),o2.getIdPedido());
+                }
+                return respuesta;
+            }
+        });
     }
-
-    /*public String[] controlSeguridad (String contraseña, String nombreUsuario) {
-            String[] errores = new String[2];
-            if (nombreUsuario.equals(this.nombreUsuario))
-                errores[0] = Constantes.NOMBRE_USUARIO_INCORRCTO;
-            else if (this.contraseña.equalsIgnoreCase(contraseña))
-                errores[1] = Constantes.NOMBRE_USUARIO_INCORRCTO;
-            return errores;
-        }*/
+    public void iniciarPedido (int idPedido) {
+        Iterator<Pedido> it = pedidos.iterator();
+        boolean exit = false;
+        Pedido pedido = null;
+        while (it.hasNext() && !exit) {
+            pedido = it.next();
+            if (pedido.getIdPedido() == idPedido) {
+                pedido.setActivo(true);
+                exit = true;
+            }
+        }
+    }
+    public void iniciarPedido (String codigo, int idPedido) {
+        Iterator<Pedido> it = pedidos.iterator();
+        boolean exit = false;
+        Pedido pedido = null;
+        while (it.hasNext() && !exit) {
+            pedido = it.next();
+            if (pedido.getIdPedido() == idPedido) {
+                pedido.setActivo(true);
+                pedido.setPromocion(new Promocion(codigo));
+                exit = true;
+            }
+        }
+    }
+    public int nuevoPedido () {
+        Pedido pedido = new Pedido(id);
+        int idPedido = -1;
+        if (pedidos.add(pedido))
+            idPedido = pedido.getIdPedido();
+        return idPedido;
+    }
+    public Pedido getPedido (int idPedido) throws PedidoNoEncontrado {
+        Pedido pedido = pedidos.stream().filter(p -> p.getIdPedido() == idPedido).findFirst().orElseThrow(PedidoNoEncontrado::new);
+        return pedido;
+    }
+    public String getPedidosString () {
+        StringBuilder sb = new StringBuilder();
+        pedidos.stream().sorted(Comparator.comparing(Pedido::getFecha)).forEach(sb::append);
+        return sb.toString();
+    }
     private String imprimirFacturas () {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -81,13 +143,7 @@ public class Cliente extends Persona {
             //excepcion
         facturas.add(factura);
     }
-    public void validarContraseña (String contraseña) throws ContraseñaNoValidaExcepcion {
-        Pattern p = Pattern.compile("^(?=.*[0-9])"
-                + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])"
-                + "(?=\\S+$).{8,20}$");
-        Matcher m = p.matcher(contraseña);
-        if (!m.matches())
-            throw new ContraseñaNoValidaExcepcion();
+    public boolean comprobarContraseña(String s) {
+        return s.equals(contraseña);
     }
 }

@@ -1,8 +1,6 @@
 package ui;
 
 import common.Constantes;
-import common.OpcionNoValidaException;
-import common.Utilidades;
 import service.GestionPersonal;
 import service.IGestionPersonal;
 
@@ -41,7 +39,7 @@ public class MenuPersonal {
         int opcion = 0;
         do {
             try {
-                System.out.println(Constantes.ELEGIR_ROL + "\n" + Constantes.CAMARERO + "\n" + Constantes.COCINERO + "\n" + Constantes.JEFE);
+                System.out.println(Constantes.ELEGIR_ROL + "\n" + Constantes.MR_OP_1_CAMARERO + "\n" + Constantes.MR_OP_2_COCINERO + "\n" + Constantes.MR_OP_3_JEFE);
                 opcion = Integer.parseInt(teclado.nextLine());
                 exit = true;
             } catch (NumberFormatException exception) {
@@ -56,7 +54,7 @@ public class MenuPersonal {
         int opcion = 0;
         do {
             try {
-                System.out.println(Constantes.MENU_USUARIO + "\n" + Constantes.JEFE_OPCION_1_NUEVO_EMPLEADO + "\n" + Constantes.JEFE_OPCION_2_ELIMINAR_EMPLEADO + "\n" + Constantes.JEFE_OPCION_3_CAMBIAR_PRECIO + "\n" + Constantes.JEFE_OPCION_4_ELIMINAR_CARTA);
+                System.out.println(Constantes.MENU_USUARIO + "\n" + Constantes.MJ_OP_1_NUEVO_EMPLEADO + "\n" + Constantes.MJ_OP_2_ELIMINAR_EMPLEADO + "\n" + Constantes.MJ_OP_3_CAMBIAR_PRECIO + "\n" + Constantes.MJ_OP_4_ELIMINAR_CARTA);
                 opcion = Integer.parseInt(teclado.nextLine());
                 exit = true;
             } catch (NumberFormatException exception) {
@@ -107,7 +105,7 @@ public class MenuPersonal {
         int opcion = 0;
         do {
             try {
-                System.out.println(Constantes.MENU_EMPLEADO + "\n" + Constantes.VER_PLATOS + "\n" + Constantes.COMFIRMAR_PLATO);
+                System.out.println(Constantes.MENU_EMPLEADO + "\n" + Constantes.MCO_OP_1_VER_PLATOS + "\n" + Constantes.MCO_OP_2_COMFIRMAR_PLATO);
                 opcion = teclado.nextInt();
                 exit = true;
             } catch (InputMismatchException exception) {
@@ -137,7 +135,7 @@ public class MenuPersonal {
         int opcion = 0;
         do {
             try {
-                System.out.println(Constantes.MENU_EMPLEADO + "\n" + Constantes.AYUDAR_CLIENTE + "\n" + Constantes.VER_PEDIDOS_CAMARERO);
+                System.out.println(Constantes.MENU_EMPLEADO + "\n" + Constantes.MCA_OP_1_AYUDAR_CLIENTE + "\n" + Constantes.MCA_OP_2_VER_PEDIDOS_CAMARERO);
                 opcion = teclado.nextInt();
                 exit = true;
             } catch (InputMismatchException exception) {

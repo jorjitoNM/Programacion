@@ -1,5 +1,8 @@
 package org.example;
 
+import lombok.Data;
+
+@Data
 public abstract class Centro {
     protected int id;
     protected String nombre;
@@ -14,47 +17,18 @@ public abstract class Centro {
         anyoConstruccion = (int)(Math.random()*20+2000);
     }
 
+    public Centro(String nombre, double precioEntrada, String provincia, int anyoConstruccion) {
+        this.nombre = nombre;
+        this.precioEntrada = precioEntrada;
+        this.provincia = provincia;
+        this.anyoConstruccion = anyoConstruccion;
+    }
 
     public abstract double calcularPrecio (boolean festivo, int edad);
     /*public abstract String calcularPrecioMedio (boolean festivo, int edad);*/
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public double getPrecioEntrada() {
-        return precioEntrada;
-    }
-
-    public void setPrecioEntrada(double precioEntrada) {
-        this.precioEntrada = precioEntrada;
-    }
-
-    public String getProvincia() {
-        return provincia;
-    }
-
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
-    }
-
-    public int getAnyoConstruccion() {
-        return anyoConstruccion;
-    }
-
-    public void setAnyoConstruccion(int anyoConstruccion) {
-        this.anyoConstruccion = anyoConstruccion;
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " " + nombre + ", en " + provincia + " desde " + anyoConstruccion + ". Entrada a " + precioEntrada + "€";
     }
 }

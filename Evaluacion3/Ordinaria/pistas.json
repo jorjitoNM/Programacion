@@ -1,0 +1,73 @@
+[
+  {
+    "dificultad": "verde",
+    "id": 409,
+    "nombre": "Bujumbura",
+    "provincia": "Asturias",
+    "km": 4.051731450413951
+  },
+  {
+    "dificultad": "rojo",
+    "id": 644,
+    "nombre": "Tegucigalpa",
+    "provincia": "Caceres",
+    "km": 14.78917677262372
+  },
+  {
+    "dificultad": "rojo",
+    "id": 119,
+    "nombre": "London",
+    "provincia": "Castellon",
+    "km": 10.64753578583023
+  },
+  {
+    "poblaciones": [
+      "Villalba",
+      "San Lorenzo del Escorial"
+    ],
+    "id": 457,
+    "nombre": "Vaduz",
+    "provincia": "Sevilla",
+    "km": 13.987077685862118
+  },
+  {
+    "poblaciones": [
+      "Morarlarzal"
+    ],
+    "id": 727,
+    "nombre": "Addis Ababa",
+    "provincia": "Zaragoza",
+    "km": 14.448635727879463
+  },
+  {
+    "dificultad": "verde",
+    "id": 209,
+    "nombre": "Port-Vila",
+    "provincia": "Sevilla",
+    "km": 5.846072207867115
+  },
+  {
+    "poblaciones": [
+      "Morarlarzal",
+      "Torrelodones",
+      "Guadarrama",
+      "San Lorenzo del Escorial"
+    ],
+    "id": 598,
+    "nombre": "Brazzaville",
+    "provincia": "Caceres",
+    "km": 5.82753169032053
+  },
+  {
+    "poblaciones": [
+      "Morarlarzal",
+      "Torrelodones",
+      "San Lorenzo del Escorial",
+      "Guadarrama"
+    ],
+    "id": 645,
+    "nombre": "Sarajevo",
+    "provincia": "Sevilla",
+    "km": 9.37438664631713
+  }
+]

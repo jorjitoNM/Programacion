@@ -5,7 +5,6 @@ import common.PedidoNoEncontrado;
 import dao.DaoClientes;
 import dao.IDaoClientes;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
@@ -15,7 +14,7 @@ public class GestionClientes implements IGestionClientes {
     public GestionClientes() throws IOException {
         daoClientes = new DaoClientes();
     }
-    public GestionClientes(DaoClientes daoClientes) throws IOException {
+    public GestionClientes(DaoClientes daoClientes) {
         this.daoClientes = daoClientes;
     }
 
@@ -33,8 +32,8 @@ public class GestionClientes implements IGestionClientes {
     }
 
     @Override
-    public boolean añadirPlato(String nombre, int cantidad, int idPedido) throws FileNotFoundException {
-        return daoClientes.añadirPlato(nombre, cantidad, idPedido);
+    public boolean añadirPlato(String nombre, int cantidad, int idPedido, int idCliente) {
+        return daoClientes.añadirPlato(nombre, cantidad, idPedido, idCliente);
     }
 
     @Override
@@ -53,13 +52,9 @@ public class GestionClientes implements IGestionClientes {
     }
 
     @Override
-    public boolean existePedido(int idPedido) {
-        return daoClientes.existePedido(idPedido);
+    public boolean existePedido(int idPedido, int idCliente) throws PedidoNoEncontrado {
+        return daoClientes.existePedido(idPedido,idCliente);
     }
-    @Override
-    public int darIDPedido (String nombreUsuario) {
-        return daoClientes.darIDPedido(nombreUsuario);
-    } //no tiene usos
 
     /*@Override
     public boolean nuevoPedido(int idUsuario) {
@@ -70,13 +65,13 @@ public class GestionClientes implements IGestionClientes {
         return daoClientes.nuevoPedido(idUsuario);
     }
     @Override
-    public void iniciarPedido (int idUsuario,int idPedido) {
-        daoClientes.iniciarPedido(idPedido);
+    public void iniciarPedido (int idPedido,int idCliente) {
+        daoClientes.iniciarPedido(idPedido,idCliente);
     }
 
     @Override
-    public void iniciarPedido(int idUsuario,String codigo, int idPedido) {
-        daoClientes.iniciarPedido(codigo,idPedido);
+    public void iniciarPedido(String codigo, int idPedido, int idCliente) {
+        daoClientes.iniciarPedido(codigo,idPedido,idCliente);
     }
 
     @Override
@@ -113,5 +108,20 @@ public class GestionClientes implements IGestionClientes {
     @Override
     public boolean pedidoIsEmpty(int idPedido) throws PedidoNoEncontrado {
         return daoClientes.pedidoIsEmpty(idPedido);
+    }
+
+    @Override
+    public boolean cambiarContraseña(int idUsuario, String contraseña) throws IOException {
+        return daoClientes.cambiarContraseña(idUsuario,contraseña);
+    }
+
+    @Override
+    public boolean carritoVacio(int idPedido, int idCliente) throws PedidoNoEncontrado {
+        return daoClientes.carritoVacion(idPedido, idCliente);
+    }
+
+    @Override
+    public void guardarFicheros() throws IOException {
+        daoClientes.guardarFicheros();
     }
 }

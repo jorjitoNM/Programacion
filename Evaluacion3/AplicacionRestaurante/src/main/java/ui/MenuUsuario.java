@@ -7,7 +7,6 @@ import lombok.extern.log4j.Log4j2;
 import service.GestionClientes;
 import service.IGestionClientes;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -46,26 +45,68 @@ public class MenuUsuario {
                     pedirCuenta(idUsuario);
                     break;
                 case 8:
+                    cambiarContraseña(idUsuario);
+                    break;
+                case 9:
                     exit = true;
                     break;
                 default:
                     System.out.println(Constantes.OPCION_NO_VALIDA);
             }
+            try {
+                servicio.guardarFicheros();
+            } catch (IOException e) {
+                System.out.println(Constantes.IO_EXCEPTION_ERROR);
+            }
         } while (!exit);
     }
+
+    private void cambiarContraseña(int idUsuario) {
+        Scanner teclado = new Scanner(System.in);
+        boolean exit = false;
+        do {
+            System.out.println(Constantes.INTRODUZCA_NUEVA_CONTRASEÑA);
+            String contraseña = teclado.nextLine();
+            System.out.println(Constantes.COMFIRMAR_CONTRASEÑA);
+            String comfirmacion = teclado.nextLine();
+            if (!contraseña.equals(comfirmacion))
+                System.out.println(Constantes.CONTRASEÑAS_NO_COINCIDEN);
+            else {
+                try {
+                    if (!servicio.cambiarContraseña(idUsuario,contraseña))
+                        System.out.println(Constantes.CONTRASEÑA_DEBIL);
+                    else
+                        System.out.println(Constantes.CONTRASEÑA_CAMBIADA);
+                } catch (IOException e) {
+                    System.out.println(Constantes.IO_EXCEPTION_ERROR);
+                }
+                exit = true;
+            }
+        }while(!exit);
+    }
+
     public int opcionMenUsuario () {
         Scanner teclado = new Scanner(System.in);
         boolean exit = false;
         int opcion = 0;
         do {
+            System.out.println(Constantes.MENU_USUARIO + "\n"
+                    + Constantes.MU_OP_1_AÑADIR_PLATO + "\n"
+                    + Constantes.MU_OP_2_VER_CESTA + "\n"
+                    + Constantes.MU_OP_3_ELIMINAR_PLATO + "\n"
+                    + Constantes.MU_OP_4_INICIAR_PEDIDO + "\n"
+                    + Constantes.MU_OP_5_TIEMPO_ESPERA + "\n"
+                    + Constantes.MU_OP_6_VER_PLATOS_POR_TIPO + "\n"
+                    + Constantes.MU_OP_7_PEDIR_CUENTA + "\n"
+                    + Constantes.MU_OP_8_CAMBIAR_CONTRASEÑA + "\n"
+                    + Constantes.MU_OP_9_SALIR);
             try {
-                System.out.println(Constantes.MENU_USUARIO + "\n" + Constantes.AÑADIR_PLATO + "\n" + Constantes.VER_CESTA + "\n" + Constantes.OPCION_ELIMINAR_PLATO + "\n" + Constantes.INICIAR_PEDIDO + "\n" + Constantes.TIEMPO_ESPERA + "\n" + Constantes.VER_PLATOS_POR_TIPO + "\n" + Constantes.PEDIR_CUENTA + "\n" + Constantes.OPCION_8_SALIR);
                 opcion = Integer.parseInt(teclado.nextLine());
                 exit = true;
             } catch (InputMismatchException exception) {
                 System.out.println(Constantes.SOLO_NUMEROS);
             }
-        }while (!exit);
+        } while (!exit);
         return opcion;
     }
     private void añadirPlato (int idUsuario) {
@@ -85,15 +126,15 @@ public class MenuUsuario {
             else {
                 System.out.println(Constantes.CANTIDAD);
                 int cantidad = 0;
-                    cantidad= Integer.parseInt(teclado.nextLine());
                 try {
-                    if(servicio.añadirPlato(nombrePlato,cantidad,idPedido))
-                        System.out.println(Constantes.PLATO_AÑADIDO_CORRECTAMENTE);
-                    else
-                        System.out.println(Constantes.ERROR_AÑADIR_PLATO);
-                } catch (FileNotFoundException e) {
-                    log.fatal(Constantes.LOG_FILE_NOT_FOUND);
+                    cantidad = Integer.parseInt(teclado.nextLine());
+                } catch (NumberFormatException e) {
+                    System.out.println(Constantes.SOLO_NUMEROS);
                 }
+                if(servicio.añadirPlato(nombrePlato,cantidad,idPedido,idUsuario))
+                    System.out.println(Constantes.PLATO_AÑADIDO_CORRECTAMENTE);
+                else
+                    System.out.println(Constantes.ERROR_AÑADIR_PLATO);
             }
         }
     }
@@ -110,22 +151,32 @@ public class MenuUsuario {
     private void eliminarPlato (int idUsuario) {
         Scanner teclado = new Scanner(System.in);
         int idPedido = 0;
+        boolean exit = false;
         try {
             idPedido = idPedido(idUsuario);
             System.out.println(servicio.mostrarCarrito(idPedido));
         } catch (PedidoNoEncontrado e) {
             System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
         }
-        while(idPedido != -1) {
-            System.out.println(Constantes.ELIMINAR_PLATO);
-            String nombrePlato = teclado.nextLine();
-            if (nombrePlato.equalsIgnoreCase(Constantes.NINGUNO))
-                idPedido = -1;
-            else {
-                if(servicio.eliminarPlato(nombrePlato,idPedido))
-                    System.out.println(Constantes.PLATO_ELIMINADO_CORRECTAMENTE);
-                else
-                    System.out.println(Constantes.ERROR_ELIMINAR_PLATO);
+        while(idPedido != -1 || !exit) {
+            try {
+                if (servicio.carritoVacio(idPedido,idUsuario)) {
+                    System.out.println(Constantes.CARRITO_VACIO);
+                    exit = true;
+                } else {
+                System.out.println(Constantes.ELIMINAR_PLATO);
+                String nombrePlato = teclado.nextLine();
+                if (nombrePlato.equalsIgnoreCase(Constantes.NINGUNO))
+                    idPedido = -1;
+                else {
+                    if (servicio.eliminarPlato(nombrePlato, idPedido))
+                        System.out.println(Constantes.PLATO_ELIMINADO_CORRECTAMENTE);
+                    else
+                        System.out.println(Constantes.ERROR_ELIMINAR_PLATO);
+                }
+                }
+            } catch (PedidoNoEncontrado e) { //ejemplo de doble excepcion
+
             }
         }
     }
@@ -172,7 +223,7 @@ public class MenuUsuario {
                 System.out.println(Constantes.QUIERE_AÑADIR_CUPONES);
                 if (teclado.nextLine().equalsIgnoreCase("si")) {
                     servicio.mostrarCupones(idUsuario);
-                    servicio.iniciarPedido(idUsuario, añadirCupon(idUsuario), idPedido);
+                    servicio.iniciarPedido(añadirCupon(idUsuario), idPedido,idUsuario);
                 } else
                     servicio.iniciarPedido(idUsuario, idPedido);
                 System.out.println(Constantes.PEDIDO_COMENZADO);
@@ -257,5 +308,4 @@ public class MenuUsuario {
             System.out.println(Constantes.PEDIDO_NO_ENCONTRADO);
         }
     }
-
 }

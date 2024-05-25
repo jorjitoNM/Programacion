@@ -9,12 +9,14 @@ import domain.Cliente;
 import domain.Factura;
 import domain.Plato;
 import domain.Promocion;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.*;
 
+@Log4j2
 public class DaoFicheros {
     //Carta (.json)
     public static boolean existCarta () {
@@ -30,19 +32,29 @@ public class DaoFicheros {
         File carta = new File(new Configuracion().loadPathProperties("pathJson"));
         return carta.length() == 0;
     }
-    public static void guardarCarta (HashSet<Plato> carta) throws FileNotFoundException {
+    public static void guardarCarta (HashSet<Plato> carta) {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
         String json = gson.toJson(carta);
-        PrintWriter pw = new PrintWriter(new Configuracion().loadPathProperties("pathJson"));
-        pw.println(json);
-        pw.close();
+        PrintWriter pw = null;
+        try {
+            pw = new PrintWriter(new Configuracion().loadPathProperties("pathJson"));
+            pw.println(json);
+            pw.close();
+        } catch (FileNotFoundException e) {
+            log.fatal(Constantes.LOG_FILE_NOT_FOUND);
+        }
     }
-    public static HashSet<Plato> leerCarta () throws FileNotFoundException {
+    public static HashSet<Plato> leerCarta () {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
         Type userListType = new TypeToken<HashSet<Plato>>() {}.getType();
-        FileReader fr = new FileReader(new Configuracion().loadPathProperties("pathJson"));
+        FileReader fr = null;
+        try {
+            fr = new FileReader(new Configuracion().loadPathProperties("pathJson"));
+        } catch (FileNotFoundException e) {
+            log.fatal(Constantes.LOG_FILE_NOT_FOUND);
+        }
         return gson.fromJson(fr, userListType);
     }
     public static boolean eliminarCarta () {
@@ -65,13 +77,25 @@ public class DaoFicheros {
         File clientes = new File(new Configuracion().loadPathProperties("pathTXT"));
         return clientes.length() == 0;
     }
-    public static void guardarClientes (HashSet<Cliente> clientes) throws FileNotFoundException {
-        PrintWriter pw = new PrintWriter(new Configuracion().loadPathProperties("pathTXT"));
-        clientes.forEach(c -> pw.println(c.toStringFichero()));
-        pw.close();
+    public static void guardarClientes (HashSet<Cliente> clientes) throws IOException {
+        PrintWriter pw = null;
+        crearFicheroClientes();
+        try {
+            pw = new PrintWriter(new Configuracion().loadPathProperties("pathTXT"));
+            PrintWriter finalPw = pw;
+            clientes.forEach(c -> finalPw.println(c.toStringFichero()));
+            pw.close();
+        } catch (FileNotFoundException e) {
+            log.fatal(Constantes.LOG_FILE_NOT_FOUND);
+        }
     }
-    public static HashSet<Cliente> leerClientes () throws FileNotFoundException {
-        Scanner teclado = new Scanner(new File(new Configuracion().loadPathProperties("pathTXT")));
+    public static HashSet<Cliente> leerClientes () {
+        Scanner teclado = null;
+        try {
+            teclado = new Scanner(new File(new Configuracion().loadPathProperties("pathTXT")));
+        } catch (FileNotFoundException e) {
+            log.fatal(Constantes.LOG_FILE_NOT_FOUND);
+        }
         HashSet<Cliente> clientes = new HashSet<>();
         String[] cliente;
         while (teclado.hasNext()) {

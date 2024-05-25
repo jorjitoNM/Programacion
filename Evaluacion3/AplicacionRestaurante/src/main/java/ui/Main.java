@@ -10,7 +10,7 @@ public class Main {
         try {
             menu.menuInicial();
         } catch (IOException e) {
-            System.out.println(Constantes.IO_EXCEPTION_ERROR); //igual puedo ejecutar la aplicacion pero sin ficheros
+            System.out.println(Constantes.IO_EXCEPTION_ERROR);
         }
     }
 }

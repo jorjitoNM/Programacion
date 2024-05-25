@@ -68,7 +68,7 @@ public class Pedidos {
     }
     public String verPedidos (int idUsuario) {
         StringBuilder sb = new StringBuilder();
-        pedidos.stream().filter(p -> p.getIdUsuario()==idUsuario).filter(Pedido::isActivo).forEach(sb::append);
+        pedidos.stream().filter(p -> p.getIdUsuario()==idUsuario).filter(Pedido::isActivo).sorted(Comparator.comparing(Pedido::getFecha)).forEach(sb::append);
         return sb.toString();
     }
 
@@ -81,9 +81,7 @@ public class Pedidos {
         }
     }
     public Pedido getPedido (int idPedido) throws PedidoNoEncontrado {
-        Pedido pedido = pedidos.stream().filter(p -> p.getIdPedido() == idPedido).findFirst().orElse(null);
-        if (pedido == null)
-            throw new PedidoNoEncontrado();
+        Pedido pedido = pedidos.stream().filter(p -> p.getIdPedido() == idPedido).findFirst().orElseThrow(PedidoNoEncontrado::new);
         return pedido;
     }
     /*public double calcularPrecio (int idPedido) { //aqui hay que arreglar, porque el metodo calcularPrecio solo lo puedo hacer en Restaurante

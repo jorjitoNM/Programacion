@@ -1,8 +1,13 @@
 package org.example;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Zoologico extends Centro {
     private boolean delfinario;
-    private boolean pinguino;
+    private boolean pinguinos;
     public Zoologico () {
         super();
         if (Math.random()>0.5)
@@ -10,10 +15,16 @@ public class Zoologico extends Centro {
         else
             delfinario = false;
         if (Math.random()>0.5)
-            pinguino = true;
+            pinguinos = true;
         else
-            pinguino = false;
+            pinguinos = false;
         precioEntrada = Math.random()*10+10;
+    }
+
+    public Zoologico(String nombre, double precioEntrada, String provincia, int anyoConstruccion, boolean delfinario, boolean pinguinos) {
+        super(nombre, precioEntrada, provincia, anyoConstruccion);
+        this.delfinario = delfinario;
+        this.pinguinos = pinguinos;
     }
 
     @Override
@@ -28,5 +39,23 @@ public class Zoologico extends Centro {
         else
             precio = 0;
         return precio;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ". " + traduccionBooleanos();
+    }
+
+    private String traduccionBooleanos() {
+        String respuesta;
+        if (delfinario && pinguinos)
+            respuesta = "Tiene delfinario y pinguinos";
+        else if (delfinario)
+            respuesta = "Tiene delfinario";
+        else if (pinguinos)
+            respuesta = "Tiene pinguinos";
+        else
+            respuesta = "";
+        return respuesta;
     }
 }

@@ -25,27 +25,22 @@ public class DaoClientes implements IDaoClientes{
         return restaurante.nuevoPedido(idUsuario);
     }
     @Override
-    public boolean añadirPlato(String nombre, int cantidad, int idPedido) throws FileNotFoundException {
-        return restaurante.añadirPlato(nombre, cantidad, idPedido);
+    public boolean añadirPlato(String nombre, int cantidad, int idPedido, int idCliente) {
+        return restaurante.añadirPlato(nombre, cantidad, idPedido,idCliente);
     }
 
     @Override
     public int darIDCliente(String nombreUsuario) {
         return 0;
     }
-
     @Override
-    public int darIDPedido (String nombreUsario) {
-        return restaurante.darIDPedido(nombreUsario);
-    }
-    @Override
-    public void iniciarPedido(int idPedido) {
-        restaurante.iniciarPedido(idPedido);
+    public void iniciarPedido(int idPedido, int idCliente) {
+        restaurante.iniciarPedido(idPedido,idCliente);
     }
 
     @Override
-    public void iniciarPedido(String codigo, int idPedido) {
-        restaurante.iniciarPedido(codigo,idPedido);
+    public void iniciarPedido(String codigo, int idPedido, int idCliente) {
+        restaurante.iniciarPedido(codigo,idPedido,idCliente);
     }
 
     @Override
@@ -57,8 +52,8 @@ public class DaoClientes implements IDaoClientes{
         return restaurante.getCarta(tipo);
     }
     @Override
-    public boolean existePedido(int idPedido) {
-        return restaurante.existePedido(idPedido);
+    public boolean existePedido(int idPedido, int idCliente) throws PedidoNoEncontrado {
+        return restaurante.existePedido(idPedido,idCliente);
     }
     @Override
     public String verPedidos (int idUsuario) {
@@ -99,5 +94,20 @@ public class DaoClientes implements IDaoClientes{
     @Override
     public String pedirCuenta(int idPedido,int idUsuario) throws PedidoNoEncontrado {
         return restaurante.crearFactura(idPedido,idUsuario);
+    }
+
+    @Override
+    public boolean cambiarContraseña(int idUsuario, String contraseña) throws IOException {
+        return restaurante.cambiarContraseña(idUsuario,contraseña);
+    }
+
+    @Override
+    public boolean carritoVacion(int idPedido, int idCliente) throws PedidoNoEncontrado {
+        return restaurante.carritoVacio(idPedido, idCliente);
+    }
+
+    @Override
+    public void guardarFicheros() throws IOException {
+        restaurante.guardarFicheros();
     }
 }
